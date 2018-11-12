@@ -1,0 +1,7 @@
+# multiply scroll wheel inputs
+"xdotool click --repeat 3 --delay 1 4"
+   b:9
+
+"xdotool click --repeat 3 --delay 1 5"
+   b:10
+   
