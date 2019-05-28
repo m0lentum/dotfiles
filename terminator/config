@@ -1,0 +1,20 @@
+[global_config]
+  borderless = True
+  tab_position = hidden
+[keybindings]
+[layouts]
+  [[default]]
+    [[[child1]]]
+      parent = window0
+      type = Terminal
+    [[[window0]]]
+      parent = ""
+      type = Window
+[plugins]
+[profiles]
+  [[default]]
+    background_color = "#080808"
+    cursor_color = "#aaaaaa"
+    font = Fira Code Medium 9
+    foreground_color = "#c8ff64"
+    use_system_font = False
