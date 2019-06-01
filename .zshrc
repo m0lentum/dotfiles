@@ -72,6 +72,7 @@ plugins=(
 	z
 	git
 	pass
+	archlinux
 	extract
 	dircycle
 	colorize
