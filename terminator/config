@@ -6,6 +6,7 @@
   title_transmit_bg_color = "#beabba"
   window_state = maximise
 [keybindings]
+  help = F12
 [layouts]
   [[default]]
     [[[child1]]]
