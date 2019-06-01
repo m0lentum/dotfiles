@@ -1,0 +1,6 @@
+- Any file with the name structure [name].[dotfile] should have its contents copied into that dotfile.
+- Terminator config goes in ~/.config.
+- Awesome config also goes in ~/.config.
+- zsh needs the powelevel10k theme and zsh-syntax-highlighting plugin;
+    these are installed by git cloning their repos into the respective folders in ~/.oh-my-zsh/custom.
+
