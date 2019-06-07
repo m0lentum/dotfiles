@@ -1,0 +1,73 @@
+// Place your key bindings in this file to overwrite the defaults
+[
+    {
+        "key": "ctrl+o",
+        "command": "-workbench.action.files.openFile"
+    },
+    {
+        "key": "ctrl+,",
+        "command": "-workbench.action.openGlobalSettings"
+    },
+    {
+        "key": "alt+[Period]",
+        "command": "workbench.action.terminal.focus"
+    },
+    {
+        "key": "alt+[Comma]",
+        "command": "workbench.action.focusActiveEditorGroup"
+    },
+    {
+        "key": "ctrl+shift+s",
+        "command": "workbench.action.files.saveAll"
+    },
+    {
+        "key": "ctrl+shift+alt+f",
+        "command": "workbench.action.findInFiles",
+        "when": "!searchInputBoxFocus"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "-workbench.action.findInFiles",
+        "when": "!searchInputBoxFocus"
+    },
+    {
+        "key": "ctrl+shift+alt+f",
+        "command": "workbench.view.search",
+        "when": "!searchViewletVisible"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "-workbench.view.search",
+        "when": "!searchViewletVisible"
+    },
+    {
+        "key": "ctrl+shift+f",
+        "command": "editor.action.startFindReplaceAction"
+    },
+    {
+        "key": "ctrl+h",
+        "command": "-editor.action.startFindReplaceAction"
+    },
+    {
+        "key": "ctrl+shift+o",
+        "command": "workbench.action.terminal.split",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+oem_5",
+        "command": "-workbench.action.terminal.split",
+        "when": "terminalFocus"
+    },
+    {
+        "key": "ctrl+alt+s",
+        "command": "workbench.action.files.saveWithoutFormatting"
+    },
+    {
+        "key": "ctrl+k s",
+        "command": "-workbench.action.files.saveWithoutFormatting"
+    },
+    {
+        "key": "ctrl+m",
+        "command": "-editor.action.toggleTabFocusMode"
+    }
+]

@@ -1,0 +1,46 @@
+{
+    "workbench.colorTheme": "Rouge No Italics",
+    "git.path": "G:/Programs/Git/bin/git.exe",
+    "terminal.integrated.shell.windows": "G:/Programs/Git/bin/bash.exe",
+    "git.confirmSync": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "editor.detectIndentation": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "git.ignoreLegacyWarning": true,
+    "editor.formatOnSave": true,
+    "window.zoomLevel": 0,
+    "editor.fontSize": 14,
+    "terminal.integrated.fontSize": 14,
+    "editor.tokenColorCustomizations": {
+        // elm type constructors
+        "[Solarized Dark]": {
+            "textMateRules": [
+                {
+                    "scope": "constant",
+                    "settings": {
+                        "foreground": "#c5562a"
+                    }
+                }
+            ]
+        }
+    },
+    "terminal.external.linuxExec": "terminator",
+    "editor.fontFamily": "'Fira Code'",
+    "editor.fontLigatures": true,
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "editor.cursorBlinking": "solid",
+    "vim.cursorStylePerMode.normal": "underline",
+    "vim.useCtrlKeys": false,
+    "editor.lineNumbers": "relative",
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "<Home>"
+            ],
+            "after": [
+                "^"
+            ]
+        }
+    ]
+}
