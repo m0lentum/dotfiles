@@ -1,17 +1,20 @@
 {
+    // visuals
     "workbench.colorTheme": "Rouge No Italics",
-    "git.path": "G:/Programs/Git/bin/git.exe",
-    "terminal.integrated.shell.windows": "G:/Programs/Git/bin/bash.exe",
-    "git.confirmSync": false,
-    "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
-    "editor.detectIndentation": true,
     "workbench.iconTheme": "material-icon-theme",
-    "git.ignoreLegacyWarning": true,
+    "editor.detectIndentation": true,
     "editor.formatOnSave": true,
     "window.zoomLevel": 0,
     "editor.fontSize": 14,
     "terminal.integrated.fontSize": 14,
+    "editor.fontFamily": "'Fira Code'",
+    "editor.fontLigatures": true,
+    "bracket-pair-colorizer-2.colors": [
+        "Orange",
+        "Salmon",
+        "Orchid",
+        "Pink"
+    ],
     "editor.tokenColorCustomizations": {
         // elm type constructors
         "[Solarized Dark]": {
@@ -25,11 +28,7 @@
             ]
         }
     },
-    "terminal.external.linuxExec": "terminator",
-    "editor.fontFamily": "'Fira Code'",
-    "editor.fontLigatures": true,
-    "terminal.integrated.shell.linux": "/bin/zsh",
-    "editor.cursorBlinking": "solid",
+    // vim
     "vim.cursorStylePerMode.normal": "underline",
     "vim.useCtrlKeys": false,
     "editor.lineNumbers": "relative",
@@ -42,5 +41,12 @@
                 "^"
             ]
         }
-    ]
+    ],
+    // other
+    "git.confirmSync": false,
+    "git.ignoreLegacyWarning": true,
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "terminal.external.linuxExec": "terminator",
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false
 }
