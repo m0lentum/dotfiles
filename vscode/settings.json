@@ -30,9 +30,10 @@
     },
     // vim
     "vim.cursorStylePerMode.normal": "underline",
-    "vim.useCtrlKeys": false,
     "editor.lineNumbers": "relative",
+    "vim.useSystemClipboard": true,
     "vim.normalModeKeyBindings": [
+        // Home moves to first character
         {
             "before": [
                 "<Home>"
@@ -40,8 +41,36 @@
             "after": [
                 "^"
             ]
+        },
+        // delete without copying
+        {
+            "before": [
+                "<leader>",
+                "d"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "d"
+            ]
+        },
+        {
+            "before": [
+                "x"
+            ],
+            "after": [
+                "\"",
+                "_",
+                "x"
+            ]
         }
     ],
+    "vim.handleKeys": {
+        "<C-d>": true,
+        "<C-w>": false,
+        "<C-f>": false,
+        "<C-q>": false
+    },
     // other
     "git.confirmSync": false,
     "git.ignoreLegacyWarning": true,
