@@ -370,6 +370,18 @@ local function pl(widget, bgcolor, padding)
     return wibox.container.background(wibox.container.margin(widget, dpi(16), dpi(16)), bgcolor, theme.powerline_rl)
 end
 
+local colors = {
+    background = theme.bg_normal,
+    fillerarrow = "#404040",
+    systray = theme.bg_normal,
+    clock = "#777E76",
+    net = "#C0C0A2",
+    battery = "#8DAA9A",
+    temp = "#4B3B51",
+    cpu = "#4B696D",
+    mem = "#777E76"
+}
+
 function theme.at_screen_connect(s)
     -- Quake application
     s.quake = lain.util.quake({app = awful.util.terminal})
@@ -453,8 +465,6 @@ function theme.at_screen_connect(s)
         {
             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
-            wibox.container.margin(scissors, dpi(4), dpi(8)),
             --[[ using shapes
             pl(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, "#343434"),
             pl(task, "#343434"),
@@ -468,84 +478,59 @@ function theme.at_screen_connect(s)
             pl(binclock.widget, "#777E76"),
             --]]
             -- using separators
-            arrow(theme.bg_normal, "#343434"),
-            wibox.container.background(
-                wibox.container.margin(
-                    wibox.widget {mailicon, theme.mail and theme.mail.widget, layout = wibox.layout.align.horizontal},
-                    dpi(4),
-                    dpi(7)
-                ),
-                "#343434"
-            ),
-            arrow("#343434", theme.bg_normal),
-            wibox.container.background(
-                wibox.container.margin(
-                    wibox.widget {mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal},
-                    dpi(3),
-                    dpi(6)
-                ),
-                theme.bg_focus
-            ),
-            arrow(theme.bg_normal, "#343434"),
-            wibox.container.background(wibox.container.margin(task, dpi(3), dpi(7)), "#343434"),
-            arrow("#343434", "#777E76"),
+            arrow(colors.background, colors.mem),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {memicon, mem.widget, layout = wibox.layout.align.horizontal},
                     dpi(2),
                     dpi(3)
                 ),
-                "#777E76"
+                colors.mem
             ),
-            arrow("#777E76", "#4B696D"),
+            arrow(colors.mem, colors.cpu),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {cpuicon, cpu.widget, layout = wibox.layout.align.horizontal},
                     dpi(3),
                     dpi(4)
                 ),
-                "#4B696D"
+                colors.cpu
             ),
-            arrow("#4B696D", "#4B3B51"),
+            arrow(colors.cpu, colors.temp),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {tempicon, temp.widget, layout = wibox.layout.align.horizontal},
                     dpi(4),
                     dpi(4)
                 ),
-                "#4B3B51"
+                colors.temp
             ),
-            arrow("#4B3B51", "#CB755B"),
-            wibox.container.background(
-                wibox.container.margin(
-                    wibox.widget {fsicon, theme.fs and theme.fs.widget, layout = wibox.layout.align.horizontal},
-                    dpi(3),
-                    dpi(3)
-                ),
-                "#CB755B"
-            ),
-            arrow("#CB755B", "#8DAA9A"),
-            wibox.container.background(
-                wibox.container.margin(
-                    wibox.widget {baticon, bat.widget, layout = wibox.layout.align.horizontal},
-                    dpi(3),
-                    dpi(3)
-                ),
-                "#8DAA9A"
-            ),
-            arrow("#8DAA9A", "#C0C0A2"),
+            --arrow(colors.temp, colors.battery),
+            --wibox.container.background(
+            --    wibox.container.margin(
+            --        wibox.widget {baticon, bat.widget, layout = wibox.layout.align.horizontal},
+            --        dpi(3),
+            --        dpi(3)
+            --    ),
+            --    colors.battery
+            --),
+            --arrow(colors.battery, colors.net)
+            arrow(colors.temp, colors.net),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {nil, neticon, net.widget, layout = wibox.layout.align.horizontal},
                     dpi(3),
                     dpi(3)
                 ),
-                "#C0C0A2"
+                colors.net
             ),
-            arrow("#C0C0A2", "#777E76"),
-            wibox.container.background(wibox.container.margin(binclock.widget, dpi(4), dpi(8)), "#777E76"),
-            arrow("#777E76", "alpha"),
+            arrow(colors.net, colors.clock),
+            wibox.container.background(wibox.container.margin(binclock.widget, dpi(4), dpi(8)), colors.clock),
+            arrow(colors.clock, colors.systray),
             --]]
+            wibox.container.background(wibox.container.margin(wibox.widget.systray(), dpi(4), dpi(4)), colors.systray),
+            arrow(theme.bg_normal, colors.fillerarrow),
+            arrow(colors.fillerarrow, alpha),
             s.mylayoutbox
         }
     }
