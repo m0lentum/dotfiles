@@ -109,12 +109,15 @@ local binclock =
     color_inactive = theme.bg_focus
 }
 
+-- Text clock
+local textclock = awful.widget.textclock("%d.%m. | %H:%M")
+
 -- Calendar
 theme.cal =
     lain.widget.cal(
     {
         --cal = "cal --color=always",
-        attach_to = {binclock.widget},
+        attach_to = {textclock},
         notification_preset = {
             font = "xos4 Terminus 10",
             fg = theme.fg_normal,
@@ -525,7 +528,7 @@ function theme.at_screen_connect(s)
                 colors.net
             ),
             arrow(colors.net, colors.clock),
-            wibox.container.background(wibox.container.margin(binclock.widget, dpi(4), dpi(8)), colors.clock),
+            wibox.container.background(wibox.container.margin(textclock, dpi(4), dpi(8)), colors.clock),
             arrow(colors.clock, colors.systray),
             --]]
             wibox.container.background(wibox.container.margin(wibox.widget.systray(), dpi(4), dpi(4)), colors.systray),
