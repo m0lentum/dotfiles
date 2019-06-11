@@ -13,25 +13,42 @@ local dpi = require("beautiful.xresources").apply_dpi
 local math, string, os = math, string, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
+local solarized = {
+    bg_dark_dark = "#002b36",
+    bg_dark_light = "#073642",
+    fg_dark_dark = "#586e75",
+    fg_dark_light = "#657b83",
+    bg_light_dark = "#eee8d5",
+    bg_light_light = "#93a1a1",
+    fg_light_dark = "#839496",
+    fg_light_light = "#93a1a1",
+    accent_yellow = "#b58900",
+    accent_orange = "#cb4b16",
+    accent_red = "#dc322f",
+    accent_magenta = "#d33682",
+    accent_violet = "#6c71c4",
+    accent_blue = "#268bd2",
+    accent_cyan = "#2aa198",
+    accent_green = "#859900"
+}
+
 local theme = {}
 theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow"
 theme.wallpaper = theme.dir .. "/wall.png"
 theme.font = "xos4 Terminus 9"
-theme.fg_normal = "#FEFEFE"
+theme.fg_normal = "#F0F0F0"
 theme.fg_focus = "#32D6FF"
-theme.fg_urgent = "#C83F11"
-theme.bg_normal = "#222222"
-theme.bg_focus = "#1E2320"
+theme.fg_urgent = solarized.accent_orange
+theme.bg_normal = solarized.bg_dark_dark
+theme.bg_focus = solarized.bg_dark_light
 theme.bg_urgent = "#3F3F3F"
-theme.taglist_fg_focus = "#00CCFF"
-theme.tasklist_bg_focus = "#222222"
-theme.tasklist_fg_focus = "#00CCFF"
+theme.taglist_fg_focus = theme.fg_focus
+theme.tasklist_bg_focus = theme.bg_focus
+theme.tasklist_fg_focus = theme.fg_focus
 theme.border_width = dpi(2)
-theme.border_normal = "#3F3F3F"
-theme.border_focus = "#6F6F6F"
-theme.border_marked = "#CC9393"
-theme.titlebar_bg_focus = "#3F3F3F"
-theme.titlebar_bg_normal = "#3F3F3F"
+theme.border_normal = solarized.fg_dark_dark
+theme.border_focus = solarized.accent_blue
+theme.border_marked = solarized.accent_orange
 theme.titlebar_bg_focus = theme.bg_focus
 theme.titlebar_bg_normal = theme.bg_normal
 theme.titlebar_fg_focus = theme.fg_focus
@@ -110,7 +127,7 @@ local binclock =
 }
 
 -- Text clock
-local textclock = awful.widget.textclock("%d.%m. | %H:%M")
+local textclock = wibox.widget.textclock("%d.%m. | %H:%M")
 
 -- Calendar
 theme.cal =
@@ -373,16 +390,17 @@ local function pl(widget, bgcolor, padding)
     return wibox.container.background(wibox.container.margin(widget, dpi(16), dpi(16)), bgcolor, theme.powerline_rl)
 end
 
-local colors = {
+local widget_colors = {
     background = theme.bg_normal,
-    fillerarrow = "#404040",
+    filler = solarized.bg_dark_light,
+    filler_light = solarized.fg_light_dark,
     systray = theme.bg_normal,
-    clock = "#777E76",
-    net = "#C0C0A2",
-    battery = "#8DAA9A",
-    temp = "#4B3B51",
-    cpu = "#4B696D",
-    mem = "#777E76"
+    clock = solarized.accent_green,
+    net = solarized.accent_cyan,
+    -- battery = "#8DAA9A",
+    temp = solarized.accent_orange,
+    cpu = solarized.accent_violet,
+    mem = solarized.accent_yellow
 }
 
 function theme.at_screen_connect(s)
@@ -468,72 +486,73 @@ function theme.at_screen_connect(s)
         {
             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            --[[ using shapes
-            pl(wibox.widget { mpdicon, theme.mpd.widget, layout = wibox.layout.align.horizontal }, "#343434"),
-            pl(task, "#343434"),
-            --pl(wibox.widget { mailicon, mail and theme.mail.widget, layout = wibox.layout.align.horizontal }, "#343434"),
-            pl(wibox.widget { memicon, mem.widget, layout = wibox.layout.align.horizontal }, "#777E76"),
-            pl(wibox.widget { cpuicon, cpu.widget, layout = wibox.layout.align.horizontal }, "#4B696D"),
-            pl(wibox.widget { tempicon, temp.widget, layout = wibox.layout.align.horizontal }, "#4B3B51"),
-            --pl(wibox.widget { fsicon, theme.fs and theme.fs.widget, layout = wibox.layout.align.horizontal }, "#CB755B"),
-            pl(wibox.widget { baticon, bat.widget, layout = wibox.layout.align.horizontal }, "#8DAA9A"),
-            pl(wibox.widget { neticon, net.widget, layout = wibox.layout.align.horizontal }, "#C0C0A2"),
-            pl(binclock.widget, "#777E76"),
-            --]]
-            -- using separators
-            arrow(colors.background, colors.mem),
+            arrow(alpha, widget_colors.filler),
+            arrow(widget_colors.filler, widget_colors.mem),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {memicon, mem.widget, layout = wibox.layout.align.horizontal},
                     dpi(2),
                     dpi(3)
                 ),
-                colors.mem
+                widget_colors.mem
             ),
-            arrow(colors.mem, colors.cpu),
+            arrow(widget_colors.mem, widget_colors.cpu),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {cpuicon, cpu.widget, layout = wibox.layout.align.horizontal},
                     dpi(3),
                     dpi(4)
                 ),
-                colors.cpu
+                widget_colors.cpu
             ),
-            arrow(colors.cpu, colors.temp),
+            arrow(widget_colors.cpu, widget_colors.temp),
+            -- arrow(widget_colors.cpu, widget_colors.filler),
+            -- arrow(widget_colors.filler, widget_colors.temp),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {tempicon, temp.widget, layout = wibox.layout.align.horizontal},
                     dpi(4),
                     dpi(4)
                 ),
-                colors.temp
+                widget_colors.temp
             ),
-            --arrow(colors.temp, colors.battery),
+            --arrow(widget_colors.temp, widget_colors.battery),
             --wibox.container.background(
             --    wibox.container.margin(
             --        wibox.widget {baticon, bat.widget, layout = wibox.layout.align.horizontal},
             --        dpi(3),
             --        dpi(3)
             --    ),
-            --    colors.battery
+            --    widget_colors.battery
             --),
-            --arrow(colors.battery, colors.net)
-            arrow(colors.temp, colors.net),
+            --arrow(widget_colors.battery, widget_colors.net),
+            --
+            arrow(widget_colors.temp, widget_colors.net),
+            -- arrow(widget_colors.temp, widget_colors.filler),
+            -- arrow(widget_colors.filler, widget_colors.net),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {nil, neticon, net.widget, layout = wibox.layout.align.horizontal},
                     dpi(3),
                     dpi(3)
                 ),
-                colors.net
+                widget_colors.net
             ),
-            arrow(colors.net, colors.clock),
-            wibox.container.background(wibox.container.margin(textclock, dpi(4), dpi(8)), colors.clock),
-            arrow(colors.clock, colors.systray),
+            arrow(widget_colors.net, widget_colors.clock),
+            -- arrow(widget_colors.net, widget_colors.filler),
+            -- arrow(widget_colors.filler, widget_colors.clock),
+            wibox.container.background(wibox.container.margin(textclock, dpi(4), dpi(8)), widget_colors.clock),
+            arrow(widget_colors.clock, widget_colors.systray),
+            -- arrow(widget_colors.clock, widget_colors.filler),
+            -- arrow(widget_colors.filler, widget_colors.systray),
             --]]
-            wibox.container.background(wibox.container.margin(wibox.widget.systray(), dpi(4), dpi(4)), colors.systray),
-            arrow(theme.bg_normal, colors.fillerarrow),
-            arrow(colors.fillerarrow, alpha),
+            wibox.container.background(
+                wibox.container.margin(wibox.widget.systray(), dpi(4), dpi(4)),
+                widget_colors.systray
+            ),
+            -- arrow(widget_colors.systray, alpha),
+            arrow(widget_colors.systray, widget_colors.filler),
+            arrow(widget_colors.filler, alpha),
             s.mylayoutbox
         }
     }
