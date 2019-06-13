@@ -1,8 +1,8 @@
 - Any file with the name structure [name].[dotfile] should have its contents copied into that dotfile.
 - Terminator, awesome, redshift and vscode config goes in ~/.config.
 - Install github.com/powerline/fonts to make things look right, also ttf-fira-code for vscode.
-- To use the Awesome config, first install awesome-copycats,
-    then symlink or copy rc.lua to ~/.config/awesome.
+- Awesome theme uses the Terminus font.
+- Clone with --recursive to get the submodules required for Awesome.
 - zsh needs the powelevel10k theme and zsh-syntax-highlighting plugin;
     these are installed by git cloning their repos into the respective folders in ~/.oh-my-zsh/custom.
 

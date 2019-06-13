@@ -33,7 +33,7 @@ local solarized = {
 }
 
 local theme = {}
-theme.dir = os.getenv("HOME") .. "/.config/awesome/themes/powerarrow"
+theme.dir = os.getenv("HOME") .. "/.config/awesome/theme"
 theme.wallpaper = theme.dir .. "/wall.png"
 theme.font = "xos4 Terminus 9"
 theme.fg_normal = "#F0F0F0"
@@ -116,15 +116,6 @@ theme.titlebar_maximized_button_normal_inactive = theme.dir .. "/icons/titlebar/
 
 local markup = lain.util.markup
 local separators = lain.util.separators
-
--- Binary clock
-local binclock =
-    require("themes.powerarrow.binclock") {
-    height = dpi(32),
-    show_seconds = true,
-    color_active = theme.fg_normal,
-    color_inactive = theme.bg_focus
-}
 
 -- Text clock
 local textclock = wibox.widget.textclock("%d.%m. | %H:%M")
