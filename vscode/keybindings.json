@@ -84,5 +84,53 @@
         "key": "ctrl+shift+z",
         "command": "-redo",
         "when": "textInputFocus && !editorReadonly"
+    },
+    {
+        "key": "alt+up",
+        "command": "workbench.action.focusAboveGroup"
+    },
+    {
+        "key": "ctrl+k ctrl+up",
+        "command": "-workbench.action.focusAboveGroup"
+    },
+    {
+        "key": "alt+down",
+        "command": "workbench.action.focusBelowGroup"
+    },
+    {
+        "key": "ctrl+k ctrl+down",
+        "command": "-workbench.action.focusBelowGroup"
+    },
+    {
+        "key": "alt+left",
+        "command": "workbench.action.focusLeftGroup"
+    },
+    {
+        "key": "ctrl+k ctrl+left",
+        "command": "-workbench.action.focusLeftGroup"
+    },
+    {
+        "key": "alt+right",
+        "command": "workbench.action.focusRightGroup"
+    },
+    {
+        "key": "ctrl+k ctrl+right",
+        "command": "-workbench.action.focusRightGroup"
+    },
+    {
+        "key": "shift+alt+up",
+        "command": "workbench.action.moveEditorToAboveGroup"
+    },
+    {
+        "key": "shift+alt+down",
+        "command": "workbench.action.moveEditorToBelowGroup"
+    },
+    {
+        "key": "shift+alt+left",
+        "command": "workbench.action.moveEditorToLeftGroup"
+    },
+    {
+        "key": "shift+alt+right",
+        "command": "workbench.action.moveEditorToRightGroup"
     }
 ]
