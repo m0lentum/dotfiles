@@ -37,6 +37,7 @@ theme.dir = os.getenv("HOME") .. "/.config/awesome/theme"
 theme.wallpaper = theme.dir .. "/wall.png"
 theme.font = "xos4 Terminus 9"
 theme.fg_normal = "#F0F0F0"
+theme.fg_dim = "#808080"
 theme.fg_focus = "#32D6FF"
 theme.fg_urgent = solarized.accent_orange
 theme.bg_normal = solarized.bg_dark_dark
@@ -453,7 +454,42 @@ function theme.at_screen_connect(s)
         )
     )
     -- Create a taglist widget
-    s.mytaglist = awful.widget.taglist(s, awful.widget.taglist.filter.all, awful.util.taglist_buttons)
+    s.mytaglist =
+        awful.widget.taglist {
+        screen = s,
+        filter = awful.widget.taglist.filter.all,
+        widget_template = {
+            {
+                {
+                    {
+                        id = "text_role",
+                        widget = wibox.widget.textbox
+                    },
+                    layout = wibox.layout.fixed.horizontal
+                },
+                left = 16,
+                right = 16,
+                widget = wibox.container.margin
+            },
+            widget = wibox.container.background,
+            shape = gears.shape.powerline,
+            create_callback = function(self, tag, index, taglist)
+                if index % 2 == 0 then
+                    self.bg = theme.bg_focus
+                else
+                    self.bg = theme.bg_normal
+                end
+            end,
+            update_callback = function(self, tag, index, taglist)
+                if #tag:clients() > 0 then
+                    self.fg = theme.fg_normal
+                else
+                    self.fg = theme.fg_dim
+                end
+            end
+        },
+        buttons = awful.util.taglist_buttons
+    }
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, awful.util.tasklist_buttons)
