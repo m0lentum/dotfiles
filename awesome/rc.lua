@@ -15,6 +15,7 @@ local wibox = require("wibox")
 local beautiful = require("beautiful")
 local naughty = require("naughty")
 local lain = require("lain")
+local charitable = require("charitable")
 --local menubar       = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
@@ -95,34 +96,41 @@ local guieditor = "code"
 local scrlocker = "slock"
 
 awful.util.terminal = terminal
-awful.util.tagnames = {"1", "2", "3", "4", "5"}
 awful.layout.layouts = {
-    awful.layout.suit.tile,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    awful.layout.suit.floating,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
-    awful.layout.suit.corner.ne,
-    awful.layout.suit.corner.sw,
-    awful.layout.suit.corner.se,
-    lain.layout.cascade,
-    lain.layout.cascade.tile,
-    lain.layout.centerwork,
-    lain.layout.centerwork.horizontal,
-    lain.layout.termfair,
-    lain.layout.termfair.center
+    -- awful.layout.suit.floating,
+    awful.layout.suit.fair
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.spiral.dwindle,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
+    -- awful.layout.suit.corner.ne,
+    -- awful.layout.suit.corner.sw,
+    -- awful.layout.suit.corner.se,
+    -- lain.layout.cascade,
+    -- lain.layout.cascade.tile,
+    -- lain.layout.centerwork,
+    -- lain.layout.centerwork.horizontal,
+    -- lain.layout.termfair,
+    -- lain.layout.termfair.center
 }
+awful.layout.tags =
+    charitable.create_tags(
+    {"1", "2", "3", "4", "5"},
+    {
+        awful.layout.layouts[1],
+        awful.layout.layouts[1],
+        awful.layout.layouts[1],
+        awful.layout.layouts[2],
+        awful.layout.layouts[2]
+    }
+)
 
 awful.util.taglist_buttons =
     my_table.join(
@@ -130,40 +138,14 @@ awful.util.taglist_buttons =
         {},
         1,
         function(t)
-            t:view_only()
+            charitable.select_tag(t, awful.screen.focused())
         end
     ),
     awful.button(
-        {modkey},
-        1,
-        function(t)
-            if client.focus then
-                client.focus:move_to_tag(t)
-            end
-        end
-    ),
-    awful.button({}, 3, awful.tag.viewtoggle),
-    awful.button(
-        {modkey},
+        {},
         3,
         function(t)
-            if client.focus then
-                client.focus:toggle_tag(t)
-            end
-        end
-    ),
-    awful.button(
-        {},
-        4,
-        function(t)
-            awful.tag.viewnext(t.screen)
-        end
-    ),
-    awful.button(
-        {},
-        5,
-        function(t)
-            awful.tag.viewprev(t.screen)
+            charitable.toggle_tag(t, awful.screen.focused())
         end
     )
 )
@@ -941,9 +923,9 @@ for i = 1, 9 do
             "#" .. i + 9,
             function()
                 local screen = awful.screen.focused()
-                local tag = screen.tags[i]
+                local tag = awful.layout.tags[i]
                 if tag then
-                    tag:view_only()
+                    charitable.select_tag(tag, screen)
                 end
             end,
             descr_view
@@ -954,7 +936,7 @@ for i = 1, 9 do
             "#" .. i + 9,
             function()
                 local screen = awful.screen.focused()
-                local tag = screen.tags[i]
+                local tag = awful.layout.tags[i]
                 if tag then
                     awful.tag.viewtoggle(tag)
                 end
@@ -967,7 +949,7 @@ for i = 1, 9 do
             "#" .. i + 9,
             function()
                 if client.focus then
-                    local tag = client.focus.screen.tags[i]
+                    local tag = awful.layout.tags[i]
                     if tag then
                         client.focus:move_to_tag(tag)
                     end
@@ -980,12 +962,7 @@ for i = 1, 9 do
             {modkey, "Control", "Shift"},
             "#" .. i + 9,
             function()
-                if client.focus then
-                    local tag = client.focus.screen.tags[i]
-                    if tag then
-                        client.focus:toggle_tag(tag)
-                    end
-                end
+                charitable.toggle_tag(tags[i], awful.screen.focused())
             end,
             descr_toggle_focus
         )
@@ -1172,3 +1149,21 @@ client.connect_signal(
 -- possible workaround for tag preservation when switching back to default screen:
 -- https://github.com/lcpz/awesome-copycats/issues/251
 -- }}}
+
+-- Charitable: ensure that removing screens doesn't kill tags
+tag.connect_signal(
+    "request::screen",
+    function(t)
+        t.selected = false
+        for s in capi.screen do
+            if s ~= t.screen then
+                t.screen = s
+                return
+            end
+        end
+    end
+)
+-- Charitable: work around bugs in awesome 4.0 through 4.3+
+-- see https://github.com/awesomeWM/awesome/issues/2780
+awful.tag.history.restore = function()
+end
