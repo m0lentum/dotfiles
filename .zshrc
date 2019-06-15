@@ -13,6 +13,34 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_first_and_last"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
+	root_indicator
+	background_jobs
+	context
+	dir
+	dir_writable_joined
+	vcs
+	command_execution_time
+	status
+	newline
+	custom_prompt_arrow
+)
+POWERLEVEL9K_CUSTOM_PROMPT_ARROW="echo ' '"
+POWERLEVEL9K_CUSTOM_PROMPT_ARROW_BACKGROUND="black"
+POWERLEVEL9K_CUSTOM_PROMPT_ARROW_FOREGROUND="green"
+
+POWERLEVEL9K_DISABLE_RPROMPT=true
+
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_THRESHOLD=0
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_BACKGROUND="black"
+POWERLEVEL9K_COMMAND_EXECUTION_TIME_FOREGROUND="green"
+POWERLEVEL9K_EXECUTION_TIME_ICON=
+# Status code displays just the number
+POWERLEVEL9K_CARRIAGE_RETURN_ICON=
+
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="blue"
+POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="black"
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
