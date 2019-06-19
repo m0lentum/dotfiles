@@ -14,7 +14,7 @@ POWERLEVEL9K_SHORTEN_STRATEGY="truncate_to_first_and_last"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-	root_indicator
+	time
 	background_jobs
 	context
 	dir
@@ -40,6 +40,10 @@ POWERLEVEL9K_CARRIAGE_RETURN_ICON=
 
 POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_BACKGROUND="blue"
 POWERLEVEL9K_DIR_WRITABLE_FORBIDDEN_FOREGROUND="black"
+
+POWERLEVEL9K_TIME_BACKGROUND="black"
+POWERLEVEL9K_TIME_FOREGROUND="blue"
+POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
