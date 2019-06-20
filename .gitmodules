@@ -1,6 +1,6 @@
 [submodule "awesome/lain"]
-	path = awesome/lain
+	path = .config/awesome/lain
 	url = https://github.com/lcpz/lain.git
 [submodule "awesome/charitable"]
-	path = awesome/charitable
+	path = .config/awesome/charitable
 	url = https://github.com/frioux/charitable.git

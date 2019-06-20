@@ -1,5 +1,8 @@
 - Any file with the name structure [name].[dotfile] should have its contents copied into that dotfile.
-- Terminator, awesome, redshift and vscode config goes in ~/.config.
+- Everything in .config goes directly in ~/.config.
+    - Easy way to do this: ln -s /path/to/here/.config/* ~/.config
+    - VSCode config also goes in .config but I didn't want to include all of it
+      so you have to put it in "Code - OSS/User/" manually.
 - Install github.com/powerline/fonts to make things look right, also ttf-fira-code for vscode.
 - Awesome theme uses the Terminus font.
 - Clone with --recursive to get the submodules required for Awesome.
