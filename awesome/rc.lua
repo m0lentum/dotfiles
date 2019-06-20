@@ -88,7 +88,7 @@ awful.spawn.with_shell(
 
 local modkey = "Mod4"
 local altkey = "Mod1"
-local terminal = "terminator"
+local terminal = "termite"
 local editor = os.getenv("EDITOR") or "vim"
 local gui_editor = "code"
 local browser = "firefox"
