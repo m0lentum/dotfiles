@@ -135,118 +135,6 @@ theme.cal =
     }
 )
 
--- Taskwarrior
-local task = wibox.widget.imagebox(theme.widget_task)
-lain.widget.contrib.task.attach(
-    task,
-    {
-        -- do not colorize output
-        show_cmd = "task | sed -r 's/\\x1B\\[([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g'"
-    }
-)
-task:buttons(my_table.join(awful.button({}, 1, lain.widget.contrib.task.prompt)))
-
--- Scissors (xsel copy and paste)
-local scissors = wibox.widget.imagebox(theme.widget_scissors)
-scissors:buttons(
-    my_table.join(
-        awful.button(
-            {},
-            1,
-            function()
-                awful.spawn.with_shell("xsel | xsel -i -b")
-            end
-        )
-    )
-)
-
--- Mail IMAP check
---[[ commented because it needs to be set before use
-local mailicon = wibox.widget.imagebox(theme.widget_mail)
-mailicon:buttons(my_table.join(awful.button({ }, 1, function () awful.spawn(mail) end)))
-theme.mail = lain.widget.imap({
-    timeout  = 180,
-    server   = "server",
-    mail     = "mail",
-    password = "keyring get mail",
-    settings = function()
-        if mailcount > 0 then
-            widget:set_text(" " .. mailcount .. " ")
-            mailicon:set_image(theme.widget_mail_on)
-        else
-            widget:set_text("")
-            mailicon:set_image(theme.widget_mail)
-        end
-    end
-})
---]]
--- ALSA volume
-theme.volume =
-    lain.widget.alsabar(
-    {
-        --togglechannel = "IEC958,3",
-        notification_preset = {font = "xos4 Terminus 10", fg = theme.fg_normal}
-    }
-)
-
--- MPD
-local musicplr = awful.util.terminal .. " -title Music -g 130x34-320+16 -e ncmpcpp"
-local mpdicon = wibox.widget.imagebox(theme.widget_music)
-mpdicon:buttons(
-    my_table.join(
-        awful.button(
-            {modkey},
-            1,
-            function()
-                awful.spawn.with_shell(musicplr)
-            end
-        ),
-        awful.button(
-            {},
-            1,
-            function()
-                os.execute("mpc prev")
-                theme.mpd.update()
-            end
-        ),
-        awful.button(
-            {},
-            2,
-            function()
-                os.execute("mpc toggle")
-                theme.mpd.update()
-            end
-        ),
-        awful.button(
-            {},
-            3,
-            function()
-                os.execute("mpc next")
-                theme.mpd.update()
-            end
-        )
-    )
-)
-theme.mpd =
-    lain.widget.mpd(
-    {
-        settings = function()
-            if mpd_now.state == "play" then
-                artist = " " .. mpd_now.artist .. " "
-                title = mpd_now.title .. " "
-                mpdicon:set_image(theme.widget_music_on)
-                widget:set_markup(markup.font(theme.font, markup("#FF8466", artist) .. " " .. title))
-            elseif mpd_now.state == "pause" then
-                widget:set_markup(markup.font(theme.font, " mpd paused "))
-                mpdicon:set_image(theme.widget_music_pause)
-            else
-                widget:set_text("")
-                mpdicon:set_image(theme.widget_music)
-            end
-        end
-    }
-)
-
 -- MEM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local mem =
@@ -269,17 +157,27 @@ local cpu =
     }
 )
 
---[[ Coretemp (lm_sensors, per core)
-local tempwidget = awful.widget.watch({awful.util.shell, '-c', 'sensors | grep Core'}, 30,
-function(widget, stdout)
-    local temps = ""
-    for line in stdout:gmatch("[^\r\n]+") do
-        temps = temps .. line:match("+(%d+).*°C")  .. "° " -- in Celsius
+-- Coretemp (lm_sensors, per core)
+local temp, temp_timer =
+    awful.widget.watch(
+    {awful.util.shell, "-c", "echo arstdawfw"},
+    1,
+    function(widget, stdout)
+        widget:set_markup(markup.font(theme.font, stdout))
     end
-    widget:set_markup(markup.font(theme.font, " " .. temps))
-end)
+    -- awful.widget.watch(
+    -- "bash -c sensors",
+    -- 1,
+    -- function(widget, stdout)
+    --     local temps = ""
+    --     for line in stdout:gmatch("[^\r\n]+") do
+    --         temps = temps .. line:match("+(%d+).*°C") .. "° " -- in Celsius
+    --     end
+    --     widget:set_markup(markup.font(theme.font, " " .. temps))
+    -- end
+)
 --]]
--- Coretemp (lain, average)
+--[[ Coretemp (lain, average)
 local temp =
     lain.widget.temp(
     {
@@ -291,17 +189,6 @@ local temp =
 --]]
 local tempicon = wibox.widget.imagebox(theme.widget_temp)
 
--- / fs
-local fsicon = wibox.widget.imagebox(theme.widget_hdd)
---[[ commented because it needs Gio/Glib >= 2.54
-theme.fs = lain.widget.fs({
-    notification_preset = { fg = theme.fg_normal, bg = theme.bg_normal, font = "xos4 Terminus 10" },
-    settings = function()
-        local fsp = string.format(" %3.2f %s ", fs_now["/"].free, fs_now["/"].units)
-        widget:set_markup(markup.font(theme.font, fsp))
-    end
-})
---]]
 -- Battery
 local baticon = wibox.widget.imagebox(theme.widget_battery)
 local bat =
@@ -342,45 +229,8 @@ local net =
     }
 )
 
--- Brigtness
-local brighticon = wibox.widget.imagebox(theme.widget_brightness)
--- If you use xbacklight, comment the line with "light -G" and uncomment the line bellow
--- local brightwidget = awful.widget.watch('xbacklight -get', 0.1,
-local brightwidget =
-    awful.widget.watch(
-    "light -G",
-    0.1,
-    function(widget, stdout, stderr, exitreason, exitcode)
-        local brightness_level = tonumber(string.format("%.0f", stdout))
-        widget:set_markup(markup.font(theme.font, " " .. brightness_level .. "%"))
-    end
-)
-
 -- Separators
 local arrow = separators.arrow_left
-
-function theme.powerline_rl(cr, width, height)
-    local arrow_depth, offset = height / 2, 0
-
-    -- Avoid going out of the (potential) clip area
-    if arrow_depth < 0 then
-        width = width + 2 * arrow_depth
-        offset = -arrow_depth
-    end
-
-    cr:move_to(offset + arrow_depth, 0)
-    cr:line_to(offset + width, 0)
-    cr:line_to(offset + width - arrow_depth, height / 2)
-    cr:line_to(offset + width, height)
-    cr:line_to(offset + arrow_depth, height)
-    cr:line_to(offset, height / 2)
-
-    cr:close_path()
-end
-
-local function pl(widget, bgcolor, padding)
-    return wibox.container.background(wibox.container.margin(widget, dpi(16), dpi(16)), bgcolor, theme.powerline_rl)
-end
 
 local widget_colors = {
     background = theme.bg_normal,
@@ -396,9 +246,6 @@ local widget_colors = {
 }
 
 function theme.at_screen_connect(s)
-    -- Quake application
-    s.quake = lain.util.quake({app = awful.util.terminal})
-
     -- If wallpaper is a function, call it with the screen
     local wallpaper = theme.wallpaper
     if type(wallpaper) == "function" then
@@ -553,8 +400,6 @@ function theme.at_screen_connect(s)
                 widget_colors.cpu
             ),
             arrow(widget_colors.cpu, widget_colors.temp),
-            -- arrow(widget_colors.cpu, widget_colors.filler),
-            -- arrow(widget_colors.filler, widget_colors.temp),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {tempicon, temp.widget, layout = wibox.layout.align.horizontal},
@@ -575,8 +420,6 @@ function theme.at_screen_connect(s)
             --arrow(widget_colors.battery, widget_colors.net),
             --
             arrow(widget_colors.temp, widget_colors.net),
-            -- arrow(widget_colors.temp, widget_colors.filler),
-            -- arrow(widget_colors.filler, widget_colors.net),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {nil, neticon, net.widget, layout = wibox.layout.align.horizontal},
@@ -586,18 +429,13 @@ function theme.at_screen_connect(s)
                 widget_colors.net
             ),
             arrow(widget_colors.net, widget_colors.clock),
-            -- arrow(widget_colors.net, widget_colors.filler),
-            -- arrow(widget_colors.filler, widget_colors.clock),
             wibox.container.background(wibox.container.margin(textclock, dpi(4), dpi(8)), widget_colors.clock),
             arrow(widget_colors.clock, widget_colors.systray),
-            -- arrow(widget_colors.clock, widget_colors.filler),
-            -- arrow(widget_colors.filler, widget_colors.systray),
             --]]
             wibox.container.background(
                 wibox.container.margin(wibox.widget.systray(), dpi(4), dpi(4)),
                 widget_colors.systray
             ),
-            -- arrow(widget_colors.systray, alpha),
             arrow(widget_colors.systray, widget_colors.filler),
             arrow(widget_colors.filler, alpha),
             s.mylayoutbox
