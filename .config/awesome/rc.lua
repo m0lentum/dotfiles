@@ -210,6 +210,29 @@ lain.layout.cascade.tile.nmaster = 5
 lain.layout.cascade.tile.ncol = 2
 
 beautiful.init(string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HOME")))
+
+-- }}}
+
+-- {{{ Random wallpaper
+
+local random_wallpaper = require("random-wallpaper")
+function wallpaper(screen)
+    return random_wallpaper()
+end
+beautiful.wallpaper = random_wallpaper
+
+-- swap wallpapers on a timer
+gears.timer {
+    timeout = 5 * 60,
+    call_now = false,
+    autostart = true,
+    callback = function()
+        for s in screen do
+            gears.wallpaper.maximized(random_wallpaper(), s)
+        end
+    end
+}
+
 -- }}}
 
 --menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
