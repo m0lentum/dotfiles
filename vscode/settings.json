@@ -5,10 +5,14 @@
     "editor.detectIndentation": true,
     "editor.formatOnSave": true,
     "window.zoomLevel": 0,
-    "editor.fontSize": 14,
-    "terminal.integrated.fontSize": 14,
+    "editor.fontSize": 13,
+    "terminal.integrated.fontSize": 13,
     "editor.fontFamily": "'Fira Code'",
     "editor.fontLigatures": true,
+    "window.menuBarVisibility": "toggle",
+    "editor.wrappingIndent": "deepIndent",
+    "editor.wordWrap": "on",
+    "scrolloff.scrolloff": 10,
     "bracket-pair-colorizer-2.colors": [
         "Orange",
         "Salmon",
@@ -69,7 +73,10 @@
         "<C-d>": true,
         "<C-w>": false,
         "<C-f>": false,
-        "<C-q>": false
+        "<C-q>": false,
+        "<C-z>": false,
+        "<C-y>": false,
+        "<C-b>": false
     },
     // other
     "git.confirmSync": false,
@@ -77,5 +84,6 @@
     "terminal.integrated.shell.linux": "/bin/zsh",
     "terminal.external.linuxExec": "terminator",
     "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false
+    "explorer.confirmDelete": false,
+    "cmake.configureOnOpen": true,
 }
