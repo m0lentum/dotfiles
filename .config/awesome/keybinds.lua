@@ -154,7 +154,7 @@ local globalkeys =
     awful.key({modkey, "Shift"}, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
     awful.key(
         {modkey},
-        "+",
+        "Prior",
         function()
             awful.tag.incmwfact(0.025)
         end,
@@ -162,7 +162,7 @@ local globalkeys =
     ),
     awful.key(
         {modkey},
-        "-",
+        "Next",
         function()
             awful.tag.incmwfact(-0.025)
         end,
@@ -170,7 +170,7 @@ local globalkeys =
     ),
     awful.key(
         {modkey, "Shift"},
-        "+",
+        "Prior",
         function()
             awful.tag.incnmaster(1, nil, true)
         end,
@@ -178,7 +178,7 @@ local globalkeys =
     ),
     awful.key(
         {modkey, "Shift"},
-        "-",
+        "Next",
         function()
             awful.tag.incnmaster(-1, nil, true)
         end,
@@ -186,7 +186,7 @@ local globalkeys =
     ),
     awful.key(
         {modkey, "Control"},
-        "+",
+        "Prior",
         function()
             awful.tag.incncol(1, nil, true)
         end,
@@ -194,7 +194,7 @@ local globalkeys =
     ),
     awful.key(
         {modkey, "Control"},
-        "-",
+        "Next",
         function()
             awful.tag.incncol(-1, nil, true)
         end,
