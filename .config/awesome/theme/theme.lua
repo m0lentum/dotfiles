@@ -239,10 +239,10 @@ local widget_colors = {
     systray = theme.bg_normal,
     clock = solarized.accent_green,
     net = solarized.accent_cyan,
-    -- battery = "#8DAA9A",
+    battery = solarized.accent_magenta,
     temp = solarized.accent_orange,
-    cpu = solarized.accent_violet,
-    mem = solarized.accent_yellow
+    cpu = solarized.accent_yellow,
+    mem = solarized.accent_violet
 }
 
 function theme.at_screen_connect(s)
@@ -408,18 +408,16 @@ function theme.at_screen_connect(s)
                 ),
                 widget_colors.temp
             ),
-            --arrow(widget_colors.temp, widget_colors.battery),
-            --wibox.container.background(
-            --    wibox.container.margin(
-            --        wibox.widget {baticon, bat.widget, layout = wibox.layout.align.horizontal},
-            --        dpi(3),
-            --        dpi(3)
-            --    ),
-            --    widget_colors.battery
-            --),
-            --arrow(widget_colors.battery, widget_colors.net),
-            --
-            arrow(widget_colors.temp, widget_colors.net),
+            arrow(widget_colors.temp, widget_colors.battery),
+            wibox.container.background(
+                wibox.container.margin(
+                    wibox.widget {baticon, bat.widget, layout = wibox.layout.align.horizontal},
+                    dpi(3),
+                    dpi(3)
+                ),
+                widget_colors.battery
+            ),
+            arrow(widget_colors.battery, widget_colors.net),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {nil, neticon, net.widget, layout = wibox.layout.align.horizontal},
