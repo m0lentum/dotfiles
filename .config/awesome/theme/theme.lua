@@ -157,7 +157,7 @@ local cpu =
     }
 )
 
--- Coretemp (lm_sensors, per core)
+--[[ Coretemp (lm_sensors, per core)
 local temp, temp_timer =
     awful.widget.watch(
     {awful.util.shell, "-c", "echo arstdawfw"},
@@ -177,7 +177,7 @@ local temp, temp_timer =
     -- end
 )
 --]]
---[[ Coretemp (lain, average)
+-- Coretemp (lain, average)
 local temp =
     lain.widget.temp(
     {
