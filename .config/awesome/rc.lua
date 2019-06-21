@@ -275,7 +275,7 @@ awful.screen.connect_for_each_screen(
 -- }}}
 
 -- {{{ key bindings from another file
-local globalkeys, clientkeys, clientbuttons = require("keybinds")
+local globalkeys, clientkeys, clientbuttons = require("keybinds")()
 
 root.keys(globalkeys)
 -- }}}

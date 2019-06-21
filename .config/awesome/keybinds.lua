@@ -260,15 +260,6 @@ local clientkeys =
     my_table.join(
     awful.key({modkey}, "m", lain.util.magnify_client, {description = "magnify client", group = "client"}),
     awful.key(
-        {modkey},
-        "f",
-        function(c)
-            c.fullscreen = not c.fullscreen
-            c:raise()
-        end,
-        {description = "toggle fullscreen", group = "client"}
-    ),
-    awful.key(
         {modkey, "Shift"},
         "c",
         function(c)
@@ -413,4 +404,6 @@ local clientbuttons =
     )
 )
 
-return globalkeys, clientkeys, clientbuttons
+return function()
+    return globalkeys, clientkeys, clientbuttons
+end
