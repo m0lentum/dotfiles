@@ -39,6 +39,7 @@ theme.font = "xos4 Terminus 9"
 theme.fg_normal = "#F0F0F0"
 theme.fg_dim = "#808080"
 theme.fg_focus = "#32D6FF"
+theme.fg_focus_dim = "#289ad3"
 theme.fg_urgent = solarized.accent_orange
 theme.bg_normal = solarized.bg_dark_dark
 theme.bg_focus = solarized.bg_dark_light
@@ -306,6 +307,13 @@ function theme.at_screen_connect(s)
                     self.fg = theme.fg_normal
                 else
                     self.fg = theme.fg_dim
+                end
+                if tag.selected then
+                    if tag.screen == s then
+                        theme.taglist_fg_focus = theme.fg_focus
+                    else
+                        theme.taglist_fg_focus = theme.fg_focus_dim
+                    end
                 end
             end
         },
