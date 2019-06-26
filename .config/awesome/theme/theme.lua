@@ -33,6 +33,7 @@ local solarized = {
 }
 
 local theme = {}
+theme.core_count = 4
 theme.dir = os.getenv("HOME") .. "/.config/awesome/theme"
 theme.wallpaper = theme.dir .. "/wall.png"
 theme.font = "xos4 Terminus 9"
@@ -120,7 +121,9 @@ local markup = lain.util.markup
 local separators = lain.util.separators
 
 -- Text clock
-local textclock = wibox.widget.textclock("%d.%m. | %H:%M")
+local textclock = wibox.widget.textclock(" %d.%m. | %H:%M")
+textclock.fg = theme.fg_normal
+textclock.font = theme.font
 
 -- Calendar
 theme.cal =
@@ -153,7 +156,11 @@ local cpu =
     lain.widget.cpu(
     {
         settings = function()
-            widget:set_markup(markup.font(theme.font, " " .. cpu_now.usage .. "% "))
+            cores = ""
+            for i = 1, theme.core_count, 1 do
+                cores = cores .. cpu_now[i].usage .. "% "
+            end
+            widget:set_markup(markup.font(theme.font, " " .. cores))
         end
     }
 )
@@ -161,22 +168,24 @@ local cpu =
 -- Coretemp (lm_sensors, per core)
 local temp, temp_timer =
     awful.widget.watch(
-    {awful.util.shell, "-c", "echo arstdawfw"},
-    1,
+    -- this grep is Ryzen specific and won't work for most CPUs
+    -- TODO: tdie only shows average, get per-core working
+    {awful.util.shell, "-c", "sensors | grep Tdie"},
+    2,
     function(widget, stdout)
-        widget:set_markup(markup.font(theme.font, stdout))
+        local temps = ""
+        local count = 0
+        for line in stdout:gmatch("[^\r\n]+") do
+            temps = temps .. line:match("+(%d+).*°C") .. "° "
+            count = count + 1
+            if count >= theme.core_count then
+                break
+            end
+        end
+        widget:set_markup(markup.font(theme.font, " " .. temps))
     end
-    -- awful.widget.watch(
-    -- "bash -c sensors",
-    -- 1,
-    -- function(widget, stdout)
-    --     local temps = ""
-    --     for line in stdout:gmatch("[^\r\n]+") do
-    --         temps = temps .. line:match("+(%d+).*°C") .. "° " -- in Celsius
-    --     end
-    --     widget:set_markup(markup.font(theme.font, " " .. temps))
-    -- end
 )
+
 --]]
 --[[ Coretemp (lain, average)
 local temp =
@@ -223,9 +232,7 @@ local net =
     lain.widget.net(
     {
         settings = function()
-            widget:set_markup(
-                markup.fontfg(theme.font, "#FEFEFE", " " .. net_now.received .. " ↓↑ " .. net_now.sent .. " ")
-            )
+            widget:set_markup(markup.font(theme.font, " " .. net_now.received .. " ↓↑ " .. net_now.sent .. " "))
         end
     }
 )
@@ -410,7 +417,7 @@ function theme.at_screen_connect(s)
             arrow(widget_colors.cpu, widget_colors.temp),
             wibox.container.background(
                 wibox.container.margin(
-                    wibox.widget {tempicon, temp.widget, layout = wibox.layout.align.horizontal},
+                    wibox.widget {tempicon, temp, layout = wibox.layout.align.horizontal},
                     dpi(4),
                     dpi(4)
                 ),
@@ -437,7 +444,14 @@ function theme.at_screen_connect(s)
                 widget_colors.net
             ),
             arrow(widget_colors.net, widget_colors.clock),
-            wibox.container.background(wibox.container.margin(textclock, dpi(4), dpi(8)), widget_colors.clock),
+            wibox.container.background(
+                wibox.container.margin(
+                    wibox.widget {nil, textclock, layout = wibox.layout.align.horizontal},
+                    dpi(4),
+                    dpi(8)
+                ),
+                widget_colors.clock
+            ),
             arrow(widget_colors.clock, widget_colors.systray),
             --]]
             wibox.container.background(
