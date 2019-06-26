@@ -328,6 +328,23 @@ client.connect_signal(
                 gears.shape.octogon(cr, w, h, 10)
             end
         end
+
+        if c.floating then
+            awful.titlebar.show(c)
+        else
+            awful.titlebar.hide(c)
+        end
+    end
+)
+
+client.connect_signal(
+    "property::floating",
+    function(c)
+        if c.floating then
+            awful.titlebar.show(c)
+        else
+            awful.titlebar.hide(c)
+        end
     end
 )
 
