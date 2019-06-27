@@ -215,18 +215,27 @@ beautiful.init(string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HO
 
 local random_wallpaper = require("random-wallpaper")
 function wallpaper(screen)
-    return random_wallpaper()
+    local wp = random_wallpaper()
+    naughty.notify(
+        {
+            title = "Wallpaper",
+            text = string.match(wp, "[^/]+$"),
+            screen = screen,
+            position = "bottom_right",
+            timeout = 5
+        }
+    )
+    return wp
 end
-beautiful.wallpaper = random_wallpaper
 
 -- swap wallpapers on a timer
 gears.timer {
     timeout = 5 * 60,
-    call_now = false,
+    call_now = true,
     autostart = true,
     callback = function()
         for s in screen do
-            gears.wallpaper.maximized(random_wallpaper(), s)
+            gears.wallpaper.maximized(wallpaper(s), s)
         end
     end
 }
