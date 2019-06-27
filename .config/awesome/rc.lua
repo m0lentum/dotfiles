@@ -275,7 +275,7 @@ awful.screen.connect_for_each_screen(
 -- }}}
 
 -- {{{ key bindings from another file
-local globalkeys, clientkeys, clientbuttons = require("keybinds")
+local globalkeys, clientkeys, clientbuttons = require("keybinds")()
 
 root.keys(globalkeys)
 -- }}}
@@ -327,6 +327,23 @@ client.connect_signal(
             c.shape = function(cr, w, h)
                 gears.shape.octogon(cr, w, h, 10)
             end
+        end
+
+        if c.floating then
+            awful.titlebar.show(c)
+        else
+            awful.titlebar.hide(c)
+        end
+    end
+)
+
+client.connect_signal(
+    "property::floating",
+    function(c)
+        if c.floating then
+            awful.titlebar.show(c)
+        else
+            awful.titlebar.hide(c)
         end
     end
 )
