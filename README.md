@@ -7,9 +7,11 @@ while still looking awesome.
 *pun intended*
 
 ## Screenshot
-![screenshot](epic_screenshot_for_teh_online.png)
+![screenshot](epic_screenshot_for_internet_points.png)
 Wallpapers are selected randomly from my personal collection;
-see bottom right notifications in the screenshot for credit.
+featured in the screenshot are
+[sketch](https://www.artstation.com/artwork/yXbmR) by Ling Xiang
+and [Quiet day](https://www.artstation.com/artwork/balnLG) by Sergey Vasnev.
 
 ## Credit
 * window manager: [awesome](https://awesomewm.org/)
