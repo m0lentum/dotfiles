@@ -87,7 +87,7 @@ awful.spawn.with_shell(
 -- global so they can be used in keybinds.lua
 modkey = "Mod4"
 altkey = "Mod1"
-terminal = "termite"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "vim"
 gui_editor = "code"
 browser = "firefox"
