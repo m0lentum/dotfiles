@@ -87,7 +87,7 @@ awful.spawn.with_shell(
 -- global so they can be used in keybinds.lua
 modkey = "Mod4"
 altkey = "Mod1"
-terminal = "termite"
+terminal = "kitty"
 editor = os.getenv("EDITOR") or "vim"
 gui_editor = "code"
 browser = "firefox"
@@ -99,8 +99,8 @@ awful.layout.layouts = {
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    -- awful.layout.suit.floating,
-    awful.layout.suit.fair
+    awful.layout.suit.floating,
+    -- awful.layout.suit.fair
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
@@ -215,18 +215,27 @@ beautiful.init(string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HO
 
 local random_wallpaper = require("random-wallpaper")
 function wallpaper(screen)
-    return random_wallpaper()
+    local wp = random_wallpaper()
+    naughty.notify(
+        {
+            title = "Wallpaper",
+            text = string.match(wp, "[^/]+$"),
+            screen = screen,
+            position = "bottom_right",
+            timeout = 5
+        }
+    )
+    return wp
 end
-beautiful.wallpaper = random_wallpaper
 
 -- swap wallpapers on a timer
 gears.timer {
     timeout = 5 * 60,
-    call_now = false,
+    call_now = true,
     autostart = true,
     callback = function()
         for s in screen do
-            gears.wallpaper.maximized(random_wallpaper(), s)
+            gears.wallpaper.maximized(wallpaper(s), s)
         end
     end
 }
@@ -301,8 +310,17 @@ awful.rules.rules = {
     },
     -- Titlebars
     {
-        rule_any = {type = {"dialog"}},
-        properties = {titlebars_enabled = true}
+        rule_any = { type = {"dialog"} },
+        properties = { titlebars_enabled = true }
+    },
+    {
+        rule = { floating = true },
+        properties = { titlebars_enabled = true },
+    },
+    -- set certain windows to floating by default
+    {
+        rule_any = { class = { "testgame", "template" } },
+        properties = { floating = true },
     }
 }
 -- }}}
@@ -337,6 +355,7 @@ client.connect_signal(
     end
 )
 
+-- show a titlebar when a window is made floating after creation
 client.connect_signal(
     "property::floating",
     function(c)
