@@ -85,4 +85,6 @@
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
     "cmake.configureOnOpen": true,
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
 }
