@@ -99,8 +99,8 @@ awful.layout.layouts = {
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
-    -- awful.layout.suit.floating,
-    awful.layout.suit.fair
+    awful.layout.suit.floating,
+    -- awful.layout.suit.fair
     -- awful.layout.suit.fair.horizontal,
     -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
@@ -310,8 +310,17 @@ awful.rules.rules = {
     },
     -- Titlebars
     {
-        rule_any = {type = {"dialog"}},
-        properties = {titlebars_enabled = true}
+        rule_any = { type = {"dialog"} },
+        properties = { titlebars_enabled = true }
+    },
+    {
+        rule = { floating = true },
+        properties = { titlebars_enabled = true },
+    },
+    -- set certain windows to floating by default
+    {
+        rule_any = { class = { "testgame", "template" } },
+        properties = { floating = true },
     }
 }
 -- }}}
@@ -346,6 +355,7 @@ client.connect_signal(
     end
 )
 
+-- show a titlebar when a window is made floating after creation
 client.connect_signal(
     "property::floating",
     function(c)
