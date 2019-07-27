@@ -203,7 +203,7 @@ set termguicolors
 " Editor theme
 set background=dark
 try
-  colorscheme strawberry-dark
+  colorscheme tokyo-metro
 catch
   colorscheme slate
 endtry
@@ -298,6 +298,7 @@ inoremap <silent><expr> <c-space> coc#refresh()
 map <leader>h :%s///<left><left>
 nmap <silent> <leader>/ :nohlsearch<CR>
 
+" === Miscellaneous === "
 " Allows you to save files you opened without write permissions via sudo
 cmap w!! w !sudo tee %
 
@@ -305,6 +306,9 @@ cmap w!! w !sudo tee %
 " Used when you want to paste over something without it getting copied to
 " Vim's default buffer
 vnoremap <leader>p "_dP
+
+" home goes to the first non-empty char on the line
+nnoremap <Home> ^
 
 " ============================================================================ "
 " ===                                 MISC.                                === "

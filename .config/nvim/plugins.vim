@@ -50,7 +50,8 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 
 " Colorschemes
 Plug 'nightsense/strawberry'
-Plug 'sonobre/briofita_vim'
+Plug 'koirand/tokyo-metro.vim'
+Plug 'sansbrina/vim-garbage-oracle', { 'branch': 'release' }
 
 " Rainbow parentheses
 Plug 'luochen1990/rainbow'
