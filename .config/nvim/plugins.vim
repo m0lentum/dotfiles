@@ -26,6 +26,8 @@ Plug 'ntpeters/vim-better-whitespace'
 
 " Easily handle surrounding brackets
 Plug 'tpope/vim-surround'
+" And comments
+Plug 'tpope/vim-commentary'
 
 " Intellisense Engine
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
