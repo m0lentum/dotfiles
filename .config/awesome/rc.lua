@@ -95,8 +95,8 @@ guieditor = "code"
 
 awful.util.terminal = terminal
 awful.layout.layouts = {
-    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
+    awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.floating,
@@ -125,8 +125,8 @@ awful.layout.tags =
         awful.layout.layouts[1],
         awful.layout.layouts[1],
         awful.layout.layouts[1],
-        awful.layout.layouts[2],
-        awful.layout.layouts[2]
+        awful.layout.layouts[1],
+        awful.layout.layouts[1]
     }
 )
 
