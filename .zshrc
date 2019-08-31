@@ -60,9 +60,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-# allow termite to open new terminals in current dir
-source /etc/profile.d/vte.sh
-
 # Keypad
 # 0 . Enter
 bindkey -s "^[Op" "0"
