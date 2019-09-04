@@ -1,0 +1,21 @@
+[character]
+use_symbol_for_status = true
+
+[cmd_duration]
+min_time = 1
+
+[directory]
+fish_style_pwd_dir_length = 1
+
+
+[rust]
+disabled = true
+[golang]
+disabled = true
+[ruby]
+disabled = true
+[nodejs]
+disabled = true
+[python]
+disabled = true
+
