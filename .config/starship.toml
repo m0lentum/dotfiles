@@ -1,12 +1,16 @@
-[character]
-use_symbol_for_status = true
-
 [cmd_duration]
 min_time = 1
 
 [directory]
 fish_style_pwd_dir_length = 1
 
+[git_status]
+show_sync_count = true
+modified = "*"
+
+[nix_shell]
+impure_msg = "nix-shell"
+pure_msg = "nix-shell (pure)"
 
 [rust]
 disabled = true
