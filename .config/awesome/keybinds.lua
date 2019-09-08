@@ -13,7 +13,9 @@ local globalkeys =
     -- Tag browsing
     awful.key({modkey, "Control"}, "Left", awful.tag.viewprev, {description = "view previous", group = "tag"}),
     awful.key({modkey, "Control"}, "Right", awful.tag.viewnext, {description = "view next", group = "tag"}),
-    awful.key({modkey}, "Escape", awful.tag.history.restore, {description = "go back", group = "tag"}),
+    awful.key({modkey}, "p", awful.tag.history.restore, {description = "go back", group = "tag"}),
+    -- Toggle wallpaper slideshow
+    awful.key({modkey}, "w", toggle_slideshow, {description = "toggle wallpaper slideshow", group = "awesome"}),
     -- Default client focus
     awful.key(
         {altkey},

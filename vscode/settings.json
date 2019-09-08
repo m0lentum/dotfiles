@@ -87,4 +87,5 @@
     "cmake.configureOnOpen": true,
     "editor.autoClosingBrackets": "never",
     "editor.autoClosingQuotes": "never",
+    "debug.allowBreakpointsEverywhere": true,
 }

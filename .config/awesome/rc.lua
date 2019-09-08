@@ -95,8 +95,8 @@ guieditor = "code"
 
 awful.util.terminal = terminal
 awful.layout.layouts = {
-    awful.layout.suit.tile,
     awful.layout.suit.tile.left,
+    awful.layout.suit.tile,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.floating,
@@ -125,8 +125,8 @@ awful.layout.tags =
         awful.layout.layouts[1],
         awful.layout.layouts[1],
         awful.layout.layouts[1],
-        awful.layout.layouts[2],
-        awful.layout.layouts[2]
+        awful.layout.layouts[1],
+        awful.layout.layouts[1]
     }
 )
 
@@ -229,7 +229,7 @@ function wallpaper(screen)
 end
 
 -- swap wallpapers on a timer
-gears.timer {
+local wp_timer = gears.timer {
     timeout = 5 * 60,
     call_now = true,
     autostart = true,
@@ -240,9 +240,24 @@ gears.timer {
     end
 }
 
--- }}}
+function toggle_slideshow(screen)
+    if wp_timer.started then
+        wp_timer:stop()
+        naughty.notify(
+            {
+                text = "Stopped wallpaper slideshow",
+                screen = screen,
+                position = "bottom_right",
+                timeout = 1
+            }
+        )
+    else
+        -- immediately change the wallpaper
+        wp_timer:emit_signal("timeout")
+        wp_timer:start()
+    end
+end
 
---menubar.utils.terminal = terminal -- Set the Menubar terminal for applications that require it
 -- }}}
 
 -- {{{ Screen
