@@ -33,9 +33,7 @@ abbr -a pacrm sudo pacman -Rns
 abbr -a pacfiles pacman -Fs
 
 # === keybindings === #
-fish_vi_key_bindings
-# TODO: make arrows work nicer
-# (arrow to only accept a word of suggestion, end to accept all)
+fish_hybrid_key_bindings
 
 # === install fisher === #
 if not functions -q fisher
