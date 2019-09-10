@@ -10,8 +10,6 @@ abbr -a ga git add
 abbr -a gc git commit -v
 abbr -a gc! git commit -v --amend
 abbr -a gcn! git commit -v --amend --no-edit
-abbr -a gp git push
-abbr -a gpf git push --force-with-lease
 abbr -a gl git pull
 abbr -a gf git fetch
 abbr -a gco git checkout
