@@ -1,41 +1,37 @@
 # === aliases === #
 # ls / lsd
-abbr -a ls lsd
-abbr -a l lsd -al
-abbr -a ll lsd -l
-abbr -a tree lsd --tree
+abbr -a -g ls lsd
+abbr -a -g l lsd -al
+abbr -a -g ll lsd -l
+abbr -a -g tree lsd --tree
 
 # git
-abbr -a ga git add
-abbr -a gc git commit -v
-abbr -a gc! git commit -v --amend
-abbr -a gcn! git commit -v --amend --no-edit
-abbr -a gp git push
-abbr -a gpf git push --force-with-lease
-abbr -a gl git pull
-abbr -a gf git fetch
-abbr -a gco git checkout
-abbr -a gd git diff
-abbr -a gsh git show
-abbr -a gst git status
-abbr -a gb git branch
-abbr -a gsta git stash
-abbr -a gstp git stash pop
-abbr -a glg git log --stat
-abbr -a glga git log --stat --graph --all
-abbr -a glo git log --oneline
-abbr -a gloa git log --oneline --graph --all
-abbr -a grh git reset HEAD
+abbr -a -g ga git add
+abbr -a -g gc git commit -v
+abbr -a -g gc! git commit -v --amend
+abbr -a -g gcn! git commit -v --amend --no-edit
+abbr -a -g gl git pull
+abbr -a -g gf git fetch
+abbr -a -g gco git checkout
+abbr -a -g gd git diff
+abbr -a -g gsh git show
+abbr -a -g gst git status
+abbr -a -g gb git branch
+abbr -a -g gsta git stash
+abbr -a -g gstp git stash pop
+abbr -a -g glg git log --stat
+abbr -a -g glga git log --stat --graph --all
+abbr -a -g glo git log --oneline
+abbr -a -g gloa git log --oneline --graph --all
+abbr -a -g grh git reset HEAD
 
 # pacman
-abbr -a pacin sudo pacman -S
-abbr -a pacrm sudo pacman -Rns
-abbr -a pacfiles pacman -Fs
+abbr -a -g pacin sudo pacman -S
+abbr -a -g pacrm sudo pacman -Rns
+abbr -a -g pacfiles pacman -Fs
 
 # === keybindings === #
-fish_vi_key_bindings
-# TODO: make arrows work nicer
-# (arrow to only accept a word of suggestion, end to accept all)
+fish_hybrid_key_bindings
 
 # === install fisher === #
 if not functions -q fisher
