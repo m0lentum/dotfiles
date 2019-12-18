@@ -88,4 +88,10 @@
     "editor.autoClosingBrackets": "never",
     "editor.autoClosingQuotes": "never",
     "debug.allowBreakpointsEverywhere": true,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.hovers.currentLine.over": "line",
+    "rust-analyzer.enableCargoWatchOnStartup": "enabled",
+    "rust-analyzer.enableEnhancedTyping": false,
+    "rust-analyzer.displayInlayHints": false,
+    "rust-analyzer.cargo-watch.arguments": "--features all --example testgame",
 }
