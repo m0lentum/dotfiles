@@ -9,7 +9,36 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 local globalkeys =
     my_table.join(
     awful.key({modkey}, "s", hotkeys_popup.show_help, {description = "show help", group = "awesome"}),
+    -- custom wallpaper slideshow thing
     awful.key({modkey}, "w", toggle_slideshow, {description = "toggle wallpaper slideshow", group = "screen"}),
+    -- Spotify
+    awful.key(
+        {},
+        "XF86AudioPlay",
+        function()
+            awful.spawn(
+                "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+            )
+        end
+    ),
+    awful.key(
+        {},
+        "XF86AudioNext",
+        function()
+            awful.spawn(
+                "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+            )
+        end
+    ),
+    awful.key(
+        {},
+        "XF86AudioPrev",
+        function()
+            awful.spawn(
+                "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+            )
+        end
+    ),
     --
     --
     -- Navigation
