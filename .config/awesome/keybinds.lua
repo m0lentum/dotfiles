@@ -6,6 +6,18 @@ local charitable = require("charitable")
 local beautiful = require("beautiful")
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
+-- note / TODO:
+-- this currently saves an empty file if custom area screenshot is cancelled..
+-- how to deal with this?
+local screenshot_pipe =
+    " | tee ~/Pictures/Screenshots/$(date +%y-%m-%d_%T)_maim.png | xclip -sel clipboard -t image/png"
+local screenshot_normal = function(maim_opts)
+    return 'bash -c "maim -o ' .. maim_opts .. screenshot_pipe .. '"'
+end
+local screenshot_nocompton = function(maim_opts)
+    return 'bash -c "killall compton && maim -o ' .. maim_opts .. screenshot_pipe .. ' && compton; disown"'
+end
+
 local globalkeys =
     my_table.join(
     awful.key({modkey}, "s", hotkeys_popup.show_help, {description = "show help", group = "awesome"}),
@@ -38,6 +50,41 @@ local globalkeys =
                 "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
             )
         end
+    ),
+    --
+    -- Screenshots w/ maim
+    --
+    awful.key(
+        {},
+        "Print",
+        function()
+            awful.spawn(screenshot_normal("-s"))
+        end,
+        {description = "custom area", group = "screenshots"}
+    ),
+    awful.key(
+        {altkey},
+        "Print",
+        function()
+            awful.spawn(screenshot_nocompton("-s"))
+        end,
+        {description = "custom area, no transparency", group = "screenshots"}
+    ),
+    awful.key(
+        {"Shift"},
+        "Print",
+        function()
+            awful.spawn(screenshot_normal("-i $(xdotool getactivewindow) -B"))
+        end,
+        {description = "active window", group = "screenshots"}
+    ),
+    awful.key(
+        {altkey, "Shift"},
+        "Print",
+        function()
+            awful.spawn(screenshot_normal("-i $(xdotool getactivewindow)"))
+        end,
+        {description = "active window, no transparency", group = "screenshots"}
     ),
     --
     --
