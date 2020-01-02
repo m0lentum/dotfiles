@@ -317,7 +317,7 @@ local globalkeys =
     -- User programs
     awful.key(
         {modkey},
-        "a",
+        "q",
         function()
             awful.spawn(browser)
         end,
