@@ -1,6 +1,6 @@
 {
     // visuals
-    "workbench.colorTheme": "Rouge No Italics",
+    "workbench.colorTheme": "BeardedTheme Purple",
     "workbench.iconTheme": "material-icon-theme",
     "editor.detectIndentation": true,
     "editor.formatOnSave": true,
@@ -75,7 +75,7 @@
         "<C-q>": false,
         "<C-z>": false,
         "<C-y>": false,
-        "<C-b>": false
+        "<C-b>": false,
     },
     // other
     "git.confirmSync": false,
@@ -84,14 +84,13 @@
     "terminal.external.linuxExec": "terminator",
     "explorer.confirmDragAndDrop": false,
     "explorer.confirmDelete": false,
-    "cmake.configureOnOpen": true,
     "editor.autoClosingBrackets": "never",
     "editor.autoClosingQuotes": "never",
     "debug.allowBreakpointsEverywhere": true,
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
-    "rust-analyzer.enableCargoWatchOnStartup": "enabled",
-    "rust-analyzer.enableEnhancedTyping": false,
+    "rust-analyzer.cargo-watch.enable": true,
+    "rust-analyzer.highlightingOn": true,
+    "rust-analyzer.rainbowHighlightingOn": true,
     "rust-analyzer.displayInlayHints": false,
-    "rust-analyzer.cargo-watch.arguments": "--features all --example testgame",
 }
