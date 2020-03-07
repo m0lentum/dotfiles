@@ -125,20 +125,6 @@ local textclock = wibox.widget.textclock(" %d.%m. | %H:%M")
 textclock.fg = theme.fg_normal
 textclock.font = theme.font
 
--- Calendar
-theme.cal =
-    lain.widget.cal(
-    {
-        --cal = "cal --color=always",
-        attach_to = {textclock},
-        notification_preset = {
-            font = "xos4 Terminus 10",
-            fg = theme.fg_normal,
-            bg = theme.bg_normal
-        }
-    }
-)
-
 -- MEM
 local memicon = wibox.widget.imagebox(theme.widget_mem)
 local mem =

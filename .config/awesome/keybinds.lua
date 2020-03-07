@@ -6,19 +6,96 @@ local charitable = require("charitable")
 local beautiful = require("beautiful")
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
+-- note / TODO:
+-- this currently saves an empty file if custom area screenshot is cancelled..
+-- how to deal with this?
+local screenshot_pipe =
+    " | tee ~/Pictures/Screenshots/$(date +%y-%m-%d_%T)_maim.png | xclip -sel clipboard -t image/png"
+local screenshot_normal = function(maim_opts)
+    return 'bash -c "maim -o ' .. maim_opts .. screenshot_pipe .. '"'
+end
+local screenshot_nocompton = function(maim_opts)
+    return 'bash -c "killall compton && maim -o ' .. maim_opts .. screenshot_pipe .. ' && compton; disown"'
+end
+
 local globalkeys =
     my_table.join(
-    -- Hotkeys
     awful.key({modkey}, "s", hotkeys_popup.show_help, {description = "show help", group = "awesome"}),
-    -- Tag browsing
+    -- custom wallpaper slideshow thing
+    awful.key({modkey}, "w", toggle_slideshow, {description = "toggle wallpaper slideshow", group = "screen"}),
+    -- Spotify
+    awful.key(
+        {},
+        "XF86AudioPlay",
+        function()
+            awful.spawn(
+                "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
+            )
+        end
+    ),
+    awful.key(
+        {},
+        "XF86AudioNext",
+        function()
+            awful.spawn(
+                "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
+            )
+        end
+    ),
+    awful.key(
+        {},
+        "XF86AudioPrev",
+        function()
+            awful.spawn(
+                "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
+            )
+        end
+    ),
+    --
+    -- Screenshots w/ maim
+    --
+    awful.key(
+        {},
+        "Print",
+        function()
+            awful.spawn(screenshot_normal("-s"))
+        end,
+        {description = "custom area", group = "screenshots"}
+    ),
+    awful.key(
+        {altkey},
+        "Print",
+        function()
+            awful.spawn(screenshot_nocompton("-s"))
+        end,
+        {description = "custom area, no transparency", group = "screenshots"}
+    ),
+    awful.key(
+        {"Shift"},
+        "Print",
+        function()
+            awful.spawn(screenshot_normal("-i $(xdotool getactivewindow) -B"))
+        end,
+        {description = "active window", group = "screenshots"}
+    ),
+    awful.key(
+        {altkey, "Shift"},
+        "Print",
+        function()
+            awful.spawn(screenshot_normal("-i $(xdotool getactivewindow)"))
+        end,
+        {description = "active window, no transparency", group = "screenshots"}
+    ),
+    --
+    --
+    -- Navigation
+    --
+    --
     awful.key({modkey, "Control"}, "Left", awful.tag.viewprev, {description = "view previous", group = "tag"}),
     awful.key({modkey, "Control"}, "Right", awful.tag.viewnext, {description = "view next", group = "tag"}),
     awful.key({modkey}, "p", awful.tag.history.restore, {description = "go back", group = "tag"}),
-    -- Toggle wallpaper slideshow
-    awful.key({modkey}, "w", toggle_slideshow, {description = "toggle wallpaper slideshow", group = "awesome"}),
-    -- Default client focus
     awful.key(
-        {altkey},
+        {modkey},
         "j",
         function()
             awful.client.focus.byidx(1)
@@ -26,7 +103,7 @@ local globalkeys =
         {description = "focus next by index", group = "client"}
     ),
     awful.key(
-        {altkey},
+        {modkey},
         "k",
         function()
             awful.client.focus.byidx(-1)
@@ -78,7 +155,28 @@ local globalkeys =
         end,
         {description = "focus right", group = "client"}
     ),
-    -- Layout manipulation
+    awful.key(
+        {modkey},
+        "End",
+        function()
+            awful.screen.focus_relative(1)
+        end,
+        {description = "focus the next screen", group = "screen"}
+    ),
+    awful.key(
+        {modkey},
+        "Home",
+        function()
+            awful.screen.focus_relative(-1)
+        end,
+        {description = "focus the previous screen", group = "screen"}
+    ),
+    awful.key({modkey}, "u", awful.client.urgent.jumpto, {description = "jump to urgent client", group = "client"}),
+    --
+    --
+    -- Layout
+    --
+    --
     awful.key(
         {modkey, "Shift"},
         "j",
@@ -97,24 +195,6 @@ local globalkeys =
     ),
     awful.key(
         {modkey},
-        "End",
-        function()
-            awful.screen.focus_relative(1)
-        end,
-        {description = "focus the next screen", group = "screen"}
-    ),
-    awful.key(
-        {modkey},
-        "Home",
-        function()
-            awful.screen.focus_relative(-1)
-        end,
-        {description = "focus the previous screen", group = "screen"}
-    ),
-    awful.key({modkey}, "u", awful.client.urgent.jumpto, {description = "jump to urgent client", group = "client"}),
-    -- Show/Hide Wibox
-    awful.key(
-        {modkey},
         "b",
         function()
             for s in screen do
@@ -126,7 +206,6 @@ local globalkeys =
         end,
         {description = "toggle wibox", group = "awesome"}
     ),
-    -- On the fly useless gaps change
     awful.key(
         {altkey, "Control"},
         "+",
@@ -143,17 +222,6 @@ local globalkeys =
         end,
         {description = "decrement useless gaps", group = "tag"}
     ),
-    -- Standard program
-    awful.key(
-        {modkey},
-        "Return",
-        function()
-            awful.spawn(terminal)
-        end,
-        {description = "open a terminal", group = "launcher"}
-    ),
-    awful.key({modkey, "Control"}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
-    awful.key({modkey, "Shift"}, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
     awful.key(
         {modkey},
         "Prior",
@@ -231,6 +299,21 @@ local globalkeys =
         end,
         {description = "restore minimized", group = "client"}
     ),
+    --
+    --
+    -- Shortcuts
+    --
+    --
+    awful.key(
+        {modkey},
+        "Return",
+        function()
+            awful.spawn(terminal)
+        end,
+        {description = "open a terminal", group = "launcher"}
+    ),
+    awful.key({modkey, "Control"}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
+    awful.key({modkey, "Control", "Shift"}, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
     -- User programs
     awful.key(
         {modkey},
@@ -239,14 +322,6 @@ local globalkeys =
             awful.spawn(browser)
         end,
         {description = "run browser", group = "launcher"}
-    ),
-    awful.key(
-        {modkey},
-        "a",
-        function()
-            awful.spawn(guieditor)
-        end,
-        {description = "run gui editor", group = "launcher"}
     ),
     awful.key(
         {modkey},
@@ -263,7 +338,7 @@ local clientkeys =
     awful.key({modkey}, "m", lain.util.magnify_client, {description = "magnify client", group = "client"}),
     awful.key(
         {modkey, "Shift"},
-        "c",
+        "q",
         function(c)
             c:kill()
         end,
