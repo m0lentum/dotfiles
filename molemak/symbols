@@ -305,10 +305,7 @@ xkb_symbols "pc+fi+colemak" {
         type= "PC_ALT_LEVEL2",
         symbols[Group1]= [           Print,         Sys_Req ]
     };
-    key <RALT> {
-        type= "ONE_LEVEL",
-        symbols[Group1]= [ ISO_Level3_Shift ]
-    };
+    key <RALT> { [Alt_R] };
     key <LNFD> {         [        Linefeed ] };
     key <HOME> {         [            Home ] };
     key   <UP> {         [              Up ] };
@@ -442,6 +439,7 @@ xkb_symbols "pc+fi+colemak" {
     modifier_map Control { <LFSH> };
     modifier_map Shift { <RTSH> };
     modifier_map Mod1 { <LALT> };
+    modifier_map Mod3 { <RALT> };
     modifier_map Shift { <CAPS> };
     modifier_map Mod2 { <NMLK> };
     modifier_map Mod5 { <LVL3> };
@@ -453,4 +451,6 @@ xkb_symbols "pc+fi+colemak" {
     modifier_map Mod1 { <META> };
     modifier_map Mod4 { <SUPR> };
     modifier_map Mod4 { <HYPR> };
+ 
+    include "level3(ralt_switch)"
 };
