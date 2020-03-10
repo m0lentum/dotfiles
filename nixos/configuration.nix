@@ -35,14 +35,18 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    curl git lsd pass gnupg xclip maim
-    kitty starship tmux
-    vscode firefox feh
+    # not much needed here, home-manager gets most stuff on a per-user basis
+    curl git
   ];
   programs.vim.defaultEditor = true;
   programs.fish.enable = true;
+
+  fonts.fonts = with pkgs; [
+    noto-fonts
+    liberation_ttf
+    fira-code
+  ];
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
