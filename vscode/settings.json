@@ -91,6 +91,7 @@
     "gitlens.hovers.currentLine.over": "line",
     "rust-analyzer.cargo-watch.enable": true,
     "rust-analyzer.highlightingOn": true,
-    "rust-analyzer.rainbowHighlightingOn": true,
     "rust-analyzer.displayInlayHints": false,
+    "extensions.autoUpdate": false,
+    "rust-analyzer.rainbowHighlightingOn": true,
 }
