@@ -40,21 +40,22 @@
   hardware.pulseaudio.enable = true;
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.windowManager.awesome.enable = true;
-  services.xserver.desktopManager.default = "none";
-  services.xserver.desktopManager.xterm.enable = false;
-  services.xserver.windowManager.default = "awesome";
-  services.xserver.extraLayouts.fi-molemak = {
-    description = "Finnish colemak with some modifier customization";
-    languages = ["fi"];
-    symbolsFile = /home/mole/dotfiles/molemak/symbols;
-    #keycodesFile = /home/mole/dotfiles/molemak/keycodes;
-    #geometryFile = /home/mole/dotfiles/molemak/geometry;
-    #typesFile = /home/mole/dotfiles/molemak/types;
-    #compatFile = /home/mole/dotfiles/molemak/compat;
+  services.xserver = {
+    enable = true;
+    windowManager.awesome.enable = true;
+    windowManager.default = "awesome";
+    desktopManager.default = "none";
+    desktopManager.xterm.enable = false;
+    extraLayouts.fi-molemak = {
+      description = "Finnish colemak with some modifier customization";
+      languages = ["fi"];
+      symbolsFile = /home/mole/dotfiles/molemak/symbols;
+      #keycodesFile = /home/mole/dotfiles/molemak/keycodes;
+      #geometryFile = /home/mole/dotfiles/molemak/geometry;
+      #typesFile = /home/mole/dotfiles/molemak/types;
+      #compatFile = /home/mole/dotfiles/molemak/compat;
+    };
   };
-  services.xserver.layout = "fi"; # TODO: machine-specific conf files
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mole = {

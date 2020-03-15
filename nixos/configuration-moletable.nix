@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-moletable.nix ./configuration-molelap.nix ];
+  imports = [ ./hardware-moletable.nix ./common.nix ];
 
   networking.hostName = "moletable";
   services.xserver.layout = "fi";
