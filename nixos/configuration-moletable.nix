@@ -5,6 +5,8 @@
 
   networking.hostName = "moletable";
   services.xserver.layout = "fi";
+  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.wacom.enable = true;
   # Enable CUPS to print documents.
   services.printing.enable = true;
 

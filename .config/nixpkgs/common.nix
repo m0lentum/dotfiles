@@ -98,6 +98,7 @@
   home.packages = with pkgs; [
     kitty
     tmux
+    xbindkeys
     vscodium
     lsd
     tokei
@@ -133,6 +134,15 @@
     "redshift.conf" = {
       source = ../redshift.conf;
       target = "./.config/redshift.conf";
+    };
+    # trackball customization
+    "xprofile" = {
+      source = "../../.xprofile";
+      target = "./.xprofile";
+    };
+    "xbindkeysrc" = {
+      source = "../../.xbindkeysrc";
+      target = "./.xbindkeysrc";
     };
   };
   
