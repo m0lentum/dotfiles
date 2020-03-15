@@ -213,7 +213,7 @@ local wp_timer = gears.timer {
     callback = function()
         for s in screen do
             local wp = wallpaper(s)
-            if not wp == nil then
+            if wp ~= nil then
                 gears.wallpaper.maximized(wallpaper(s), s)
             end
         end
