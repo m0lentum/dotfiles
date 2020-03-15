@@ -13,6 +13,11 @@ local dpi = require("beautiful.xresources").apply_dpi
 local math, string, os = math, string, os
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
+local gap_size = tonumber(os.getenv("AWESOME_GAP"))
+if gap_size == nil then
+    gap_size = 10
+end
+
 local solarized = {
     bg_dark_dark = "#002b36",
     bg_dark_light = "#073642",
@@ -97,7 +102,7 @@ theme.widget_task = theme.dir .. "/icons/task.png"
 theme.widget_scissors = theme.dir .. "/icons/scissors.png"
 theme.tasklist_plain_task_name = true
 theme.tasklist_disable_icon = true
-theme.useless_gap = 0
+theme.useless_gap = dpi(gap_size)
 theme.titlebar_close_button_focus = theme.dir .. "/icons/titlebar/close_focus.png"
 theme.titlebar_close_button_normal = theme.dir .. "/icons/titlebar/close_normal.png"
 theme.titlebar_ontop_button_focus_active = theme.dir .. "/icons/titlebar/ontop_focus_active.png"
