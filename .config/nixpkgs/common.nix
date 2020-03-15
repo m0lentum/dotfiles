@@ -137,11 +137,11 @@
     };
     # trackball customization
     "xprofile" = {
-      source = "../../.xprofile";
+      source = ../../.xprofile;
       target = "./.xprofile";
     };
     "xbindkeysrc" = {
-      source = "../../.xbindkeysrc";
+      source = ../../.xbindkeysrc;
       target = "./.xbindkeysrc";
     };
   };

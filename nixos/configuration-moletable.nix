@@ -5,6 +5,7 @@
 
   networking.hostName = "moletable";
   services.xserver.layout = "fi";
+  nixpkgs.config.allowUnfree = true;
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.wacom.enable = true;
   # Enable CUPS to print documents.
