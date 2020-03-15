@@ -25,7 +25,11 @@ end
 
 function get_random_wallpaper()
     local wallpapers = scandir(path)
-    return path .. wallpapers[math.random(1, num_files)]
+    if num_files == 0 then
+        return nil
+    else
+        return path .. wallpapers[math.random(1, num_files)]
+    end
 end
 
 return get_random_wallpaper

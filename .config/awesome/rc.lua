@@ -216,10 +216,11 @@ beautiful.init(string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HO
 local random_wallpaper = require("random-wallpaper")
 function wallpaper(screen)
     local wp = random_wallpaper()
+    local msg = wp == nil and "No files in ~.wallpaper" or string.match(wp, "[^/]+$")
     naughty.notify(
         {
             title = "Wallpaper",
-            text = string.match(wp, "[^/]+$"),
+            text = msg,
             screen = screen,
             position = "bottom_right",
             timeout = 5
@@ -235,7 +236,10 @@ local wp_timer = gears.timer {
     autostart = true,
     callback = function()
         for s in screen do
-            gears.wallpaper.maximized(wallpaper(s), s)
+            local wp = wallpaper(s)
+            if not wp == nil then
+                gears.wallpaper.maximized(wallpaper(s), s)
+            end
         end
     end
 }
