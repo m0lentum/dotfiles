@@ -81,7 +81,7 @@
       inactiveOpacity = "0.90";
       opacityRule = [
         # Opaque at all times
-        "100:class_g = 'firefox'"
+        "100:class_g = 'Firefox'"
         "100:class_g = 'feh'"
         "100:class_g = 'vlc'"
         "100:class_g = 'obs'"
