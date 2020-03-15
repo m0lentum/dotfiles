@@ -3,7 +3,14 @@
 {
   imports = [ ./hardware-molelap.nix ./common.nix ];
 
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
   networking.hostName = "molelap";
+  networking.interfaces.eno1.useDHCP = true;
+  networking.interfaces.wlp2s0.useDHCP = true;
+  networking.interfaces.wwp0s29u1u6i6.useDHCP = true;
+
   services.xserver.layout = "fi-molemak";
   # Enable touchpad support.
   services.xserver.libinput.enable = true;

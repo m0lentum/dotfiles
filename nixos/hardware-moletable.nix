@@ -10,7 +10,8 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
+  # boot.kernelModules = [ "kvm-amd" ];
+  boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
@@ -18,9 +19,14 @@
       fsType = "ext4";
     };
 
-  fileSystems."/efi" =
+  fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/2A6C-3479";
       fsType = "vfat";
+    };
+  
+  fileSystems."/data" =
+    { device = "/dev/disk/by-uuid/2432CF0932CEDEC4";
+      fsType = "ntfs";
     };
 
   swapDevices = [ ];

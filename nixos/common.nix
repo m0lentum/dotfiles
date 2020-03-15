@@ -2,17 +2,12 @@
 
 # Everything that is identical between my laptop and desktop is here.
 {
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
   networking.networkmanager.enable = true;
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
   # replicates the default behaviour.
   networking.useDHCP = false;
-  networking.interfaces.eno1.useDHCP = true;
-  networking.interfaces.wlp2s0.useDHCP = true;
-  networking.interfaces.wwp0s29u1u6i6.useDHCP = true;
 
   # Select internationalisation properties.
   i18n = {
@@ -23,8 +18,8 @@
   time.timeZone = "Europe/Helsinki";
 
   environment.systemPackages = with pkgs; [
-    # not much needed here, home-manager gets most stuff on a per-user basis
-    curl git
+    # git and firefox so we can easily install home-manager; it will handle the rest
+    git firefox
   ];
   programs.vim.defaultEditor = true;
   programs.fish.enable = true;
