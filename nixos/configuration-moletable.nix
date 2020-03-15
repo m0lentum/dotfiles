@@ -27,6 +27,10 @@
     { output = "DP-2"; primary = true; }
     "DVI-D-0"
   ];
+  # enable vsync
+  services.xserver.screenSection = ''   
+    Option "metamodes" "DP-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: nvidia-auto-select +2560+0"
+  '';
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
