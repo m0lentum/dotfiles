@@ -7,6 +7,11 @@
       enable = true;
       userName = "Mikael Myyrä";
       userEmail = "mikael.myyrae@gmail.com";
+      ignores = [
+        "*.nogit*"
+        ".envrc"
+        ".direnv"
+      ];
     };
     fish = {
       enable = true;
@@ -108,6 +113,8 @@
     pass
     stretchly
     redshift
+    vlc
+    networkmanagerapplet
   ];
   home.file = {
     "awesome" = {
