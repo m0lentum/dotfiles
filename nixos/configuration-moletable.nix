@@ -12,6 +12,7 @@
     version = 2;
     device = "nodev";
     useOSProber = true;
+    configurationLimit = 10;
   };
 
   networking.hostName = "moletable";

@@ -10,10 +10,10 @@
   networking.useDHCP = false;
 
   # Select internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "fi";
-    defaultLocale = "en_US.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "fi";
   };
   time.timeZone = "Europe/Helsinki";
 
@@ -38,8 +38,7 @@
   services.xserver = {
     enable = true;
     windowManager.awesome.enable = true;
-    windowManager.default = "awesome";
-    desktopManager.default = "none";
+    displayManager.defaultSession = "none+awesome";
     desktopManager.xterm.enable = false;
     extraLayouts.fi-molemak = {
       description = "Finnish colemak with some modifier customization";
