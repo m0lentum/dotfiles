@@ -17,10 +17,10 @@
   networking.hostName = "moletable";
   networking.interfaces.enp30s0.useDHCP = true;
   services.xserver.layout = "fi";
+
   nixpkgs.config.allowUnfree = true;
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.wacom.enable = true;
-  # Enable CUPS to print documents.
   services.printing.enable = true;
 
   services.xserver.xrandrHeads = [
@@ -31,8 +31,21 @@
   services.xserver.screenSection = ''   
     Option "metamodes" "DP-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: nvidia-auto-select +2560+0"
   '';
-
+  # required by Steam
   hardware.opengl.driSupport32Bit = true;
+
+  # systemd-udev-settle hangs the system for 2 minutes on startup and apparently isn't needed
+  systemd.services.systemd-udev-settle.enable = false;
+
+  # reject the Oculus Rift and its sensors so we don't run out of USB power
+  # (can't use that thing on Linux anyway)
+  services.usbguard = {
+    enable = true;
+    implictPolicyTarget = "allow";
+    rules = ''
+      reject id one-of { 2833:3031 2833:0211 2833:2031 2833:0211 2833:0031 }
+    '';
+  };
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
