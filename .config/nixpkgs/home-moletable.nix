@@ -4,6 +4,10 @@
   nixpkgs.config.allowUnfree = true;
   programs = {
     direnv.enable = true;
+    obs-studio = {
+      enable = true;
+      plugins = [ pkgs.obs-linuxbrowser pkgs.obs-ndi ];
+    };
   };
   services = {
     lorri.enable = true;
@@ -12,9 +16,10 @@
     discord
     spotify
     steam
-    wine
-    jack2
+    wineWowPackages.stable
+    cadence
+    carla
+    guitarix
     reaper
-    google-chrome
   ];
 }

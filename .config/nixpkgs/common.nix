@@ -68,8 +68,8 @@
       };
     };
     firefox.enable = true;
+    z-lua.enable = true;
     fzf.enable = true;
-    gpg.enable = true;
     feh.enable = true;
     home-manager.enable = true;
   };
@@ -115,6 +115,7 @@
     redshift
     vlc
     networkmanagerapplet
+    niv
   ];
   home.file = {
     "awesome" = {

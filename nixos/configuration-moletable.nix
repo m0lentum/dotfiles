@@ -1,7 +1,15 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ ./hardware-moletable.nix ./common.nix ];
+  imports = [ 
+    ./hardware-moletable.nix
+    ./common.nix
+    <musnix>
+  ];
+
+  musnix.enable = true;
+  musnix.kernel.optimize = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   boot.supportedFilesystems = [ "ntfs" ];
   boot.loader.systemd-boot.enable = false;

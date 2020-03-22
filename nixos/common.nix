@@ -23,6 +23,7 @@
   ];
   programs.vim.defaultEditor = true;
   programs.fish.enable = true;
+  programs.gnupg.agent.enable = true;
 
   fonts.fonts = with pkgs; [
     noto-fonts
