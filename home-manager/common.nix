@@ -131,7 +131,10 @@
         set -g message-style 'fg=colour0 bg=colour6 bold'
       '';
     };
-    firefox.enable = true;
+    firefox = {
+      enable = true;
+      package = (pkgs.firefox.override { extraNativeMessagingHosts = [ pkgs.passff-host ];});
+    };
     z-lua.enable = true;
     fzf.enable = true;
     feh.enable = true;
