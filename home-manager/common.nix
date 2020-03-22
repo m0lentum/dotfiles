@@ -10,7 +10,6 @@
       ignores = [
         "*.nogit*"
         ".envrc"
-        ".direnv"
       ];
     };
     fish = {
@@ -103,21 +102,24 @@
 
   # extra stuff not in programs and/or config files managed manually
   home.packages = with pkgs; [
+    # cli/dev utils
     kitty
     tmux
-    xbindkeys
-    vscodium
     lsd
     tokei
     ripgrep
     xclip
-    maim
+    vscodium
+    niv
+    # general helpful stuff
     pass
     stretchly
     redshift
-    vlc
     networkmanagerapplet
-    niv
+    # multimedia
+    maim
+    vlc
+    xbindkeys
   ];
   home.file = {
     "awesome" = {
@@ -125,7 +127,7 @@
       target = "./.config/awesome";
     };
     ".tmux.conf" = {
-      source = ../../.tmux.conf;
+      source = ../.tmux.conf;
       target = "./.tmux.conf";
     };
     "kitty.conf" = {
@@ -133,11 +135,11 @@
       target = "./.config/kitty";
     };
     "code/settings.json" = {
-      source = ../../vscode/settings.json;
+      source = ../vscode/settings.json;
       target = "./.config/VSCodium/User/settings.json";
     };
     "code/keybindings.json" = {
-      source = ../../vscode/keybindings.json;
+      source = ../vscode/keybindings.json;
       target = "./.config/VSCodium/User/keybindings.json";
     };
     # home-manager has redshift but does not support constant activation times
@@ -147,11 +149,11 @@
     };
     # trackball customization
     "xprofile" = {
-      source = ../../.xprofile;
+      source = ../.xprofile;
       target = "./.xprofile";
     };
     "xbindkeysrc" = {
-      source = ../../.xbindkeysrc;
+      source = ../.xbindkeysrc;
       target = "./.xbindkeysrc";
     };
   };

@@ -41,15 +41,6 @@
     windowManager.awesome.enable = true;
     displayManager.defaultSession = "none+awesome";
     desktopManager.xterm.enable = false;
-    extraLayouts.fi-molemak = {
-      description = "Finnish colemak with some modifier customization";
-      languages = ["fi"];
-      symbolsFile = /home/mole/dotfiles/molemak/symbols;
-      #keycodesFile = /home/mole/dotfiles/molemak/keycodes;
-      #geometryFile = /home/mole/dotfiles/molemak/geometry;
-      #typesFile = /home/mole/dotfiles/molemak/types;
-      #compatFile = /home/mole/dotfiles/molemak/compat;
-    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

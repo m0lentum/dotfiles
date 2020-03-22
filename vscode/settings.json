@@ -11,27 +11,16 @@
     "window.menuBarVisibility": "toggle",
     "editor.wrappingIndent": "deepIndent",
     "editor.wordWrap": "on",
-    "scrolloff.scrolloff": 10,
     "bracket-pair-colorizer-2.colors": [
         "Orange",
         "Salmon",
         "Orchid",
         "Pink"
     ],
-    "editor.tokenColorCustomizations": {
-        // elm type constructors
-        "[Solarized Dark]": {
-            "textMateRules": [
-                {
-                    "scope": "constant",
-                    "settings": {
-                        "foreground": "#c5562a"
-                    }
-                }
-            ]
-        }
-    },
-    // vim
+    // vim / editing
+    "editor.autoClosingBrackets": "never",
+    "editor.autoClosingQuotes": "never",
+    "scrolloff.scrolloff": 10,
     "vim.cursorStylePerMode.normal": "underline",
     "editor.lineNumbers": "relative",
     "vim.useSystemClipboard": true,
@@ -77,21 +66,19 @@
         "<C-y>": false,
         "<C-b>": false,
     },
-    // other
+    // git
     "git.confirmSync": false,
     "git.ignoreLegacyWarning": true,
-    "terminal.integrated.shell.linux": "/bin/zsh",
-    "terminal.external.linuxExec": "terminator",
-    "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
-    "editor.autoClosingBrackets": "never",
-    "editor.autoClosingQuotes": "never",
-    "debug.allowBreakpointsEverywhere": true,
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
+    // rust
     "rust-analyzer.cargo-watch.enable": true,
     "rust-analyzer.highlightingOn": true,
-    "rust-analyzer.displayInlayHints": false,
-    "extensions.autoUpdate": false,
     "rust-analyzer.rainbowHighlightingOn": true,
+    // misc
+    "extensions.autoUpdate": false,
+    "terminal.integrated.shell.linux": "/usr/bin/env bash",
+    "explorer.confirmDragAndDrop": false,
+    "explorer.confirmDelete": false,
+    "debug.allowBreakpointsEverywhere": true,
 }

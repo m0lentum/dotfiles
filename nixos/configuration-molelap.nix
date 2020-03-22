@@ -11,9 +11,16 @@
   networking.interfaces.wlp2s0.useDHCP = true;
   networking.interfaces.wwp0s29u1u6i6.useDHCP = true;
 
-  services.xserver.layout = "fi-molemak";
-  # Enable touchpad support.
-  services.xserver.libinput.enable = true;
+  services.xserver = {
+    extraLayouts.fi-molemak = {
+      description = "Finnish colemak with some modifier customization";
+      languages = ["fi"];
+      symbolsFile = ../molemak.xkb;
+    };
+    layout = "fi-molemak";
+    # Enable touchpad support.
+    libinput.enable = true;
+  };
 
   environment.variables.AWESOME_GAP = "0";
 
