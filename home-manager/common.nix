@@ -66,6 +66,71 @@
         python.disabled = true;
       };
     };
+    tmux = {
+      enable = true;
+      shortcut = "t";
+      terminal = "screen-256color";
+      keyMode = "vi";
+      extraConfig = ''
+        # navigate panes with alt-arrow
+        bind -n M-Right select-pane -R
+        bind -n M-Up select-pane -U
+        bind -n M-Left select-pane -L
+        bind -n M-Down select-pane -D
+
+        # navigate tabs
+        bind -n M-C-NPage next-window
+        bind -n M-C-PPage previous-window
+
+        # splits & tabs
+        bind > split-window -h -c "#{pane_current_path}"
+        bind v split-window -v -c "#{pane_current_path}"
+        bind t new-window -c "#{pane_current_path}"
+        bind w kill-window
+
+        # vim-style copy-paste
+        bind u copy-mode
+        bind p paste-buffer
+        bind -T copy-mode-vi v send-keys -X begin-selection
+        bind -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+        bind -T copy-mode-vi r send-keys -X rectangle-toggle
+        # copy also to clipboard
+        bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -sel clip -i"
+
+        set -g mouse on
+
+        # bells off
+        set -g visual-activity off
+        set -g visual-bell off
+        set -g visual-silence off
+        setw -g monitor-activity off
+        set -g bell-action none
+
+        # panes and borders
+        set -g pane-border-style 'bg=colour0 fg=colour10'
+        set -g pane-active-border-style 'bg=colour0 fg=colour10'
+        set -g window-style 'bg=colour8 fg=colour242'
+        set -g window-active-style 'bg=colour8 fg=colour12'
+
+        # statusbar
+        set -g status-position bottom
+        set -g status-justify left
+        set -g status-style 'bg=colour0 fg=colour2 dim'
+        set -g status-left ""
+        set -g status-right '#[fg=colour255,bg=colour0]%d.%m. #[fg=colour255,bg=colour0]%H:%M '
+        set -g status-right-length 50
+        set -g status-left-length 20
+
+        setw -g window-status-current-style 'fg=colour233 bg=colour2 bold'
+        setw -g window-status-current-format ' #I#[fg=colour233]:#[fg=colour233]#W#[fg=colour233]#F '
+
+        setw -g window-status-style 'fg=colour255 bg=colour0'
+        setw -g window-status-format ' #I#[fg=colour255]:#[fg=colour255]#W#[fg=colour255]#F '
+
+        # messages
+        set -g message-style 'fg=colour0 bg=colour6 bold'
+      '';
+    };
     firefox.enable = true;
     z-lua.enable = true;
     fzf.enable = true;
@@ -104,7 +169,6 @@
   home.packages = with pkgs; [
     # cli/dev utils
     kitty
-    tmux
     lsd
     tokei
     ripgrep
@@ -125,10 +189,6 @@
     "awesome" = {
       source = ../awesome;
       target = "./.config/awesome";
-    };
-    ".tmux.conf" = {
-      source = ../.tmux.conf;
-      target = "./.tmux.conf";
     };
     "kitty.conf" = {
       source = ../kitty;
