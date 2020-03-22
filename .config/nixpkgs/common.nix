@@ -71,10 +71,12 @@
     z-lua.enable = true;
     fzf.enable = true;
     feh.enable = true;
+    direnv.enable = true;
     home-manager.enable = true;
   };
   
   services = {
+    lorri.enable = true;
     compton = {
       enable = true;
       shadow = true;
