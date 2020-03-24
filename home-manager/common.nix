@@ -187,6 +187,7 @@
     maim
     vlc
     xbindkeys
+    xdotool
   ];
   home.file = {
     "awesome" = {
