@@ -144,7 +144,7 @@
   
   services = {
     lorri.enable = true;
-    compton = {
+    picom = {
       enable = true;
       shadow = true;
       shadowOpacity = "0.5";
