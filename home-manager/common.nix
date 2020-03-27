@@ -189,6 +189,7 @@
     vlc
     xbindkeys
     xdotool
+    pcmanfm
   ];
   home.file = {
     "awesome" = {
