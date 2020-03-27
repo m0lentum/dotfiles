@@ -71,6 +71,7 @@
       shortcut = "t";
       terminal = "screen-256color";
       keyMode = "vi";
+      escapeTime = 0;
       extraConfig = ''
         # navigate panes with alt-arrow
         bind -n M-Right select-pane -R
