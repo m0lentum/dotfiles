@@ -1,6 +1,6 @@
 {
     // visuals
-    "workbench.colorTheme": "BeardedTheme Purple",
+    "workbench.colorTheme": "BeardedTheme Void",
     "workbench.iconTheme": "material-icon-theme",
     "editor.detectIndentation": true,
     "editor.formatOnSave": true,
