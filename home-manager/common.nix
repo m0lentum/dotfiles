@@ -200,14 +200,6 @@
       source = ../kitty;
       target = "./.config/kitty";
     };
-    "code/settings.json" = {
-      source = ../vscode/settings.json;
-      target = "./.config/VSCodium/User/settings.json";
-    };
-    "code/keybindings.json" = {
-      source = ../vscode/keybindings.json;
-      target = "./.config/VSCodium/User/keybindings.json";
-    };
     # home-manager has redshift but does not support constant activation times
     "redshift.conf" = {
       source = ../redshift.conf;
