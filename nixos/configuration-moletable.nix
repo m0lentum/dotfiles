@@ -30,7 +30,11 @@
   nixpkgs.config.allowUnfree = true;
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.wacom.enable = true;
-  services.printing.enable = true;
+
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.epson-escpr2 ];
+  };
 
   services.xserver.xrandrHeads = [
     { output = "DP-2"; primary = true; }
