@@ -6,16 +6,15 @@ local charitable = require("charitable")
 local beautiful = require("beautiful")
 local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 
--- note / TODO:
--- this currently saves an empty file if custom area screenshot is cancelled..
--- how to deal with this?
+-- screenshot commands require maim and ifne to be installed.
+-- transparency removal assumes transparency is created by picom.
 local screenshot_pipe =
-    " | tee ~/Pictures/Screenshots/$(date +%y-%m-%d_%T)_maim.png | xclip -sel clipboard -t image/png"
+    " | ifne tee ~/Pictures/Screenshots/$(date +%y-%m-%d_%T)_maim.png | xclip -sel clipboard -t image/png"
 local screenshot_normal = function(maim_opts)
     return 'bash -c "maim -o ' .. maim_opts .. screenshot_pipe .. '"'
 end
 local screenshot_nocompton = function(maim_opts)
-    return 'bash -c "killall compton && maim -o ' .. maim_opts .. screenshot_pipe .. ' && compton; disown"'
+    return 'bash -c "systemctl --user stop picom && maim -o ' .. maim_opts .. screenshot_pipe .. ' && systemctl --user start picom"'
 end
 
 local globalkeys =

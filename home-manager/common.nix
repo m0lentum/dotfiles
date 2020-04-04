@@ -166,6 +166,10 @@
         "95:class_g = 'Spotify' && focused"
         "95:class_g = 'kitty' && focused"
       ];
+      shadowExclude = [
+        # Prevent picom from drawing a shadow on the slop selection window
+        "class_g = 'slop'"
+      ];
     };
   };
 
@@ -185,6 +189,7 @@
     redshift
     networkmanagerapplet
     # multimedia
+    moreutils
     maim
     vlc
     xbindkeys
