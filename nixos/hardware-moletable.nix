@@ -12,7 +12,10 @@
   boot.initrd.kernelModules = [ ];
   # boot.kernelModules = [ "kvm-amd" ];
   boot.kernelModules = [ ];
-  boot.extraModulePackages = [ ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [
+    # for IP camera as webcam
+    v4l2loopback
+  ];
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/b36d6d6b-a4f8-4ba4-af67-ee3c9e8f4cdf";

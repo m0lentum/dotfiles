@@ -7,6 +7,8 @@
     <musnix>
   ];
 
+  nixpkgs.config.allowUnfree = true;
+
   musnix.enable = true;
   musnix.kernel.optimize = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
@@ -25,9 +27,10 @@
 
   networking.hostName = "moletable";
   networking.interfaces.enp30s0.useDHCP = true;
-  services.xserver.layout = "fi";
+  # common development server ports
+  networking.firewall.allowedTCPPorts = [ 8080 8000 9000 ];
 
-  nixpkgs.config.allowUnfree = true;
+  services.xserver.layout = "fi";
   services.xserver.videoDrivers = ["nvidia"];
   services.xserver.wacom.enable = true;
 
