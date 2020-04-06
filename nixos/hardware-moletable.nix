@@ -10,12 +10,14 @@
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
-  # boot.kernelModules = [ "kvm-amd" ];
-  boot.kernelModules = [ ];
+  # for IP camera as webcam
+  boot.kernelModules = [ "v4l2loopback" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
-    # for IP camera as webcam
     v4l2loopback
   ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback exclusive_caps=1 devices=1
+  '';
 
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/b36d6d6b-a4f8-4ba4-af67-ee3c9e8f4cdf";
