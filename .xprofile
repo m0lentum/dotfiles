@@ -9,5 +9,13 @@ if xinput list | grep -q "$DEV"; then
 	xinput set-prop "$DEV" 'Coordinate Transformation Matrix' "$PTR_SPEED", 0.000000, 0.000000, 0.000000, "$PTR_SPEED", 0.000000, 0.000000, 0.000000, 1.000000
 fi
 
-# wacom to monitor 1 (probably won't work on every machine)
+# wacom to monitor 1
 xsetwacom --set "Wacom Intuos S Pen stylus" MapToOutput HEAD-0
+
+# screensaver using xidlehook:
+# 5 minutes of no activity -> turn screen off
+# 10 minutes of screen off -> suspend
+xidlehook --not-when-fullscreen --not-when-audio \
+ --timer 285 'notify-desktop "Turning the screen off in 15 seconds"' '' \
+ --timer 15 'xset dpms force off' '' \
+ --timer 600 'systemctl suspend' '' &

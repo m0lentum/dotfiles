@@ -41,6 +41,14 @@
     windowManager.awesome.enable = true;
     displayManager.defaultSession = "none+awesome";
     desktopManager.xterm.enable = false;
+    # disable automatic screen blanking and stuff, we'll use xidlehook instead
+    # so that these things don't happen when audio is playing
+    serverFlagsSection = ''
+      Option "BlankTime" "0"
+      Option "StandbyTime" "0"
+      Option "SuspendTime" "0"
+      Option "OffTime" "0"
+    '';
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
