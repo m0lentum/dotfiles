@@ -56,6 +56,7 @@
           modified = "*";
         };
         nix_shell = {
+          symbol = "";
           impure_msg = "λ";
           pure_msg = "λλ";
         };
