@@ -72,9 +72,18 @@
     "gitlens.currentLine.enabled": false,
     "gitlens.hovers.currentLine.over": "line",
     // rust
-    "rust-analyzer.cargo-watch.enable": true,
-    "rust-analyzer.highlightingOn": true,
-    "rust-analyzer.rainbowHighlightingOn": true,
+    "rust-analyzer.inlayHints.typeHints": false,
+    "rust-analyzer.inlayHints.chainingHints": false,
+    // discord 
+    "discord.detailsEditing": "{dirname}/{filename}",
+    "discord.lowerDetailsEditing": "in {workspace}",
+    "discord.lowerDetailsIdle": "{null}",
+    "discord.lowerDetailsNotFound": "{null}",
+    "discord.detailsDebugging": "{dirname}/{filename}",
+    "discord.lowerDetailsDebugging": "in {workspace}",
+    "discord.detailsIdle": "Idle",
+    "discord.largeImageIdle": "Idle",
+    "discord.workspaceElapsedTime": true,
     // misc
     "extensions.autoUpdate": false,
     "terminal.integrated.shell.linux": "/usr/bin/env bash",
