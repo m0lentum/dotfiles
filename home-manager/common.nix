@@ -10,6 +10,7 @@
       ignores = [
         "*.nogit*"
         ".envrc"
+        ".vscode"
       ];
     };
     fish = {
@@ -65,6 +66,7 @@
         ruby.disabled = true;
         nodejs.disabled = true;
         python.disabled = true;
+        package.disabled =  true;
       };
     };
     tmux = {
