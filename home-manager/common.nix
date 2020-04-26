@@ -11,6 +11,7 @@
         "*.nogit*"
         ".envrc"
         ".vscode"
+        "Session.vim"
       ];
     };
     fish = {
@@ -20,7 +21,7 @@
         l = "lsd -al";
         ll = "lsd -l";
         tree = "lsd --tree";
-        ga = "git add"; 
+        ga = "git add";
         gc = "git commit -v";
         "gc!" = "git commit -v --amend";
         gl = "git pull";
@@ -37,6 +38,7 @@
         glo = "git log --oneline";
         gloa = "git log --oneline --graph --all";
         grh = "git reset HEAD";
+        vis = "nvim -S Session.vim";
       };
     };
     starship = {
@@ -176,6 +178,116 @@
         set -g message-style 'fg=colour0 bg=colour6 bold'
       '';
     };
+    neovim = {
+      enable = true;
+      plugins = with pkgs.vimPlugins; [
+        coc-nvim
+        ale
+        vim-nix
+
+        vim-obsession
+        fzf-vim
+        vim-commentary
+        vim-surround
+
+        vim-airline
+        vim-gitgutter
+        awesome-vim-colorschemes
+      ];
+      withNodeJs = true;
+      extraConfig = ''
+        set termguicolors
+        color challenger_deep
+        let g:airline_theme='violet'
+        let g:airline#extensions#tabline#enabled = 1
+
+        set hidden
+        nnoremap <silent><C-PageUp> :bp<cr>
+        nnoremap <silent><C-PageDown> :bn<cr>
+        nnoremap <silent><leader>w :bdelete<cr>
+
+        set expandtab
+        set mouse=a
+        set scrolloff=15
+        set clipboard=unnamed
+        nnoremap <Home> ^
+
+        " relative line numbers, only in focused normal mode
+        set number relativenumber
+        augroup numbertoggle
+          autocmd!
+          autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+          autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+        augroup END
+
+        " fzf
+
+        nnoremap <C-p> :GFiles<cr>
+        let g:fzf_action = {
+          \ 'ctrl-n': 'tab split',
+          \ 'ctrl-r': 'split',
+          \ 'ctrl-v': 'vsplit' }
+
+        " ale
+
+        let g:ale_fixers = {
+        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+        \   'javascript': ['eslint'],
+        \   'rust': ['rustfmt'],
+        \}
+        let g:ale_fix_on_save = 1
+
+        " coc.nvim
+
+        set nobackup
+        set nowritebackup
+        " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+        " delays and poor user experience.
+        set updatetime=300
+        set signcolumn=yes
+        " Don't pass messages to |ins-completion-menu|.
+        set shortmess+=c
+        " Use <c-space> to trigger completion.
+        inoremap <silent><expr> <c-space> coc#refresh()
+        " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+        " position. Coc only does snippet and additional edit on confirm.
+        if exists('*complete_info')
+          inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+        else
+          imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+        endif
+
+        " navigate diagnostics
+        nmap <silent> gN <Plug>(coc-diagnostic-prev)
+        nmap <silent> gn <Plug>(coc-diagnostic-next)
+
+        " GoTo code navigation.
+        nmap <silent> gd <Plug>(coc-definition)
+        nmap <silent> gy <Plug>(coc-type-definition)
+        nmap <silent> gi <Plug>(coc-implementation)
+        nmap <silent> gr <Plug>(coc-references)
+
+        " Use K to show documentation in preview window.
+        nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+        function! s:show_documentation()
+          if (index(['vim','help'], &filetype) >= 0)
+            execute 'h '.expand('<cword>')
+          else
+            call CocAction('doHover')
+          endif
+        endfunction
+
+        " Highlight the symbol and its references when holding the cursor.
+        autocmd CursorHold * silent call CocActionAsync('highlight')
+
+        " Symbol renaming.
+        nmap <F2> <Plug>(coc-rename)
+
+        nnoremap <silent> <C-m> :<C-u>CocList diagnostics<cr>
+      '';
+      vimAlias = true;
+    };
     firefox = {
       enable = true;
       package = (pkgs.firefox.override { extraNativeMessagingHosts = [ pkgs.passff-host ];});
@@ -186,7 +298,7 @@
     direnv.enable = true;
     home-manager.enable = true;
   };
-  
+
   services = {
     lorri.enable = true;
     picom = {
@@ -268,7 +380,7 @@
       target = "./.xbindkeysrc";
     };
   };
-  
+
   xsession = {
     windowManager.awesome.enable = true;
     pointerCursor = {
