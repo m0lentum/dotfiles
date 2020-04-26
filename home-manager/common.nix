@@ -221,6 +221,13 @@
   home.packages = with pkgs; [
     # cli/dev utils
     lsd
+    bat
+    du-dust
+    procs
+    ytop
+    fd
+    hyperfine
+    miniserve
     tokei
     ripgrep
     xclip
