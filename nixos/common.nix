@@ -29,6 +29,7 @@
     noto-fonts
     liberation_ttf
     fira-code
+    jetbrains-mono
   ];
 
   # Enable sound.

@@ -69,6 +69,47 @@
         package.disabled =  true;
       };
     };
+    kitty = {
+      enable = true;
+      font = {
+        name = "JetBrains Mono Medium 10";
+        package = pkgs.jetbrains-mono;
+      };
+      settings = {
+        # solarized dark colors
+        foreground = "#839496";
+        foreground_bold = "#eee8d5";
+        cursor = "#839496";
+        cursor_foreground = "#002b36";
+        background = "#002b36";
+        # dark backgrounds
+        color0 = "#073642";
+        color8 = "#002b36";
+        # light backgrounds
+        color7 = "#eee8d5";
+        color15 = "#fdf6e3";
+        # grays
+        color10 = "#586e75";
+        color11 = "#657b83";
+        color12 = "#839496";
+        color14 = "#93a1a1";
+        # accents
+        color1 = "#dc322f";
+        color9 = "#cb4b16";
+        color2 = "#859900";
+        color3 = "#b58900";
+        color4 = "#268bd2";
+        color5 = "#d33682";
+        color13 = "#6c71c4";
+        color6 = "#2aa198";
+        color16 = "#cb4b16";
+        color17 = "#d33682";
+        color18 = "#073642";
+        color19 = "#586e75";
+        color20 = "#839496";
+        color21 = "#eee8d5";
+      };
+    };
     tmux = {
       enable = true;
       shortcut = "t";
@@ -179,7 +220,6 @@
   # extra stuff not in programs and/or config files managed manually
   home.packages = with pkgs; [
     # cli/dev utils
-    kitty
     lsd
     tokei
     ripgrep
@@ -205,10 +245,6 @@
     "awesome" = {
       source = ../awesome;
       target = "./.config/awesome";
-    };
-    "kitty.conf" = {
-      source = ../kitty;
-      target = "./.config/kitty";
     };
     # home-manager has redshift but does not support constant activation times
     "redshift.conf" = {
