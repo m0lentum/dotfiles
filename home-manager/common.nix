@@ -16,6 +16,11 @@
     };
     fish = {
       enable = true;
+      interactiveShellInit = ''
+        if not set -q TMUX
+          exec tmux
+        end
+      '';
       shellAbbrs = {
         ls = "lsd";
         l = "lsd -al";
