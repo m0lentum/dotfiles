@@ -58,7 +58,6 @@
     home = "/home/mole";
     description = "mole";
     shell = pkgs.fish;
-    extraGroups = [ "networkmanager" "wheel" "realtime" "audio" "jackaudio" ];
+    extraGroups = [ "networkmanager" "wheel" "realtime" "audio" "jackaudio" "docker" ];
   };
 }
-

@@ -13,6 +13,8 @@
   musnix.kernel.optimize = true;
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
+  virtualisation.docker.enable = true;
+
   boot.supportedFilesystems = [ "ntfs" ];
   boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
