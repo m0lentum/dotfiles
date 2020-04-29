@@ -6,7 +6,7 @@
     "editor.formatOnSave": true,
     "window.zoomLevel": 0,
     "terminal.integrated.fontSize": 13,
-    "editor.fontFamily": "'Fira Code'",
+    "editor.fontFamily": "'JetBrains Mono'",
     "editor.fontLigatures": true,
     "window.menuBarVisibility": "toggle",
     "editor.wrappingIndent": "deepIndent",
