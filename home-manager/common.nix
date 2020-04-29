@@ -145,6 +145,7 @@
         bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel "xclip -sel clip -i"
 
         set -g mouse on
+        set -g focus-events on
 
         # bells off
         set -g visual-activity off
@@ -184,15 +185,21 @@
         coc-nvim
         ale
         vim-nix
+        typescript-vim
+        vim-tsx
 
         vim-obsession
         fzf-vim
+        coc-fzf
         vim-commentary
         vim-surround
+        vim-tmux-focus-events
 
         vim-airline
         vim-gitgutter
         awesome-vim-colorschemes
+        rainbow
+        vim-indent-guides
       ];
       withNodeJs = true;
       extraConfig = ''
@@ -200,16 +207,23 @@
         color challenger_deep
         let g:airline_theme='violet'
         let g:airline#extensions#tabline#enabled = 1
+        let g:rainbow_active = 1
 
+        let g:indent_guides_enable_on_vim_startup = 1
+        set expandtab
+        set ts=2 sw=2
+        let g:indent_guides_guide_size = 2
+
+        set autoread
         set hidden
         nnoremap <silent><C-PageUp> :bp<cr>
         nnoremap <silent><C-PageDown> :bn<cr>
         nnoremap <silent><leader>w :bdelete<cr>
 
-        set expandtab
         set mouse=a
         set scrolloff=15
         set clipboard=unnamed
+        au FocusGained,BufEnter * :checktime
         nnoremap <Home> ^
 
         " relative line numbers, only in focused normal mode
@@ -221,20 +235,23 @@
         augroup END
 
         " fzf
+        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
         nnoremap <C-p> :GFiles<cr>
         let g:fzf_action = {
           \ 'ctrl-n': 'tab split',
-          \ 'ctrl-r': 'split',
-          \ 'ctrl-v': 'vsplit' }
+          \ 'ctrl-v': 'split',
+          \ 'ctrl-r': 'vsplit' }
 
         " ale
 
         let g:ale_fixers = {
         \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'javascript': ['eslint'],
+        \   'javascript': ['prettier'],
+        \   'typescript': ['prettier'],
         \   'rust': ['rustfmt'],
         \}
+        let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
         let g:ale_fix_on_save = 1
 
         " coc.nvim
@@ -267,8 +284,6 @@
         nmap <silent> gi <Plug>(coc-implementation)
         nmap <silent> gr <Plug>(coc-references)
 
-        " Use K to show documentation in preview window.
-        nnoremap <silent> K :call <SID>show_documentation()<CR>
 
         function! s:show_documentation()
           if (index(['vim','help'], &filetype) >= 0)
@@ -281,10 +296,11 @@
         " Highlight the symbol and its references when holding the cursor.
         autocmd CursorHold * silent call CocActionAsync('highlight')
 
-        " Symbol renaming.
+        nnoremap <silent> gh :call <SID>show_documentation()<CR>
         nmap <F2> <Plug>(coc-rename)
-
-        nnoremap <silent> <C-m> :<C-u>CocList diagnostics<cr>
+        nnoremap <silent> <leader>M :<C-u>CocFzfList diagnostics<cr>
+        nnoremap <silent> <leader>m :<C-u>CocFzfList diagnostics --current-buf<cr>
+        nnoremap <silent> <leader>P :<C-u>CocFzfList commands<cr>
       '';
       vimAlias = true;
     };

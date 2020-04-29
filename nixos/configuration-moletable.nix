@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ 
+  imports = [
     ./hardware-moletable.nix
     ./common.nix
     <musnix>
@@ -44,7 +44,7 @@
     "DVI-D-0"
   ];
   # enable vsync
-  services.xserver.screenSection = ''   
+  services.xserver.screenSection = ''
     Option "metamodes" "DP-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: nvidia-auto-select +2560+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
   '';
   # required by Steam
@@ -70,4 +70,3 @@
   system.stateVersion = "19.09"; # Did you read the comment?
 
 }
-
