@@ -44,6 +44,7 @@
         gloa = "git log --oneline --graph --all";
         grh = "git reset HEAD";
         vis = "nvim -S Session.vim";
+        docc = "docker-compose";
       };
     };
     starship = {
