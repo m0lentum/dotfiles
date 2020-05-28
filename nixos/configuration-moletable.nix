@@ -11,7 +11,11 @@
 
   musnix.enable = true;
   musnix.kernel.optimize = true;
-  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+  hardware.pulseaudio = {
+    enable = true;
+    package = pkgs.pulseaudioFull;
+    support32Bit = true;
+  };
 
   virtualisation.docker.enable = true;
 
