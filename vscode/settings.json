@@ -1,93 +1,73 @@
 {
-    // visuals
-    "workbench.colorTheme": "BeardedTheme Void",
-    "workbench.iconTheme": "material-icon-theme",
-    "editor.detectIndentation": true,
-    "editor.formatOnSave": true,
-    "window.zoomLevel": 0,
-    "terminal.integrated.fontSize": 13,
-    "editor.fontFamily": "'JetBrains Mono'",
-    "editor.fontLigatures": true,
-    "window.menuBarVisibility": "toggle",
-    "editor.wrappingIndent": "deepIndent",
-    "editor.wordWrap": "on",
-    "bracket-pair-colorizer-2.colors": [
-        "Orange",
-        "Salmon",
-        "Orchid",
-        "Pink"
-    ],
-    // vim / editing
-    "editor.autoClosingBrackets": "never",
-    "editor.autoClosingQuotes": "never",
-    "scrolloff.scrolloff": 10,
-    "vim.cursorStylePerMode.normal": "underline",
-    "editor.lineNumbers": "relative",
-    "vim.useSystemClipboard": true,
-    "vim.normalModeKeyBindings": [
-        // Home moves to first character
-        {
-            "before": [
-                "<Home>"
-            ],
-            "after": [
-                "^"
-            ]
-        },
-        // delete without copying
-        {
-            "before": [
-                "<leader>",
-                "d"
-            ],
-            "after": [
-                "\"",
-                "_",
-                "d"
-            ]
-        },
-        {
-            "before": [
-                "x"
-            ],
-            "after": [
-                "\"",
-                "_",
-                "x"
-            ]
-        }
-    ],
-    "vim.handleKeys": {
-        "<C-d>": true,
-        "<C-w>": false,
-        "<C-f>": false,
-        "<C-q>": false,
-        "<C-z>": false,
-        "<C-y>": false,
-        "<C-b>": false,
+  // visuals
+  "workbench.colorTheme": "BeardedTheme Purple",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.detectIndentation": true,
+  "editor.formatOnSave": true,
+  "window.zoomLevel": 0,
+  "terminal.integrated.fontSize": 13,
+  "editor.fontFamily": "'JetBrains Mono'",
+  "editor.fontLigatures": true,
+  "window.menuBarVisibility": "toggle",
+  "editor.wrappingIndent": "deepIndent",
+  "editor.wordWrap": "on",
+  "bracket-pair-colorizer-2.colors": ["Orange", "Salmon", "Orchid", "Pink"],
+  // vim / editing
+  "editor.autoClosingBrackets": "never",
+  "editor.autoClosingQuotes": "never",
+  "scrolloff.scrolloff": 10,
+  "vim.cursorStylePerMode.normal": "block",
+  "editor.lineNumbers": "relative",
+  "vim.useSystemClipboard": true,
+  "vim.normalModeKeyBindings": [
+    // Home moves to first character
+    {
+      "before": ["<Home>"],
+      "after": ["^"]
     },
-    // git
-    "git.confirmSync": false,
-    "git.ignoreLegacyWarning": true,
-    "gitlens.currentLine.enabled": false,
-    "gitlens.hovers.currentLine.over": "line",
-    // rust
-    "rust-analyzer.inlayHints.typeHints": false,
-    "rust-analyzer.inlayHints.chainingHints": false,
-    // discord 
-    "discord.detailsEditing": "{dirname}/{filename}",
-    "discord.lowerDetailsEditing": "in {workspace}",
-    "discord.lowerDetailsIdle": "{null}",
-    "discord.lowerDetailsNotFound": "{null}",
-    "discord.detailsDebugging": "{dirname}/{filename}",
-    "discord.lowerDetailsDebugging": "in {workspace}",
-    "discord.detailsIdle": "Idle",
-    "discord.largeImageIdle": "Idle",
-    "discord.workspaceElapsedTime": true,
-    // misc
-    "extensions.autoUpdate": false,
-    "terminal.integrated.shell.linux": "/usr/bin/env bash",
-    "explorer.confirmDragAndDrop": false,
-    "explorer.confirmDelete": false,
-    "debug.allowBreakpointsEverywhere": true,
+    // delete without copying
+    {
+      "before": ["<leader>", "d"],
+      "after": ["\"", "_", "d"]
+    },
+    {
+      "before": ["x"],
+      "after": ["\"", "_", "x"]
+    }
+  ],
+  "vim.handleKeys": {
+    "<C-d>": true,
+    "<C-w>": false,
+    "<C-f>": false,
+    "<C-q>": false,
+    "<C-z>": false,
+    "<C-y>": false,
+    "<C-b>": false
+  },
+  // git
+  "git.confirmSync": false,
+  "git.ignoreLegacyWarning": true,
+  "gitlens.currentLine.enabled": false,
+  "gitlens.hovers.currentLine.over": "line",
+  // rust
+  "rust-analyzer.inlayHints.typeHints": false,
+  "rust-analyzer.inlayHints.chainingHints": false,
+  // discord
+  "discord.detailsEditing": "{dirname}/{filename}",
+  "discord.lowerDetailsEditing": "in {workspace}",
+  "discord.lowerDetailsIdle": "{null}",
+  "discord.lowerDetailsNotFound": "{null}",
+  "discord.detailsDebugging": "{dirname}/{filename}",
+  "discord.lowerDetailsDebugging": "in {workspace}",
+  "discord.detailsIdle": "Idle",
+  "discord.largeImageIdle": "Idle",
+  "discord.workspaceElapsedTime": true,
+  // misc
+  "extensions.autoUpdate": false,
+  "terminal.integrated.shell.linux": "/usr/bin/env bash",
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+  "debug.allowBreakpointsEverywhere": true,
+  "python.linting.flake8Enabled": true,
+  "python.formatting.provider": "yapf"
 }
