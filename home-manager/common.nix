@@ -228,7 +228,7 @@
 
         set mouse=a
         set scrolloff=15
-        set clipboard=unnamed
+        set clipboard=unnamedplus
         au FocusGained,BufEnter * :checktime
         nnoremap <Home> ^
 
