@@ -4,13 +4,14 @@
   imports = [
     ./hardware-moletable.nix
     ./common.nix
-    <musnix>
+    ./musnix
   ];
 
   nixpkgs.config.allowUnfree = true;
 
-  musnix.enable = true;
-  musnix.kernel.optimize = true;
+  # musnix is not working but I can't be bothered with it right now
+  # musnix.enable = true;
+  # musnix.kernel.optimize = true;
   hardware.pulseaudio = {
     enable = true;
     package = pkgs.pulseaudioFull;
