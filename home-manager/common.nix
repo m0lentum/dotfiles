@@ -69,11 +69,6 @@
           impure_msg = "λ";
           pure_msg = "λλ";
         };
-        rust.disabled = true;
-        golang.disabled = true;
-        ruby.disabled = true;
-        nodejs.disabled = true;
-        python.disabled = true;
         package.disabled =  true;
       };
     };
