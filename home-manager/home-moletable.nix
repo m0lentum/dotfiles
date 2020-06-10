@@ -7,11 +7,12 @@ let
   '';
   cam = pkgs.writeScriptBin "cam" ''
     #!${pkgs.stdenv.shell}
-    PAD_IP="192.168.0.189"
-    PHONE_IP="TODO"
-    if [[ $1 = "phone" ]]; then IP="$PHONE_IP"; else IP="$PAD_IP"; fi
-
-    ffmpeg -f mjpeg -i "http://$IP/live" -pix_fmt yuv420p -f v4l2 /dev/video0
+    if [[ -z $1 ]]; then
+      echo "Usage: cam [IPCamera address]"
+      false
+    else
+      ffmpeg -f mjpeg -i "http://$1/live" -pix_fmt yuv420p -f v4l2 /dev/video0
+    fi
   '';
 in
 { imports = [ ./common.nix ];
