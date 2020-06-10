@@ -50,9 +50,9 @@
     { output = "DP-2"; primary = true; }
     "DVI-D-0"
   ];
-  # enable vsync
+  # enable vsync and position screens
   services.xserver.screenSection = ''
-    Option "metamodes" "DP-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: nvidia-auto-select +2560+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+    Option "metamodes" "DP-2: nvidia-auto-select +1920+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
   '';
   # required by Steam
   hardware.opengl.driSupport32Bit = true;
