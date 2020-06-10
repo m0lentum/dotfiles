@@ -325,9 +325,7 @@
     lorri.enable = true;
     picom = {
       enable = true;
-      shadow = true;
-      shadowOpacity = "0.5";
-      shadowOffsets = [ (-5) (-5) ];
+      shadow = false;
       fade = true;
       fadeDelta = 4;
       blur = true;
@@ -343,10 +341,6 @@
         "95:class_g = 'discord' && focused"
         "95:class_g = 'Spotify' && focused"
         "95:class_g = 'kitty' && focused"
-      ];
-      shadowExclude = [
-        # Prevent picom from drawing a shadow on the slop selection window
-        "class_g = 'slop'"
       ];
     };
   };
