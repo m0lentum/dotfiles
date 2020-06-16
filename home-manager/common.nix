@@ -337,6 +337,8 @@
         "95:class_g = 'Spotify' && focused"
         "95:class_g = 'kitty' && focused"
       ];
+      # fixes flickering problems with glx backend
+      backend = "xrender";
     };
   };
 
