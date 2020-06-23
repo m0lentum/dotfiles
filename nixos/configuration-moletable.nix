@@ -9,13 +9,13 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # musnix is not working but I can't be bothered with it right now
-  # musnix.enable = true;
-  # musnix.kernel.optimize = true;
-  hardware.pulseaudio = {
-    enable = true;
-    package = pkgs.pulseaudioFull;
-    support32Bit = true;
+  # run JACK on the external soundcard so it doesn't need to worry about pulseaudio
+  services.jack = {
+    jackd.enable = true;
+    jackd.extraOptions = [
+      "-R" "-dalsa" "-dhw:USB"
+    ];
+    alsa.enable = false;
   };
 
   virtualisation.docker.enable = true;

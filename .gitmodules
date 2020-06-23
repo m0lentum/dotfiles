@@ -4,6 +4,3 @@
 [submodule "awesome/charitable"]
 	path = awesome/charitable
 	url = https://github.com/frioux/charitable.git
-[submodule "musnix"]
-	path = nixos/musnix
-	url = https://github.com/musnix/musnix.git

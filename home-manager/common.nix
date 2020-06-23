@@ -191,7 +191,6 @@
 
         vim-obsession
         fzf-vim
-        coc-fzf
         vim-commentary
         vim-surround
         vim-tmux-focus-events
@@ -357,13 +356,13 @@
     ripgrep
     xclip
     vscodium
-    niv
     # general helpful stuff
     pass
     stretchly
     redshift
     networkmanagerapplet
     # multimedia
+    pulsemixer
     moreutils
     maim
     vlc

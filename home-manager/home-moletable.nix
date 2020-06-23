@@ -36,7 +36,7 @@ in
     spotify
     steam
     wineWowPackages.stable
-    cadence
+    qjackctl
     carla
     guitarix
     reaper
