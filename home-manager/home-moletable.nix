@@ -6,7 +6,8 @@ let
     wine "/home/mole/.wine/drive_c/Program Files/CELSYS/CLIP STUDIO 1.5/CLIP STUDIO PAINT/CLIPStudioPaint.exe"
   '';
   cam = pkgs.writeScriptBin "cam" ''
-    #!${pkgs.stdenv.shell}
+    #! /usr/bin/env nix-shell
+    #! nix-shell -p ffmpeg -i bash
     if [[ -z $1 ]]; then
       echo "Usage: cam [IPCamera address]"
       false
@@ -20,25 +21,20 @@ in
   programs = {
     obs-studio = {
       enable = true;
-      plugins = with pkgs; [
-        obs-linuxbrowser
-        # This does not install correctly,
-        # and also doesn't seem to work with the iOS camera app anymore anyway
-        # obs-ndi
-      ];
+      plugins = [ pkgs.obs-linuxbrowser ];
     };
   };
-  home.packages = with pkgs; [
+  home.packages = [
     csp
     cam
-    ffmpeg
-    discord
-    spotify
-    steam
-    wineWowPackages.stable
-    qjackctl
-    carla
-    guitarix
-    reaper
+
+    pkgs.discord
+    pkgs.spotify
+    pkgs.steam
+    pkgs.wineWowPackages.stable
+
+    pkgs.carla
+    pkgs.guitarix
+    pkgs.reaper
   ];
 }
