@@ -20,11 +20,17 @@
   '';
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/b36d6d6b-a4f8-4ba4-af67-ee3c9e8f4cdf";
+    { device = "/dev/disk/by-uuid/85485197-e6f7-498d-8b38-f3c5a1e92137";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/24F4-2610";
+      fsType = "vfat";
+    };
+
+  # mount windows boot partition so os-prober finds it
+  fileSystems."/boot-win" =
     { device = "/dev/disk/by-uuid/2A6C-3479";
       fsType = "vfat";
     };
