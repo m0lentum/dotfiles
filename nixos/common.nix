@@ -42,8 +42,7 @@
     windowManager.awesome.enable = true;
     displayManager.defaultSession = "none+awesome";
     desktopManager.xterm.enable = false;
-    # disable automatic screen blanking and stuff, we'll use xidlehook instead
-    # so that these things don't happen when audio is playing
+    # disable automatic screen blanking and stuff, we'll do it manually instead
     serverFlagsSection = ''
       Option "BlankTime" "0"
       Option "StandbyTime" "0"

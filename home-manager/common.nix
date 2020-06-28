@@ -369,7 +369,6 @@
     xbindkeys
     xdotool
     pcmanfm
-    xidlehook
     notify-desktop
   ];
   home.file = {

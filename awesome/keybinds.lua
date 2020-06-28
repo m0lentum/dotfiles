@@ -86,6 +86,17 @@ local globalkeys =
         {description = "active window, no transparency", group = "screenshots"}
     ),
     --
+    -- Screen blank
+    --
+    awful.key(
+      {modkey},
+      "z",
+      function()
+          awful.spawn("xset dpms force off")
+      end,
+      {description = "Blank the screen", group = "screen"}
+    ),
+    --
     --
     -- Navigation
     --
