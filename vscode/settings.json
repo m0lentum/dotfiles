@@ -64,7 +64,6 @@
   "discord.workspaceElapsedTime": true,
   // misc
   "extensions.autoUpdate": false,
-  "terminal.integrated.shell.linux": "/usr/bin/env bash",
   "explorer.confirmDragAndDrop": false,
   "explorer.confirmDelete": false,
   "debug.allowBreakpointsEverywhere": true,
