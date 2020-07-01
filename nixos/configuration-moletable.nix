@@ -4,7 +4,6 @@
   imports = [
     ./hardware-moletable.nix
     ./common.nix
-    ./musnix
   ];
 
   nixpkgs.config.allowUnfree = true;
