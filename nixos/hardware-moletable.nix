@@ -29,16 +29,11 @@
       fsType = "vfat";
     };
 
-  # mount windows boot partition so os-prober finds it
-  fileSystems."/boot-win" =
-    { device = "/dev/disk/by-uuid/2A6C-3479";
-      fsType = "vfat";
-    };
 
   fileSystems."/data" =
     { device = "/dev/disk/by-uuid/7365130763304B2D";
       fsType = "ntfs";
-      options = [ "uid=1000" "gid=100" ];
+      options = [ "rw" "uid=1000" "gid=100" ];
     };
 
   swapDevices = [ ];

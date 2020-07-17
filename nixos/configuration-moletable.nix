@@ -55,6 +55,7 @@
   '';
   # required by Steam
   hardware.opengl.driSupport32Bit = true;
+  hardware.steam-hardware.enable = true;
 
   # systemd-udev-settle hangs the system for 2 minutes on startup and apparently isn't needed
   systemd.services.systemd-udev-settle.enable = false;
