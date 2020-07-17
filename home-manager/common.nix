@@ -365,6 +365,7 @@
     pulsemixer
     moreutils
     maim
+    peek
     vlc
     xbindkeys
     xdotool
