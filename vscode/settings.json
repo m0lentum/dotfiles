@@ -68,5 +68,7 @@
   "explorer.confirmDelete": false,
   "debug.allowBreakpointsEverywhere": true,
   "python.linting.flake8Enabled": true,
-  "python.formatting.provider": "yapf"
+  "python.formatting.provider": "yapf",
+  "update.mode": "none",
+  "editor.cursorSurroundingLines": 10
 }
