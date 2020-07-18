@@ -12,6 +12,7 @@
   networking.interfaces.wwp0s29u1u6i6.useDHCP = true;
 
   services.xserver = {
+    videoDrivers = ["intel"];
     extraLayouts.fi-molemak = {
       description = "Finnish colemak with some modifier customization";
       languages = ["fi"];
