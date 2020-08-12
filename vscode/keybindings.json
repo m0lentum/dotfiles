@@ -1,156 +1,156 @@
 // Place your key bindings in this file to overwrite the defaults
 [
-    {
-        "key": "ctrl+o",
-        "command": "-workbench.action.files.openFile"
-    },
-    {
-        "key": "ctrl+,",
-        "command": "-workbench.action.openGlobalSettings"
-    },
-    {
-        "key": "alt+[Period]",
-        "command": "workbench.action.terminal.focus"
-    },
-    {
-        "key": "alt+[Comma]",
-        "command": "workbench.action.focusActiveEditorGroup"
-    },
-    {
-        "key": "ctrl+shift+s",
-        "command": "workbench.action.files.saveAll"
-    },
-    {
-        "key": "ctrl+shift+alt+f",
-        "command": "workbench.action.findInFiles",
-        "when": "!searchInputBoxFocus"
-    },
-    {
-        "key": "ctrl+shift+f",
-        "command": "-workbench.action.findInFiles",
-        "when": "!searchInputBoxFocus"
-    },
-    {
-        "key": "ctrl+shift+alt+f",
-        "command": "workbench.view.search",
-        "when": "!searchViewletVisible"
-    },
-    {
-        "key": "ctrl+shift+f",
-        "command": "-workbench.view.search",
-        "when": "!searchViewletVisible"
-    },
-    {
-        "key": "ctrl+shift+f",
-        "command": "editor.action.startFindReplaceAction"
-    },
-    {
-        "key": "ctrl+h",
-        "command": "-editor.action.startFindReplaceAction"
-    },
-    {
-        "key": "ctrl+shift+o",
-        "command": "workbench.action.terminal.split",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "ctrl+oem_5",
-        "command": "-workbench.action.terminal.split",
-        "when": "terminalFocus"
-    },
-    {
-        "key": "ctrl+alt+s",
-        "command": "workbench.action.files.saveWithoutFormatting"
-    },
-    {
-        "key": "ctrl+k s",
-        "command": "-workbench.action.files.saveWithoutFormatting"
-    },
-    {
-        "key": "ctrl+m",
-        "command": "-editor.action.toggleTabFocusMode"
-    },
-    {
-        "key": "ctrl+shift+z",
-        "command": "cursorUndo",
-        "when": "textInputFocus"
-    },
-    {
-        "key": "ctrl+u",
-        "command": "-cursorUndo",
-        "when": "textInputFocus"
-    },
-    {
-        "key": "ctrl+shift+z",
-        "command": "-redo",
-        "when": "textInputFocus && !editorReadonly"
-    },
-    {
-        "key": "alt+up",
-        "command": "workbench.action.focusAboveGroup"
-    },
-    {
-        "key": "ctrl+k ctrl+up",
-        "command": "-workbench.action.focusAboveGroup"
-    },
-    {
-        "key": "alt+down",
-        "command": "workbench.action.focusBelowGroup"
-    },
-    {
-        "key": "ctrl+k ctrl+down",
-        "command": "-workbench.action.focusBelowGroup"
-    },
-    {
-        "key": "alt+left",
-        "command": "workbench.action.focusLeftGroup"
-    },
-    {
-        "key": "ctrl+k ctrl+left",
-        "command": "-workbench.action.focusLeftGroup"
-    },
-    {
-        "key": "alt+right",
-        "command": "workbench.action.focusRightGroup"
-    },
-    {
-        "key": "ctrl+k ctrl+right",
-        "command": "-workbench.action.focusRightGroup"
-    },
-    {
-        "key": "shift+alt+up",
-        "command": "workbench.action.moveEditorToAboveGroup"
-    },
-    {
-        "key": "shift+alt+down",
-        "command": "workbench.action.moveEditorToBelowGroup"
-    },
-    {
-        "key": "shift+alt+left",
-        "command": "workbench.action.moveEditorToLeftGroup"
-    },
-    {
-        "key": "shift+alt+right",
-        "command": "workbench.action.moveEditorToRightGroup"
-    },
-    {
-        "key": "enter",
-        "command": "-rust-analyzer.onEnter",
-        "when": "editorTextFocus && !suggestWidgetVisible && editorLangId == 'rust'"
-    },
-    {
-        "key": "ctrl+shift+r",
-        "command": "rust-analyzer.run",
-        "when": "editorTextFocus && editorLangId == 'rust'"
-    },
-    {
-        "key": "ctrl+r",
-        "command": "-rust-analyzer.run",
-        "when": "editorTextFocus && editorLangId == 'rust'"
-    },
-    {
-        "key": "ctrl+shift+m",
-        "command": "-rust-analyzer.matchingBrace",
-        "when": "editorTextFocus && editorLangId == 'rust'"
-    }
+  {
+    "key": "ctrl+o",
+    "command": "-workbench.action.files.openFile"
+  },
+  {
+    "key": "ctrl+,",
+    "command": "-workbench.action.openGlobalSettings"
+  },
+  {
+    "key": "alt+[Comma]",
+    "command": "workbench.action.focusActiveEditorGroup"
+  },
+  {
+    "key": "alt+[Period]",
+    "command": "workbench.panel.markers.view.focus"
+  },
+  {
+    "key": "ctrl+shift+s",
+    "command": "workbench.action.files.saveAll"
+  },
+  {
+    "key": "ctrl+shift+alt+f",
+    "command": "workbench.action.findInFiles",
+    "when": "!searchInputBoxFocus"
+  },
+  {
+    "key": "ctrl+shift+f",
+    "command": "-workbench.action.findInFiles",
+    "when": "!searchInputBoxFocus"
+  },
+  {
+    "key": "ctrl+shift+alt+f",
+    "command": "workbench.view.search",
+    "when": "!searchViewletVisible"
+  },
+  {
+    "key": "ctrl+shift+f",
+    "command": "-workbench.view.search",
+    "when": "!searchViewletVisible"
+  },
+  {
+    "key": "ctrl+shift+f",
+    "command": "editor.action.startFindReplaceAction"
+  },
+  {
+    "key": "ctrl+h",
+    "command": "-editor.action.startFindReplaceAction"
+  },
+  {
+    "key": "ctrl+shift+o",
+    "command": "workbench.action.terminal.split",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+oem_5",
+    "command": "-workbench.action.terminal.split",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+alt+s",
+    "command": "workbench.action.files.saveWithoutFormatting"
+  },
+  {
+    "key": "ctrl+k s",
+    "command": "-workbench.action.files.saveWithoutFormatting"
+  },
+  {
+    "key": "ctrl+m",
+    "command": "-editor.action.toggleTabFocusMode"
+  },
+  {
+    "key": "ctrl+shift+z",
+    "command": "cursorUndo",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "ctrl+u",
+    "command": "-cursorUndo",
+    "when": "textInputFocus"
+  },
+  {
+    "key": "ctrl+shift+z",
+    "command": "-redo",
+    "when": "textInputFocus && !editorReadonly"
+  },
+  {
+    "key": "alt+up",
+    "command": "workbench.action.focusAboveGroup"
+  },
+  {
+    "key": "ctrl+k ctrl+up",
+    "command": "-workbench.action.focusAboveGroup"
+  },
+  {
+    "key": "alt+down",
+    "command": "workbench.action.focusBelowGroup"
+  },
+  {
+    "key": "ctrl+k ctrl+down",
+    "command": "-workbench.action.focusBelowGroup"
+  },
+  {
+    "key": "alt+left",
+    "command": "workbench.action.focusLeftGroup"
+  },
+  {
+    "key": "ctrl+k ctrl+left",
+    "command": "-workbench.action.focusLeftGroup"
+  },
+  {
+    "key": "alt+right",
+    "command": "workbench.action.focusRightGroup"
+  },
+  {
+    "key": "ctrl+k ctrl+right",
+    "command": "-workbench.action.focusRightGroup"
+  },
+  {
+    "key": "shift+alt+up",
+    "command": "workbench.action.moveEditorToAboveGroup"
+  },
+  {
+    "key": "shift+alt+down",
+    "command": "workbench.action.moveEditorToBelowGroup"
+  },
+  {
+    "key": "shift+alt+left",
+    "command": "workbench.action.moveEditorToLeftGroup"
+  },
+  {
+    "key": "shift+alt+right",
+    "command": "workbench.action.moveEditorToRightGroup"
+  },
+  {
+    "key": "enter",
+    "command": "-rust-analyzer.onEnter",
+    "when": "editorTextFocus && !suggestWidgetVisible && editorLangId == 'rust'"
+  },
+  {
+    "key": "ctrl+shift+r",
+    "command": "rust-analyzer.run",
+    "when": "editorTextFocus && editorLangId == 'rust'"
+  },
+  {
+    "key": "ctrl+r",
+    "command": "-rust-analyzer.run",
+    "when": "editorTextFocus && editorLangId == 'rust'"
+  },
+  {
+    "key": "ctrl+shift+m",
+    "command": "-rust-analyzer.matchingBrace",
+    "when": "editorTextFocus && editorLangId == 'rust'"
+  }
 ]
