@@ -35,6 +35,7 @@ in
 
     pkgs.carla
     pkgs.guitarix
-    pkgs.reaper
+    # installed from unstable with nix-env atm
+    # pkgs.reaper
   ];
 }
