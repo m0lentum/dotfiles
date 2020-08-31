@@ -339,6 +339,7 @@
       # fixes flickering problems with glx backend
       backend = "xrender";
     };
+    unclutter.enable = true;
   };
 
   # extra stuff not in programs and/or config files managed manually
