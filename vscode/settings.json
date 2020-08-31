@@ -43,6 +43,9 @@
     "<C-y>": false,
     "<C-b>": false
   },
+  "vim.easymotion": true,
+  "vim.leader": "<Space>",
+  "vim.easymotionMarkerBackgroundColor": "#bada55",
   // git
   "git.confirmSync": false,
   "git.ignoreLegacyWarning": true,
