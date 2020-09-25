@@ -13,6 +13,7 @@
         ".vscode"
         "Session.vim"
       ];
+      lfs.enable = true;
     };
     fish = {
       enable = true;
@@ -372,6 +373,7 @@
     xdotool
     pcmanfm
     notify-desktop
+    zotero
   ];
   home.file = {
     "awesome" = {

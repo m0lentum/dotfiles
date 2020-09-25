@@ -29,9 +29,12 @@ in
     cam
 
     pkgs.discord
+    pkgs.tdesktop # telegram
     pkgs.spotify
+
     pkgs.steam
     pkgs.wineWowPackages.stable
+    pkgs.dolphinEmuMaster
 
     pkgs.carla
     pkgs.guitarix
