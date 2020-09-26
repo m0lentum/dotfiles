@@ -40,5 +40,7 @@ in
     pkgs.guitarix
     # installed from unstable with nix-env atm
     # pkgs.reaper
+
+    pkgs.lm_sensors
   ];
 }
