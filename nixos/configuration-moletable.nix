@@ -60,16 +60,6 @@
   # systemd-udev-settle hangs the system for 2 minutes on startup and apparently isn't needed
   systemd.services.systemd-udev-settle.enable = false;
 
-  # reject the Oculus Rift and its sensors so we don't run out of USB power
-  # (can't use that thing on Linux anyway)
-  services.usbguard = {
-    enable = true;
-    implictPolicyTarget = "allow";
-    rules = ''
-      reject id one-of { 2833:3031 2833:0211 2833:2031 2833:0211 2833:0031 }
-    '';
-  };
-
   programs.fuse.userAllowOther = true;
 
   # This value determines the NixOS release with which your system is to be
