@@ -32,6 +32,11 @@
     {
       "before": ["x"],
       "after": ["\"", "_", "x"]
+    },
+    // easymotion search with one press
+    {
+      "before": ["m"],
+      "after": ["<leader>", "<leader>", "s"]
     }
   ],
   "vim.handleKeys": {
@@ -46,6 +51,7 @@
   "vim.easymotion": true,
   "vim.leader": "<Space>",
   "vim.easymotionMarkerBackgroundColor": "#bada55",
+  "vim.easymotionKeys": ".,xcbdgkhjvmwfprstyulien",
   // git
   "git.confirmSync": false,
   "git.ignoreLegacyWarning": true,
