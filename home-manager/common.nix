@@ -341,6 +341,15 @@
       backend = "xrender";
     };
     unclutter.enable = true;
+    redshift = {
+      enable = true;
+      temperature = {
+        day = 6500;
+        night = 5000;
+      };
+      latitude = "62.24";
+      longitude = "25.70";
+    };
   };
 
   # extra stuff not in programs and/or config files managed manually
