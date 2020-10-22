@@ -370,7 +370,6 @@
     # general helpful stuff
     pass
     stretchly
-    redshift
     networkmanagerapplet
     # multimedia
     pulsemixer
@@ -388,11 +387,6 @@
     "awesome" = {
       source = ../awesome;
       target = "./.config/awesome";
-    };
-    # home-manager has redshift but does not support constant activation times
-    "redshift.conf" = {
-      source = ../redshift.conf;
-      target = "./.config/redshift.conf";
     };
     # trackball customization
     "xprofile" = {
