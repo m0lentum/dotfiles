@@ -17,6 +17,11 @@
     alsa.enable = false;
   };
 
+  environment.variables = {
+    LV2_PATH = "/home/mole/.nix-profile/lib/lv2";
+  };
+
+  # docker for work stuff
   virtualisation.docker.enable = true;
 
   boot.supportedFilesystems = [ "ntfs" ];

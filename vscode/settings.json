@@ -78,5 +78,6 @@
   "update.mode": "none",
   "editor.cursorSurroundingLines": 10,
   "workbench.panel.defaultLocation": "right",
-  "editor.minimap.renderCharacters": false
+  "editor.minimap.renderCharacters": false,
+  "prettier.proseWrap": "always"
 }

@@ -36,10 +36,11 @@ in
     pkgs.wineWowPackages.stable
     pkgs.dolphinEmuMaster
 
-    pkgs.carla
-    pkgs.guitarix
-    # installed from unstable with nix-env atm
-    # pkgs.reaper
+    pkgs.ardour # DAW
+    pkgs.guitarix # guitar amp sim
+    pkgs.drumgizmo # drum machine
+    pkgs.helm # synth
+    pkgs.zynaddsubfx # synth
 
     pkgs.lm_sensors
   ];
