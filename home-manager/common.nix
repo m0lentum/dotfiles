@@ -331,6 +331,7 @@
         "100:class_g = 'feh'"
         "100:class_g = 'vlc'"
         "100:class_g = 'obs'"
+        "100:class_g = 'Wine'"
         # Slightly transparent even when focused
         "95:class_g = 'VSCodium' && focused"
         "95:class_g = 'discord' && focused"
