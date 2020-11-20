@@ -76,7 +76,7 @@
     kitty = {
       enable = true;
       font = {
-        name = "JetBrains Mono Medium 10";
+        name = "JetBrains Mono Medium Nerd Font Complete 10";
         package = pkgs.jetbrains-mono;
       };
       settings = {

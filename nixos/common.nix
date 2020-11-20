@@ -28,8 +28,7 @@
   fonts.fonts = with pkgs; [
     noto-fonts
     liberation_ttf
-    fira-code
-    jetbrains-mono
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
   # Enable sound.
