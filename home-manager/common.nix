@@ -383,6 +383,7 @@
     moreutils
     maim
     peek gifski dconf
+    ffmpeg
     vlc
     xbindkeys
     xdotool
