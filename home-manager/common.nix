@@ -332,11 +332,17 @@
         "100:class_g = 'vlc'"
         "100:class_g = 'obs'"
         "100:class_g = 'Wine'"
+        "100:class_g = 'Microsoft Teams - Preview'"
+        "100:class_g = 'zoom'"
         # Slightly transparent even when focused
         "95:class_g = 'VSCodium' && focused"
         "95:class_g = 'discord' && focused"
         "95:class_g = 'Spotify' && focused"
         "95:class_g = 'kitty' && focused"
+      ];
+      blurExclude = [
+        # teams screenshare overlay
+        "name *= 'rect-overlay'"
       ];
       # fixes flickering problems with glx backend
       backend = "xrender";
