@@ -47,6 +47,9 @@
   "vim.easymotion": true,
   "vim.leader": "<Space>",
   "vim.easymotionMarkerBackgroundColor": "#bada55",
+  "vim.easymotionMarkerForegroundColorOneChar": "#000",
+  "vim.easymotionMarkerForegroundColorTwoCharFirst": "#000",
+  "vim.easymotionMarkerForegroundColorTwoCharSecond": "#000",
   "vim.easymotionKeys": ".,xcbdgkhjvmwfprstyulien",
   // git
   "git.confirmSync": false,
