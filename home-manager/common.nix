@@ -14,6 +14,11 @@
         "Session.vim"
       ];
       lfs.enable = true;
+      extraConfig = {
+        pull = { rebase = true; };
+        fetch = { prune = true; };
+        diff = { colorMoved = "zebra"; };
+      };
     };
     fish = {
       enable = true;
