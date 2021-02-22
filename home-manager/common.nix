@@ -3,6 +3,9 @@
 {
   nixpkgs.config.allowUnfree = true;
   programs = {
+    #
+    # GIT
+    #
     git = {
       enable = true;
       userName = "Mikael Myyrä";
@@ -11,6 +14,7 @@
         "*.nogit*"
         ".envrc"
         ".vscode"
+        ".vim"
         "Session.vim"
       ];
       lfs.enable = true;
@@ -20,6 +24,9 @@
         diff = { colorMoved = "zebra"; };
       };
     };
+    #
+    # FISH
+    #
     fish = {
       enable = true;
       interactiveShellInit = ''
@@ -53,6 +60,9 @@
         docc = "docker-compose";
       };
     };
+    #
+    # STARSHIP
+    #
     starship = {
       enable = true;
       settings = {
@@ -78,6 +88,9 @@
         package.disabled =  true;
       };
     };
+    #
+    # KITTY
+    #
     kitty = {
       enable = true;
       font = {
@@ -121,6 +134,9 @@
         color21 = "#eee8d5";
       };
     };
+    #
+    # TMUX
+    #
     tmux = {
       enable = true;
       shortcut = "t";
@@ -188,51 +204,32 @@
         set -g message-style 'fg=colour0 bg=colour6 bold'
       '';
     };
+    #
+    # VIM
+    #
     neovim = {
       enable = true;
-      plugins = with pkgs.vimPlugins; [
-        coc-nvim
-        ale
-        vim-nix
-        typescript-vim
-        vim-tsx
-
-        vim-obsession
-        fzf-vim
-        vim-commentary
-        vim-surround
-        vim-tmux-focus-events
-
-        vim-airline
-        vim-gitgutter
-        awesome-vim-colorschemes
-        rainbow
-        vim-indent-guides
-      ];
       withNodeJs = true;
+      vimAlias = true;
+      # non-plugin configs
       extraConfig = ''
-        set termguicolors
-        color challenger_deep
-        let g:airline_theme='violet'
-        let g:airline#extensions#tabline#enabled = 1
-        let g:rainbow_active = 1
-
-        let g:indent_guides_enable_on_vim_startup = 1
-        set expandtab
-        set ts=2 sw=2
-        let g:indent_guides_guide_size = 2
+        nnoremap <SPACE> <Nop>
+        let mapleader = " "
 
         set autoread
         set hidden
         nnoremap <silent><C-PageUp> :bp<cr>
         nnoremap <silent><C-PageDown> :bn<cr>
-        nnoremap <silent><leader>w :bdelete<cr>
+        nnoremap <silent><leader><leader>w :bdelete<cr>
 
         set mouse=a
         set scrolloff=15
         set clipboard=unnamedplus
         au FocusGained,BufEnter * :checktime
         nnoremap <Home> ^
+
+        set nobackup
+        set nowritebackup
 
         " relative line numbers, only in focused normal mode
         set number relativenumber
@@ -241,77 +238,144 @@
           autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
           autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
         augroup END
-
-        " fzf
-        let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-
-        nnoremap <C-p> :GFiles<cr>
-        let g:fzf_action = {
-          \ 'ctrl-n': 'tab split',
-          \ 'ctrl-v': 'split',
-          \ 'ctrl-r': 'vsplit' }
-
-        " ale
-
-        let g:ale_fixers = {
-        \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-        \   'javascript': ['prettier'],
-        \   'typescript': ['prettier'],
-        \   'rust': ['rustfmt'],
-        \}
-        let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
-        let g:ale_fix_on_save = 1
-
-        " coc.nvim
-
-        set nobackup
-        set nowritebackup
-        " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-        " delays and poor user experience.
-        set updatetime=300
-        set signcolumn=yes
-        " Don't pass messages to |ins-completion-menu|.
-        set shortmess+=c
-        " Use <c-space> to trigger completion.
-        inoremap <silent><expr> <c-space> coc#refresh()
-        " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-        " position. Coc only does snippet and additional edit on confirm.
-        if exists('*complete_info')
-          inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-        else
-          imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-        endif
-
-        " navigate diagnostics
-        nmap <silent> gN <Plug>(coc-diagnostic-prev)
-        nmap <silent> gn <Plug>(coc-diagnostic-next)
-
-        " GoTo code navigation.
-        nmap <silent> gd <Plug>(coc-definition)
-        nmap <silent> gy <Plug>(coc-type-definition)
-        nmap <silent> gi <Plug>(coc-implementation)
-        nmap <silent> gr <Plug>(coc-references)
-
-
-        function! s:show_documentation()
-          if (index(['vim','help'], &filetype) >= 0)
-            execute 'h '.expand('<cword>')
-          else
-            call CocAction('doHover')
-          endif
-        endfunction
-
-        " Highlight the symbol and its references when holding the cursor.
-        autocmd CursorHold * silent call CocActionAsync('highlight')
-
-        nnoremap <silent> gh :call <SID>show_documentation()<CR>
-        nmap <F2> <Plug>(coc-rename)
-        nnoremap <silent> <leader>M :<C-u>CocFzfList diagnostics<cr>
-        nnoremap <silent> <leader>m :<C-u>CocFzfList diagnostics --current-buf<cr>
-        nnoremap <silent> <leader>P :<C-u>CocFzfList commands<cr>
       '';
-      vimAlias = true;
+      # plugin configs
+      plugins = with pkgs.vimPlugins; [
+        # visuals
+        {
+          plugin = awesome-vim-colorschemes;
+          config = ''
+            set termguicolors
+            let g:oceanic_material_background='ocean'
+            let g:oceanic_material_allow_bold=1
+            let g:oceanic_material_allow_italic=1
+            let g:oceanic_material_allow_underline=1
+            let g:oceanic_material_allow_undercurl=1
+            color oceanic_material
+          '';
+        }
+        {
+          plugin = vim-airline;
+          config = ''
+            let g:airline#extensions#tabline#enabled = 1
+          '';
+        }
+        {
+          plugin = vim-airline-themes;
+          config = ''
+            let g:airline_theme='fruit_punch'
+          '';
+        }
+        {
+          plugin = rainbow;
+          config = ''
+            let g:rainbow_active = 1
+          '';
+        }
+        {
+          plugin = vim-indent-guides;
+          config = ''
+            let g:indent_guides_enable_on_vim_startup = 1
+            set expandtab
+            set ts=2 sw=2
+            let g:indent_guides_guide_size = 2
+          '';
+        }
+        vim-gitgutter
+
+        # language utilities
+        {
+          plugin = coc-nvim;
+          config = ''
+            " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+            " delays and poor user experience.
+            set updatetime=300
+            set signcolumn=yes
+            " Don't pass messages to |ins-completion-menu|.
+            set shortmess+=c
+            " Use <c-space> to trigger completion.
+            inoremap <silent><expr> <c-space> coc#refresh()
+            " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+            " position. Coc only does snippet and additional edit on confirm.
+            if exists('*complete_info')
+              inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+            else
+              imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+            endif
+
+            " navigate diagnostics
+            nmap <silent> gN <Plug>(coc-diagnostic-prev)
+            nmap <silent> gn <Plug>(coc-diagnostic-next)
+
+            " GoTo code navigation.
+            nmap <silent> gd <Plug>(coc-definition)
+            nmap <silent> gy <Plug>(coc-type-definition)
+            nmap <silent> gi <Plug>(coc-implementation)
+            nmap <silent> gr <Plug>(coc-references)
+
+
+            function! s:show_documentation()
+              if (index(['vim','help'], &filetype) >= 0)
+                execute 'h '.expand('<cword>')
+              else
+                call CocAction('doHover')
+              endif
+            endfunction
+
+            " Highlight the symbol and its references when holding the cursor.
+            autocmd CursorHold * silent call CocActionAsync('highlight')
+
+            nnoremap <silent> gh :call <SID>show_documentation()<CR>
+            nmap <F2> <Plug>(coc-rename)
+            nnoremap <silent> <leader>M :<C-u>CocFzfList diagnostics<cr>
+            nnoremap <silent> <leader>m :<C-u>CocFzfList diagnostics --current-buf<cr>
+            nnoremap <silent> <leader>p :<C-u>CocFzfList commands<cr>
+          '';
+        }
+        {
+          plugin = ale;
+          config = ''
+            let g:ale_fixers = {
+            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+            \   'javascript': ['prettier'],
+            \   'typescript': ['prettier'],
+            \   'rust': ['rustfmt'],
+            \}
+            let g:ale_linters = {
+            \   'rust': ['analyzer'],
+            \}
+            let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
+            let g:ale_fix_on_save = 1
+          '';
+        }
+        coc-rust-analyzer
+        vim-nix
+        typescript-vim
+        vim-tsx
+        rust-vim
+
+        # QOL
+        {
+          plugin = fzf-vim;
+          config = ''
+            let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+            nnoremap <C-p> :GFiles<cr>
+            let g:fzf_action = {
+              \ 'ctrl-n': 'tab split',
+              \ 'ctrl-v': 'split',
+              \ 'ctrl-r': 'vsplit' }
+              '';
+        }
+        coc-fzf
+        vim-obsession
+        vim-commentary
+        vim-surround
+        vim-tmux-focus-events
+      ];
     };
+    #
+    # MISC
+    #
     firefox = {
       enable = true;
       package = (pkgs.firefox.override { extraNativeMessagingHosts = [ pkgs.passff-host ];});
@@ -381,6 +445,7 @@
     ripgrep
     xclip
     vscodium
+    rust-analyzer
     # general helpful stuff
     pass
     stretchly
@@ -411,6 +476,10 @@
     "xbindkeysrc" = {
       source = ../.xbindkeysrc;
       target = "./.xbindkeysrc";
+    };
+    "coc-settings" = {
+      source = ../nvim/coc-settings.json;
+      target = ".config/nvim/coc-settings.json";
     };
   };
 

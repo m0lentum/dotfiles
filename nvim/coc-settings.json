@@ -1,0 +1,11 @@
+{
+  "rust-analyzer.serverPath": "rust-analyzer",
+  "rpc.enabled": false,
+  "rpc.workspaceElapsedTime": true,
+  "rpc.checkIdle": false,
+  "rpc.showProblems": false,
+  "rpc.detailsEditing": "{workspace}",
+  "rpc.lowerDetailsEditing": "{filename}",
+  "rpc.detailsViewing": "{workspace}",
+  "rpc.lowerDetailsViewing": "{filename}"
+}
