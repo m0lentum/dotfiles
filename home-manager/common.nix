@@ -258,12 +258,13 @@
           plugin = vim-airline;
           config = ''
             let g:airline#extensions#tabline#enabled = 1
+            let g:airline_powerline_fonts = 1
           '';
         }
         {
           plugin = vim-airline-themes;
           config = ''
-            let g:airline_theme='fruit_punch'
+            let g:airline_theme='bubblegum'
           '';
         }
         {
