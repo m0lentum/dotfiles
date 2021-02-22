@@ -81,10 +81,12 @@
     kitty = {
       enable = true;
       font = {
-        name = "JetBrains Mono Medium Nerd Font Complete 10";
+        name = "JetBrains Mono Medium Nerd Font Complete";
         package = pkgs.jetbrains-mono;
       };
       settings = {
+        font_size = 11;
+        disable_ligatures = "cursor";
         # solarized dark colors
         foreground = "#839496";
         foreground_bold = "#eee8d5";
