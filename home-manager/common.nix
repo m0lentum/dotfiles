@@ -211,7 +211,9 @@
       enable = true;
       withNodeJs = true;
       vimAlias = true;
+      #
       # non-plugin configs
+      #
       extraConfig = ''
         nnoremap <SPACE> <Nop>
         let mapleader = " "
@@ -220,7 +222,7 @@
         set hidden
         nnoremap <silent><C-PageUp> :bp<cr>
         nnoremap <silent><C-PageDown> :bn<cr>
-        nnoremap <silent><leader><leader>w :bdelete<cr>
+        nnoremap <silent><leader>w :bdelete<cr>
 
         set mouse=a
         set scrolloff=15
@@ -239,9 +241,13 @@
           autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
         augroup END
       '';
+      #
       # plugin configs
+      #
       plugins = with pkgs.vimPlugins; [
+        #
         # visuals
+        #
         {
           plugin = awesome-vim-colorschemes;
           config = ''
@@ -282,15 +288,17 @@
             let g:indent_guides_guide_size = 2
           '';
         }
-        vim-gitgutter
+        vim-signify
 
+        #
         # language utilities
+        #
         {
           plugin = coc-nvim;
           config = ''
             " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
             " delays and poor user experience.
-            set updatetime=300
+            set updatetime=100
             set signcolumn=yes
             " Don't pass messages to |ins-completion-menu|.
             set shortmess+=c
@@ -331,31 +339,37 @@
             nnoremap <silent> <leader>M :<C-u>CocFzfList diagnostics<cr>
             nnoremap <silent> <leader>m :<C-u>CocFzfList diagnostics --current-buf<cr>
             nnoremap <silent> <leader>p :<C-u>CocFzfList commands<cr>
+            nnoremap <silent> <leader>P :<C-u>CocFzfList<cr>
+            nnoremap <silent> <leader>, :<C-u>CocAction<cr>
           '';
         }
-        {
-          plugin = ale;
-          config = ''
-            let g:ale_fixers = {
-            \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-            \   'javascript': ['prettier'],
-            \   'typescript': ['prettier'],
-            \   'rust': ['rustfmt'],
-            \}
-            let g:ale_linters = {
-            \   'rust': ['analyzer'],
-            \}
-            let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
-            let g:ale_fix_on_save = 1
-          '';
-        }
+
         coc-rust-analyzer
-        vim-nix
-        typescript-vim
-        vim-tsx
         rust-vim
 
+        coc-tsserver
+        coc-eslint
+        coc-prettier
+        typescript-vim
+        vim-tsx
+
+        {
+          plugin = vim-markdown;
+          config = ''
+            let g:vim_markdown_folding_disabled = 1
+            let g:vim_markdown_fenced_languages = ['rust=rs']
+            let g:vim_markdown_math = 1
+            let g:vim_markdown_frontmatter = 1
+          '';
+        }
+        coc-markdownlint
+
+        vim-nix
+        coc-json
+
+        #
         # QOL
+        #
         {
           plugin = fzf-vim;
           config = ''
@@ -366,6 +380,12 @@
               \ 'ctrl-v': 'split',
               \ 'ctrl-r': 'vsplit' }
               '';
+        }
+        {
+          plugin = git-messenger-vim;
+          config = ''
+            nmap <silent> gm <Plug>(git-messenger)
+          '';
         }
         coc-fzf
         vim-obsession

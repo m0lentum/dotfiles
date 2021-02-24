@@ -1,5 +1,13 @@
 {
   "rust-analyzer.serverPath": "rust-analyzer",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "rust",
+    "javascript",
+    "typescript",
+    "python",
+    "css",
+    "markdown"
+  ],
   "rpc.enabled": false,
   "rpc.workspaceElapsedTime": true,
   "rpc.checkIdle": false,
