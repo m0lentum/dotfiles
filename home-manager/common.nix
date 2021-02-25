@@ -240,6 +240,9 @@
           autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
           autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
         augroup END
+
+        set cursorline
+        set cursorcolumn
       '';
       #
       # plugin configs
@@ -249,10 +252,14 @@
         # visuals
         #
         {
-          plugin = awesome-vim-colorschemes;
+          # custom fork of the oceanic-material theme
+          plugin = pkgs.vimUtils.buildVimPlugin {
+            name = "oceanic-material";
+            pname = "oceanic-material";
+            src = ../nvim/oceanic-material;
+          };
           config = ''
             set termguicolors
-            let g:oceanic_material_background='ocean'
             let g:oceanic_material_allow_bold=1
             let g:oceanic_material_allow_italic=1
             let g:oceanic_material_allow_underline=1
@@ -283,6 +290,7 @@
           plugin = vim-indent-guides;
           config = ''
             let g:indent_guides_enable_on_vim_startup = 1
+            let g:indent_guides_auto_colors = 0
             set expandtab
             set ts=2 sw=2
             let g:indent_guides_guide_size = 2
@@ -366,6 +374,7 @@
 
         vim-nix
         coc-json
+        elm-vim
 
         #
         # QOL
