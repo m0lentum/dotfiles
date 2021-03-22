@@ -1,3 +1,13 @@
+global !p
+def math():
+	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
+def comment(): 
+	return vim.eval('vimtex#syntax#in_comment()') == '1'
+def env(name):
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	return x != '0' and y != '0'
+endglobal
+
 snippet beg "begin{} / end{}" bA
 \begin{$1}
 	$0
@@ -24,4 +34,24 @@ endsnippet
 snippet sub "subsection*" bA
 \subsection*{$1}
 $0
+endsnippet
+
+snippet // "fraction" iA
+\frac{$1}{$2}$0
+endsnippet
+
+snippet "([a-zA-Z])bb" "postfix mathbb" riA
+\mathbb{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet "([a-zA-Z])bf" "postfix mathbf" riA
+\mathbf{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet "([a-zA-Z])bar" "postfix overline" riA
+\overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet "([a-zA-Z])hat" "postfix hat" riA
+\hat{`!p snip.rv=match.group(1)`}
 endsnippet
