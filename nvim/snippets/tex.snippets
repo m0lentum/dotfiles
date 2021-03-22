@@ -1,0 +1,27 @@
+snippet beg "begin{} / end{}" bA
+\begin{$1}
+	$0
+\end{$1}
+endsnippet
+
+snippet bel "begin{} / end{} + label" bA
+\begin{$1}\label{$2}
+	$0
+\end{$1}
+endsnippet
+
+snippet mb "math block" bA
+\[
+	$0
+\]
+endsnippet
+
+snippet sec "section*" bA
+\section*{$1}
+$0
+endsnippet
+
+snippet sub "subsection*" bA
+\subsection*{$1}
+$0
+endsnippet

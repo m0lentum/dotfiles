@@ -202,6 +202,9 @@
 
         # messages
         set -g message-style 'fg=colour0 bg=colour6 bold'
+
+        # only close tabs by closing every terminal
+        unbind w
       '';
     };
     #
@@ -217,6 +220,7 @@
       extraConfig = ''
         nnoremap <SPACE> <Nop>
         let mapleader = " "
+        let maplocalleader = " "
 
         set autoread
         set hidden
@@ -227,6 +231,7 @@
         set mouse=a
         set scrolloff=15
         set clipboard=unnamedplus
+        " reload file if it's been changed on disk
         au FocusGained,BufEnter * :checktime
         nnoremap <Home> ^
 
@@ -243,6 +248,7 @@
 
         set cursorline
         set cursorcolumn
+        set conceallevel=0
       '';
       #
       # plugin configs
@@ -358,8 +364,7 @@
         coc-tsserver
         coc-eslint
         coc-prettier
-        typescript-vim
-        vim-tsx
+        yats-vim
 
         {
           plugin = vim-markdown;
@@ -373,8 +378,38 @@
         coc-markdownlint
 
         vim-nix
-        coc-json
         elm-vim
+        coc-json
+        coc-vimtex
+        {
+          plugin = vimtex;
+          config = ''
+            let g:tex_flavor = 'latex'
+            let g:tex_conceal = 'abdmg'
+            autocmd FileType tex,md set conceallevel=1
+            " for some reason this is empty by default, copied from docs
+            let g:vimtex_compiler_latexmk_engines = {
+              \ '_'                : '-pdf',
+              \ 'pdflatex'         : '-pdf',
+              \ 'dvipdfex'         : '-pdfdvi',
+              \ 'lualatex'         : '-lualatex',
+              \ 'xelatex'          : '-xelatex',
+              \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+              \ 'context (luatex)' : '-pdf -pdflatex=context',
+              \ 'context (xetex)'  : '-pdf -pdflatex=""texexec --xtx""',
+              \}
+            let g:vimtex_view_method='zathura'
+          '';
+        }
+        {
+          plugin = ultisnips;
+          config = ''
+            let g:UltiSnipsSnippetDirectories = [$HOME . '/.config/nvim/ultisnips']
+            let g:UltiSnipsExpandTrigger = '<tab>'
+            let g:UltiSnipsJumpForwardTrigger = '<tab>'
+            let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+          '';
+        }
 
         #
         # QOL
@@ -388,12 +423,20 @@
               \ 'ctrl-n': 'tab split',
               \ 'ctrl-v': 'split',
               \ 'ctrl-r': 'vsplit' }
-              '';
+          '';
         }
         {
           plugin = git-messenger-vim;
           config = ''
             nmap <silent> gm <Plug>(git-messenger)
+          '';
+        }
+        {
+          plugin = vim-sneak;
+          config = ''
+            let g:sneak#label = 1
+            map m <Plug>Sneak_s
+            map M <Plug>Sneak_S
           '';
         }
         coc-fzf
@@ -410,6 +453,7 @@
       enable = true;
       package = (pkgs.firefox.override { extraNativeMessagingHosts = [ pkgs.passff-host ];});
     };
+    zathura.enable = true;
     z-lua.enable = true;
     fzf.enable = true;
     feh.enable = true;
@@ -430,6 +474,8 @@
         # Opaque at all times
         "100:class_g = 'Firefox'"
         "100:class_g = 'feh'"
+        "100:class_g = 'Sxiv'"
+        "100:class_g = 'Zathura'"
         "100:class_g = 'vlc'"
         "100:class_g = 'obs'"
         "100:class_g = 'Wine'"
@@ -486,6 +532,7 @@
     maim
     peek gifski dconf
     ffmpeg
+    sxiv
     vlc
     xbindkeys
     xdotool
@@ -510,6 +557,10 @@
     "coc-settings" = {
       source = ../nvim/coc-settings.json;
       target = ".config/nvim/coc-settings.json";
+    };
+    "ultisnips" = {
+      source = ../nvim/snippets;
+      target = ".config/nvim/ultisnips";
     };
   };
 
