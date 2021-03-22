@@ -378,8 +378,9 @@
         coc-markdownlint
 
         vim-nix
-        elm-vim
         coc-json
+        vim-elm-syntax
+
         coc-vimtex
         {
           plugin = vimtex;

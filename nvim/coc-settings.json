@@ -5,10 +5,20 @@
     "javascript",
     "typescript",
     "typescriptreact",
+    "elm",
     "python",
     "css",
     "markdown"
   ],
+  "languageserver": {
+    "elmLS": {
+      "command": "elm-language-server",
+      "filetypes": ["elm"],
+      "rootPatterns": ["elm.json"]
+    }
+  },
+  "codeLens.enable": true,
+
   "rpc.enabled": false,
   "rpc.workspaceElapsedTime": true,
   "rpc.checkIdle": false,
