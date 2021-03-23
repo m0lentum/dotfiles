@@ -1,10 +1,10 @@
 global !p
 def math():
 	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
-def comment(): 
+def comment():
 	return vim.eval('vimtex#syntax#in_comment()') == '1'
 def env(name):
-	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')") 
+	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
 	return x != '0' and y != '0'
 endglobal
 
@@ -26,6 +26,12 @@ snippet mb "math block" bA
 \]
 endsnippet
 
+snippet ali "Align" bA
+\begin{align*}
+	${1:${VISUAL}}
+\end{align*}
+endsnippet
+
 snippet sec "section*" bA
 \section*{$1}
 $0
@@ -36,8 +42,19 @@ snippet sub "subsection*" bA
 $0
 endsnippet
 
+context "math()"
 snippet // "fraction" iA
 \frac{$1}{$2}$0
+endsnippet
+
+context "math()"
+snippet "d([a-zA-Z])d([a-zA-Z])" "derivative dydx" riA
+\frac{d`!p snip.rv=match.group(1)`}{d`!p snip.rv=match.group(2)`}
+endsnippet
+
+context "math()"
+snippet "p([a-zA-Z])p([a-zA-Z])" "partial derivative pypx" riA
+\frac{\partial `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)`}
 endsnippet
 
 snippet "([a-zA-Z])bb" "postfix mathbb" riA
