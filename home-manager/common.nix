@@ -370,7 +370,6 @@
           plugin = vim-markdown;
           config = ''
             let g:vim_markdown_folding_disabled = 1
-            let g:vim_markdown_fenced_languages = ['rust=rs']
             let g:vim_markdown_math = 1
             let g:vim_markdown_frontmatter = 1
           '';
@@ -387,7 +386,7 @@
           config = ''
             let g:tex_flavor = 'latex'
             let g:tex_conceal = 'abdmg'
-            autocmd FileType tex,md set conceallevel=1
+            autocmd FileType tex,markdown set conceallevel=1
             " for some reason this is empty by default, copied from docs
             let g:vimtex_compiler_latexmk_engines = {
               \ '_'                : '-pdf',

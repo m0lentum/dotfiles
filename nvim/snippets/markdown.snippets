@@ -1,13 +1,16 @@
 extends tex
 
-snippet mb "math block" bA
-\$\$
-$0
-\$\$
-endsnippet
-
 snippet cb "code block" bA
 \`\`\`${1:rust}
 $0
 \`\`\`
- 
+endsnippet
+
+# tex overrides for mathjax versions
+priority 1
+snippet mb "math block" bA
+\$\$
+	$0
+\$\$
+endsnippet
+

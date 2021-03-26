@@ -72,18 +72,22 @@ snippet "pp([a-zA-Z])p([a-zA-Z])p([a-zA-Z])" "second partial perivative p^2y/pxp
 \frac{\partial^2 `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)` \partial `!p snip.rv=match.group(3)`}
 endsnippet
 
+context "math()"
 snippet "([a-zA-Z])bb" "postfix mathbb" riA
 \mathbb{`!p snip.rv=match.group(1)`}
 endsnippet
 
+context "math()"
 snippet "([a-zA-Z])bf" "postfix mathbf" riA
 \mathbf{`!p snip.rv=match.group(1)`}
 endsnippet
 
+context "math()"
 snippet "([a-zA-Z])bar" "postfix overline" riA
 \overline{`!p snip.rv=match.group(1)`}
 endsnippet
 
+context "math()"
 snippet "([a-zA-Z])hat" "postfix hat" riA
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
