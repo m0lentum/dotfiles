@@ -48,13 +48,28 @@ snippet // "fraction" iA
 endsnippet
 
 context "math()"
-snippet "d([a-zA-Z])d([a-zA-Z])" "derivative dydx" riA
+snippet "d([a-zA-Z])d([a-zA-Z])" "derivative dy/dx" r
 \frac{d`!p snip.rv=match.group(1)`}{d`!p snip.rv=match.group(2)`}
 endsnippet
 
 context "math()"
-snippet "p([a-zA-Z])p([a-zA-Z])" "partial derivative pypx" riA
+snippet "dd([a-zA-Z])dd([a-zA-Z])" "second derivative d^2y/dx^2" rA
+\frac{d^2 `!p snip.rv=match.group(1)`}{d `!p snip.rv=match.group(2)`^2}
+endsnippet
+
+context "math()"
+snippet "p([a-zA-Z])p([a-zA-Z])" "partial derivative py/px" r
 \frac{\partial `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)`}
+endsnippet
+
+context "math()"
+snippet "pp([a-zA-Z])pp([a-zA-Z])" "second partial perivative p^2y/px^2" rA
+\frac{\partial^2 `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)`^2}
+endsnippet
+
+context "math()"
+snippet "pp([a-zA-Z])p([a-zA-Z])p([a-zA-Z])" "second partial perivative p^2y/pxpz" rA
+\frac{\partial^2 `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)` \partial `!p snip.rv=match.group(3)`}
 endsnippet
 
 snippet "([a-zA-Z])bb" "postfix mathbb" riA
