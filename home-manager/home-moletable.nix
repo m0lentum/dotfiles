@@ -47,6 +47,7 @@ let
         /data/music                     \
         /data/documents                 \
         /home/mole/CELSYS               \
+        /home/mole/stuff                \
 
     backup_exit=$?
 
@@ -56,9 +57,9 @@ let
         --list                          \
         --prefix '{hostname}-'          \
         --show-rc                       \
-        --keep-daily    7               \
-        --keep-weekly   4               \
-        --keep-monthly  6               \
+        --keep-daily    3               \
+        --keep-weekly   2               \
+        --keep-monthly  3               \
 
     prune_exit=$?
 
