@@ -249,6 +249,8 @@
         set cursorline
         set cursorcolumn
         set conceallevel=0
+        set ignorecase
+        set smartcase
       '';
       #
       # plugin configs
