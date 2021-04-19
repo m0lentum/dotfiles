@@ -48,6 +48,16 @@ snippet // "fraction" iA
 endsnippet
 
 context "math()"
+snippet -> "right arrow" A
+\rightarrow
+endsnippet
+
+context "math()"
+snippet <- "left arrow" A
+\leftarrow
+endsnippet
+
+context "math()"
 snippet "d([a-zA-Z])d([a-zA-Z])" "derivative dy/dx" r
 \frac{d`!p snip.rv=match.group(1)`}{d`!p snip.rv=match.group(2)`}
 endsnippet
@@ -73,12 +83,12 @@ snippet "pp([a-zA-Z])p([a-zA-Z])p([a-zA-Z])" "second partial perivative p^2y/pxp
 endsnippet
 
 context "math()"
-snippet "([a-zA-Z])bb" "postfix mathbb" riA
+snippet "([a-zA-Z])bb" "postfix mathbb" ri
 \mathbb{`!p snip.rv=match.group(1)`}
 endsnippet
 
 context "math()"
-snippet "([a-zA-Z])bf" "postfix mathbf" riA
+snippet "([a-zA-Z])bf" "postfix mathbf" ri
 \mathbf{`!p snip.rv=match.group(1)`}
 endsnippet
 
