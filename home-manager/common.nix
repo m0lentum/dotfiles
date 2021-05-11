@@ -403,6 +403,10 @@
             let g:vimtex_view_method='zathura'
           '';
         }
+
+        #
+        # QOL
+        #
         {
           plugin = ultisnips;
           config = ''
@@ -412,10 +416,6 @@
             let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
           '';
         }
-
-        #
-        # QOL
-        #
         {
           plugin = fzf-vim;
           config = ''
@@ -524,11 +524,13 @@
     xclip
     vscodium
     rust-analyzer
+    entr
     # general helpful stuff
     pass
     stretchly
     networkmanagerapplet
     # multimedia
+    pdftk
     pulsemixer
     moreutils
     maim
