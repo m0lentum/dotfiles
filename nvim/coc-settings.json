@@ -20,6 +20,28 @@
         "elmFormatPath": "elm-format",
         "elmTestPath": "elm-test"
       }
+    },
+    "python": {
+      "command": "nvim-python3",
+      "args": ["-mpyls"],
+      "filetypes": ["python"],
+      "rootPatterns": ["setup.cfg", "requirements.txt"],
+      "settings": {
+        "pyls": {
+          "plugins": {
+            "pycodestyle": { "enabled": false },
+            "jedi_completion": { "enabled": true },
+            "jedi_hover": { "enabled": true },
+            "jedi_references": { "enabled": true },
+            "jedi_signature_help": { "enabled": true },
+            "jedi_symbols": {
+              "enabled": true,
+              "all_scopes": true
+            },
+            "black": { "enabled": true }
+          }
+        }
+      }
     }
   },
   "codeLens.enable": true,
