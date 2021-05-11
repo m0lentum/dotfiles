@@ -1,5 +1,5 @@
 # Set up trackball (boost scroll and slow down pointer)
-DEV='Kensington Kensington Slimblade Trackball'
+DEV='Kensington Slimblade Trackball'
 if xinput list | grep -q "$DEV"; then
 	# multiply scroll wheel inputs (binding in ~/.xbindkeysrc)
 	xinput set-button-map "$DEV" 1 8 3 9 10 6 7 2
