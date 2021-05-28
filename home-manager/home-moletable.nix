@@ -90,7 +90,7 @@ in
     cam
     backup
 
-    pkgs.discord
+    (pkgs.discord.override { nss = pkgs.nss_latest; })
     pkgs.tdesktop # telegram
     pkgs.spotify
 
