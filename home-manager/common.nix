@@ -535,6 +535,7 @@
     vscodium
     rust-analyzer
     entr
+    file
     # general helpful stuff
     pass
     stretchly
