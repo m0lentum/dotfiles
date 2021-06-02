@@ -365,6 +365,7 @@
             nnoremap <silent> <leader>M :<C-u>CocFzfList diagnostics<cr>
             nnoremap <silent> <leader>m :<C-u>CocFzfList diagnostics --current-buf<cr>
             nnoremap <silent> <leader>p :<C-u>CocFzfList commands<cr>
+            nnoremap <silent> <leader>s :<C-u>CocFzfList symbols<cr>
             nnoremap <silent> <leader>P :<C-u>CocFzfList<cr>
             nnoremap <silent> <leader>, :<C-u>CocAction<cr>
           '';
