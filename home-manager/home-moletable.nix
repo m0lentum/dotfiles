@@ -82,7 +82,9 @@ in
   programs = {
     obs-studio = {
       enable = true;
-      plugins = [ pkgs.obs-linuxbrowser ];
+      # obs-linuxbrowser isn't in nixpkgs on 21.05.
+      # I don't need it atm since I stream from windows, so leaving it off
+      # plugins = [ pkgs.obs-linuxbrowser ];
     };
   };
   home.packages = [
@@ -90,7 +92,10 @@ in
     cam
     backup
 
-    (pkgs.discord.override { nss = pkgs.nss_latest; })
+    pkgs.krita
+
+    # (pkgs.discord.override { nss = pkgs.nss_latest; })
+    pkgs.discord
     pkgs.tdesktop # telegram
     pkgs.spotify
 
@@ -103,6 +108,7 @@ in
     pkgs.drumgizmo # drum machine
     pkgs.helm # synth
     pkgs.zynaddsubfx # synth
+    pkgs.geonkick # chiptune percussion
 
     pkgs.lm_sensors
   ];

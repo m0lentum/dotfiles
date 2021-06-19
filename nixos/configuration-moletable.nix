@@ -12,7 +12,7 @@
   services.jack = {
     jackd.enable = true;
     jackd.extraOptions = [
-      "-R" "-dalsa" "-dhw:USB" "--period" "128" "--nperiods" "2" "--rate" "48000"
+      "-R" "-dalsa" "-dhw:USB" "--period" "256" "--nperiods" "3" "--rate" "48000"
     ];
     alsa.enable = false;
   };

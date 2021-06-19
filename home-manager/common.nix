@@ -66,26 +66,27 @@
     starship = {
       enable = true;
       settings = {
-        prompt_order = [
-          "username" "hostname" "directory"
-          "git_branch" "git_state" "git_status"
-          "package" "nodejs" "ruby"
-          "rust" "python" "golang" "cmd_duration"
-          "line_break"
-          "jobs" "battery" "nix_shell" "character"
+        format = pkgs.lib.concatStrings [
+          "$username" "$hostname" "$directory"
+          "$git_branch" "$git_state" "$git_status"
+          "$rust" "$cmd_duration"
+          "$line_break"
+          "$jobs" "$battery" "$nix_shell" "$character"
         ];
         cmd_duration.min_time = 1;
         directory.fish_style_pwd_dir_length = 1;
         git_status = {
-          show_sync_count = true;
+          ahead = "⇡$count";
+          diverged = "⇕⇡$ahead_count⇣$behind_count";
+          behind = "⇣$count";
           modified = "*";
         };
         nix_shell = {
-          symbol = "";
+          format = "[$state ]($style)";
           impure_msg = "λ";
           pure_msg = "λλ";
         };
-        package.disabled =  true;
+        package.disabled = true;
       };
     };
     #
@@ -526,7 +527,7 @@
     bat
     du-dust
     procs
-    ytop
+    bottom
     fd
     hyperfine
     miniserve
