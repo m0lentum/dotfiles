@@ -46,8 +46,11 @@ let
         /data/games/Livesplit_1.4.5     \
         /data/music                     \
         /data/documents                 \
+        /data/steam-windows/steamapps/common/Beat\ Saber/UserData \
+        /data/steam-windows/steamapps/common/Beat\ Saber/Beat\ Saber_Data/CustomLevels \
         /home/mole/CELSYS               \
         /home/mole/stuff                \
+        /home/mole/.config/krita*       \
 
     backup_exit=$?
 
