@@ -495,6 +495,7 @@
         "100:class_g = 'Wine'"
         "100:class_g = 'Microsoft Teams - Preview'"
         "100:class_g = 'zoom'"
+        "100:class_g = 'PureRef'"
         # Slightly transparent even when focused
         "95:class_g = 'VSCodium' && focused"
         "95:class_g = 'discord' && focused"
