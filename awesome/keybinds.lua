@@ -394,6 +394,15 @@ local clientkeys =
             c:raise()
         end,
         {description = "maximize", group = "client"}
+    ),
+    awful.key(
+        {modkey},
+        "f",
+        function(c)
+            c.fullscreen = not c.fullscreen
+            c:raise()
+        end,
+        {description = "fullscreen", group = "client"}
     )
 )
 
