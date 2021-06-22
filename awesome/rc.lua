@@ -300,8 +300,11 @@ awful.rules.rules = {
             screen = awful.screen.preferred,
             placement = awful.placement.no_overlap + awful.placement.no_offscreen,
             size_hints_honor = false,
-            titlebars_enabled = false
-        }
+            titlebars_enabled = false,
+            maximized = false,
+            maximized_vertical = false,
+            maximized_horizontal = false
+        },
     },
     -- Titlebars
     {
