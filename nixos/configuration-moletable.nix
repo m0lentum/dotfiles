@@ -8,6 +8,8 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  programs.steam.enable = true;
+
   # run JACK on the external soundcard so it doesn't need to worry about pulseaudio
   services.jack = {
     jackd.enable = true;
@@ -58,9 +60,6 @@
   services.xserver.screenSection = ''
     Option "metamodes" "DP-2: nvidia-auto-select +1920+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
   '';
-  # required by Steam
-  hardware.opengl.driSupport32Bit = true;
-  hardware.steam-hardware.enable = true;
 
   # systemd-udev-settle hangs the system for 2 minutes on startup and apparently isn't needed
   systemd.services.systemd-udev-settle.enable = false;

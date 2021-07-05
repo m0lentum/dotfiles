@@ -102,8 +102,8 @@ in
     pkgs.tdesktop # telegram
     pkgs.spotify
 
-    pkgs.steam
-    pkgs.wineWowPackages.stable
+    # pkgs.steam
+    # pkgs.wineWowPackages.stable
     pkgs.dolphinEmuMaster
 
     pkgs.ardour # DAW
