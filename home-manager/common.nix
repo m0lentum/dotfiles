@@ -451,6 +451,7 @@
             let g:sneak#label = 1
             map m <Plug>Sneak_s
             map M <Plug>Sneak_S
+            nnoremap <C-m> m
           '';
         }
         coc-fzf
