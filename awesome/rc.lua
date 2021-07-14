@@ -278,6 +278,36 @@ awful.screen.connect_for_each_screen(
 )
 -- }}}
 
+-- change padding on a per-tag basis
+function increment_padding(amount)
+    local scr = awful.screen.focused()
+    local tag = scr.selected_tag
+    local curr_padding = tag.padding or 0
+    local new_padding = curr_padding + amount
+    if new_padding > 0 then
+        tag.padding = new_padding
+    else
+        tag.padding = 0
+    end
+    awful.layout.arrange(scr)
+end
+
+function set_padding(tag)
+    if not tag.selected then
+        return
+    end
+    local p = tag.padding or 0
+    tag.screen.padding = {
+        left = p,
+        right = p,
+        top = p,
+        bottom = p,
+    }
+end
+awful.tag.attached_connect_signal(nil, "property::padding", set_padding)
+awful.tag.attached_connect_signal(nil, "property::screen", set_padding)
+awful.tag.attached_connect_signal(nil, "property::selected", set_padding)
+
 -- {{{ key bindings from another file
 local globalkeys, clientkeys, clientbuttons = require("keybinds")()
 

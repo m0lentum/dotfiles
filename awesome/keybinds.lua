@@ -101,8 +101,6 @@ local globalkeys =
     -- Navigation
     --
     --
-    awful.key({modkey, "Control"}, "Left", awful.tag.viewprev, {description = "view previous", group = "tag"}),
-    awful.key({modkey, "Control"}, "Right", awful.tag.viewnext, {description = "view next", group = "tag"}),
     awful.key({modkey}, "p", awful.tag.history.restore, {description = "go back", group = "tag"}),
     awful.key(
         {modkey},
@@ -169,17 +167,17 @@ local globalkeys =
         {modkey},
         "End",
         function()
-            awful.screen.focus_relative(1)
+            awful.screen.focus_bydirection("right")
         end,
-        {description = "focus the next screen", group = "screen"}
+        {description = "focus the screen on the right", group = "screen"}
     ),
     awful.key(
         {modkey},
         "Home",
         function()
-            awful.screen.focus_relative(-1)
+            awful.screen.focus_bydirection("left")
         end,
-        {description = "focus the previous screen", group = "screen"}
+        {description = "focus the screen on the left", group = "screen"}
     ),
     awful.key({modkey}, "u", awful.client.urgent.jumpto, {description = "jump to urgent client", group = "client"}),
     --
@@ -188,20 +186,44 @@ local globalkeys =
     --
     --
     awful.key(
-        {modkey, "Shift"},
-        "j",
+        {modkey, "Control"},
+        "Left",
         function()
-            awful.client.swap.byidx(1)
+            awful.client.swap.bydirection("left")
         end,
-        {description = "swap with next client by index", group = "client"}
+        {description = "swap with client on the left", group = "client"}
+    ),
+    awful.key(
+        {modkey, "Control"},
+        "Right",
+        function()
+            awful.client.swap.bydirection("right")
+        end,
+        {description = "swap with client on the right", group = "client"}
+    ),
+    awful.key(
+        {modkey, "Control"},
+        "Up",
+        function()
+            awful.client.swap.bydirection("up")
+        end,
+        {description = "swap with client above", group = "client"}
+    ),
+    awful.key(
+        {modkey, "Control"},
+        "Down",
+        function()
+            awful.client.swap.bydirection("down")
+        end,
+        {description = "swap with client below", group = "client"}
     ),
     awful.key(
         {modkey, "Shift"},
-        "k",
+        "Right",
         function()
-            awful.client.swap.byidx(-1)
+            awful.client.swap.bydirection("right")
         end,
-        {description = "swap with previous client by index", group = "client"}
+        {description = "swap with client on the right", group = "client"}
     ),
     awful.key(
         {modkey},
@@ -215,22 +237,6 @@ local globalkeys =
             end
         end,
         {description = "toggle wibox", group = "awesome"}
-    ),
-    awful.key(
-        {altkey, "Control"},
-        "+",
-        function()
-            lain.util.useless_gaps_resize(1)
-        end,
-        {description = "increment useless gaps", group = "tag"}
-    ),
-    awful.key(
-        {altkey, "Control"},
-        "-",
-        function()
-            lain.util.useless_gaps_resize(-1)
-        end,
-        {description = "decrement useless gaps", group = "tag"}
     ),
     awful.key(
         {modkey},
@@ -279,6 +285,21 @@ local globalkeys =
             awful.tag.incncol(-1, nil, true)
         end,
         {description = "decrease the number of columns", group = "layout"}
+    ),
+    awful.key(
+      {modkey, altkey}, "Prior",
+      function()
+          -- defined in rc.lua
+          increment_padding(-40)
+      end,
+      {description = "decrease screen padding", group = "layout"}
+    ),
+    awful.key(
+      {modkey, altkey}, "Next",
+      function()
+          increment_padding(40)
+      end,
+      {description = "increase screen padding", group = "layout"}
     ),
     awful.key(
         {modkey},
@@ -369,12 +390,26 @@ local clientkeys =
         {description = "move to master", group = "client"}
     ),
     awful.key(
-        {modkey},
-        "o",
+        {modkey, "Control"},
+        "Home",
         function(c)
-            c:move_to_screen()
+            local target = c.screen:get_next_in_direction("left")
+            if target then
+                c:move_to_screen(target)
+            end
         end,
-        {description = "move to other screen", group = "client"}
+        {description = "move to screen on the left", group = "client"}
+    ),
+    awful.key(
+        {modkey, "Control"},
+        "End",
+        function(c)
+            local target = c.screen:get_next_in_direction("right")
+            if target then
+                c:move_to_screen(target)
+            end
+        end,
+        {description = "move to screen on the right", group = "client"}
     ),
     awful.key(
         {modkey},
