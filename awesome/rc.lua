@@ -191,8 +191,8 @@ beautiful.init(string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HO
 
 local random_wallpaper = require("random-wallpaper")
 function wallpaper(screen)
-    local wp = random_wallpaper()
-    local msg = wp == nil and "No files in ~.wallpaper" or string.match(wp, "[^/]+$")
+    local wp = random_wallpaper(screen)
+    local msg = wp == nil and "No wallpaper found" or string.match(wp, "[^/]+$")
     naughty.notify(
         {
             title = "Wallpaper",
