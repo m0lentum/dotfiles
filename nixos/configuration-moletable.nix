@@ -53,12 +53,14 @@
   };
 
   services.xserver.xrandrHeads = [
-    { output = "DP-2"; primary = true; }
+    { output = "DP-0"; primary = true; }
+    "DP-2"
     "DVI-D-0"
   ];
   # enable vsync and position screens
   services.xserver.screenSection = ''
-    Option "metamodes" "DP-2: nvidia-auto-select +1920+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DVI-D-0: nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+    Option "metamodes" "DP-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DP-0: nvidia-auto-select +2560+0, DVI-D-0: nvidia-auto-select +5120+0 {Rotation=right, ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
+    Option "DPI" "96 x 96"
   '';
 
   # systemd-udev-settle hangs the system for 2 minutes on startup and apparently isn't needed
