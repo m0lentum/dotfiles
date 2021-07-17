@@ -96,13 +96,14 @@ awful.layout.layouts = {
 }
 awful.layout.tags =
     charitable.create_tags(
-    {"1", "2", "3", "4", "5"},
+    {"1", "2", "3", "4", "5", "6"},
     {
         awful.layout.layouts[1],
         awful.layout.layouts[1],
         awful.layout.layouts[1],
         awful.layout.layouts[2],
-        awful.layout.layouts[2]
+        awful.layout.layouts[2],
+        awful.layout.layouts[3],
     }
 )
 
