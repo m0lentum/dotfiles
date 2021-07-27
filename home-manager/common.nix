@@ -526,6 +526,7 @@
   # extra stuff not in programs and/or config files managed manually
   home.packages = with pkgs; [
     # cli/dev utils
+    busybox
     lsd
     bat
     du-dust
