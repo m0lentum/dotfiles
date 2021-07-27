@@ -295,6 +295,25 @@ function increment_padding(amount)
     }
     awful.layout.arrange(scr)
 end
+-- set initial padding from env vars if available
+awful.screen.connect_for_each_screen(
+    function(s)
+        local p = 0
+        for k,v in pairs(s.outputs) do
+            local varname = "AWESOME_PADDING_" .. k:gsub("-", "_")
+            local fromenv = tonumber(os.getenv(varname))
+            if fromenv ~= nil then
+                p = fromenv
+            end
+        end
+        s.padding = {
+            left = p,
+            right = p,
+            top = p,
+            bottom = p,
+        }
+    end
+)
 
 -- {{{ key bindings from another file
 local globalkeys, clientkeys, clientbuttons = require("keybinds")()
