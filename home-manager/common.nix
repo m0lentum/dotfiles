@@ -18,6 +18,7 @@
         "Session.vim"
       ];
       lfs.enable = true;
+      delta.enable = true;
       extraConfig = {
         pull = { rebase = true; };
         fetch = { prune = true; };
@@ -529,6 +530,7 @@
     busybox
     lsd
     bat
+    less
     du-dust
     procs
     bottom
