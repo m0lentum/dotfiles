@@ -40,6 +40,10 @@
         l = "lsd -al";
         ll = "lsd -l";
         tree = "lsd --tree";
+        vis = "nvim -S Session.vim";
+        docc = "docker-compose";
+        clip = "xclip -sel clip";
+        # git
         ga = "git add";
         gc = "git commit -v";
         "gc!" = "git commit -v --amend";
@@ -57,8 +61,6 @@
         glo = "git log --oneline";
         gloa = "git log --oneline --graph --all";
         grh = "git reset HEAD";
-        vis = "nvim -S Session.vim";
-        docc = "docker-compose";
       };
     };
     #
