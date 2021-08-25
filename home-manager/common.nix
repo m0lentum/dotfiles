@@ -472,7 +472,7 @@
       package = (pkgs.firefox.override { extraNativeMessagingHosts = [ pkgs.passff-host ];});
     };
     zathura.enable = true;
-    z-lua.enable = true;
+    zoxide.enable = true;
     fzf.enable = true;
     feh.enable = true;
     direnv.enable = true;
