@@ -11,6 +11,14 @@
   networking.interfaces.wlp2s0.useDHCP = true;
   networking.interfaces.wwp0s29u1u6i6.useDHCP = true;
 
+  services.openssh = {
+    enable = true;
+    passwordAuthentication = false;
+  };
+  users.extraUsers.mole.openssh.authorizedKeys.keyFiles = [
+    "/home/mole/.ssh/moletable.pub"
+  ];
+
   services.xserver = {
     videoDrivers = ["intel"];
     extraLayouts.fi-molemak = {
