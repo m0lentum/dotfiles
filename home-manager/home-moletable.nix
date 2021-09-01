@@ -146,16 +146,15 @@ in
     backup
     a4pad
 
-    pkgs.krita
-
-    # (pkgs.discord.override { nss = pkgs.nss_latest; })
     pkgs.discord
     pkgs.tdesktop # telegram
+    pkgs.teams
+    pkgs.zoom-us
+
+    pkgs.dolphinEmuMaster
     pkgs.spotify
 
-    # pkgs.steam
-    # pkgs.wineWowPackages.stable
-    pkgs.dolphinEmuMaster
+    pkgs.krita
 
     pkgs.ardour # DAW
     pkgs.guitarix # guitar amp sim
