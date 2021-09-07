@@ -39,7 +39,7 @@
         ls = "lsd";
         l = "lsd -al";
         ll = "lsd -l";
-        tree = "lsd --tree";
+        lt = "lsd --tree -I node_modules -I build -I target";
         vis = "nvim -S Session.vim";
         docc = "docker-compose";
         clip = "xclip -sel clip";
@@ -473,6 +473,7 @@
     };
     zathura.enable = true;
     zoxide.enable = true;
+    lsd.enable = true;
     fzf.enable = true;
     feh.enable = true;
     direnv.enable = true;
@@ -530,7 +531,6 @@
   home.packages = with pkgs; [
     # cli/dev utils
     busybox
-    lsd
     bat
     less
     du-dust
