@@ -39,7 +39,7 @@
         ls = "lsd";
         l = "lsd -al";
         ll = "lsd -l";
-        lt = "lsd --tree -I node_modules -I build -I target";
+        lt = "lsd --tree -I node_modules -I build -I target -I __pycache__";
         vis = "nvim -S Session.vim";
         docc = "docker-compose";
         clip = "xclip -sel clip";
@@ -388,7 +388,7 @@
           config = ''
             let g:vim_markdown_folding_disabled = 1
             let g:vim_markdown_math = 1
-            let g:vim_markdown_frontmatter = 1
+            let g:vim_markdown_toml_frontmatter = 1
           '';
         }
         coc-markdownlint
@@ -396,6 +396,8 @@
         vim-nix
         coc-json
         vim-elm-syntax
+        vim-hcl
+        vim-toml
 
         coc-vimtex
         {
@@ -410,7 +412,7 @@
               \ 'pdflatex'         : '-pdf',
               \ 'dvipdfex'         : '-pdfdvi',
               \ 'lualatex'         : '-lualatex',
-              \ 'xelatex'          : '-xelatex',
+              \ 'xelatex'          : '-xelatex -shell-escape',
               \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
               \ 'context (luatex)' : '-pdf -pdflatex=context',
               \ 'context (xetex)'  : '-pdf -pdflatex=""texexec --xtx""',

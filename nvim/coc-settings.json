@@ -1,5 +1,6 @@
 {
   "rust-analyzer.serverPath": "rust-analyzer",
+  "rust-analyzer.checkOnSave.command": "clippy",
   "coc.preferences.formatOnSaveFiletypes": [
     "rust",
     "javascript",
@@ -45,6 +46,10 @@
     }
   },
   "codeLens.enable": true,
+  "markdownlint.config": {
+    "no-inline-html": false,
+    "no-space-in-emphasis": false
+  },
 
   "rpc.enabled": false,
   "rpc.workspaceElapsedTime": true,
