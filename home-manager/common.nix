@@ -542,6 +542,7 @@
     hyperfine
     miniserve
     tokei
+    git-quick-stats
     ripgrep
     xclip
     vscodium

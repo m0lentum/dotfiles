@@ -81,6 +81,16 @@
 
   programs.fuse.userAllowOther = true;
 
+  # block Valve Index to prevent it from eating up usb power
+  # and causing problems with other usb devices
+  services.usbguard = {
+    enable = true;
+    implictPolicyTarget = "allow";
+    rules = ''
+      block name "Valve Index HMD"
+    '';
+  };
+
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you

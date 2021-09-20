@@ -1,6 +1,9 @@
 snippet feat "#[cfg(feature)]" b
-#[cfg(feature = "$1")]
-$0
+#[cfg(feature = "$1")]$0
+endsnippet
+
+snippet nfeat "#[cfg(not(feature))]" b
+#[cfg(not(feature = "$1"))]$0
 endsnippet
 
 snippet der "#[derive()]" b
