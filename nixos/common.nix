@@ -23,7 +23,6 @@
   ];
   programs.vim.defaultEditor = true;
   programs.fish.enable = true;
-  programs.gnupg.agent.enable = true;
 
   fonts.fonts = with pkgs; [
     noto-fonts
@@ -58,4 +57,29 @@
     shell = pkgs.fish;
     extraGroups = [ "networkmanager" "wheel" "realtime" "audio" "jackaudio" "docker" ];
   };
+  
+  # yubikey setup
+  programs.gnupg.agent.enable = true;
+  programs.ssh.startAgent = false;
+  services.pcscd.enable = true;
+
+  services.yubikey-agent.enable = true;
+  # to use gpg instead of yubikey-agent
+  # programs.gnupg.enableSSHSupport = true;
+  # environment.shellInit = ''
+  #   export GPG_TTY="$(tty)"
+  #   gpg-connect-agent /bye
+  #   export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+  # '';
+  
+  security.pam.yubico = {
+    enable = true;
+    debug = false;
+    mode = "challenge-response";
+  };
+  security.pam.services.sudo.yubicoAuth = true;
+  services.udev.extraRules = ''
+    # Yubico YubiKey
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="1050", ATTRS{idProduct}=="0113|0114|0115|0116|0120|0200|0402|0403|0406|0407|0410", TAG+="uaccess"
+  '';
 }

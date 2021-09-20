@@ -552,6 +552,7 @@
     pass
     stretchly
     networkmanagerapplet
+    yubioath-desktop
     # multimedia
     pdftk
     pulsemixer
