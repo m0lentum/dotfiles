@@ -497,6 +497,7 @@
         "100:class_g = 'feh'"
         "100:class_g = 'Sxiv'"
         "100:class_g = 'Zathura'"
+        "100:class_g = 'Octave'"
         "100:class_g = 'vlc'"
         "100:class_g = 'obs'"
         "100:class_g = 'Wine'"
@@ -549,6 +550,7 @@
     rust-analyzer
     entr
     file
+    jq
     # general helpful stuff
     pass
     stretchly

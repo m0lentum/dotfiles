@@ -8,13 +8,13 @@ def env(name):
 	return x != '0' and y != '0'
 endglobal
 
-snippet beg "begin{} / end{}" bA
+snippet beg "begin{} / end{}"
 \begin{$1}
 	$0
 \end{$1}
 endsnippet
 
-snippet bel "begin{} / end{} + label" bA
+snippet bel "begin{} / end{} + label"
 \begin{$1}\label{$2}
 	$0
 \end{$1}
@@ -30,6 +30,12 @@ snippet ali "Align" bA
 \begin{align*}
 	${1:${VISUAL}}
 \end{align*}
+endsnippet
+
+snippet mat "bmatrix"
+\begin{bmatrix}
+	$0
+\end{bmatrix}
 endsnippet
 
 snippet sec "section*" bA
