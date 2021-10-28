@@ -156,12 +156,12 @@ in
 
     pkgs.krita
 
-    pkgs.ardour # DAW
-    pkgs.guitarix # guitar amp sim
-    pkgs.drumgizmo # drum machine
-    pkgs.helm # synth
-    pkgs.zynaddsubfx # synth
-    pkgs.geonkick # chiptune percussion
+    pkgs.ardour
+    pkgs.guitarix
+    pkgs.drumgizmo
+    pkgs.zynaddsubfx
+    pkgs.geonkick
+    pkgs.artyFX
 
     pkgs.lm_sensors
   ];
