@@ -23,8 +23,9 @@
     LV2_PATH = "/home/mole/.nix-profile/lib/lv2";
   };
 
-  # docker for work stuff
+  # docker and libvirt for work stuff
   virtualisation.docker.enable = true;
+  virtualisation.libvirtd.enable = true;
 
   boot.supportedFilesystems = [ "ntfs" ];
   boot.loader.systemd-boot.enable = false;

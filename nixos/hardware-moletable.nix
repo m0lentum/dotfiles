@@ -11,7 +11,7 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ ];
   # for IP camera as webcam
-  boot.kernelModules = [ "v4l2loopback" ];
+  boot.kernelModules = [ "v4l2loopback" "kvm-intel" ];
   boot.extraModulePackages = with config.boot.kernelPackages; [
     v4l2loopback
   ];
