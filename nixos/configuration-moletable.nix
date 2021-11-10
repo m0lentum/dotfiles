@@ -63,19 +63,9 @@
     Option "metamodes" "DP-2: nvidia-auto-select +0+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, DP-0: nvidia-auto-select +2560+0, DVI-D-0: nvidia-auto-select +5120+0 {Rotation=right, ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}"
     Option "DPI" "96 x 96"
   '';
-  # the only way I could come up with to get awesome to see my environment variables
-  services.xserver.windowManager.awesome.package = pkgs.symlinkJoin {
-    name = "awesome";
-    paths = [
-      (pkgs.writeScriptBin "awesome" ''
-        #!${pkgs.stdenv.shell}
-        export AWESOME_PADDING_DP_0=40
-        export AWESOME_PADDING_DP_2=200
-        exec ${pkgs.awesome}/bin/awesome
-      '')
-      pkgs.awesome
-    ];
-  };
+
+  environment.variables.AWESOME_PADDING_DP_0 = "40";
+  environment.variables.AWESOME_PADDING_DP_2 = "200";
 
   # systemd-udev-settle hangs the system for 2 minutes on startup and apparently isn't needed
   systemd.services.systemd-udev-settle.enable = false;
