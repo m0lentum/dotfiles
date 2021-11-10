@@ -157,7 +157,7 @@ local cpu =
 )
 
 -- Coretemp (lm_sensors, per core)
-local temp, temp_timer =
+local temp_ryzen, temp_ryzen_timer =
     awful.widget.watch(
     -- this grep is Ryzen specific and won't work for most CPUs
     -- TODO: tdie only shows average, get per-core working
@@ -178,7 +178,7 @@ local temp, temp_timer =
 )
 
 --]]
---[[ Coretemp (lain, average)
+-- Coretemp (lain, average)
 local temp =
     lain.widget.temp(
     {
@@ -238,7 +238,7 @@ local widget_colors = {
     systray = theme.bg_normal,
     clock = solarized.accent_green,
     net = solarized.accent_cyan,
-    -- battery = "#8DAA9A",
+    battery = "#8DAA9A",
     temp = solarized.accent_orange,
     cpu = solarized.accent_violet,
     mem = solarized.accent_yellow
@@ -408,24 +408,28 @@ function theme.at_screen_connect(s)
             arrow(widget_colors.cpu, widget_colors.temp),
             wibox.container.background(
                 wibox.container.margin(
-                    wibox.widget {tempicon, temp, layout = wibox.layout.align.horizontal},
+                    wibox.widget {
+                      tempicon,
+                      os.getenv("AWESOME_RYZEN_TEMP") and temp_ryzen or temp,
+                      layout = wibox.layout.align.horizontal
+                    },
                     dpi(4),
                     dpi(4)
                 ),
                 widget_colors.temp
             ),
-            --arrow(widget_colors.temp, widget_colors.battery),
-            --wibox.container.background(
-            --    wibox.container.margin(
-            --        wibox.widget {baticon, bat.widget, layout = wibox.layout.align.horizontal},
-            --        dpi(3),
-            --        dpi(3)
-            --    ),
-            --    widget_colors.battery
-            --),
-            --arrow(widget_colors.battery, widget_colors.net),
-            --
-            arrow(widget_colors.temp, widget_colors.net),
+            os.getenv("AWESOME_BATTERY") and arrow(widget_colors.temp, widget_colors.battery),
+            os.getenv("AWESOME_BATTERY") and wibox.container.background(
+               wibox.container.margin(
+                   wibox.widget {baticon, bat.widget, layout = wibox.layout.align.horizontal},
+                   dpi(3),
+                   dpi(3)
+               ),
+               widget_colors.battery
+            ),
+            os.getenv("AWESOME_BATTERY")
+                and arrow(widget_colors.battery, widget_colors.net)
+                or arrow(widget_colors.temp, widget_colors.net),
             wibox.container.background(
                 wibox.container.margin(
                     wibox.widget {nil, neticon, net.widget, layout = wibox.layout.align.horizontal},

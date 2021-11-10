@@ -32,6 +32,7 @@
   };
 
   environment.variables.AWESOME_GAP = "0";
+  environment.variables.AWESOME_BATTERY = "1";
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
