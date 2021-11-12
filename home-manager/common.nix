@@ -505,6 +505,7 @@
         "100:class_g = 'zoom'"
         "100:class_g = 'krita'"
         "100:class_g = 'PureRef'"
+        "100:class_g = 'game'"
         # Slightly transparent even when focused
         "95:class_g = 'VSCodium' && focused"
         "95:class_g = 'discord' && focused"

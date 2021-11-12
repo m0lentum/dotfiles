@@ -352,9 +352,9 @@ awful.rules.rules = {
         rule = { floating = true },
         properties = { titlebars_enabled = true },
     },
-    -- set certain windows to floating by default
     {
-        rule_any = { class = { "testgame", "template" } },
+        -- I set this class on games I make, those should be floating by default
+        rule_any = { class = { "game" } },
         properties = { floating = true },
     }
 }
