@@ -6,4 +6,4 @@
 	url = https://github.com/frioux/charitable.git
 [submodule "nvim/oceanic-material"]
 	path = nvim/oceanic-material
-	url = git@github.com:MoleTrooper/oceanic-material.git
+	url = https://github.com/MoleTrooper/oceanic-material.git
