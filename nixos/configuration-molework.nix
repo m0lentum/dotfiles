@@ -36,6 +36,10 @@
     layout = "fi";
     # Enable touchpad support.
     libinput.enable = true;
+    xrandrHeads = [
+      "eDP-1"
+      { output = "DP-1"; primary = true; }
+    ];
   };
 
   environment.variables.AWESOME_BATTERY = "1";
