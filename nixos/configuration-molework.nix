@@ -38,7 +38,6 @@
     libinput.enable = true;
   };
 
-  environment.variables.AWESOME_GAP = "0";
   environment.variables.AWESOME_BATTERY = "1";
 
   services.openssh = {
@@ -48,6 +47,11 @@
   users.extraUsers.mole.openssh.authorizedKeys.keyFiles = [
     "/home/mole/.ssh/moleyubi.pub"
   ];
+
+  services.physlock = {
+    enable = true;
+    allowAnyUser = true;
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
