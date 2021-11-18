@@ -47,6 +47,9 @@
   services.openssh = {
     enable = true;
     passwordAuthentication = false;
+    extraConfig = ''
+      StreamLocalBindUnlink yes
+    '';
   };
   users.extraUsers.mole.openssh.authorizedKeys.keyFiles = [
     "/home/mole/.ssh/moleyubi.pub"

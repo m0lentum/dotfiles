@@ -72,9 +72,12 @@
   programs.ssh.startAgent = false;
   services.pcscd.enable = true;
 
-  programs.gnupg.agent.pinentryFlavor = "qt";
-  # to use gpg instead of yubikey-agent
-  programs.gnupg.agent.enableSSHSupport = true;
+  programs.gnupg.agent = {
+    pinentryFlavor = "qt";
+    enableSSHSupport = true;
+    enableExtraSocket = true;
+  };
+
   environment.shellInit = ''
     export GPG_TTY="$(tty)"
     gpg-connect-agent /bye

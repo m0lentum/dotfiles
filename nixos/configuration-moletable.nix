@@ -26,10 +26,6 @@
     AWESOME_RYZEN_TEMP = "1";
   };
 
-  # docker and libvirt for work stuff
-  virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
-
   boot.supportedFilesystems = [ "ntfs" ];
   boot.loader.systemd-boot.enable = false;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -81,6 +77,14 @@
       block name "Valve Index HMD"
     '';
   };
+
+  # shenanigans for agent forwarding to work computer
+  programs.ssh.extraConfig = ''
+    Host 192.168.0.172
+      StreamLocalBindUnlink yes
+      RemoteForward /run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent.extra
+      RemoteForward /run/user/1000/gnupg/S.gpg-agent.ssh.remote /run/user/1000/gnupg/S.gpg-agent.ssh
+  '';
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database
