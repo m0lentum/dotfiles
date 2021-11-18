@@ -53,6 +53,10 @@ in
   home.packages = [
     pkgs.teams
     pkgs.spotify
+    pkgs.stretchly
+    pkgs.virt-manager
+    pkgs.vagrant
+    pkgs.docker-compose
   ];
   # vscode with robocorp extensions
   programs.vscode = {
