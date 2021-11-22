@@ -54,6 +54,15 @@
   users.extraUsers.mole.openssh.authorizedKeys.keyFiles = [
     "/home/mole/.ssh/moleyubi.pub"
   ];
+  # if ssh, use the forwarded socket (set to different path from
+  # default socket to allow both direct use and ssh use with yubikey)
+  environment.shellInit = ''
+    if [ -n "$SSH_CONNECTION" ]; then
+      export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh.remote"
+    else
+      export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+    fi
+  '';
 
   services.physlock = {
     enable = true;
