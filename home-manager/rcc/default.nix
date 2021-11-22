@@ -2,11 +2,11 @@
 
 let rcc = buildGoPackage rec {
   name = "rcc-${version}";
-  version = "v9.16.0";
+  version = "v11.4.3";
   goPackagePath = "github.com/robocorp/rcc";
-  src = (import ./sources.nix).rcc;
+  src = (import ./nix/sources.nix).rcc;
   nativeBuildInputs = [ go-bindata rake zip ];
-  goDeps = ./rcc.nix;
+  goDeps = ./deps.nix;
   postPatch = ''
     source $stdenv/setup
     substituteInPlace Rakefile --replace "\$HOME/go/bin/" ""
