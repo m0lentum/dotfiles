@@ -242,6 +242,9 @@
         nnoremap <silent><C-PageDown> :bn<cr>
         nnoremap <silent><leader>w :bdelete<cr>
 
+        " netrw off
+        let loaded_netrwPlugin = 1
+
         set mouse=a
         set scrolloff=15
         set clipboard=unnamedplus
