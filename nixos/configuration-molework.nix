@@ -69,6 +69,8 @@
     enable = true;
     allowAnyUser = true;
   };
+  # don't suspend on lid close so we can use ssh or second monitor while closed
+  services.logind.lidSwitch = "lock";
 
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
