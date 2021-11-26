@@ -80,9 +80,9 @@
 
   # shenanigans for agent forwarding to work computer
   programs.ssh.extraConfig = ''
-    Host 192.168.0.172
+    Host YOPL2109-14
       StreamLocalBindUnlink yes
-      RemoteForward /run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent.extra
+      RemoteForward /run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent
       RemoteForward /run/user/1000/gnupg/S.gpg-agent.ssh.remote /run/user/1000/gnupg/S.gpg-agent.ssh
   '';
 

@@ -75,7 +75,6 @@
   programs.gnupg.agent = {
     pinentryFlavor = "qt";
     enableSSHSupport = true;
-    enableExtraSocket = true;
   };
   
   security.pam.yubico = {
