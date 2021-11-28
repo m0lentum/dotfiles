@@ -537,7 +537,6 @@
   # extra stuff not in programs and/or config files managed manually
   home.packages = with pkgs; [
     # cli/dev utils
-    busybox
     bat
     less
     du-dust
@@ -556,6 +555,7 @@
     file
     jq
     # general helpful stuff
+    et
     pass
     stretchly
     networkmanagerapplet
