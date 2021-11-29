@@ -64,6 +64,10 @@
       export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
     fi
   '';
+  # sudo via ssh
+  security.pam.enableSSHAgentAuth = true;
+  # don't allow logging in with just password
+  security.pam.yubico.control = "required";
 
   services.physlock = {
     enable = true;
