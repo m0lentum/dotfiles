@@ -78,6 +78,8 @@
 
   virtualisation.docker.enable = true;
   virtualisation.libvirtd.enable = true;
+  # needed for mounting node_modules
+  programs.fuse.userAllowOther = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
