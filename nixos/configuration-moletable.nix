@@ -80,10 +80,17 @@
 
   # shenanigans for agent forwarding to work computer
   programs.ssh.extraConfig = ''
-    Host YOPL2109-14
+    Host work
+      User mole
+      HostName 192.168.0.172
+      ForwardX11 yes
       StreamLocalBindUnlink yes
       RemoteForward /run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent
       RemoteForward /run/user/1000/gnupg/S.gpg-agent.ssh.remote /run/user/1000/gnupg/S.gpg-agent.ssh
+
+    Host pi
+      User pi
+      HostName 192.168.0.198
   '';
 
   # This value determines the NixOS release with which your system is to be
