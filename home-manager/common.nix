@@ -554,6 +554,7 @@
     entr
     file
     jq
+    zip unzip
     # general helpful stuff
     et
     pass
