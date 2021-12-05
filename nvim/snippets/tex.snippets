@@ -8,6 +8,50 @@ def env(name):
 	return x != '0' and y != '0'
 endglobal
 
+# writing
+
+snippet sec* "section*" bA
+\section*{$1}
+$0
+endsnippet
+
+snippet sec- "section" bA
+\section{$1}
+$0
+endsnippet
+
+snippet sub* "subsection*" bA
+\subsection*{$1}
+$0
+endsnippet
+
+snippet sub- "subsection" bA
+\subsection{$1}
+$0
+endsnippet
+
+snippet bf "textbf{}"
+\textbf{$1}$0
+endsnippet
+
+snippet it "textit{}"
+\textit{$1}$0
+endsnippet
+
+snippet ci "textcite"
+\textcite{$1}$0
+endsnippet
+
+snippet pci "parencite"
+\parencite{$1}$0
+endsnippet
+
+snippet pci* "parencite*"
+\parencite*{$1}$0
+endsnippet
+
+# math
+
 snippet beg "begin{} / end{}"
 \begin{$1}
 	$0
@@ -26,7 +70,7 @@ snippet mb "math block" bA
 \]
 endsnippet
 
-snippet ali "Align" bA
+snippet ali "align" bA
 \begin{align*}
 	${1:${VISUAL}}
 \end{align*}
@@ -36,16 +80,6 @@ snippet mat "bmatrix"
 \begin{bmatrix}
 	$0
 \end{bmatrix}
-endsnippet
-
-snippet sec "section*" bA
-\section*{$1}
-$0
-endsnippet
-
-snippet sub "subsection*" bA
-\subsection*{$1}
-$0
 endsnippet
 
 context "math()"
