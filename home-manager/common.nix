@@ -10,6 +10,8 @@
       enable = true;
       userName = "Mikael Myyrä";
       userEmail = "mikael.myyrae@gmail.com";
+      signing.signByDefault = true;
+      signing.key = "EBDEF166B95A3FB8";
       ignores = [
         "*.nogit*"
         ".envrc"
