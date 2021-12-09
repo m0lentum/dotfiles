@@ -84,6 +84,7 @@
       User mole
       HostName 192.168.0.172
       ForwardX11 yes
+      ForwardX11Trusted yes
       StreamLocalBindUnlink yes
       RemoteForward /run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent
       RemoteForward /run/user/1000/gnupg/S.gpg-agent.ssh.remote /run/user/1000/gnupg/S.gpg-agent.ssh
