@@ -221,22 +221,22 @@
       vimAlias = true;
       # nodejs needed for coc.nvim
       withNodeJs = true;
-      # python for python-language-server
-      withPython3 = true;
-      extraPython3Packages = (ps: with ps; [
-        python-language-server
-        jedi
-        pyls-black
-        pyls-isort
-        # pyls-mypy
-      ]);
+      # python for python-language-server (not working right now)
+      # withPython3 = true;
+      # extraPython3Packages = (ps: with ps; [
+      #   python-language-server
+      #   jedi
+      #   pyls-black
+      #   pyls-isort
+      #   # pyls-mypy
+      # ]);
       #
       # non-plugin configs
       #
       extraConfig = ''
-        nnoremap <SPACE> <Nop>
-        let mapleader = " "
-        let maplocalleader = " "
+        nnoremap <space> <Nop>
+        map <space> <leader>
+        map <space> <localleader>
 
         set autoread
         set hidden
@@ -543,6 +543,7 @@
     less
     du-dust
     procs
+    killall
     bottom
     fd
     hyperfine
@@ -606,7 +607,7 @@
     windowManager.awesome.enable = true;
     pointerCursor = {
       package = pkgs.bibata-cursors;
-      name = "Bibata_Ice";
+      name = "Bibata-Modern-Ice";
     };
   };
 

@@ -353,6 +353,10 @@ awful.rules.rules = {
         properties = { titlebars_enabled = true },
     },
     {
+        rule_any = { class = { "pinentry" } },
+        properties = { floating = true },
+    },
+    {
         -- I set this class on games I make, those should be floating by default
         rule_any = { class = { "game" } },
         properties = { floating = true },

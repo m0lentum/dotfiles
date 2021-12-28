@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  csp = pkgs.writeScriptBin "csp" ''
-    #!${pkgs.stdenv.shell}
-    wine "/home/mole/.wine/drive_c/Program Files/CELSYS/CLIP STUDIO 1.5/CLIP STUDIO PAINT/CLIPStudioPaint.exe"
-  '';
   cam = pkgs.writeScriptBin "cam" ''
     #! /usr/bin/env nix-shell
     #! nix-shell -p ffmpeg -i bash
@@ -141,7 +137,6 @@ in
     };
   };
   home.packages = [
-    csp
     cam
     backup
     a4pad

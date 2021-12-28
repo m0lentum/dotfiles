@@ -14,19 +14,21 @@ Bug me about it on [Twitter](https://twitter.com/moletrooper) or open an issue i
 
 ## Nonexhaustive list of programs and features
 
-- OS: [NixOS](https://nixos.org/) 20.09
+- OS: [NixOS](https://nixos.org/) (latest stable)
   - [lorri](https://github.com/target/lorri), a nix-shell helper
-  - [home-manager](https://github.com/rycee/home-manager) for declarative per-user package management
+  - [home-manager](https://github.com/nix-community/home-manager) for declarative per-user package management
 - window manager: [awesome](https://awesomewm.org/)
   - theme based on [awesome-copycats](https://github.com/lcpz/awesome-copycats) powerline theme
   - tag management with [charitable](https://github.com/frioux/charitable)
   - randomized wallpaper slideshow
   - colors from [solarized](https://ethanschoonover.com/solarized/)
+  - screenshots with [maim](https://github.com/naelstrof/maim)
 - compositor: [picom](https://github.com/yshui/picom)
 - shell: [fish](https://fishshell.com/)
   - prompt: [starship](https://starship.rs/)
   - terminal: [kitty](https://sw.kovidgoyal.net/kitty/)
 - code editor: [neovim](https://neovim.io/)
-- DAW: [ardour](https://ardour.org/)
-- other stuff worth mentioning: [redshift](http://jonls.dk/redshift/), [strecthly](https://hovancik.net/stretchly/),
+- drawing with [krita](https://krita.org/)
+- making music with [ardour](https://ardour.org/)
+- other cool stuff: [redshift](http://jonls.dk/redshift/), [strecthly](https://hovancik.net/stretchly/),
   [pass](https://www.passwordstore.org/)
