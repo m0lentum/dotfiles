@@ -41,7 +41,6 @@
         ls = "lsd";
         l = "lsd -al";
         ll = "lsd -l";
-        lt = "lsd --tree -I node_modules -I build -I target -I __pycache__";
         vis = "nvim -S Session.vim";
         docc = "docker-compose";
         clip = "xclip -sel clip";
@@ -63,6 +62,11 @@
         glo = "git log --oneline";
         gloa = "git log --oneline --graph --all";
         grh = "git reset HEAD";
+      };
+      # generally use abbrs for readability,
+      # but some long commands are better off as aliases
+      shellAliases = {
+        lt = "lsd --tree -I node_modules -I build -I target -I __pycache__";
       };
     };
     #
