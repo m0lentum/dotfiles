@@ -328,6 +328,7 @@
           '';
         }
         vim-signify
+        vim-smoothie
 
         #
         # language utilities
