@@ -225,15 +225,6 @@
       vimAlias = true;
       # nodejs needed for coc.nvim
       withNodeJs = true;
-      # python for python-language-server (not working right now)
-      # withPython3 = true;
-      # extraPython3Packages = (ps: with ps; [
-      #   python-language-server
-      #   jedi
-      #   pyls-black
-      #   pyls-isort
-      #   # pyls-mypy
-      # ]);
       #
       # non-plugin configs
       #
@@ -392,6 +383,7 @@
         coc-eslint
         coc-prettier
         yats-vim
+        coc-pyright
 
         {
           plugin = vim-markdown;
