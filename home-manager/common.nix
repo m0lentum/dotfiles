@@ -439,7 +439,7 @@
           plugin = fzf-vim;
           config = ''
             let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-            nnoremap <C-p> :GFiles<cr>
+            nnoremap <C-p> :Files<cr>
             let g:fzf_action = {
               \ 'ctrl-n': 'tab split',
               \ 'ctrl-v': 'split',
