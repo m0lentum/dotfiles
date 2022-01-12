@@ -515,8 +515,8 @@
         "95:class_g = 'kitty' && focused"
       ];
       blurExclude = [
-        # teams screenshare overlay
-        "name *= 'rect-overlay'"
+        "name *= 'rect-overlay'" # teams screenshare overlay
+        "class_g = 'peek'"
       ];
       # fixes flickering problems with glx backend
       backend = "xrender";
