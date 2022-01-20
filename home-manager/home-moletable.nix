@@ -150,6 +150,7 @@ in
     pkgs.spotify
 
     pkgs.krita
+    pkgs.inkscape
 
     pkgs.ardour
     pkgs.guitarix
