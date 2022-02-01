@@ -25,6 +25,7 @@
         pull = { rebase = true; };
         fetch = { prune = true; };
         diff = { colorMoved = "zebra"; };
+        init = { defaultBranch = "main"; };
       };
     };
     #
@@ -44,6 +45,8 @@
         vis = "nvim -S Session.vim";
         docc = "docker-compose";
         clip = "xclip -sel clip";
+        date = "date +%F";
+        datetime = "date +%FT%T%z";
         # git
         ga = "git add";
         gc = "git commit -v";
@@ -482,6 +485,7 @@
     feh.enable = true;
     direnv.enable = true;
     home-manager.enable = true;
+    nix-index.enable = true;
   };
 
   services = {
@@ -561,6 +565,7 @@
     stretchly
     networkmanagerapplet
     yubioath-desktop
+    obsidian
     # multimedia
     pdftk
     pulsemixer

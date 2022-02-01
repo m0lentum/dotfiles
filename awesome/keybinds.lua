@@ -9,7 +9,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 -- screenshot commands require maim and ifne to be installed.
 -- transparency removal assumes transparency is created by picom.
 local screenshot_pipe =
-    " | ifne tee ~/Pictures/Screenshots/$(date +%y-%m-%d_%T)_maim.png | xclip -sel clipboard -t image/png"
+    " | ifne tee ~/Pictures/Screenshots/$(date +%y-%m-%d_%T)_$(xdotool getwindowname $(xdotool getactivewindow)).png | xclip -sel clipboard -t image/png"
 local screenshot_normal = function(maim_opts)
     return 'bash -c "maim -o ' .. maim_opts .. screenshot_pipe .. '"'
 end
@@ -361,6 +361,14 @@ local globalkeys =
             awful.screen.focused().mypromptbox:run()
         end,
         {description = "run prompt", group = "launcher"}
+    ),
+    awful.key(
+        {modkey},
+        "a",
+        function()
+            awful.spawn("obsidian")
+        end,
+        {description = "run obsidian", group = "launcher"}
     )
 )
 

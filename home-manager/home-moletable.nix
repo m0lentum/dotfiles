@@ -151,6 +151,7 @@ in
 
     pkgs.krita
     pkgs.inkscape
+    pkgs.blender
 
     pkgs.ardour
     pkgs.guitarix
