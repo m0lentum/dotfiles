@@ -464,6 +464,18 @@
             nnoremap <C-m> m
           '';
         }
+        {
+          plugin = vim-move;
+          config = ''
+            let g:move_map_keys = 0
+            vmap <C-Up> <Plug>MoveBlockUp
+            vmap <C-Down> <Plug>MoveBlockDown
+            nmap <C-Up> <Plug>MoveLineUp
+            nmap <C-Down> <Plug>MoveLineDown
+            vmap <C-Left> <Plug>MoveBlockLeft
+            vmap <C-Right> <Plug>MoveBlockRight
+          '';
+        }
         coc-fzf
         vim-obsession
         vim-commentary
