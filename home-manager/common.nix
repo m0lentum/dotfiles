@@ -25,6 +25,7 @@ in
       ignores = [
         "*.nogit*"
         ".envrc"
+        ".direnv"
         ".vscode"
         ".vim"
         "Session.vim"
