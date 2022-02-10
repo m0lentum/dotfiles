@@ -1,5 +1,15 @@
 { config, pkgs, ... }:
 
+let
+  # directories to ignore in tree and fzf listings
+  listIgnores = [
+    ".git"
+    "node_modules"
+    "build"
+    "target"
+    "__pycache__"
+  ];
+in
 {
   nixpkgs.config.allowUnfree = true;
   programs = {
@@ -42,6 +52,7 @@
         ls = "lsd";
         l = "lsd -al";
         ll = "lsd -l";
+        ltd = "lt --depth";
         vis = "nvim -S Session.vim";
         docc = "docker-compose";
         clip = "xclip -sel clip";
@@ -69,7 +80,10 @@
       # generally use abbrs for readability,
       # but some long commands are better off as aliases
       shellAliases = {
-        lt = "lsd --tree -I node_modules -I build -I target -I __pycache__";
+        lt = builtins.concatStringsSep " " (
+          ["lsd --tree -a"] ++
+          (map (i: "-I " + i) listIgnores)
+        );
       };
     };
     #
@@ -490,10 +504,17 @@
       enable = true;
       package = (pkgs.firefox.override { extraNativeMessagingHosts = [ pkgs.passff-host ];});
     };
+    fzf = {
+      enable = true;
+      defaultCommand = pkgs.lib.strings.concatStrings (
+        [ "rg --files --follow --no-ignore-vcs --hidden -g '!{" ]
+        ++ (pkgs.lib.strings.intersperse "," (map (i: "**/" + i + "/*") listIgnores))
+        ++ [ "}'" ]
+      );
+    };
     zathura.enable = true;
     zoxide.enable = true;
     lsd.enable = true;
-    fzf.enable = true;
     feh.enable = true;
     direnv.enable = true;
     home-manager.enable = true;
