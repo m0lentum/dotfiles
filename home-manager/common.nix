@@ -304,7 +304,25 @@ in
             let g:oceanic_material_allow_italic=1
             let g:oceanic_material_allow_underline=1
             let g:oceanic_material_allow_undercurl=1
-            color oceanic_material
+            " changing colors for a bit but leaving this in to easily switch back
+            " color oceanic_material
+            " let g:airline_theme='bubblegum'
+          '';
+        }
+        {
+          plugin = pkgs.vimUtils.buildVimPlugin {
+            name = "nightfly";
+            pname = "nightfly";
+            src = pkgs.fetchFromGitHub {
+              owner = "bluz71";
+              repo = "vim-nightfly-guicolors";
+              rev = "d75a30e3874a9746d563634010accae4c463dc22";
+              sha256 = "1ff4k20v0c3dhx4j18pyfrirxxlzn5aya9gry3fp0ckjv8ry6496";
+            };
+          };
+          config = ''
+            colorscheme nightfly
+            let g:airline_theme='nightfly'
           '';
         }
         {
@@ -314,28 +332,24 @@ in
             let g:airline_powerline_fonts = 1
           '';
         }
-        {
-          plugin = vim-airline-themes;
-          config = ''
-            let g:airline_theme='bubblegum'
-          '';
-        }
+        vim-airline-themes
         {
           plugin = rainbow;
           config = ''
             let g:rainbow_active = 1
           '';
         }
-        {
-          plugin = vim-indent-guides;
-          config = ''
-            let g:indent_guides_enable_on_vim_startup = 1
-            let g:indent_guides_auto_colors = 0
-            set expandtab
-            set ts=2 sw=2
-            let g:indent_guides_guide_size = 2
-          '';
-        }
+        indentLine
+        # {
+        #   plugin = vim-indent-guides;
+        #   config = ''
+        #     let g:indent_guides_enable_on_vim_startup = 1
+        #     let g:indent_guides_auto_colors = 0
+        #     set expandtab
+        #     set ts=2 sw=2
+        #     let g:indent_guides_guide_size = 2
+        #   '';
+        # }
         vim-signify
         vim-smoothie
 
