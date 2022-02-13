@@ -319,10 +319,18 @@ in
               rev = "d75a30e3874a9746d563634010accae4c463dc22";
               sha256 = "1ff4k20v0c3dhx4j18pyfrirxxlzn5aya9gry3fp0ckjv8ry6496";
             };
+            # swap colors around for more green
+            preInstall = ''
+              substituteInPlace ./colors/nightfly.vim \
+                --replace "highlight NightflyGreen" "__TMP__" \
+                --replace "highlight NightflyBlue" "highlight NightflyGreen" \
+                --replace "__TMP__" "highlight NightflyBlue"
+            '';
           };
           config = ''
             colorscheme nightfly
             let g:airline_theme='nightfly'
+            let g:nightlyCursorColor=1
           '';
         }
         {
@@ -340,16 +348,6 @@ in
           '';
         }
         indentLine
-        # {
-        #   plugin = vim-indent-guides;
-        #   config = ''
-        #     let g:indent_guides_enable_on_vim_startup = 1
-        #     let g:indent_guides_auto_colors = 0
-        #     set expandtab
-        #     set ts=2 sw=2
-        #     let g:indent_guides_guide_size = 2
-        #   '';
-        # }
         vim-signify
         vim-smoothie
 
