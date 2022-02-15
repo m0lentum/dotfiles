@@ -508,6 +508,7 @@ in
         vim-commentary
         vim-surround
         vim-tmux-focus-events
+        vim-sleuth
       ];
     };
     #
