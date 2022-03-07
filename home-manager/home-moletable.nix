@@ -44,7 +44,6 @@ let
         /data/documents                 \
         /data/steam-windows/steamapps/common/Beat\ Saber/UserData \
         /data/steam-windows/steamapps/common/Beat\ Saber/Beat\ Saber_Data/CustomLevels \
-        /home/mole/CELSYS               \
         /home/mole/stuff                \
         /home/mole/.config/krita*       \
 
@@ -56,9 +55,7 @@ let
         --list                          \
         --prefix '{hostname}-'          \
         --show-rc                       \
-        --keep-daily    3               \
-        --keep-weekly   2               \
-        --keep-monthly  3               \
+        --keep-within 30d               \
 
     prune_exit=$?
 
