@@ -280,9 +280,8 @@ in
 
         set cursorline
         set cursorcolumn
-        " the indentline plugin requires and sets conceallevel.
-        " thus this does nothing while that plugin is in use
-        set conceallevel=0
+        set conceallevel=1
+        set concealcursor=
         set ignorecase
         set smartcase
       '';
@@ -352,8 +351,9 @@ in
         {
           plugin = indentLine;
           config = ''
-            let g:indentLine_conceallevel = 1
-            let g:vim_json_conceal = 0
+            " leave conceallevel settings to our defaults,
+            " set in the common settings section
+            let g:indentLine_setConceal = 0
           '';
         }
         vim-signify
