@@ -317,15 +317,15 @@ in
             src = pkgs.fetchFromGitHub {
               owner = "bluz71";
               repo = "vim-nightfly-guicolors";
-              rev = "d75a30e3874a9746d563634010accae4c463dc22";
-              sha256 = "1ff4k20v0c3dhx4j18pyfrirxxlzn5aya9gry3fp0ckjv8ry6496";
+              rev = "60b1893c58bc711b1f41611ada19ee06b6c1f403";
+              sha256 = "1jlj4qcjdylqa8l1i6ddwcfwggmfzh5c7wq11sbly3hf11srzf03";
             };
-            # swap colors around for more green
+            # swap colors around for more green and better conceal symbols
             preInstall = ''
               substituteInPlace ./colors/nightfly.vim \
                 --replace "highlight NightflyGreen" "__TMP__" \
                 --replace "highlight NightflyBlue" "highlight NightflyGreen" \
-                --replace "__TMP__" "highlight NightflyBlue"
+                --replace "__TMP__" "highlight NightflyBlue" \
             '';
           };
           config = ''
@@ -349,11 +349,12 @@ in
           '';
         }
         {
-          plugin = indentLine;
+          plugin = indent-blankline-nvim;
           config = ''
-            " leave conceallevel settings to our defaults,
-            " set in the common settings section
-            let g:indentLine_setConceal = 0
+            let g:indent_blankline_char_highlight_list = [
+              \'NightflySlateBlue',
+              \'NightflyRegalBlue',
+            \]
           '';
         }
         vim-signify
