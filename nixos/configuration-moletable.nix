@@ -9,6 +9,7 @@
   nixpkgs.config.allowUnfree = true;
 
   programs.steam.enable = true;
+  programs.gamemode.enable = true;
 
   # run JACK on the external soundcard so it doesn't need to worry about pulseaudio
   services.jack = {

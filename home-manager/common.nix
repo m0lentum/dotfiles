@@ -54,6 +54,7 @@ in
         l = "lsd -al";
         ll = "lsd -l";
         ltd = "lt --depth";
+        nnn = "nnn -adHe -P p";
         vis = "nvim -S Session.vim";
         docc = "docker-compose";
         clip = "xclip -sel clip";
@@ -234,6 +235,33 @@ in
         # only close tabs by closing every terminal
         unbind w
       '';
+    };
+    #
+    # NNN
+    #
+    nnn = {
+      enable = true;
+      package = pkgs.nnn.override ({ withNerdIcons = true; });
+      extraPackages = with pkgs; [
+        tabbed
+        catimg
+        ffmpegthumbnailer
+        mediainfo
+        sxiv
+        mpv
+        zathura
+      ];
+      plugins.src = (pkgs.fetchFromGitHub {
+        owner = "jarun";
+        repo = "nnn";
+        rev = "v4.4";
+        sha256 = "15w7jjhzyj1fq1c8f956pj7s729w8h3dih2ghxiann68rw4rmlc3";
+      }) + "/plugins";
+      plugins.mappings = {
+        p = "preview-tui";
+        P = "preview-tabbed";
+        i = "imgview";
+      };
     };
     #
     # VIM
@@ -432,7 +460,6 @@ in
             let g:vim_markdown_toml_frontmatter = 1
           '';
         }
-        coc-markdownlint
 
         vim-nix
         coc-json
@@ -546,6 +573,9 @@ in
 
   services = {
     lorri.enable = true;
+    #
+    # PICOM
+    #
     picom = {
       enable = true;
       shadow = false;
@@ -555,7 +585,7 @@ in
       inactiveOpacity = "0.90";
       opacityRule = [
         # Opaque at all times
-        "100:class_g = 'Firefox'"
+        "100:class_g = 'firefox-default'"
         "100:class_g = 'feh'"
         "100:class_g = 'Sxiv'"
         "100:class_g = 'Zathura'"
@@ -567,6 +597,7 @@ in
         "100:class_g = 'zoom'"
         "100:class_g = 'krita'"
         "100:class_g = 'PureRef'"
+        "100:class_g = 'tabbed'"
         "100:class_g = 'game'"
         # Slightly transparent even when focused
         "95:class_g = 'VSCodium' && focused"
