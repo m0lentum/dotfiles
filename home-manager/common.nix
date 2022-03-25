@@ -348,7 +348,7 @@ in
               rev = "60b1893c58bc711b1f41611ada19ee06b6c1f403";
               sha256 = "1jlj4qcjdylqa8l1i6ddwcfwggmfzh5c7wq11sbly3hf11srzf03";
             };
-            # swap colors around for more green and better conceal symbols
+            # swap colors around for more green
             preInstall = ''
               substituteInPlace ./colors/nightfly.vim \
                 --replace "highlight NightflyGreen" "__TMP__" \
@@ -591,6 +591,7 @@ in
         "100:class_g = 'Zathura'"
         "100:class_g = 'Octave'"
         "100:class_g = 'vlc'"
+        "100:class_g = 'mpv'"
         "100:class_g = 'obs'"
         "100:class_g = 'Wine'"
         "100:class_g = 'Microsoft Teams - Preview'"
@@ -662,6 +663,7 @@ in
     ffmpeg
     sxiv
     vlc
+    mpv
     xbindkeys
     xdotool
     pcmanfm

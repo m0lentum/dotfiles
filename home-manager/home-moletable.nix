@@ -139,11 +139,8 @@ in
     a4pad
 
     pkgs.discord
-    pkgs.tdesktop # telegram
     pkgs.teams
-    pkgs.zoom-us
 
-    pkgs.dolphinEmuMaster
     pkgs.spotify
 
     pkgs.krita
