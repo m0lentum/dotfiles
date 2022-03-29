@@ -261,6 +261,9 @@ in
         p = "preview-tui";
         P = "preview-tabbed";
         i = "imgview";
+        # need the escaped backslash or the $nnn variable disappears during build
+        C = "!convert \\$nnn jpeg:- | xclip -sel clip -t image/jpeg*";
+        c = "cat \\$nnn | xclip -sel clip*";
       };
     };
     #
