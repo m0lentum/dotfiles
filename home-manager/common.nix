@@ -588,7 +588,7 @@ in
       inactiveOpacity = "0.90";
       opacityRule = [
         # Opaque at all times
-        "100:class_g = 'firefox-default'"
+        "100:class_g = 'firefox'"
         "100:class_g = 'feh'"
         "100:class_g = 'Sxiv'"
         "100:class_g = 'Zathura'"
