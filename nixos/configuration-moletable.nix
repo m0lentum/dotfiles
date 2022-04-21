@@ -89,6 +89,11 @@
       StreamLocalBindUnlink yes
       RemoteForward /run/user/1000/gnupg/S.gpg-agent /run/user/1000/gnupg/S.gpg-agent
       RemoteForward /run/user/1000/gnupg/S.gpg-agent.ssh.remote /run/user/1000/gnupg/S.gpg-agent.ssh
+      LocalForward 8080 localhost:8080
+      LocalForward 8090 localhost:8090
+      LocalForward 9695 localhost:9695
+      LocalForward 9693 localhost:9693
+      LocalForward 3000 localhost:3000
 
     Host pi
       User pi
