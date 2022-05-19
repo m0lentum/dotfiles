@@ -492,6 +492,21 @@ in
           '';
         }
 
+        {
+          # requires a `jupytext` executable in the path,
+          # can be installed as a python package from nixpkgs
+          plugin = pkgs.vimUtils.buildVimPlugin {
+            name = "jupytext-vim";
+            pname = "jupytext-vim";
+            src = pkgs.fetchFromGitHub {
+              owner = "goerz";
+              repo = "jupytext.vim";
+              rev = "32c1e37b2edf63a7e38d0deb92cc3f1462cc4dcd";
+              sha256 = "1jmimir6d0vz5cs0hcpa8v5ay7jm5xj91qkk0y4mbgms47bd43na";
+            };
+          };
+        }
+
         #
         # QOL
         #
