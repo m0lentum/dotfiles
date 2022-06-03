@@ -317,6 +317,118 @@ in
         set smartcase
       '';
       #
+      # coc.nvim
+      #
+      coc = {
+        enable = true;
+        # temporary workaround from https://github.com/nix-community/home-manager/issues/2966
+        # while the coc.nvim on nixpkgs is broken
+        package = pkgs.vimUtils.buildVimPluginFrom2Nix {
+          pname = "coc.nvim";
+          version = "2022-05-21";
+          src = pkgs.fetchFromGitHub {
+            owner = "neoclide";
+            repo = "coc.nvim";
+            rev = "791c9f673b882768486450e73d8bda10e391401d";
+            sha256 = "sha256-MobgwhFQ1Ld7pFknsurSFAsN5v+vGbEFojTAYD/kI9c=";
+          };
+          meta.homepage = "https://github.com/neoclide/coc.nvim/";
+        };
+        pluginConfig = ''
+          " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+          " delays and poor user experience.
+          set updatetime=100
+          set signcolumn=yes
+          " Don't pass messages to |ins-completion-menu|.
+          set shortmess+=c
+          " Use <c-space> to trigger completion.
+          inoremap <silent><expr> <c-space> coc#refresh()
+          " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+          " position. Coc only does snippet and additional edit on confirm.
+          if exists('*complete_info')
+            inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+          else
+            imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+          endif
+
+          " navigate diagnostics
+          nmap <silent> gN <Plug>(coc-diagnostic-prev)
+          nmap <silent> gn <Plug>(coc-diagnostic-next)
+
+          " GoTo code navigation.
+          nmap <silent> gd <Plug>(coc-definition)
+          nmap <silent> gy <Plug>(coc-type-definition)
+          nmap <silent> gi <Plug>(coc-implementation)
+          nmap <silent> gr <Plug>(coc-references)
+
+
+          function! s:show_documentation()
+            if (index(['vim','help'], &filetype) >= 0)
+              execute 'h '.expand('<cword>')
+            else
+              call CocAction('doHover')
+            endif
+          endfunction
+
+          " Highlight the symbol and its references when holding the cursor.
+          autocmd CursorHold * silent call CocActionAsync('highlight')
+
+          nnoremap <silent> gh :call <SID>show_documentation()<CR>
+          nmap <F2> <Plug>(coc-rename)
+          nnoremap <silent> <leader>M :<C-u>CocFzfList diagnostics<cr>
+          nnoremap <silent> <leader>m :<C-u>CocFzfList diagnostics --current-buf<cr>
+          nnoremap <silent> <leader>p :<C-u>CocFzfList commands<cr>
+          nnoremap <silent> <leader>s :<C-u>CocFzfList symbols<cr>
+          nnoremap <silent> <leader>P :<C-u>CocFzfList<cr>
+          nnoremap <silent> <leader>, :<C-u>CocAction<cr>
+        '';
+        settings = {
+          "coc.preferences.formatOnSaveFiletypes" = [
+            "rust"
+            "javascript"
+            "typescript"
+            "typescriptreact"
+            "elm"
+            "python"
+            "css"
+            "markdown"
+          ];
+          rust-analyzer = {
+            serverPath = "rust-analyzer";
+            "checkOnSave.command" = "clippy";
+          };
+          languageserver = {
+            elmLS = {
+              command = "elm-language-server";
+              filetypes = ["elm"];
+              rootPatterns = ["elm.json"];
+              initializationOptions = {
+                elmPath = "elm";
+                elmFormatPath = "elm-format";
+                elmTestPath = "elm-test";
+              };
+            };
+          };
+
+          "codeLens.enable" = true;
+          "markdownlint.config" = {
+            no-inline-html = false;
+            no-space-in-emphasis = false;
+          };
+
+          rpc = {
+            enabled = false;
+            workspaceElapsedTime = true;
+            checkIdle = false;
+            showProblems = false;
+            detailsEditing = "{workspace}";
+            lowerDetailsEditing = "{filename}";
+            detailsViewing = "{workspace}";
+            lowerDetailsViewing = "{filename}";
+          };
+        };
+      };
+      #
       # plugin configs
       #
       plugins = with pkgs.vimPlugins; [
@@ -394,57 +506,6 @@ in
         #
         # language utilities
         #
-        {
-          plugin = coc-nvim;
-          config = ''
-            " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-            " delays and poor user experience.
-            set updatetime=100
-            set signcolumn=yes
-            " Don't pass messages to |ins-completion-menu|.
-            set shortmess+=c
-            " Use <c-space> to trigger completion.
-            inoremap <silent><expr> <c-space> coc#refresh()
-            " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-            " position. Coc only does snippet and additional edit on confirm.
-            if exists('*complete_info')
-              inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-            else
-              imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-            endif
-
-            " navigate diagnostics
-            nmap <silent> gN <Plug>(coc-diagnostic-prev)
-            nmap <silent> gn <Plug>(coc-diagnostic-next)
-
-            " GoTo code navigation.
-            nmap <silent> gd <Plug>(coc-definition)
-            nmap <silent> gy <Plug>(coc-type-definition)
-            nmap <silent> gi <Plug>(coc-implementation)
-            nmap <silent> gr <Plug>(coc-references)
-
-
-            function! s:show_documentation()
-              if (index(['vim','help'], &filetype) >= 0)
-                execute 'h '.expand('<cword>')
-              else
-                call CocAction('doHover')
-              endif
-            endfunction
-
-            " Highlight the symbol and its references when holding the cursor.
-            autocmd CursorHold * silent call CocActionAsync('highlight')
-
-            nnoremap <silent> gh :call <SID>show_documentation()<CR>
-            nmap <F2> <Plug>(coc-rename)
-            nnoremap <silent> <leader>M :<C-u>CocFzfList diagnostics<cr>
-            nnoremap <silent> <leader>m :<C-u>CocFzfList diagnostics --current-buf<cr>
-            nnoremap <silent> <leader>p :<C-u>CocFzfList commands<cr>
-            nnoremap <silent> <leader>s :<C-u>CocFzfList symbols<cr>
-            nnoremap <silent> <leader>P :<C-u>CocFzfList<cr>
-            nnoremap <silent> <leader>, :<C-u>CocAction<cr>
-          '';
-        }
 
         coc-rust-analyzer
         rust-vim
@@ -699,10 +760,6 @@ in
       source = ../.xbindkeysrc;
       target = "./.xbindkeysrc";
     };
-    "coc-settings" = {
-      source = ../nvim/coc-settings.json;
-      target = ".config/nvim/coc-settings.json";
-    };
     "ultisnips" = {
       source = ../nvim/snippets;
       target = ".config/nvim/ultisnips";
@@ -711,10 +768,11 @@ in
 
   xsession = {
     windowManager.awesome.enable = true;
-    pointerCursor = {
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Ice";
-    };
+  };
+  home.pointerCursor = {
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Ice";
+    x11.enable = true;
   };
 
   # This value determines the Home Manager release that your
