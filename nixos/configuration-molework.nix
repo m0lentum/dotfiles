@@ -55,6 +55,7 @@
   users.extraUsers.mole.openssh.authorizedKeys.keyFiles = [
     "/home/mole/.ssh/moleyubi.pub"
   ];
+  nix.trustedUsers = [ "root" "mole" ];
   # if ssh, use the forwarded socket (set to different path from
   # default socket to allow both direct use and ssh use with yubikey)
   environment.shellInit = ''

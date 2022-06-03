@@ -653,13 +653,10 @@ in
     killall
     bottom
     fd
-    hyperfine
-    miniserve
     tokei
     git-quick-stats
     ripgrep
     xclip
-    vscodium
     rust-analyzer
     entr
     file
@@ -672,21 +669,21 @@ in
     networkmanagerapplet
     yubioath-desktop
     obsidian
+    zotero
     # multimedia
     pdftk
     pulsemixer
     moreutils
-    maim
-    peek gifski dconf
     ffmpeg
     sxiv
     vlc
     mpv
-    xbindkeys
-    xdotool
     pcmanfm
     notify-desktop
-    zotero
+    # script/WM dependencies
+    maim
+    xbindkeys
+    xdotool
   ];
   home.file = {
     "awesome" = {
