@@ -1,11 +1,10 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ 
-      ./hardware-molework.nix
-      ./common.nix
-    ];
+  imports = [ 
+    ./hardware-molework.nix
+    ./configuration-common.nix
+  ];
 
   boot.loader.grub = {
     enable = true;

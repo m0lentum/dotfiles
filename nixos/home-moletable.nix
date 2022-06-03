@@ -123,7 +123,7 @@ let
     convert "$src" -resize "$dims" -background white -gravity center -extent "$dims" "$dest"
   '';
 in
-{ imports = [ ./common.nix ];
+{ imports = [ ./home-common.nix ];
   nixpkgs.config.allowUnfree = true;
   programs = {
     obs-studio = {

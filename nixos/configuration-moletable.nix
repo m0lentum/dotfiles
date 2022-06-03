@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-moletable.nix
-    ./common.nix
+    ./configuration-common.nix
   ];
 
   nixpkgs.config.allowUnfree = true;

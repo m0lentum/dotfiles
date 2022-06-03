@@ -46,7 +46,7 @@ let
       })
   ]);
 in
-{ imports = [ ./common.nix ];
+{ imports = [ ./home-common.nix ];
   services = {
     picom.backend = pkgs.lib.mkForce "glx";
   };
