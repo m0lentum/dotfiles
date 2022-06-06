@@ -57,7 +57,7 @@ local globalkeys =
         {},
         "Print",
         function()
-            awful.spawn(screenshot_normal("-s"))
+            awful.spawn(screenshot_normal("--select --hidecursor"))
         end,
         {description = "custom area", group = "screenshots"}
     ),
@@ -65,7 +65,7 @@ local globalkeys =
         {altkey},
         "Print",
         function()
-            awful.spawn(screenshot_nocompton("-s"))
+            awful.spawn(screenshot_nocompton("--select --hidecursor"))
         end,
         {description = "custom area, no transparency", group = "screenshots"}
     ),
