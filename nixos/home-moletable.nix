@@ -140,6 +140,7 @@ in
 
     pkgs.discord
     pkgs.teams
+    pkgs.zulip
 
     pkgs.spotify
 

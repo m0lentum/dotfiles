@@ -52,6 +52,7 @@ in
   };
   home.packages = [
     pkgs.teams
+    pkgs.zulip
     pkgs.spotify
     pkgs.stretchly
     pkgs.virt-manager
