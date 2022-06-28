@@ -137,24 +137,24 @@ in
     cam
     backup
     a4pad
+  ] ++ (with pkgs; [
+    discord
+    teams
+    zulip
 
-    pkgs.discord
-    pkgs.teams
-    pkgs.zulip
+    spotify
 
-    pkgs.spotify
+    krita
+    inkscape
+    blender
 
-    pkgs.krita
-    pkgs.inkscape
-    pkgs.blender
+    ardour
+    guitarix
+    drumgizmo
+    zynaddsubfx
+    geonkick
+    artyFX
 
-    pkgs.ardour
-    pkgs.guitarix
-    pkgs.drumgizmo
-    pkgs.zynaddsubfx
-    pkgs.geonkick
-    pkgs.artyFX
-
-    pkgs.lm_sensors
-  ];
+    lm_sensors
+  ]);
 }

@@ -45,19 +45,21 @@ let
       '';
       })
   ]);
+
+  teams = pkgs.teams;
 in
 { imports = [ ./home-common.nix ];
   services = {
     picom.backend = pkgs.lib.mkForce "glx";
   };
-  home.packages = [
-    pkgs.teams
-    pkgs.zulip
-    pkgs.spotify
-    pkgs.stretchly
-    pkgs.virt-manager
-    pkgs.vagrant
-    pkgs.docker-compose
+  home.packages = with pkgs; [
+    teams
+    zulip
+    spotify
+    stretchly
+    virt-manager
+    vagrant
+    docker-compose
   ];
   # vscode with robocorp extensions
   programs.vscode = {
