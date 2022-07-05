@@ -504,16 +504,54 @@ in
         vim-smoothie
 
         #
+        # tree-sitter based highlighting
+        #
+
+        {
+          plugin = nvim-treesitter.withPlugins (p: [
+            p.tree-sitter-nix
+            p.tree-sitter-rust
+            p.tree-sitter-typescript
+            p.tree-sitter-javascript
+            p.tree-sitter-tsx
+            p.tree-sitter-elm
+            p.tree-sitter-haskell
+            p.tree-sitter-python
+            p.tree-sitter-markdown
+            p.tree-sitter-html
+            p.tree-sitter-scss
+            p.tree-sitter-css
+            p.tree-sitter-make
+            p.tree-sitter-bash
+            p.tree-sitter-lua
+            p.tree-sitter-latex
+            p.tree-sitter-bibtex
+            p.tree-sitter-toml
+            p.tree-sitter-yaml
+            p.tree-sitter-json
+            p.tree-sitter-dockerfile
+          ]);
+          config = ''
+            lua << EOF
+            require'nvim-treesitter.configs'.setup {
+              highlight = {
+                enable = true,
+                additional_vim_regex_highlighting = false,
+              }
+            }
+            EOF
+          '';
+        }
+
+        #
         # language utilities
         #
 
         coc-rust-analyzer
-        rust-vim
 
         coc-tsserver
         coc-eslint
         coc-prettier
-        yats-vim
         coc-pyright
 
         {
@@ -525,11 +563,7 @@ in
           '';
         }
 
-        vim-nix
         coc-json
-        vim-elm-syntax
-        vim-hcl
-        vim-toml
 
         coc-vimtex
         {
