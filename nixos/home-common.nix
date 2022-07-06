@@ -486,12 +486,6 @@ in
         }
         vim-airline-themes
         {
-          plugin = rainbow;
-          config = ''
-            let g:rainbow_active = 1
-          '';
-        }
-        {
           plugin = indent-blankline-nvim;
           config = ''
             let g:indent_blankline_char_highlight_list = [
@@ -507,6 +501,7 @@ in
         # tree-sitter based highlighting
         #
 
+        nvim-ts-rainbow
         {
           plugin = nvim-treesitter.withPlugins (p: [
             p.tree-sitter-nix
@@ -537,7 +532,12 @@ in
               highlight = {
                 enable = true,
                 additional_vim_regex_highlighting = false,
-              }
+              },
+              rainbow = {
+                enable = true,
+                extended_mode = true,
+                max_file_lines = nil,
+              },
             }
             EOF
           '';
