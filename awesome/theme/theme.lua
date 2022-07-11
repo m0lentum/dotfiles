@@ -386,7 +386,7 @@ function theme.at_screen_connect(s)
         {
             -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            arrow(alpha, widget_colors.filler),
+            arrow("alpha", widget_colors.filler),
             arrow(widget_colors.filler, widget_colors.mem),
             wibox.container.background(
                 wibox.container.margin(
@@ -454,7 +454,7 @@ function theme.at_screen_connect(s)
                 widget_colors.systray
             ),
             arrow(widget_colors.systray, widget_colors.filler),
-            arrow(widget_colors.filler, alpha),
+            arrow(widget_colors.filler, "alpha"),
             s.mylayoutbox
         }
     }
