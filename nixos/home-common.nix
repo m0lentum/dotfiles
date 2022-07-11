@@ -38,6 +38,13 @@ in
         diff = { colorMoved = "zebra"; };
         init = { defaultBranch = "main"; };
       };
+      aliases = {
+        fixup = pkgs.lib.concatStrings [
+          "!git log -n 50 --pretty=format:'%h %s' --no-merges "
+          "| fzf | cut -c -7 "
+          "| xargs -o git commit --fixup"
+        ];
+      };
     };
     #
     # FISH
