@@ -138,7 +138,7 @@ in
     backup
     a4pad
   ] ++ (with pkgs; [
-    discord
+    (discord.override { nss = pkgs.nss_latest; })
     teams
     zulip
 
