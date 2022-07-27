@@ -10,7 +10,7 @@ _pun intended_
 I spend most of my time writing code, but I also draw, make music and play games on this.
 
 There used to be a screenshot here but many things changed and I couldn't be bothered to take another.
-Bug me about it on [Twitter](https://twitter.com/moletrooper) or open an issue if you want to see it.
+Bug me about it on [Twitter](https://twitter.com/molentum_) or open an issue if you want to see it.
 
 ## Nonexhaustive list of programs and features
 
