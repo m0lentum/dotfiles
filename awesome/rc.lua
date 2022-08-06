@@ -239,6 +239,18 @@ function toggle_slideshow(screen)
     end
 end
 
+-- constant wallpaper to avoid copyright issues and awkward moments
+-- while streaming or screensharing
+function const_wallpaper()
+    if wp_timer.started then
+        wp_timer:stop()
+    end
+    for s in screen do
+        local path = os.getenv("HOME") .. "/.wallpaper-const"
+        gears.wallpaper.maximized(path, s)
+    end
+end
+
 -- }}}
 
 -- {{{ Screen

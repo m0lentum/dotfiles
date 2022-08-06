@@ -20,8 +20,9 @@ end
 local globalkeys =
     my_table.join(
     awful.key({modkey}, "s", hotkeys_popup.show_help, {description = "show help", group = "awesome"}),
-    -- custom wallpaper slideshow thing
+    -- custom wallpaper slideshow thing, functions defined in rc.lua
     awful.key({modkey}, "w", toggle_slideshow, {description = "toggle wallpaper slideshow", group = "screen"}),
+    awful.key({modkey, "Shift"}, "w", const_wallpaper, {description = "set constant wallpaper", group = "screen"}),
     -- Spotify
     awful.key(
         {},
