@@ -9,6 +9,15 @@ let
     "target"
     "__pycache__"
   ];
+  # helper script because I always forget the exact way to nix-prefetch-url from github
+  prefetchGithub = pkgs.writeScriptBin "nix-prefetch-github" ''
+    #! /usr/bin/env bash
+    if [ "$#" -ne 3 ]; then
+      echo "usage: nix-prefetch-github <owner> <repo> <rev>"
+      exit 1
+    fi
+    nix-prefetch-url --unpack "https://github.com/$1/$2/archive/$3.tar.gz"
+  '';
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -90,7 +99,7 @@ in
       # but some long commands are better off as aliases
       shellAliases = {
         lt = builtins.concatStringsSep " " (
-          ["lsd --tree -a"] ++
+          [ "lsd --tree -a" ] ++
           (map (i: "-I " + i) listIgnores)
         );
       };
@@ -102,11 +111,19 @@ in
       enable = true;
       settings = {
         format = pkgs.lib.concatStrings [
-          "$username" "$hostname" "$directory"
-          "$git_branch" "$git_state" "$git_status"
-          "$rust" "$cmd_duration"
+          "$username"
+          "$hostname"
+          "$directory"
+          "$git_branch"
+          "$git_state"
+          "$git_status"
+          "$rust"
+          "$cmd_duration"
           "$line_break"
-          "$jobs" "$battery" "$nix_shell" "$character"
+          "$jobs"
+          "$battery"
+          "$nix_shell"
+          "$character"
         ];
         cmd_duration.min_time = 1;
         directory.fish_style_pwd_dir_length = 1;
@@ -279,8 +296,6 @@ in
     neovim = {
       enable = true;
       vimAlias = true;
-      # nodejs needed for coc.nvim
-      withNodeJs = true;
       #
       # non-plugin configs
       #
@@ -291,8 +306,10 @@ in
 
         set autoread
         set hidden
-        nnoremap <silent><C-PageUp> :bp<cr>
-        nnoremap <silent><C-PageDown> :bn<cr>
+        " buffer controls replaced with bufferline-nvim
+        " (in the plugins -> visual section of the config)
+        " nnoremap <silent><C-PageUp> :bp<cr>
+        " nnoremap <silent><C-PageDown> :bn<cr>
         nnoremap <silent><leader>w :bdelete<cr>
 
         " netrw off
@@ -323,123 +340,222 @@ in
         set ignorecase
         set smartcase
       '';
-      #
-      # coc.nvim
-      #
-      coc = {
-        enable = true;
-        # temporary workaround from https://github.com/nix-community/home-manager/issues/2966
-        # while the coc.nvim on nixpkgs is broken
-        package = pkgs.vimUtils.buildVimPluginFrom2Nix {
-          pname = "coc.nvim";
-          version = "2022-05-21";
-          src = pkgs.fetchFromGitHub {
-            owner = "neoclide";
-            repo = "coc.nvim";
-            rev = "791c9f673b882768486450e73d8bda10e391401d";
-            sha256 = "sha256-MobgwhFQ1Ld7pFknsurSFAsN5v+vGbEFojTAYD/kI9c=";
-          };
-          meta.homepage = "https://github.com/neoclide/coc.nvim/";
-        };
-        pluginConfig = ''
-          " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-          " delays and poor user experience.
-          set updatetime=100
-          set signcolumn=yes
-          " Don't pass messages to |ins-completion-menu|.
-          set shortmess+=c
-          " Use <c-space> to trigger completion.
-          inoremap <silent><expr> <c-space> coc#refresh()
-          " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-          " position. Coc only does snippet and additional edit on confirm.
-          if exists('*complete_info')
-            inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-          else
-            imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-          endif
+      plugins = with pkgs.vimPlugins; [
+        #
+        # LSP and utilities
+        #
+        {
+          plugin = nvim-lspconfig;
+          config = ''
+            lua << EOF
+            -- keybinds
 
-          " navigate diagnostics
-          nmap <silent> gN <Plug>(coc-diagnostic-prev)
-          nmap <silent> gn <Plug>(coc-diagnostic-next)
+            -- using telescope for anything that produces lists
+            local tel = require('telescope.builtin')
 
-          " GoTo code navigation.
-          nmap <silent> gd <Plug>(coc-definition)
-          nmap <silent> gy <Plug>(coc-type-definition)
-          nmap <silent> gi <Plug>(coc-implementation)
-          nmap <silent> gr <Plug>(coc-references)
+            local opts = { noremap=true, silent=true }
+            vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts)
+            vim.keymap.set('n', 'gN', vim.diagnostic.goto_prev, opts)
+            vim.keymap.set('n', 'gn', vim.diagnostic.goto_next, opts)
 
+            vim.keymap.set('n', '<C-p>', tel.find_files, opts)
+            vim.keymap.set('n', '<leader>f', tel.live_grep, opts)
+            vim.keymap.set('n', 'gr', tel.lsp_references, opts)
+            vim.keymap.set('n', 'gi', tel.lsp_implementations, opts)
+            vim.keymap.set('n', '<leader>s', tel.lsp_document_symbols, opts)
+            vim.keymap.set('n', '<leader>S', tel.lsp_workspace_symbols, opts)
+            vim.keymap.set('n', 'gd', tel.lsp_definitions, opts)
+            vim.keymap.set('n', '<leader>gd', tel.lsp_type_definitions, opts)
+            vim.keymap.set('n', '<leader>M', tel.diagnostics, opts)
+            vim.keymap.set('n', '<leader>m', function() tel.diagnostics({bufnr=0}) end, opts)
 
-          function! s:show_documentation()
-            if (index(['vim','help'], &filetype) >= 0)
-              execute 'h '.expand('<cword>')
-            else
-              call CocAction('doHover')
-            endif
-          endfunction
+            local on_attach = function(client, bufnr)
+              vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+              local bufopts = { noremap=true, silent=true, buffer=bufnr }
+              vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+              vim.keymap.set('n', '<leader>h', vim.lsp.buf.hover, bufopts)
+              vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
+              vim.keymap.set('n', '<leader>,', vim.lsp.buf.code_action, bufopts)
+              vim.keymap.set('n', 'gq', vim.lsp.buf.range_formatting, bufopts)
+            end
 
-          " Highlight the symbol and its references when holding the cursor.
-          autocmd CursorHold * silent call CocActionAsync('highlight')
+            -- format on save
+            vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 
-          nnoremap <silent> gh :call <SID>show_documentation()<CR>
-          nmap <F2> <Plug>(coc-rename)
-          nnoremap <silent> <leader>M :<C-u>CocFzfList diagnostics<cr>
-          nnoremap <silent> <leader>m :<C-u>CocFzfList diagnostics --current-buf<cr>
-          nnoremap <silent> <leader>p :<C-u>CocFzfList commands<cr>
-          nnoremap <silent> <leader>s :<C-u>CocFzfList symbols<cr>
-          nnoremap <silent> <leader>o :<C-u>CocFzfList outline<cr>
-          nnoremap <silent> <leader>P :<C-u>CocFzfList<cr>
-          nnoremap <silent> <leader>, :<C-u>CocAction<cr>
-        '';
-        settings = {
-          "coc.preferences.formatOnSaveFiletypes" = [
-            "rust"
-            "javascript"
-            "typescript"
-            "typescriptreact"
-            "elm"
-            "python"
-            "css"
-            "markdown"
-          ];
-          rust-analyzer = {
-            serverPath = "rust-analyzer";
-            "checkOnSave.command" = "clippy";
-          };
-          languageserver = {
-            elmLS = {
-              command = "elm-language-server";
-              filetypes = ["elm"];
-              rootPatterns = ["elm.json"];
-              initializationOptions = {
-                elmPath = "elm";
-                elmFormatPath = "elm-format";
-                elmTestPath = "elm-test";
-              };
+            -- enable servers
+
+            -- with completion using cmp-nvim
+            local capabilities = require('cmp_nvim_lsp').update_capabilities(
+              vim.lsp.protocol.make_client_capabilities()
+            )
+            local enable = function(lsp_name, settings)
+              require('lspconfig')[lsp_name].setup { 
+                on_attach = on_attach,
+                capabilities = capabilities,
+                settings = settings or {}
+              }
+            end
+              
+            enable('rust_analyzer', {
+              ["rust-analyzer"] = {
+                checkOnSave = { command = "clippy" },
+              }
+            })
+            enable('pyright')
+            enable('tsserver')
+            enable('eslint')
+            enable('jsonls')
+            enable('rnix')
+
+            -- nicer diagnostic icons
+            local signs = {
+                Error = " ",
+                Warn = " ",
+                Hint = " ",
+                Info = " "
+            }
+            for type, icon in pairs(signs) do
+                local hl = "DiagnosticSign" .. type
+                vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
+            end
+            -- prioritize errors and warnings in the sign column, otherwise everything looks like hints
+            vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+              vim.lsp.diagnostic.on_publish_diagnostics, {
+                severity_sort = true
+              }
+            )
+            EOF
+          '';
+        }
+        {
+          # bindings for telescope defined in the LSP section above
+          plugin = telescope-nvim;
+          config = ''
+            lua << EOF
+            local actions = require('telescope.actions')
+            require('telescope').setup {
+              defaults = {
+                mappings = {
+                  i = {
+                    ["<esc>"] = actions.close
+                  },
+                },
+                layout_config = {
+                  vertical = { width = 0.6, height = 0.9 },
+                },
+                layout_strategy = "vertical",
+              },
+              pickers = {
+                find_files = { layout_strategy = "horizontal" },
+              },
+            }
+            EOF
+          '';
+        }
+        # completions with cmp-nvim
+        cmp-nvim-lsp
+        cmp-nvim-ultisnips
+        {
+          plugin = nvim-cmp;
+          # from https://github.com/hrsh7th/nvim-cmp
+          config = ''
+            set completeopt=menu,menuone,noselect
+            lua <<EOF
+              local cmp = require('cmp')
+
+              cmp.setup({
+                snippet = {
+                  expand = function(args)
+                    vim.fn["UltiSnips#Anon"](args.body)
+                  end,
+                },
+                window = {
+                  -- completion = cmp.config.window.bordered(),
+                  -- documentation = cmp.config.window.bordered(),
+                },
+                mapping = cmp.mapping.preset.insert({
+                  ['<C-u>'] = cmp.mapping.scroll_docs(-8),
+                  ['<C-d>'] = cmp.mapping.scroll_docs(8),
+                  ['<C-Space>'] = cmp.mapping.complete(),
+                  ['<Esc>'] = cmp.mapping.abort(),
+                  ['<CR>'] = cmp.mapping.confirm({ select = true }),
+                }),
+                sources = cmp.config.sources({
+                  { name = 'nvim_lsp' },
+                  { name = 'ultisnips' },
+                }, {
+                  { name = 'buffer' },
+                })
+              })
+
+              -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+              cmp.setup.cmdline('/', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                  { name = 'buffer' }
+                }
+              })
+
+              -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+              cmp.setup.cmdline(':', {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = cmp.config.sources({
+                  { name = 'path' }
+                }, {
+                  { name = 'cmdline' }
+                })
+              })
+            EOF
+          '';
+        }
+
+        #
+        # non-LSP language utilities
+        #
+
+        {
+          plugin = vim-markdown;
+          config = ''
+            let g:vim_markdown_folding_disabled = 1
+            let g:vim_markdown_math = 1
+            let g:vim_markdown_toml_frontmatter = 1
+          '';
+        }
+        {
+          plugin = vimtex;
+          config = ''
+            let g:tex_flavor = 'latex'
+            let g:tex_conceal = 'abdmg'
+            autocmd FileType tex,markdown set conceallevel=1
+            " for some reason this is empty by default, copied from docs
+            let g:vimtex_compiler_latexmk_engines = {
+              \ '_'                : '-pdf',
+              \ 'pdflatex'         : '-pdf',
+              \ 'dvipdfex'         : '-pdfdvi',
+              \ 'lualatex'         : '-lualatex',
+              \ 'xelatex'          : '-xelatex -shell-escape',
+              \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
+              \ 'context (luatex)' : '-pdf -pdflatex=context',
+              \ 'context (xetex)'  : '-pdf -pdflatex=""texexec --xtx""',
+              \}
+            let g:vimtex_view_method='zathura'
+          '';
+        }
+        {
+          # requires a `jupytext` executable in the path,
+          # can be installed as a python package from nixpkgs
+          plugin = pkgs.vimUtils.buildVimPlugin {
+            name = "jupytext-vim";
+            pname = "jupytext-vim";
+            src = pkgs.fetchFromGitHub {
+              owner = "goerz";
+              repo = "jupytext.vim";
+              rev = "32c1e37b2edf63a7e38d0deb92cc3f1462cc4dcd";
+              sha256 = "1jmimir6d0vz5cs0hcpa8v5ay7jm5xj91qkk0y4mbgms47bd43na";
             };
           };
+        }
 
-          "codeLens.enable" = true;
-          "markdownlint.config" = {
-            no-inline-html = false;
-            no-space-in-emphasis = false;
-          };
-
-          rpc = {
-            enabled = false;
-            workspaceElapsedTime = true;
-            checkIdle = false;
-            showProblems = false;
-            detailsEditing = "{workspace}";
-            lowerDetailsEditing = "{filename}";
-            detailsViewing = "{workspace}";
-            lowerDetailsViewing = "{filename}";
-          };
-        };
-      };
-      #
-      # plugin configs
-      #
-      plugins = with pkgs.vimPlugins; [
         #
         # visuals
         #
@@ -456,9 +572,8 @@ in
             let g:oceanic_material_allow_italic=1
             let g:oceanic_material_allow_underline=1
             let g:oceanic_material_allow_undercurl=1
-            " changing colors for a bit but leaving this in to easily switch back
+            " not using this right now but leaving this in to easily switch back
             " color oceanic_material
-            " let g:airline_theme='bubblegum'
           '';
         }
         {
@@ -481,18 +596,9 @@ in
           };
           config = ''
             colorscheme nightfly
-            let g:airline_theme='nightfly'
-            let g:nightlyCursorColor=1
+            let g:nightflyCursorColor=1
           '';
         }
-        {
-          plugin = vim-airline;
-          config = ''
-            let g:airline#extensions#tabline#enabled = 1
-            let g:airline_powerline_fonts = 1
-          '';
-        }
-        vim-airline-themes
         {
           plugin = indent-blankline-nvim;
           config = ''
@@ -502,12 +608,47 @@ in
             \]
           '';
         }
-        vim-signify
-        vim-smoothie
+        {
+          plugin = nvim-web-devicons;
+          config = ''
+            lua require("nvim-web-devicons").setup()
+          '';
+        }
+        {
+          plugin = gitsigns-nvim;
+          config = ''
+            " signcolumn flickers when no git signs if this isn't set
+            set signcolumn=yes
+            lua require("gitsigns").setup()
+          '';
+        }
+        {
+          plugin = feline-nvim;
+          config = ''
+            lua require("feline").setup()
+          '';
+        }
+        {
+          plugin = bufferline-nvim;
+          config = ''
+            lua << EOF
+            require("bufferline").setup {
+              options = {
+                show_buffer_close_icons = false,
+                separator_style = "slant",
+                right_mouse_command = nil,
+                middle_mouse_command = "bdelete %d",
+              }
+            }
+            EOF
+            nnoremap <silent><C-PageDown> :BufferLineCycleNext<CR>
+            nnoremap <silent><C-PageUp> :BufferLineCyclePrev<CR>
+            nnoremap <silent><leader><C-PageDown> :BufferLineMoveNext<CR>
+            nnoremap <silent><leader><C-PageUp> :BufferLineMovePrev<CR>
+          '';
+        }
 
-        #
         # tree-sitter based highlighting
-        #
 
         nvim-ts-rainbow
         {
@@ -552,67 +693,9 @@ in
         }
 
         #
-        # language utilities
+        # QOL / editing utilities
         #
 
-        coc-rust-analyzer
-
-        coc-tsserver
-        coc-eslint
-        coc-prettier
-        coc-pyright
-
-        {
-          plugin = vim-markdown;
-          config = ''
-            let g:vim_markdown_folding_disabled = 1
-            let g:vim_markdown_math = 1
-            let g:vim_markdown_toml_frontmatter = 1
-          '';
-        }
-
-        coc-json
-
-        coc-vimtex
-        {
-          plugin = vimtex;
-          config = ''
-            let g:tex_flavor = 'latex'
-            let g:tex_conceal = 'abdmg'
-            autocmd FileType tex,markdown set conceallevel=1
-            " for some reason this is empty by default, copied from docs
-            let g:vimtex_compiler_latexmk_engines = {
-              \ '_'                : '-pdf',
-              \ 'pdflatex'         : '-pdf',
-              \ 'dvipdfex'         : '-pdfdvi',
-              \ 'lualatex'         : '-lualatex',
-              \ 'xelatex'          : '-xelatex -shell-escape',
-              \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
-              \ 'context (luatex)' : '-pdf -pdflatex=context',
-              \ 'context (xetex)'  : '-pdf -pdflatex=""texexec --xtx""',
-              \}
-            let g:vimtex_view_method='zathura'
-          '';
-        }
-
-        {
-          # requires a `jupytext` executable in the path,
-          # can be installed as a python package from nixpkgs
-          plugin = pkgs.vimUtils.buildVimPlugin {
-            name = "jupytext-vim";
-            pname = "jupytext-vim";
-            src = pkgs.fetchFromGitHub {
-              owner = "goerz";
-              repo = "jupytext.vim";
-              rev = "32c1e37b2edf63a7e38d0deb92cc3f1462cc4dcd";
-              sha256 = "1jmimir6d0vz5cs0hcpa8v5ay7jm5xj91qkk0y4mbgms47bd43na";
-            };
-          };
-        }
-
-        #
-        # QOL
-        #
         {
           plugin = ultisnips;
           config = ''
@@ -620,17 +703,6 @@ in
             let g:UltiSnipsExpandTrigger = '<tab>'
             let g:UltiSnipsJumpForwardTrigger = '<tab>'
             let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
-          '';
-        }
-        {
-          plugin = fzf-vim;
-          config = ''
-            let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-            nnoremap <C-p> :Files<cr>
-            let g:fzf_action = {
-              \ 'ctrl-n': 'tab split',
-              \ 'ctrl-v': 'split',
-              \ 'ctrl-r': 'vsplit' }
           '';
         }
         {
@@ -660,12 +732,25 @@ in
             vmap <C-Right> <Plug>MoveBlockRight
           '';
         }
-        coc-fzf
-        vim-obsession
-        vim-commentary
+        vim-smoothie # smooth scroll
+        vim-obsession # persistent sessions
+        vim-commentary # comment/uncomment actions
         vim-surround
         vim-tmux-focus-events
-        vim-sleuth
+        vim-sleuth # autodetect tab settings
+
+        {
+          # discord rich presence because why not
+          plugin = presence-nvim;
+          config = ''
+            lua << EOF
+            require("presence"):setup({
+              neovim_image_text = "The text editor whomst is good",
+              log_level = "error",
+            })
+            EOF
+          '';
+        }
       ];
     };
     #
@@ -673,7 +758,7 @@ in
     #
     firefox = {
       enable = true;
-      package = (pkgs.firefox.override { extraNativeMessagingHosts = [ pkgs.passff-host ];});
+      package = (pkgs.firefox.override { extraNativeMessagingHosts = [ pkgs.passff-host ]; });
     };
     fzf = {
       enable = true;
@@ -760,11 +845,15 @@ in
     git-quick-stats
     ripgrep
     xclip
-    rust-analyzer
     entr
     file
     jq
-    zip unzip
+    zip
+    unzip
+    prefetchGithub
+    # language servers I use often enough to put in home (others are in project shell.nixes)
+    rust-analyzer
+    rnix-lsp
     # general helpful stuff
     et
     pass

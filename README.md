@@ -28,7 +28,10 @@ Bug me about it on [Twitter](https://twitter.com/molentum_) or open an issue if 
   - prompt: [starship](https://starship.rs/)
   - terminal: [kitty](https://sw.kovidgoyal.net/kitty/) with [tmux](https://github.com/tmux/tmux)
 - code editor: [neovim](https://neovim.io/)
-  - [coc.nvim](https://github.com/neoclide/coc.nvim) for language server support
+  - using Neovim's native language server support,
+    [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
+    and [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) for
+    smooth coding and navigation
   - favorite themes:
     [nightfly](https://github.com/bluz71/vim-nightfly-guicolors),
     [oceanic-material](https://github.com/glepnir/oceanic-material)
