@@ -1,14 +1,16 @@
 { config, pkgs, ... }:
 
 let
-  micromamba = (import (fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/64065d76f434457073f5d255a3246658119e08ed.tar.gz";
-    sha256 = "01nk76zhx5pf5ay0czcyikxqmrpr68gsvil3h4jy6sknrrid962m";
-  }) {}).micromamba;
+  micromamba = (import
+    (fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/64065d76f434457073f5d255a3246658119e08ed.tar.gz";
+      sha256 = "01nk76zhx5pf5ay0czcyikxqmrpr68gsvil3h4jy6sknrrid962m";
+    })
+    { }).micromamba;
   rcc = pkgs.callPackage ./rcc { micromamba = micromamba; };
   robocode = (pkgs.vscode-fhsWithPackages (ps: with ps; [
-    (ps.python3Full.withPackages(ps: [
-      (ps.robotframework.overridePythonAttrs(old: rec {
+    (ps.python3Full.withPackages (ps: [
+      (ps.robotframework.overridePythonAttrs (old: rec {
         version = "4.1.1";
         src = ps.fetchPypi {
           pname = "robotframework";
@@ -43,12 +45,11 @@ let
         mkdir -p $out/share/vscode/extensions/robocorp.robocorp-code/bin
         ln -s ${rcc}/bin/rcc $out/share/vscode/extensions/robocorp.robocorp-code/bin
       '';
-      })
+    })
   ]);
-
-  teams = pkgs.teams;
 in
-{ imports = [ ./home-common.nix ];
+{
+  imports = [ ./home-common.nix ];
   services = {
     picom.backend = pkgs.lib.mkForce "glx";
   };
@@ -60,6 +61,7 @@ in
     virt-manager
     vagrant
     docker-compose
+    pyright
   ];
   # vscode with robocorp extensions
   programs.vscode = {
