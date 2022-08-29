@@ -309,7 +309,7 @@ in
         " (in the plugins -> visual section of the config)
         " nnoremap <silent><C-PageUp> :bp<cr>
         " nnoremap <silent><C-PageDown> :bn<cr>
-        nnoremap <silent><leader>w :bdelete<cr>
+        nnoremap <silent><C-w> :bdelete<cr>
 
         " netrw off
         let loaded_netrwPlugin = 1
@@ -714,12 +714,18 @@ in
           '';
         }
         {
-          plugin = vim-sneak;
+          plugin = hop-nvim;
           config = ''
-            let g:sneak#label = 1
-            map m <Plug>Sneak_s
-            map M <Plug>Sneak_S
-            nnoremap <C-m> m
+            lua << EOF
+            local hop = require('hop')
+            hop.setup {
+              -- colemak-friendly keys
+              keys = "tsradneiohpfwqgluyjvcxzbmk"
+            }
+            local opts = { noremap=true, silent=true }
+            vim.keymap.set("", 'm', hop.hint_char1, opts)
+            vim.keymap.set("", 'l', hop.hint_lines, opts)
+            EOF
           '';
         }
         {
