@@ -71,7 +71,6 @@ in
         ll = "lsd -l";
         ltd = "lt --depth";
         nnn = "nnn -adHe -P p";
-        vis = "nvim -S Session.vim";
         docc = "docker-compose";
         clip = "xclip -sel clip";
         date = "date +%F";
@@ -733,21 +732,43 @@ in
           '';
         }
         vim-smoothie # smooth scroll
-        vim-obsession # persistent sessions
-        vim-commentary # comment/uncomment actions
+        {
+          # sessions fully automatically
+          plugin = pkgs.vimUtils.buildVimPlugin {
+            name = "auto-session";
+            pname = "auto-session";
+            src = pkgs.fetchFromGitHub {
+              owner = "rmagatti";
+              repo = "auto-session";
+              rev = "9c302e01ebb474f9b19998488060d9f110ef75c5";
+              sha256 = "0m9jjbrqvlhgzp8gcif678f6315jy1qrs86sc712q3ban9zs2ykw";
+            };
+          };
+          config = ''
+            lua require("auto-session").setup()
+          '';
+        }
+        vim-commentary
         vim-surround
         vim-tmux-focus-events
         vim-sleuth # autodetect tab settings
 
         {
-          # discord rich presence because why not
+          # discord rich presence, but opt-in with an environment variable
           plugin = presence-nvim;
           config = ''
             lua << EOF
-            require("presence"):setup({
-              neovim_image_text = "The text editor whomst is good",
-              log_level = "error",
-            })
+            if vim.env.VIM_DISCORD_PRESENCE ~= nil then
+              require("presence"):setup({
+                neovim_image_text = "The text editor whomst is good",
+                log_level = "error",
+              })
+            else
+              -- setup with everything blacklisted, otherwise presence will setup itself
+              require("presence"):setup({
+                blacklist = {".*"}
+              })
+            end
             EOF
           '';
         }
