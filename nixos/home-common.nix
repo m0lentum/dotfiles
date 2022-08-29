@@ -445,7 +445,10 @@ in
                 layout_strategy = "vertical",
               },
               pickers = {
-                find_files = { layout_strategy = "horizontal" },
+                find_files = {
+                  layout_strategy = "horizontal",
+                  find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+                },
               },
             }
             EOF
