@@ -123,7 +123,8 @@ let
     convert "$src" -resize "$dims" -background white -gravity center -extent "$dims" "$dest"
   '';
 in
-{ imports = [ ./home-common.nix ];
+{
+  imports = [ ./home-common.nix ];
   nixpkgs.config.allowUnfree = true;
   programs = {
     obs-studio = {
@@ -140,6 +141,7 @@ in
   ] ++ (with pkgs; [
     (discord.override { nss = pkgs.nss_latest; })
     teams
+    zoom-us
     zulip
 
     spotify
