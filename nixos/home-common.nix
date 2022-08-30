@@ -387,23 +387,27 @@ in
             local capabilities = require('cmp_nvim_lsp').update_capabilities(
               vim.lsp.protocol.make_client_capabilities()
             )
-            local enable = function(lsp_name, settings)
-              require('lspconfig')[lsp_name].setup { 
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = settings or {}
-              }
+            local enable = function(lsp_name, args)
+              local args = args or {}
+              args["on_attach"] = on_attach
+              args["capabilities"] = capabilities
+              require('lspconfig')[lsp_name].setup(args)
             end
               
             enable('rust_analyzer', {
-              ["rust-analyzer"] = {
-                checkOnSave = { command = "clippy" },
+              settings = {
+                ["rust-analyzer"] = {
+                  checkOnSave = { command = "clippy" },
+                }
               }
             })
             enable('pyright')
             enable('tsserver')
             enable('eslint')
-            enable('jsonls')
+            enable('jsonls', {
+              -- the version in nixpkgs has a different name from the default
+              cmd = { "vscode-json-languageserver", "--stdio" }
+            })
             enable('rnix')
 
             -- nicer diagnostic icons
@@ -884,6 +888,7 @@ in
     # language servers I use often enough to put in home (others are in project shell.nixes)
     rust-analyzer
     rnix-lsp
+    nodePackages.vscode-json-languageserver
     # general helpful stuff
     et
     pass
