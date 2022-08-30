@@ -309,7 +309,7 @@ in
         " (in the plugins -> visual section of the config)
         " nnoremap <silent><C-PageUp> :bp<cr>
         " nnoremap <silent><C-PageDown> :bn<cr>
-        nnoremap <silent><C-w> :bdelete<cr>
+        nnoremap <silent><leader>w :bdelete<cr>
 
         " netrw off
         let loaded_netrwPlugin = 1
@@ -479,7 +479,7 @@ in
                   ['<C-u>'] = cmp.mapping.scroll_docs(-8),
                   ['<C-d>'] = cmp.mapping.scroll_docs(8),
                   ['<C-Space>'] = cmp.mapping.complete(),
-                  ['<Esc>'] = cmp.mapping.abort(),
+                  ['<C-e>'] = cmp.mapping.abort(),
                   ['<CR>'] = cmp.mapping.confirm({ select = true }),
                 }),
                 sources = cmp.config.sources({
