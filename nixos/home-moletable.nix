@@ -53,7 +53,6 @@ let
 
     borg prune                          \
         --list                          \
-        --prefix '{hostname}-'          \
         --show-rc                       \
         --keep-within 30d               \
 
