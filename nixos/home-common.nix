@@ -349,16 +349,17 @@ in
             lua << EOF
             -- keybinds
 
-            -- using telescope for anything that produces lists
-            local tel = require('telescope.builtin')
-
             local opts = { noremap=true, silent=true }
             vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, opts)
             vim.keymap.set('n', 'gN', vim.diagnostic.goto_prev, opts)
             vim.keymap.set('n', 'gn', vim.diagnostic.goto_next, opts)
 
+            -- using telescope for anything that produces lists
+            local tel = require('telescope.builtin')
+
             vim.keymap.set('n', '<C-p>', tel.find_files, opts)
             vim.keymap.set('n', '<leader>f', tel.live_grep, opts)
+            vim.keymap.set('n', '<leader>.', tel.resume, opts)
             vim.keymap.set('n', 'gr', tel.lsp_references, opts)
             vim.keymap.set('n', 'gi', tel.lsp_implementations, opts)
             vim.keymap.set('n', '<leader>s', tel.lsp_document_symbols, opts)
@@ -427,6 +428,22 @@ in
                 severity_sort = true
               }
             )
+            EOF
+          '';
+        }
+        # null-ls for formatters that don't come with lspconfig
+        {
+          plugin = null-ls-nvim;
+          config = ''
+            lua << EOF
+            local null_ls = require('null-ls')
+            null_ls.setup {
+              debug = true,
+              sources = {
+                null_ls.builtins.formatting.isort,
+                null_ls.builtins.formatting.black,
+              },
+            }
             EOF
           '';
         }
