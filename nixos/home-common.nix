@@ -468,7 +468,11 @@ in
               pickers = {
                 find_files = {
                   layout_strategy = "horizontal",
-                  find_command = { "fd", "--type", "f", "--strip-cwd-prefix" },
+                  -- remove leading ./, include gitignored and hidden files
+                  -- (except .git which is big and annoying and shouldn't be edited anyway)
+                  find_command = {
+                    "fd", "--type", "f", "--strip-cwd-prefix", "--no-ignore", "--hidden", "--exclude", ".git"
+                  },
                 },
               },
             }
