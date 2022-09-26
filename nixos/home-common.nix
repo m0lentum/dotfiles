@@ -396,20 +396,32 @@ in
             end
               
             enable('rust_analyzer', {
+              cmd = { "${pkgs.rust-analyzer}/bin/rust-analyzer" },
               settings = {
                 ["rust-analyzer"] = {
                   checkOnSave = { command = "clippy" },
                 }
-              }
+              },
             })
-            enable('pyright')
-            enable('tsserver')
-            enable('eslint')
+            enable('tsserver', {
+              cmd = {
+                "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server",
+                "--stdio",
+                "--tsserver-path",
+                "${pkgs.nodePackages.typescript}/lib/node_modules/typescript/lib/",
+              },
+            })
             enable('jsonls', {
               -- the version in nixpkgs has a different name from the default
-              cmd = { "vscode-json-languageserver", "--stdio" }
+              cmd = {
+                "${pkgs.nodePackages.vscode-json-languageserver}/bin/vscode-json-languageserver",
+                "--stdio",
+              },
             })
-            enable('rnix')
+            enable('rnix', {
+              cmd = { "${pkgs.rnix-lsp}/bin/rnix-lsp" },
+            })
+            enable('pyright')
 
             -- nicer diagnostic icons
             local signs = {
@@ -906,10 +918,6 @@ in
     zip
     unzip
     prefetchGithub
-    # language servers I use often enough to put in home (others are in project shell.nixes)
-    rust-analyzer
-    rnix-lsp
-    nodePackages.vscode-json-languageserver
     # general helpful stuff
     et
     pass
