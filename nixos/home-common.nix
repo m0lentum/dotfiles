@@ -1,13 +1,17 @@
 { config, pkgs, ... }:
 
 let
-  # directories to ignore in tree and fzf listings
+  # directories to ignore in tree and fzf listings because they're
+  # never what I'm looking for and make lists too big to navigate
   listIgnores = [
     ".git"
     "node_modules"
     "build"
     "target"
     "__pycache__"
+    ".cache"
+    ".pytest_cache"
+    ".mypy_cache"
   ];
   # helper script because I always forget the exact way to nix-prefetch-url from github
   prefetchGithub = pkgs.writeScriptBin "nix-prefetch-github" ''
@@ -382,9 +386,7 @@ in
             -- format on save
             vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
 
-            -- enable servers
-
-            -- with completion using cmp-nvim
+            -- completion using cmp-nvim
             local capabilities = require('cmp_nvim_lsp').update_capabilities(
               vim.lsp.protocol.make_client_capabilities()
             )
@@ -395,6 +397,8 @@ in
               require('lspconfig')[lsp_name].setup(args)
             end
               
+            -- enable servers
+
             enable('rust_analyzer', {
               cmd = { "${pkgs.rust-analyzer}/bin/rust-analyzer" },
               settings = {
@@ -412,7 +416,6 @@ in
               },
             })
             enable('jsonls', {
-              -- the version in nixpkgs has a different name from the default
               cmd = {
                 "${pkgs.nodePackages.vscode-json-languageserver}/bin/vscode-json-languageserver",
                 "--stdio",
@@ -424,6 +427,7 @@ in
             enable('pyright')
 
             -- nicer diagnostic icons
+
             local signs = {
                 Error = " ",
                 Warn = " ",
@@ -481,9 +485,10 @@ in
                 find_files = {
                   layout_strategy = "horizontal",
                   -- remove leading ./, include gitignored and hidden files
-                  -- (except .git which is big and annoying and shouldn't be edited anyway)
+                  -- (except the stuff in listIgnores which is big and doesn't need to be seen)
                   find_command = {
-                    "fd", "--type", "f", "--strip-cwd-prefix", "--no-ignore", "--hidden", "--exclude", ".git"
+                    "fd", "--type", "f", "--strip-cwd-prefix", "--no-ignore", "--hidden",
+                    ${pkgs.lib.strings.concatMapStrings (i: ''"--exclude","${i}",'') listIgnores}
                   },
                 },
               },
