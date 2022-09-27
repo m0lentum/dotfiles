@@ -57,6 +57,11 @@ in
           "| fzf | cut -c -7 "
           "| xargs -o git commit --fixup"
         ];
+        chpick = pkgs.lib.concatStrings [
+          "!git log --all -n 50 --pretty=format:'%h %s' --no-merges "
+          "| fzf | cut -c -7 "
+          "| xargs -o git cherry-pick"
+        ];
       };
     };
     #
