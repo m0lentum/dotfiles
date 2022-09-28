@@ -386,6 +386,11 @@ in
               vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
               vim.keymap.set('n', '<leader>,', vim.lsp.buf.code_action, bufopts)
               vim.keymap.set('n', 'gq', vim.lsp.buf.range_formatting, bufopts)
+
+              -- override tsserver formatting with prettier from null-ls
+              if client.name == 'tsserver' then
+                client.resolved_capabilities.document_formatting = false
+              end
             end
 
             -- format on save
@@ -463,6 +468,7 @@ in
               sources = {
                 null_ls.builtins.formatting.isort,
                 null_ls.builtins.formatting.black,
+                null_ls.builtins.formatting.prettier,
               },
             }
             EOF
