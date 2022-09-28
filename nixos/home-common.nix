@@ -91,6 +91,8 @@ in
         gl = "git pull";
         gf = "git fetch";
         gco = "git checkout";
+        gs = "git switch";
+        gre = "git restore";
         gd = "git diff";
         gsh = "git show";
         gst = "git status";
