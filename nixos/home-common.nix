@@ -62,6 +62,11 @@ in
           "| fzf | cut -c -7 "
           "| xargs -o git cherry-pick"
         ];
+        showl = pkgs.lib.concatStrings [
+          "!git log --all -n 50 --pretty=format:'%h %s' --no-merges "
+          "| fzf | cut -c -7 "
+          "| xargs -o git show"
+        ];
       };
     };
     #
@@ -95,6 +100,7 @@ in
         gre = "git restore";
         gd = "git diff";
         gsh = "git show";
+        gsl = "git showl";
         gst = "git status";
         gb = "git branch";
         gsta = "git stash";
