@@ -42,6 +42,7 @@ let
         /data/games/Livesplit_1.4.5     \
         /data/music                     \
         /data/documents                 \
+        /data/zotero                    \
         /data/steam-windows/steamapps/common/Beat\ Saber/UserData \
         /data/steam-windows/steamapps/common/Beat\ Saber/Beat\ Saber_Data/CustomLevels \
         /home/mole/stuff                \
