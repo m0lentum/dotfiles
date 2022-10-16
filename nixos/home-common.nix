@@ -425,6 +425,9 @@ in
                 }
               },
             })
+            enable('clangd', {
+              cmd = { "${pkgs.clang-tools}/bin/clangd" },
+            })
             enable('tsserver', {
               cmd = {
                 "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server",
@@ -718,6 +721,8 @@ in
           plugin = nvim-treesitter.withPlugins (p: [
             p.tree-sitter-nix
             p.tree-sitter-rust
+            p.tree-sitter-c
+            p.tree-sitter-cpp
             p.tree-sitter-typescript
             p.tree-sitter-javascript
             p.tree-sitter-tsx
