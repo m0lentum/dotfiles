@@ -42,6 +42,8 @@ in
         ".vscode"
         ".vim"
         "Session.vim"
+        "compile_commands.json"
+        ".cache"
       ];
       lfs.enable = true;
       delta.enable = true;
