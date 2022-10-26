@@ -792,7 +792,7 @@ in
             }
             local opts = { noremap=true, silent=true }
             vim.keymap.set("", 'm', hop.hint_char1, opts)
-            vim.keymap.set("", 'l', hop.hint_lines, opts)
+            vim.keymap.set("", 'L', hop.hint_lines, opts)
             EOF
           '';
         }
