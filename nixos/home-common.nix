@@ -231,7 +231,7 @@ in
         bind t new-window -c "#{pane_current_path}"
         bind w kill-window
         # send pane to other existing window
-        bind \" command-prompt -p "send pane to :" "join-pane -t '%%'"
+        bind \" choose-window "join-pane -h -t '%%'"
 
         # vim-style copy-paste
         bind u copy-mode
