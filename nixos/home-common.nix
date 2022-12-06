@@ -406,12 +406,10 @@ in
             end
 
             -- format on save
-            vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.formatting_sync()]]
+            vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
 
             -- completion using cmp-nvim
-            local capabilities = require('cmp_nvim_lsp').update_capabilities(
-              vim.lsp.protocol.make_client_capabilities()
-            )
+            local capabilities = require('cmp_nvim_lsp').default_capabilities()
             local enable = function(lsp_name, args)
               local args = args or {}
               args["on_attach"] = on_attach
@@ -890,9 +888,8 @@ in
       shadow = false;
       fade = true;
       fadeDelta = 4;
-      blur = true;
-      inactiveOpacity = "0.90";
-      opacityRule = [
+      inactiveOpacity = 0.90;
+      opacityRules = [
         # Opaque at all times
         "100:class_g = 'firefox'"
         "100:class_g = 'feh'"
@@ -915,10 +912,18 @@ in
         "95:class_g = 'Spotify' && focused"
         "95:class_g = 'kitty' && focused"
       ];
-      blurExclude = [
-        "name *= 'rect-overlay'" # teams screenshare overlay
-        "class_g = 'peek'"
-      ];
+      settings = {
+        blur =
+          {
+            method = "gaussian";
+            size = 10;
+            deviation = 5.0;
+          };
+        blur-background-exclude = [
+          "name *= 'rect-overlay'" # teams screenshare overlay
+          "name *= 'Peek'"
+        ];
+      };
       # fixes flickering problems with glx backend
       backend = "xrender";
     };

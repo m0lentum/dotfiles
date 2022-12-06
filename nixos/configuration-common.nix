@@ -2,13 +2,6 @@
 
 # Everything that is identical between my laptop and desktop is here.
 {
-  nix = {
-    package = pkgs.nixUnstable;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-  };
-
   networking.networkmanager.enable = true;
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
@@ -26,7 +19,8 @@
 
   environment.systemPackages = with pkgs; [
     # git and firefox so we can easily install home-manager; it will handle the rest
-    git firefox
+    git
+    firefox
   ];
   programs.vim.defaultEditor = true;
   programs.fish.enable = true;
@@ -62,7 +56,7 @@
     home = "/home/mole";
     description = "mole";
     shell = pkgs.fish;
-    extraGroups = [ 
+    extraGroups = [
       "networkmanager"
       "wheel"
       "realtime"
@@ -73,7 +67,7 @@
       "libvirtd"
     ];
   };
-  
+
   # yubikey setup
   programs.gnupg.agent.enable = true;
   programs.ssh.startAgent = false;
@@ -83,7 +77,7 @@
     pinentryFlavor = "qt";
     enableSSHSupport = true;
   };
-  
+
   security.pam.yubico = {
     enable = true;
     debug = false;
