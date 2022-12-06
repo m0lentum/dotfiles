@@ -449,7 +449,9 @@ in
             enable('rnix', {
               cmd = { "${pkgs.rnix-lsp}/bin/rnix-lsp" },
             })
-            enable('pyright')
+            enable('pyright', {
+              cmd = { "${pkgs.pyright}/bin/pyright-langserver", "--stdio" },
+            })
 
             -- nicer diagnostic icons
 
