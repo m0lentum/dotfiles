@@ -13,6 +13,52 @@ let
     ".pytest_cache"
     ".mypy_cache"
   ];
+  # aliases for multiple shells in one place,
+  # separated into abbrs and aliases for fish
+  fishAbbrs = {
+    l = "lsd -al";
+    ltd = "lt --depth";
+    nnn = "nnn -adHe -P p";
+    docc = "docker-compose";
+    clip = "xclip -sel clip";
+    today = "date +%F";
+    datetime = "date +%FT%T%z";
+    # git
+    ga = "git add";
+    gc = "git commit -v";
+    "gc!" = "git commit -v --amend";
+    gl = "git pull";
+    gf = "git fetch";
+    gco = "git checkout";
+    gs = "git switch";
+    gre = "git restore";
+    gd = "git diff";
+    gsh = "git show";
+    gsl = "git showl";
+    gst = "git status";
+    gb = "git branch";
+    gsta = "git stash";
+    gstp = "git stash pop";
+    glg = "git log --stat";
+    glga = "git log --stat --graph --all";
+    glo = "git log --oneline";
+    gloa = "git log --oneline --graph --all";
+    grh = "git reset HEAD";
+  };
+  fishAliases = {
+    lt = builtins.concatStringsSep " " (
+      [ "lsd --tree -a" ] ++
+      (map (i: "-I " + i) listIgnores)
+    );
+  };
+  shellAliases = fishAbbrs // fishAliases;
+  nuAliases = shellAliases // {
+    today = "(date now | date format \"%F\")";
+    datetime = "(date now | date format \"%FT%T%z\")";
+  };
+  nuAliasesStr = builtins.concatStringsSep "\n"
+    (pkgs.lib.mapAttrsToList (k: v: "alias ${k} = ${v}") nuAliases);
+
   # helper script because I always forget the exact way to nix-prefetch-url from github
   prefetchGithub = pkgs.writeScriptBin "nix-prefetch-github" ''
     #! /usr/bin/env bash
@@ -81,46 +127,87 @@ in
           exec tmux
         end
       '';
-      shellAbbrs = {
-        ls = "lsd";
-        l = "lsd -al";
-        ll = "lsd -l";
-        ltd = "lt --depth";
-        nnn = "nnn -adHe -P p";
-        docc = "docker-compose";
-        clip = "xclip -sel clip";
-        date = "date +%F";
-        datetime = "date +%FT%T%z";
-        # git
-        ga = "git add";
-        gc = "git commit -v";
-        "gc!" = "git commit -v --amend";
-        gl = "git pull";
-        gf = "git fetch";
-        gco = "git checkout";
-        gs = "git switch";
-        gre = "git restore";
-        gd = "git diff";
-        gsh = "git show";
-        gsl = "git showl";
-        gst = "git status";
-        gb = "git branch";
-        gsta = "git stash";
-        gstp = "git stash pop";
-        glg = "git log --stat";
-        glga = "git log --stat --graph --all";
-        glo = "git log --oneline";
-        gloa = "git log --oneline --graph --all";
-        grh = "git reset HEAD";
-      };
-      # generally use abbrs for readability,
-      # but some long commands are better off as aliases
-      shellAliases = {
-        lt = builtins.concatStringsSep " " (
-          [ "lsd --tree -a" ] ++
-          (map (i: "-I " + i) listIgnores)
-        );
-      };
+      shellAbbrs = fishAbbrs;
+      shellAliases = fishAliases;
+    };
+    #
+    # NUSHELL
+    #
+    nushell = {
+      enable = true;
+      configFile.text =
+        ''
+          let-env config = {
+            edit_mode: vi
+            show_banner: false
+            color_config: {
+              # default hint color is invisible for some reason
+              hints: "#908080"
+            }
+          }
+
+          ${nuAliasesStr}
+
+          # direnv
+          # taken from home-manager git master; TODO: remove once it lands on stable
+          let-env config = ($env | default {} config).config
+          let-env config = ($env.config | default {} hooks)
+          let-env config = ($env.config | update hooks ($env.config.hooks | default [] pre_prompt))
+          let-env config = ($env.config | update hooks.pre_prompt ($env.config.hooks.pre_prompt | append {
+            code: "
+              let direnv = (${pkgs.direnv}/bin/direnv export json | from json)
+              let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
+              $direnv | load-env
+              "
+          }))
+        '';
+      envFile.text = ''
+        # starship
+
+        let-env STARSHIP_SHELL = "nu"
+
+        def create_left_prompt [] {
+            starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)'
+        }
+
+        let-env PROMPT_COMMAND = { create_left_prompt }
+        let-env PROMPT_COMMAND_RIGHT = ""
+
+        # starship brings its own indicator char
+        let-env PROMPT_INDICATOR_VI_INSERT = ""
+        let-env PROMPT_INDICATOR_VI_NORMAL = ""
+        let-env PROMPT_MULTILINE_INDICATOR = "| "
+
+        # zoxide (generated with `zoxide init nushell`
+        # since home-manager doesn't currently have automation for this)
+
+        let-env config = ($env | default {} config).config
+        let-env config = ($env.config | default {} hooks)
+        let-env config = ($env.config | update hooks ($env.config.hooks | default {} env_change))
+        let-env config = ($env.config | update hooks.env_change ($env.config.hooks.env_change | default [] PWD))
+        let-env config = ($env.config | update hooks.env_change.PWD ($env.config.hooks.env_change.PWD | append {|_, dir|
+          zoxide add -- $dir
+        }))
+
+        # Jump to a directory using only keywords.
+        def-env __zoxide_z [...rest:string] {
+          let arg0 = ($rest | append '~').0
+          let path = if (($rest | length) <= 1) && ($arg0 == '-' || ($arg0 | path expand | path type) == dir) {
+            $arg0
+          } else {
+            (zoxide query --exclude $env.PWD -- $rest | str trim -r -c "\n")
+          }
+          cd $path
+        }
+
+        # Jump to a directory using interactive search.
+        def-env __zoxide_zi  [...rest:string] {
+          cd $'(zoxide query -i -- $rest | str trim -r -c "\n")'
+        }
+
+        alias z = __zoxide_z
+        alias zi = __zoxide_zi
+      '';
     };
     #
     # STARSHIP
@@ -215,6 +302,9 @@ in
       keyMode = "vi";
       escapeTime = 0;
       extraConfig = ''
+        # use nushell which isn't login shell (yet) as I'm still testing it
+        set -g default-command "nu"
+
         # navigate panes with alt-arrow
         bind -n M-Right select-pane -R
         bind -n M-Up select-pane -U
