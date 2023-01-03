@@ -134,6 +134,10 @@ in
     # NUSHELL
     #
     nushell = {
+      # nushell is not set as login shell because it doesn't have the right
+      # environment variable setup and making it by hand is cumbersome.
+      # instead, fish is login shell, set up to automatically start tmux,
+      # and the tmux default command is set to "exec nu"
       enable = true;
       configFile.text =
         ''
@@ -315,8 +319,10 @@ in
       keyMode = "vi";
       escapeTime = 0;
       extraConfig = ''
-        # use nushell which isn't login shell (yet) as I'm still testing it
-        set -g default-command "nu"
+        # run nushell through fish (not as login shell)
+        # to get necessary environment variables.
+        # exec required to have new panes created in the current directory
+        set -g default-command "exec nu"
 
         # navigate panes with alt-arrow
         bind -n M-Right select-pane -R
