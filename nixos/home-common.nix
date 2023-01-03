@@ -137,6 +137,10 @@ in
       enable = true;
       configFile.text =
         ''
+          let carapace_completer = {|spans|
+              carapace $spans.0 nushell $spans | from json
+          }
+
           let-env config = {
             edit_mode: vi
             show_banner: false
@@ -144,6 +148,15 @@ in
               # default hint color is invisible for some reason
               hints: "#908080"
             }
+            external_completer: $carapace_completer
+            # nushell >=0.72 syntax for completions:
+            # completions: {
+            #   external: {
+            #     enable: true
+            #     max_results: 100
+            #     completer: $carapace_completer
+            #   }
+            # }
           }
 
           ${nuAliasesStr}
@@ -1032,6 +1045,7 @@ in
   # extra stuff not in programs and/or config files managed manually
   home.packages = with pkgs; [
     # cli/dev utils
+    carapace
     bat
     less
     du-dust
