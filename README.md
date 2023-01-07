@@ -45,6 +45,6 @@ Bug me about it on [Twitter](https://twitter.com/molentum_) or open an issue if 
     keys stored on a [Yubikey](https://www.yubico.com/products/yubikey-5-overview/)
   - [obsidian](https://obsidian.md/) for note taking,
     [zotero](https://www.zotero.org/) to manage references
-  - [strecthly](https://hovancik.net/stretchly/) to remind me to take breaks
+  - [safe eyes](https://github.com/slgobinath/SafeEyes) to remind me to take breaks
   - [redshift](http://jonls.dk/redshift/) to help with late night eye fatigue
   - [borg](https://www.borgbackup.org/) for backups

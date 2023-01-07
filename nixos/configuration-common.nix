@@ -69,6 +69,10 @@
   };
 
   # yubikey setup
+  # also requires ~/.gnupg/gpg.conf from https://github.com/drduh/config/blob/master/gpg.conf
+  # and ~/.gnupg/scdaemon.conf with the line `disable-ccid`
+  # for gpg-agent and yubico authenticator compatibility
+  # (TODO: automate installing these with nix)
   programs.gnupg.agent.enable = true;
   programs.ssh.startAgent = false;
   services.pcscd.enable = true;

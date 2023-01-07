@@ -592,7 +592,9 @@ in
               sources = {
                 null_ls.builtins.formatting.isort,
                 null_ls.builtins.formatting.black,
-                null_ls.builtins.formatting.prettier,
+                -- TODO: either add a max line width rule for markdown
+                -- or disable null-ls for markdown (while still using it for typescript)
+                -- null_ls.builtins.formatting.prettier,
               },
             }
             EOF
@@ -1072,9 +1074,9 @@ in
     # general helpful stuff
     et
     pass
-    stretchly
+    safeeyes
     networkmanagerapplet
-    yubioath-desktop
+    # TODO: add yubioath-flutter once it's on nixpkgs stable (yubioath-desktop doesn't work anymore)
     obsidian
     zotero
     # multimedia
