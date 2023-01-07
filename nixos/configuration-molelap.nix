@@ -17,16 +17,28 @@
   services.openssh = {
     enable = true;
     passwordAuthentication = false;
+    extraConfig = ''
+      StreamLocalBindUnlink yes
+    '';
   };
   users.extraUsers.mole.openssh.authorizedKeys.keyFiles = [
     "/home/mole/.ssh/moletable.pub"
   ];
+  # if ssh, use the forwarded socket (set to different path from
+  # default socket to allow both direct use and ssh use with yubikey)
+  environment.shellInit = ''
+    if [ -n "$SSH_CONNECTION" ]; then
+      export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh.remote"
+    else
+      export SSH_AUTH_SOCK="/run/user/$UID/gnupg/S.gpg-agent.ssh"
+    fi
+  '';
 
   services.xserver = {
-    videoDrivers = ["intel"];
+    videoDrivers = [ "intel" ];
     extraLayouts.fi-molemak = {
       description = "Finnish colemak with some modifier customization";
-      languages = ["fi"];
+      languages = [ "fi" ];
       symbolsFile = ../molemak.xkb;
     };
     layout = "fi-molemak";
