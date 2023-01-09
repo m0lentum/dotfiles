@@ -23,6 +23,8 @@ let
     clip = "xclip -sel clip";
     today = "date +%F";
     datetime = "date +%FT%T%z";
+    shut = "sudo systemctl poweroff";
+    rebo = "sudo systemctl reboot";
     # git
     ga = "git add";
     gc = "git commit -v";
