@@ -149,6 +149,7 @@ in
 
           let-env config = {
             edit_mode: vi
+            completion_algorithm: "fuzzy"
             show_banner: false
             color_config: {
               # default hint color is invisible for some reason
