@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  imports = [ 
+  imports = [
     ./hardware-molework.nix
     ./configuration-common.nix
   ];
@@ -23,12 +23,12 @@
   networking.hostName = "YOPL2109-14";
   networking.useDHCP = false;
   networking.interfaces.enp0s31f6.useDHCP = true;
-  
+
   services.xserver = {
     # videoDrivers = ["intel"];
     extraLayouts.fi-molemak = {
       description = "Finnish colemak with some modifier customization";
-      languages = ["fi"];
+      languages = [ "fi" ];
       symbolsFile = ../molemak.xkb;
     };
     # fi by default because I'll be using an ergodox with this one most of the time
@@ -54,7 +54,7 @@
   users.extraUsers.mole.openssh.authorizedKeys.keyFiles = [
     "/home/mole/.ssh/moleyubi.pub"
   ];
-  nix.trustedUsers = [ "root" "mole" ];
+  nix.settings.trusted-users = [ "root" "mole" ];
   # if ssh, use the forwarded socket (set to different path from
   # default socket to allow both direct use and ssh use with yubikey)
   environment.shellInit = ''
