@@ -28,7 +28,6 @@ let
     # git
     ga = "git add";
     gc = "git commit -v";
-    "gc!" = "git commit -v --amend";
     gl = "git pull";
     gf = "git fetch";
     gco = "git checkout";
