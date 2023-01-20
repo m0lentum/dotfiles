@@ -150,10 +150,6 @@ in
             edit_mode: vi
             completion_algorithm: "fuzzy"
             show_banner: false
-            color_config: {
-              # default hint color is invisible for some reason
-              hints: "#908080"
-            }
             external_completer: $carapace_completer
             # nushell >=0.72 syntax for completions:
             # completions: {
@@ -277,38 +273,28 @@ in
       settings = {
         font_size = 11;
         disable_ligatures = "cursor";
-        # solarized dark colors
-        foreground = "#839496";
-        foreground_bold = "#eee8d5";
-        cursor = "#839496";
-        cursor_foreground = "#002b36";
-        background = "#002b36";
-        # dark backgrounds
-        color0 = "#073642";
-        color8 = "#002b36";
-        # light backgrounds
-        color7 = "#eee8d5";
-        color15 = "#fdf6e3";
-        # grays
-        color10 = "#586e75";
-        color11 = "#657b83";
-        color12 = "#839496";
-        color14 = "#93a1a1";
-        # accents
-        color1 = "#dc322f";
-        color9 = "#cb4b16";
-        color2 = "#859900";
-        color3 = "#b58900";
-        color4 = "#268bd2";
-        color5 = "#d33682";
-        color13 = "#6c71c4";
-        color6 = "#2aa198";
-        color16 = "#cb4b16";
-        color17 = "#d33682";
-        color18 = "#073642";
-        color19 = "#586e75";
-        color20 = "#839496";
-        color21 = "#eee8d5";
+        # theme from https://github.com/bluz71/vim-nightfly-colors
+        background = "#011627";
+        foreground = "#acb4c2";
+        cursor = "#9ca1aa";
+        color0 = "#1d3b53";
+        color1 = "#fc514e";
+        color2 = "#a1cd5e";
+        color3 = "#e3d18a";
+        color4 = "#82aaff";
+        color5 = "#c792ea";
+        color6 = "#7fdbca";
+        color7 = "#a1aab8";
+        color8 = "#7c8f8f";
+        color9 = "#ff5874";
+        color10 = "#21c7a8";
+        color11 = "#ecc48d";
+        color12 = "#82aaff";
+        color13 = "#ae81ff";
+        color14 = "#7fdbca";
+        color15 = "#d6deeb";
+        selection_background = "#b2ceee";
+        selection_foreground = "#080808";
       };
     };
     #
@@ -340,7 +326,6 @@ in
         bind > split-window -h -c "#{pane_current_path}"
         bind v split-window -v -c "#{pane_current_path}"
         bind t new-window -c "#{pane_current_path}"
-        bind w kill-window
         # send pane to other existing window
         bind \" choose-window "join-pane -h -t '%%'"
 
@@ -363,32 +348,21 @@ in
         setw -g monitor-activity off
         set -g bell-action none
 
-        # panes and borders
-        set -g pane-border-style 'bg=colour0 fg=colour10'
-        set -g pane-active-border-style 'bg=colour0 fg=colour10'
-        set -g window-style 'bg=colour8 fg=colour242'
-        set -g window-active-style 'bg=colour8 fg=colour12'
+        # theming (only tmux-specific parts, rest done via kitty)
+
+        # pane borders
+        set -g pane-border-style 'fg=black'
+        set -g pane-active-border-style 'fg=green'
 
         # statusbar
-        set -g status-position bottom
-        set -g status-justify left
-        set -g status-style 'bg=colour0 fg=colour2 dim'
+        set -g status-style 'bg=black fg=white'
         set -g status-left ""
-        set -g status-right '#[fg=colour255,bg=colour0]%d.%m. #[fg=colour255,bg=colour0]%H:%M '
-        set -g status-right-length 50
+        set -g status-right '%d.%m. %H:%M '
         set -g status-left-length 20
-
-        setw -g window-status-current-style 'fg=colour233 bg=colour2 bold'
-        setw -g window-status-current-format ' #I#[fg=colour233]:#[fg=colour233]#W#[fg=colour233]#F '
-
-        setw -g window-status-style 'fg=colour255 bg=colour0'
-        setw -g window-status-format ' #I#[fg=colour255]:#[fg=colour255]#W#[fg=colour255]#F '
-
-        # messages
-        set -g message-style 'fg=colour0 bg=colour6 bold'
-
-        # only close tabs by closing every terminal
-        unbind w
+        setw -g window-status-style 'bg=black fg=white'
+        setw -g window-status-current-style 'bg=green fg=black bold'
+        setw -g window-status-format ' #I:#W#F '
+        setw -g window-status-current-format ' #I:#W#F '
       '';
     };
     #
