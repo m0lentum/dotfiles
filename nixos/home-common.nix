@@ -966,7 +966,6 @@ in
         }
         vim-commentary
         vim-surround
-        vim-tmux-focus-events
         vim-sleuth # autodetect tab settings
         vim-cool # automatically un-highlight search
 
