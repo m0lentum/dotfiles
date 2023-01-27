@@ -430,14 +430,6 @@ in
         set nobackup
         set nowritebackup
 
-        " relative line numbers, only in focused normal mode
-        set number relativenumber
-        augroup numbertoggle
-          autocmd!
-          autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-          autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-        augroup END
-
         set cursorline
         set cursorcolumn
         set conceallevel=1
