@@ -15,7 +15,15 @@
   services.jack = {
     jackd.enable = true;
     jackd.extraOptions = [
-      "-R" "-dalsa" "-dhw:USB" "--period" "256" "--nperiods" "3" "--rate" "48000"
+      "-R"
+      "-dalsa"
+      "-dhw:USB"
+      "--period"
+      "256"
+      "--nperiods"
+      "3"
+      "--rate"
+      "48000"
     ];
     alsa.enable = false;
   };
@@ -25,6 +33,8 @@
     AWESOME_PADDING_DP_0 = "40";
     AWESOME_PADDING_DP_2 = "200";
     AWESOME_RYZEN_TEMP = "1";
+    BORG_REPO = "/backup/borg";
+    BORG_PASSCOMMAND = "pass show home/borg";
   };
 
   boot.supportedFilesystems = [ "ntfs" ];
@@ -45,7 +55,7 @@
   networking.firewall.allowedTCPPorts = [ 8080 8000 9000 ];
 
   services.xserver.layout = "fi";
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   services.xserver.wacom.enable = true;
 
   services.printing = {

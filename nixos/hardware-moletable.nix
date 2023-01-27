@@ -36,7 +36,13 @@
       options = [ "rw" "uid=1000" "gid=100" ];
     };
 
+  fileSystems."/backup" =
+    { device = "/dev/disk/by-uuid/100C-2B5D";
+      fsType = "vfat";
+      options = [ "rw" "uid=1000" "gid=100" "dmask=007" "fmask=117" ];
+    };
+
   swapDevices = [ ];
 
-  nix.maxJobs = lib.mkDefault 16;
+  nix.settings.max-jobs = lib.mkDefault 16;
 }

@@ -11,14 +11,11 @@ let
       ffmpeg -f mjpeg -i "http://$1/live" -pix_fmt yuv420p -f v4l2 /dev/video0
     fi
   '';
+  # environment variables defining the repo location are set in configuration-moletable.nix
+  # so that they are also in effect when using the borg command manually
   backup = pkgs.writeScriptBin "backup" ''
     #! /usr/bin/env nix-shell
     #! nix-shell -p borgbackup -i bash
-
-    if [[ -z $BORG_REPO || -z $BORG_PASSPHRASE ]]; then
-      echo "Please set BORG_REPO and BORG_PASSPHRASE"
-      exit 1
-    fi
 
     # some helpers and error handling:
     echo() { printf "\n%s %s\n\n" "$( date )" "$*" >&2; }
@@ -158,5 +155,6 @@ in
     artyFX
 
     lm_sensors
+    borgbackup
   ]);
 }
