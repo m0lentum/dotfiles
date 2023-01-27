@@ -548,12 +548,14 @@ in
                 local hl = "DiagnosticSign" .. type
                 vim.fn.sign_define(hl, {text = icon, texthl = hl, numhl = hl})
             end
-            -- prioritize errors and warnings in the sign column, otherwise everything looks like hints
-            vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-              vim.lsp.diagnostic.on_publish_diagnostics, {
-                severity_sort = true
-              }
-            )
+            vim.diagnostic.config({
+              -- prioritize errors and warnings in the sign column, otherwise everything looks like hints
+              severity_sort = true,
+              virtual_text = {
+                prefix = "●",
+                source = "if_many",
+              },
+            })
             EOF
           '';
         }
@@ -740,8 +742,8 @@ in
             src = pkgs.fetchFromGitHub {
               owner = "bluz71";
               repo = "vim-nightfly-guicolors";
-              rev = "60b1893c58bc711b1f41611ada19ee06b6c1f403";
-              sha256 = "1jlj4qcjdylqa8l1i6ddwcfwggmfzh5c7wq11sbly3hf11srzf03";
+              rev = "33d094aa4c5864796615af20026ab3d792cfd482";
+              sha256 = "0l02wgzr7nz50ns1azxpkrm2hnv2dc84vyb04r8sxyynahlh9b7b";
             };
             # swap colors around for more green
             preInstall = ''
@@ -754,6 +756,20 @@ in
           config = ''
             colorscheme nightfly
             let g:nightflyCursorColor=1
+            lua << EOF
+            -- overrides
+            local custom_highlight = vim.api.nvim_create_augroup("CustomHighlight", {})
+            vim.api.nvim_create_autocmd("ColorScheme", {
+              pattern = "nightfly",
+              callback = function()
+                vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { link = "DiagnosticError" })
+                vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { link = "DiagnosticWarn" })
+                vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { link = "DiagnosticInfo" })
+                vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { link = "DiagnosticHint" })
+              end,
+              group = custom_highlight,
+            })
+            EOF
           '';
         }
         {
