@@ -746,8 +746,6 @@ in
             '';
           };
           config = ''
-            colorscheme nightfly
-            let g:nightflyCursorColor=1
             lua << EOF
             -- overrides
             local custom_highlight = vim.api.nvim_create_augroup("CustomHighlight", {})
@@ -762,6 +760,8 @@ in
               group = custom_highlight,
             })
             EOF
+            let g:nightflyCursorColor=1
+            colorscheme nightfly
           '';
         }
         {
