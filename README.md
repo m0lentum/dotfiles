@@ -24,9 +24,9 @@ Bug me about it on [Twitter](https://twitter.com/molentum_) or open an issue if 
   - colors from [solarized](https://ethanschoonover.com/solarized/)
   - screenshots with [maim](https://github.com/naelstrof/maim)
 - compositor: [picom](https://github.com/yshui/picom)
-- shell: [fish](https://fishshell.com/)
+- terminal: [kitty](https://sw.kovidgoyal.net/kitty/) with [tmux](https://github.com/tmux/tmux)
+  - shell: [nushell](https://www.nushell.sh/)
   - prompt: [starship](https://starship.rs/)
-  - terminal: [kitty](https://sw.kovidgoyal.net/kitty/) with [tmux](https://github.com/tmux/tmux)
 - code editor: [neovim](https://neovim.io/)
   - using Neovim's native language server support,
     [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)

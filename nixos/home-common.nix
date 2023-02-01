@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 let
+  # generally avoiding unstable but using it to keep up with some
+  # particularly fast-moving programs like nushell
+  pkgsUnstable = import <nixos-unstable> { };
+
   # directories to ignore in tree and fzf listings because they're
   # never what I'm looking for and make lists too big to navigate
   listIgnores = [
@@ -140,25 +144,26 @@ in
       # instead, fish is login shell, set up to automatically start tmux,
       # and the tmux default command is set to "exec nu"
       enable = true;
+      # changes come frequently enough and make big enough changes to online docs
+      # to warrant getting the version on unstable
+      package = pkgsUnstable.nushell;
       configFile.text =
         ''
-          let carapace_completer = {|spans|
-              carapace $spans.0 nushell $spans | from json
-          }
-
           let-env config = {
             edit_mode: vi
-            completion_algorithm: "fuzzy"
+            completions: {
+              algorithm: "fuzzy"
+            }
             show_banner: false
-            external_completer: $carapace_completer
-            # nushell >=0.72 syntax for completions:
-            # completions: {
-            #   external: {
-            #     enable: true
-            #     max_results: 100
-            #     completer: $carapace_completer
-            #   }
-            # }
+            completions: {
+              external: {
+                enable: true
+                max_results: 100
+                completer: {|spans|
+                  carapace $spans.0 nushell $spans | from json
+                }
+              }
+            }
           }
 
           ${nuAliasesStr}
@@ -190,7 +195,7 @@ in
           # Jump to a directory using only keywords.
           def-env __zoxide_z [...rest:string] {
             let arg0 = ($rest | append '~').0
-            let path = if (($rest | length) <= 1) && ($arg0 == '-' || ($arg0 | path expand | path type) == dir) {
+            let path = if (($rest | length) <= 1) and ($arg0 == '-' or ($arg0 | path expand | path type) == dir) {
               $arg0
             } else {
               (zoxide query --exclude $env.PWD -- $rest | str trim -r -c "\n")
