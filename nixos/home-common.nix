@@ -150,11 +150,12 @@ in
       configFile.text =
         ''
           let-env config = {
-            edit_mode: vi
-            completions: {
-              algorithm: "fuzzy"
-            }
             show_banner: false
+            edit_mode: vi
+            cursor_shape: {
+              vi_insert: line
+              vi_normal: block
+            }
             completions: {
               external: {
                 enable: true
@@ -164,6 +165,29 @@ in
                 }
               }
             }
+            keybindings: [
+              {
+                name: fzf_file
+                modifier: control
+                keycode: char_f
+                mode: [emacs, vi_insert, vi_normal]
+                event: {
+                  send: executehostcommand
+                  # big messy command to wrap the result in ticks only if it has spaces or quotes
+                  cmd: `commandline --insert (fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
+                }
+              },
+              {
+                name: fzf_dir
+                modifier: alt
+                keycode: char_f
+                mode: [emacs, vi_insert, vi_normal]
+                event: {
+                  send: executehostcommand
+                  cmd: `commandline --insert (fd --type d | fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
+                }
+              },
+            ]
           }
 
           ${nuAliasesStr}
