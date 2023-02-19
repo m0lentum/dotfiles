@@ -635,6 +635,7 @@ in
         # completions with cmp-nvim
         cmp-nvim-lsp
         cmp-nvim-ultisnips
+        cmp-omni
         {
           plugin = nvim-cmp;
           # from https://github.com/hrsh7th/nvim-cmp
@@ -662,6 +663,7 @@ in
                 }),
                 sources = cmp.config.sources({
                   { name = 'nvim_lsp' },
+                  { name = 'omni' },
                   { name = 'ultisnips' },
                 }, {
                   { name = 'buffer' },
