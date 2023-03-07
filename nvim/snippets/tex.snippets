@@ -1,14 +1,6 @@
-global !p
-def math():
-	return vim.eval('vimtex#syntax#in_mathzone()') == '1'
-def comment():
-	return vim.eval('vimtex#syntax#in_comment()') == '1'
-def env(name):
-	[x,y] = vim.eval("vimtex#env#is_inside('" + name + "')")
-	return x != '0' and y != '0'
-endglobal
-
-# writing
+#
+# text shorthands
+#
 
 snippet sec* "section*" bA
 \section*{$1}
@@ -50,42 +42,9 @@ snippet pci* "parencite*"
 \parencite*{$1}$0
 endsnippet
 
-# math
-
-snippet beg "begin{} / end{}"
-\begin{$1}
-	$0
-\end{$1}
-endsnippet
-
-snippet bel "begin{} / end{} + label"
-\begin{$1}\label{$2}
-	$0
-\end{$1}
-endsnippet
-
-snippet mb "math block" bA
-\[
-	$0
-\]
-endsnippet
-
-snippet ali "align" bA
-\begin{align*}
-	${1:${VISUAL}}
-\end{align*}
-endsnippet
-
-snippet mat "bmatrix"
-\begin{bmatrix}
-	$0
-\end{bmatrix}
-endsnippet
-
-context "math()"
-snippet // "fraction" iA
-\frac{$1}{$2}$0
-endsnippet
+#
+# symbol shorthands
+#
 
 snippet -> "right arrow"
 \rightarrow
@@ -95,47 +54,92 @@ snippet <- "left arrow"
 \leftarrow
 endsnippet
 
-context "math()"
+snippet par "partial derivative" i
+\partial
+endsnippet
+
+#
+# math
+#
+
+snippet beg "begin{} / end{}"
+\begin{$1}
+  ${VISUAL}$0
+\end{$1}
+endsnippet
+
+snippet bel "begin{} / end{} + label"
+\begin{$1}\label{$2}
+  ${VISUAL}$0
+\end{$1}
+endsnippet
+
+snippet mb "math block" bA
+\[
+  ${VISUAL}$0
+\]
+endsnippet
+
+snippet ali "align" bA
+\begin{align*}
+  ${VISUAL}$0
+\end{align*}
+endsnippet
+
+snippet mat "bmatrix"
+\begin{bmatrix}
+  ${VISUAL}$0
+\end{bmatrix}
+endsnippet
+
+snippet // "fraction" iA
+\frac{$1}{$2}$0
+endsnippet
+
 snippet "d([^\sd]+)d([^\sd]+)" "derivative dy/dx" r
 \frac{d`!p snip.rv=match.group(1)`}{d`!p snip.rv=match.group(2)`}
 endsnippet
 
-context "math()"
+snippet dd "first derivative, fill variables manually"
+\frac{d$1}{d$2}$0
+endsnippet
+
 snippet "dd([^\sp]+)dd([^\sp]+)" "second derivative d^2y/dx^2" r
 \frac{d^2 `!p snip.rv=match.group(1)`}{d `!p snip.rv=match.group(2)`^2}
 endsnippet
 
-context "math()"
 snippet "p([^\sp]+)p([^\sp]+)" "partial derivative py/px" r
 \frac{\partial `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)`}
 endsnippet
 
-context "math()"
+snippet pp "partial derivative, fill variables manually"
+\frac{\partial $1}{\partial $2}$0
+endsnippet
+
 snippet "pp([^\sp]+)pp([^\sp]+)" "second partial perivative p^2y/px^2" r
 \frac{\partial^2 `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)`^2}
 endsnippet
 
-context "math()"
 snippet "pp([^\sp]+)p([^\sp]+)p([^\sp]+)" "second partial perivative p^2y/pxpz" r
 \frac{\partial^2 `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)` \partial `!p snip.rv=match.group(3)`}
 endsnippet
 
-context "math()"
 snippet "([a-zA-Z])bb" "postfix mathbb" ri
 \mathbb{`!p snip.rv=match.group(1)`}
 endsnippet
 
-context "math()"
 snippet "([a-zA-Z])bf" "postfix mathbf" ri
 \mathbf{`!p snip.rv=match.group(1)`}
 endsnippet
 
-context "math()"
-snippet "([a-zA-Z])bar" "postfix overline" riA
+snippet "([a-zA-Z])cal" "postfix mathcal" ri
+\mathcal{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet "([a-zA-Z])bar" "postfix overline" ri
 \overline{`!p snip.rv=match.group(1)`}
 endsnippet
 
-context "math()"
-snippet "([a-zA-Z])hat" "postfix hat" riA
+snippet "([a-zA-Z])hat" "postfix hat" ri
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet

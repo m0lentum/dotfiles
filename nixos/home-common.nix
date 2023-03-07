@@ -591,9 +591,7 @@ in
               sources = {
                 null_ls.builtins.formatting.isort,
                 null_ls.builtins.formatting.black,
-                -- TODO: either add a max line width rule for markdown
-                -- or disable null-ls for markdown (while still using it for typescript)
-                -- null_ls.builtins.formatting.prettier,
+                null_ls.builtins.formatting.prettier,
               },
             }
             EOF
@@ -642,8 +640,12 @@ in
           config = ''
             set completeopt=menu,menuone,noselect
             lua <<EOF
-              local cmp = require('cmp')
+              require("cmp_nvim_ultisnips").setup {
+                -- fixes snippets not working inside markdown math blocks
+                filetype_source = "ultisnips_default",
+              }
 
+              local cmp = require('cmp')
               cmp.setup({
                 snippet = {
                   expand = function(args)
@@ -860,6 +862,7 @@ in
             p.tree-sitter-haskell
             p.tree-sitter-python
             p.tree-sitter-markdown
+            p.tree-sitter-markdown-inline
             p.tree-sitter-html
             p.tree-sitter-scss
             p.tree-sitter-css
@@ -958,7 +961,7 @@ in
             local hop = require('hop')
             hop.setup {
               -- colemak-friendly keys
-              keys = "tsradneiohpfwqgluyjvcxzbmk"
+              keys = "tsradneiohpfwqgluyjkbcxzvm,"
             }
             local opts = { noremap=true, silent=true }
             vim.keymap.set("", 'm', hop.hint_char1, opts)

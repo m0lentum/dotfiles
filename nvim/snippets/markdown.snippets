@@ -2,28 +2,28 @@ extends tex
 
 snippet cb "code block" bA
 \`\`\`${1:rust}
-$0
+${VISUAL}$0
 \`\`\`
 endsnippet
 
 snippet py "python code block in a jupytext md file" b
 \`\`\`python
-$0
+${VISUAL}$0
 \`\`\`
 endsnippet
 
 # custom Zola conventions for blogging
 snippet side "sidenote block" b
 {% sidenote() %}
-$0
+${VISUAL}$0
 {% end %}
 endsnippet
 
 # tex overrides for mathjax versions
 priority 1
 snippet mb "math block" bA
-<p>\$\$
-	$0
-\$\$</p>
+\$\$
+${VISUAL}$0
+\$\$
 endsnippet
 
