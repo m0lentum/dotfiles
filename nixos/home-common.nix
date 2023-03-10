@@ -258,6 +258,8 @@ in
     #
     starship = {
       enable = true;
+      # get from unstable to ensure compatibility with nushell from unstable
+      package = pkgsUnstable.starship;
       settings = {
         format = pkgs.lib.concatStrings [
           "$username"
