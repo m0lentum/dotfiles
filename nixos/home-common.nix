@@ -1003,7 +1003,6 @@ in
         vim-commentary
         vim-surround
         vim-sleuth # autodetect tab settings
-        vim-cool # automatically un-highlight search
 
         {
           # discord rich presence, but opt-in with an environment variable
