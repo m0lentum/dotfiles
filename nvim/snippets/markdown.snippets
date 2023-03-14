@@ -6,20 +6,17 @@ ${VISUAL}$0
 \`\`\`
 endsnippet
 
-snippet py "python code block in a jupytext md file" b
+# quick special case shorthand for jupytext editing
+snippet py "python code block" b
 \`\`\`python
 ${VISUAL}$0
 \`\`\`
 endsnippet
 
-# custom Zola conventions for blogging
-snippet side "sidenote block" b
-{% sidenote() %}
-${VISUAL}$0
-{% end %}
-endsnippet
+#
+# tex overrides for mathjax/katex
+#
 
-# tex overrides for mathjax versions
 priority 1
 snippet mb "math block" bA
 \$\$
@@ -27,3 +24,20 @@ ${VISUAL}$0
 \$\$
 endsnippet
 
+# align* environment doesn't work with all renderers
+priority 1
+snippet ali "align" bA
+\begin{aligned}
+${VISUAL}$0
+\end{aligned}
+endsnippet
+
+#
+# custom Zola conventions for blogging
+#
+
+snippet side "sidenote block" b
+{% sidenote() %}
+${VISUAL}$0
+{% end %}
+endsnippet
