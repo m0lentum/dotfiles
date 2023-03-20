@@ -22,7 +22,7 @@ let
   fishAbbrs = {
     l = "lsd -al";
     ltd = "lt --depth";
-    nnn = "nnn -adHe -P p";
+    nnp = "nnn -adHe -P p";
     docc = "docker-compose";
     clip = "xclip -sel clip";
     today = "date +%F";
