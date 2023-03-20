@@ -1001,7 +1001,12 @@ in
           '';
         }
         vim-commentary
-        vim-surround
+        {
+          plugin = nvim-surround;
+          config = ''
+            lua require("nvim-surround").setup()
+          '';
+        }
         vim-sleuth # autodetect tab settings
 
         {
