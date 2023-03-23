@@ -509,7 +509,7 @@ in
 
               -- override tsserver formatting with prettier from null-ls
               if client.name == 'tsserver' then
-                client.server_capabilities.document_formatting = false
+                client.server_capabilities.documentFormattingProvider = false
               end
             end
 
