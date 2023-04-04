@@ -18,10 +18,14 @@
   lfs.enable = true;
   delta.enable = true;
   extraConfig = {
-    pull = { rebase = true; };
-    fetch = { prune = true; };
-    diff = { colorMoved = "zebra"; };
-    init = { defaultBranch = "main"; };
+    pull.rebase = true;
+    fetch.prune = true;
+    diff.colorMoved = "zebra";
+    init.defaultBranch = "main";
+    merge.tool = "nvim";
+    mergetool.nvim.cmd = ''nvim "$MERGED"'';
+    mergetool.prompt = false;
+    mergetool.keepBackup = false;
   };
   aliases = {
     fixup = pkgs.lib.concatStrings [

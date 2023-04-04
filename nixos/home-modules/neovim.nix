@@ -237,7 +237,10 @@
             }),
             sources = cmp.config.sources({
               { name = 'nvim_lsp' },
-              { name = 'omni' },
+              -- TODO: omnifunc completion is needed with LaTeX,
+              -- but causes problems with other languages.
+              -- figure out how to enable for LaTeX only
+              -- { name = 'omni' },
               { name = 'ultisnips' },
             }, {
               { name = 'buffer' },
@@ -367,6 +370,9 @@
         EOF
         let g:nightflyCursorColor=1
         colorscheme nightfly
+
+        highlight DiffText guibg=#14332c
+        highlight DiffAdd guibg=#1d354c
       '';
     }
     {
@@ -415,6 +421,21 @@
         nnoremap <silent><C-PageUp> :BufferLineCyclePrev<CR>
         nnoremap <silent><leader><C-PageDown> :BufferLineMoveNext<CR>
         nnoremap <silent><leader><C-PageUp> :BufferLineMovePrev<CR>
+      '';
+    }
+    {
+      plugin = pkgs.vimUtils.buildVimPlugin {
+        name = "git-conflict.nvim";
+        pname = "git-conflict.nvim";
+        src = pkgs.fetchFromGitHub {
+          owner = "akinsho";
+          repo = "git-conflict.nvim";
+          rev = "v1.0.0";
+          sha256 = "07zk1fh1ira2ynfxql1c7z3qimp0wkl7dq7libnjgzca6a7qc4ml";
+        };
+      };
+      config = ''
+        lua require("git-conflict").setup()
       '';
     }
 
