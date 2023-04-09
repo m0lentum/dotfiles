@@ -224,10 +224,6 @@
                 vim.fn["UltiSnips#Anon"](args.body)
               end,
             },
-            window = {
-              -- completion = cmp.config.window.bordered(),
-              -- documentation = cmp.config.window.bordered(),
-            },
             mapping = cmp.mapping.preset.insert({
               ['<C-u>'] = cmp.mapping.scroll_docs(-8),
               ['<C-d>'] = cmp.mapping.scroll_docs(8),
@@ -237,10 +233,18 @@
             }),
             sources = cmp.config.sources({
               { name = 'nvim_lsp' },
-              -- TODO: omnifunc completion is needed with LaTeX,
-              -- but causes problems with other languages.
-              -- figure out how to enable for LaTeX only
-              -- { name = 'omni' },
+              { name = 'ultisnips' },
+            }, {
+              { name = 'buffer' },
+            })
+          })
+
+          -- omnifunc completion for latex only,
+          -- it causes problems in some languages with LSPs
+          cmp.setup.filetype('tex', {
+            sources = cmp.config.sources({
+              { name = 'nvim_lsp' },
+              { name = 'omni' },
               { name = 'ultisnips' },
             }, {
               { name = 'buffer' },
