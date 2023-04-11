@@ -57,11 +57,12 @@ in
     teams
     zulip
     spotify
-    stretchly
     virt-manager
     vagrant
     docker-compose
     pyright
+    fuse
+    bindfs
   ];
   # vscode with robocorp extensions
   programs.vscode = {

@@ -84,6 +84,7 @@ in
   home.packages = with pkgs; [
     # cli/dev utils
     carapace
+    gnumake
     bat
     less
     du-dust
@@ -106,7 +107,8 @@ in
     pass
     safeeyes
     networkmanagerapplet
-    # TODO: add yubioath-flutter once it's on nixpkgs stable (yubioath-desktop doesn't work anymore)
+    # this is not on stable yet and the old yubioath-desktop doesn't work anymore
+    pkgsUnstable.yubioath-flutter
     obsidian
     zotero
     # multimedia
