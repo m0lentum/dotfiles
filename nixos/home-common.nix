@@ -64,9 +64,6 @@ in
 
   services = {
     lorri.enable = true;
-    #
-    # PICOM
-    #
     picom = import ./home-modules/picom.nix { };
     unclutter.enable = true;
     redshift = {
