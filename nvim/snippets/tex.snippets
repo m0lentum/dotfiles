@@ -3,31 +3,27 @@
 #
 
 snippet sec* "section*" bA
-\section*{$1}
-$0
+\section*{$1}$0
 endsnippet
 
 snippet sec- "section" bA
-\section{$1}
-$0
+\section{$1}$0
 endsnippet
 
 snippet sub* "subsection*" bA
-\subsection*{$1}
-$0
+\subsection*{$1}$0
 endsnippet
 
 snippet sub- "subsection" bA
-\subsection{$1}
-$0
+\subsection{$1}$0
 endsnippet
 
 snippet bf "textbf{}"
-\textbf{$1}$0
+\textbf{${VISUAL:1}}$0
 endsnippet
 
 snippet it "textit{}"
-\textit{$1}$0
+\textit{${VISUAL:1}}$0
 endsnippet
 
 snippet ci "textcite"
@@ -98,6 +94,18 @@ snippet mb "math block" bA
 \[
   ${VISUAL}$0
 \]
+endsnippet
+
+snippet eq "numbered equation" b
+\begin{equation}
+  ${VISUAL}$0
+\end{equation}
+endsnippet
+
+snippet eqa "numbered array of equations" b
+\begin{eqnarray}
+  ${VISUAL}$0
+\end{eqnarray}
 endsnippet
 
 snippet ali "align" bA

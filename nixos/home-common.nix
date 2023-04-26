@@ -110,6 +110,7 @@ in
     zotero
     # multimedia
     pdftk
+    mupdf
     pulsemixer
     moreutils
     ffmpeg

@@ -290,18 +290,13 @@
         let g:tex_flavor = 'latex'
         let g:tex_conceal = 'abdmg'
         autocmd FileType tex,markdown set conceallevel=1
-        " for some reason this is empty by default, copied from docs
+        " for some reason this is empty by default,
+        " engines I use copied from docs
         let g:vimtex_compiler_latexmk_engines = {
           \ '_'                : '-pdf',
-          \ 'pdflatex'         : '-pdf',
-          \ 'dvipdfex'         : '-pdfdvi',
-          \ 'lualatex'         : '-lualatex',
           \ 'xelatex'          : '-xelatex -shell-escape',
-          \ 'context (pdftex)' : '-pdf -pdflatex=texexec',
-          \ 'context (luatex)' : '-pdf -pdflatex=context',
-          \ 'context (xetex)'  : '-pdf -pdflatex=""texexec --xtx""',
           \}
-        let g:vimtex_view_method='zathura'
+        let g:vimtex_view_method='mupdf'
       '';
     }
     {

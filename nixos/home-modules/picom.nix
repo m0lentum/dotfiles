@@ -11,6 +11,8 @@
     "100:class_g = 'feh'"
     "100:class_g = 'Sxiv'"
     "100:class_g = 'Zathura'"
+    # mupdf doesn't have a class, workaround using name
+    "100:name *= '.pdf'"
     "100:class_g = 'Octave'"
     "100:class_g = 'vlc'"
     "100:class_g = 'mpv'"
