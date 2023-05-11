@@ -5,7 +5,7 @@ let
   fishAbbrs = {
     l = "lsd -al";
     ltd = "lt --depth";
-    nnp = "nnn -adHe -P p";
+    nnn = "nnn -adHe -P p";
     docc = "docker-compose";
     clip = "xclip -sel clip";
     today = "date +%F";
@@ -41,8 +41,14 @@ let
   };
   shellAliases = fishAbbrs // fishAliases;
   nuAliases = shellAliases // {
-    today = "(date now | date format \"%F\")";
-    datetime = "(date now | date format \"%FT%T%z\")";
+    # TODO: these don't work with nu 0.79, figure out why
+    # today = "(date now | date format \"%F\")";
+    # datetime = "(date now | date format \"%FT%T%z\")";
+
+    # still need to overwrite these
+    # because the fish versions don't work with nu
+    today = "date now";
+    datetime = "date now";
   };
   nuAliasesStr = builtins.concatStringsSep "\n"
     (pkgs.lib.mapAttrsToList (k: v: "alias ${k} = ${v}") nuAliases);
