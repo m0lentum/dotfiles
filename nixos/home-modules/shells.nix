@@ -88,6 +88,13 @@ let
               enable: true
               max_results: 100
               completer: {|spans|
+                # workaround for a bug with custom completers and aliases in nu v0.77+,
+                # see https://github.com/nushell/nushell/issues/8483
+                let has_alias = ($nu.scope.aliases | where name == $spans.0)
+                let spans = (if not ($has_alias | is-empty) {
+                  # put the first word of the expanded alias first in the span
+                  $spans | skip 1 | prepend ($has_alias | get expansion | split words | get 0)
+                } else { $spans })
                 carapace $spans.0 nushell $spans | from json
               }
             }
