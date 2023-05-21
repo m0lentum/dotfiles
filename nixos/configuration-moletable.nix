@@ -73,7 +73,7 @@
     "Option \"metamodes\" "
     "\"DP-0: nvidia-auto-select +1080+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, "
     "DP-2: nvidia-auto-select +3640+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, "
-    "DVI-D-0: nvidia-auto-select +0+0 {Rotation=left, ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}\""
+    "HDMI-0: nvidia-auto-select +0+0 {Rotation=left, ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}\""
     "Option \"DPI\" \"96 x 96\""
   ];
 
