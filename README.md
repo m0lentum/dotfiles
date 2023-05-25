@@ -1,16 +1,10 @@
 ## Summary
 
-This is my home computer setup aiming for pragmatic, keyboard-focused usage
-while still looking awesome.
+This is my home computer setup aiming for pragmatic,
+keyboard-focused usage while still looking awesome.
 
-...
-
-_pun intended_
-
-I spend most of my time writing code, but I also draw, make music and play games on this.
-
-There used to be a screenshot here but many things changed and I couldn't be bothered to take another.
-Bug me about it on [Twitter](https://twitter.com/molentum_) or open an issue if you want to see it.
+I spend most of my time writing code,
+but I also draw, make music and play games on this.
 
 ## Nonexhaustive list of programs and features
 
@@ -32,17 +26,15 @@ Bug me about it on [Twitter](https://twitter.com/molentum_) or open an issue if 
     [nvim-cmp](https://github.com/hrsh7th/nvim-cmp)
     and [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) for
     smooth coding and navigation
-  - favorite themes:
-    [nightfly](https://github.com/bluz71/vim-nightfly-guicolors),
-    [oceanic-material](https://github.com/glepnir/oceanic-material)
+  - theme: [nightfly](https://github.com/bluz71/vim-nightfly-guicolors)
   - LaTeX setup with [vimtex](https://github.com/lervag/vimtex) and
     [ultisnips](https://github.com/SirVer/ultisnips) based on [this blog post
     by Gilles Castel](https://castel.dev/post/lecture-notes-1/)
 - drawing with [krita](https://krita.org/)
 - making music with [ardour](https://ardour.org/)
 - other cool stuff:
-  - [pass](https://www.passwordstore.org/) for password management with GPG
-    keys stored on a [Yubikey](https://www.yubico.com/products/yubikey-5-overview/)
+  - [pass](https://www.passwordstore.org/) for password management
+    with GPG keys stored on a [Yubikey](https://www.yubico.com/products/yubikey-5-overview/)
   - [obsidian](https://obsidian.md/) for note taking,
     [zotero](https://www.zotero.org/) to manage references
   - [safe eyes](https://github.com/slgobinath/SafeEyes) to remind me to take breaks
