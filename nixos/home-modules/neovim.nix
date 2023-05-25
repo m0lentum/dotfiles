@@ -318,23 +318,6 @@
     # visuals
     #
     {
-      # custom fork of the oceanic-material theme
-      plugin = pkgs.vimUtils.buildVimPlugin {
-        name = "oceanic-material";
-        pname = "oceanic-material";
-        src = ../../nvim/oceanic-material;
-      };
-      config = ''
-        set termguicolors
-        let g:oceanic_material_allow_bold=1
-        let g:oceanic_material_allow_italic=1
-        let g:oceanic_material_allow_underline=1
-        let g:oceanic_material_allow_undercurl=1
-        " not using this right now but leaving this in to easily switch back
-        " color oceanic_material
-      '';
-    }
-    {
       plugin = pkgs.vimUtils.buildVimPlugin {
         name = "nightfly";
         pname = "nightfly";
@@ -353,6 +336,7 @@
         '';
       };
       config = ''
+        set termguicolors
         lua << EOF
         -- overrides
         local custom_highlight = vim.api.nvim_create_augroup("CustomHighlight", {})

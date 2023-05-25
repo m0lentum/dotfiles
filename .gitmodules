@@ -4,6 +4,3 @@
 [submodule "awesome/charitable"]
 	path = awesome/charitable
 	url = https://github.com/frioux/charitable.git
-[submodule "nvim/oceanic-material"]
-	path = nvim/oceanic-material
-	url = https://github.com/MoleTrooper/oceanic-material.git
