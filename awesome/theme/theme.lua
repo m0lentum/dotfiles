@@ -156,12 +156,11 @@ local cpu =
     }
 )
 
--- Coretemp (lm_sensors, per core)
+-- Coretemp (lm_sensors, works on my Ryzen desktop)
 local temp_ryzen, temp_ryzen_timer =
     awful.widget.watch(
     -- this grep is Ryzen specific and won't work for most CPUs
-    -- TODO: tdie only shows average, get per-core working
-    {awful.util.shell, "-c", "sensors | grep Tdie"},
+    {awful.util.shell, "-c", "sensors | grep Tctl"},
     2,
     function(widget, stdout)
         local temps = ""
@@ -178,7 +177,7 @@ local temp_ryzen, temp_ryzen_timer =
 )
 
 --]]
--- Coretemp (lain, average)
+-- Coretemp (lain default, works on my laptops)
 local temp =
     lain.widget.temp(
     {

@@ -43,14 +43,13 @@
   boot.loader.grub = {
     enable = true;
     efiSupport = true;
-    version = 2;
     device = "nodev";
     useOSProber = true;
     configurationLimit = 10;
   };
 
   networking.hostName = "moletable";
-  networking.interfaces.enp30s0.useDHCP = true;
+  networking.networkmanager.enable = true;
   # common development server ports
   networking.firewall.allowedTCPPorts = [ 8080 8000 9000 ];
 
