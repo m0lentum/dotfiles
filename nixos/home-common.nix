@@ -1,6 +1,10 @@
-{ config, pkgs, pkgsUnstable, ... }:
+{ config, pkgs, ... }:
 
 let
+  # generally avoiding unstable but using it to keep up with some
+  # particularly fast-moving programs like nushell
+  pkgsUnstable = import <nixos-unstable> { };
+
   # directories to ignore in tree and fzf listings because they're
   # never what I'm looking for and make lists too big to navigate
   listIgnores = [
@@ -54,6 +58,7 @@ in
     lsd.enable = true;
     feh.enable = true;
     direnv.enable = true;
+    home-manager.enable = true;
     nix-index.enable = true;
   };
 
