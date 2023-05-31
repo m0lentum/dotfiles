@@ -84,8 +84,8 @@ snippet beg "begin{} / end{}"
 \end{$1}
 endsnippet
 
-snippet bel "begin{} / end{} + label"
-\begin{$1}\label{$2}
+snippet begg "begin{} / end{} with parameters"
+\begin{$1}[$2]
   ${VISUAL}$0
 \end{$1}
 endsnippet
@@ -178,4 +178,12 @@ endsnippet
 
 snippet "ex([a-zA-Z0-9])" "single symbol exponent" ri
 ^`!p snip.rv=match.group(1)`
+endsnippet
+
+snippet "R([a-zA-Z0-9])" "real vector space" ri
+\mathbb{R}^`!p snip.rv=match.group(1)`
+endsnippet
+
+snippet "C([a-zA-Z0-9])" "complex vector space" ri
+\mathbb{C}^`!p snip.rv=match.group(1)`
 endsnippet
