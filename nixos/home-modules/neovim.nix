@@ -581,6 +581,12 @@
         lua require("nvim-surround").setup()
       '';
     }
+    {
+      plugin = autoclose-nvim;
+      config = ''
+        lua require("autoclose").setup()
+      '';
+    }
     vim-sleuth # autodetect tab settings
 
     {
