@@ -584,7 +584,14 @@
     {
       plugin = autoclose-nvim;
       config = ''
-        lua require("autoclose").setup()
+        lua << EOF
+        require("autoclose").setup({
+          keys = {
+            -- disable for apostrophe because it's used so often in english text
+            ["'"] = { close = false }
+          }
+        })
+        EOF
       '';
     }
     vim-sleuth # autodetect tab settings
