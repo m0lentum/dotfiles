@@ -8,7 +8,6 @@
 
   boot.loader.grub = {
     enable = true;
-    version = 2;
     device = "nodev";
     efiSupport = true;
     enableCryptodisk = true;
@@ -45,8 +44,10 @@
 
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
-    forwardX11 = true;
+    settings = {
+      PasswordAuthentication = false;
+      X11Forwarding = true;
+    };
     extraConfig = ''
       StreamLocalBindUnlink yes
     '';
