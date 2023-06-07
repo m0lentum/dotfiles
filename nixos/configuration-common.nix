@@ -3,6 +3,7 @@
 # Everything that is identical between my laptop and desktop is here.
 {
   nix.settings.experimental-features = [ "nix-command flakes" ];
+  nixpkgs.config.allowUnfree = true;
 
   networking.networkmanager.enable = true;
 
