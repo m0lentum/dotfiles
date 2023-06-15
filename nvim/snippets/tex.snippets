@@ -120,36 +120,12 @@ snippet mat "bmatrix"
 \end{bmatrix}
 endsnippet
 
-#
-# derivatives
-#
-
-snippet "d([^\sd]+)d([^\sd]+)" "derivative dy/dx" ri
-\frac{d`!p snip.rv=match.group(1)`}{d`!p snip.rv=match.group(2)`}
-endsnippet
-
-snippet dd "first derivative, fill variables manually" i
+snippet dd "derivative" i
 \frac{d$1}{d$2}$0
 endsnippet
 
-snippet "dd([^\sp]+)dd([^\sp]+)" "second derivative d^2y/dx^2" ri
-\frac{d^2 `!p snip.rv=match.group(1)`}{d `!p snip.rv=match.group(2)`^2}
-endsnippet
-
-snippet "p([^\sp]+)p([^\sp]+)" "partial derivative py/px" ri
-\frac{\partial `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)`}
-endsnippet
-
-snippet pp "partial derivative, fill variables manually" i
+snippet pp "partial derivative" i
 \frac{\partial $1}{\partial $2}$0
-endsnippet
-
-snippet "pp([^\sp]+)pp([^\sp]+)" "second partial perivative p^2y/px^2" ri
-\frac{\partial^2 `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)`^2}
-endsnippet
-
-snippet "pp([^\sp]+)p([^\sp]+)p([^\sp]+)" "second partial perivative p^2y/pxpz" ri
-\frac{\partial^2 `!p snip.rv=match.group(1)`}{\partial `!p snip.rv=match.group(2)` \partial `!p snip.rv=match.group(3)`}
 endsnippet
 
 #
