@@ -38,6 +38,10 @@ snippet pci* "parencite*"
 \parencite*{$1}$0
 endsnippet
 
+snippet lab "label"
+\label{$1}$0
+endsnippet
+
 #
 # symbol shorthands
 #
@@ -97,7 +101,7 @@ snippet mb "math block" bA
 endsnippet
 
 snippet eq "numbered equation" b
-\begin{equation}
+\begin{equation}\label{eq:$1}
   ${VISUAL}$0
 \end{equation}
 endsnippet
@@ -108,7 +112,13 @@ snippet eqa "numbered array of equations" b
 \end{eqnarray}
 endsnippet
 
-snippet ali "align" bA
+snippet ali- "align" bA
+\begin{align}
+  ${VISUAL}$0
+\end{align}
+endsnippet
+
+snippet ali* "align*" bA
 \begin{align*}
   ${VISUAL}$0
 \end{align*}
