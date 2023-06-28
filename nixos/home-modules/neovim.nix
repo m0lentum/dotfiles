@@ -307,10 +307,10 @@
         };
         # swap colors around for more green
         preInstall = ''
-          substituteInPlace ./colors/nightfly.vim \
-            --replace "highlight NightflyGreen" "__TMP__" \
-            --replace "highlight NightflyBlue" "highlight NightflyGreen" \
-            --replace "__TMP__" "highlight NightflyBlue" \
+          substituteInPlace ./lua/nightfly/init.lua \
+            --replace 'highlight(0, "NightflyGreen"' '__TMP__' \
+            --replace 'highlight(0, "NightflyBlue"' 'highlight(0, "NightflyGreen"' \
+            --replace '__TMP__' 'highlight(0, "NightflyBlue"' \
         '';
       };
       config = ''
