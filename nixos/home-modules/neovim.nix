@@ -299,20 +299,6 @@
         let g:vimtex_view_method='mupdf'
       '';
     }
-    {
-      # requires a `jupytext` executable in the path,
-      # can be installed as a python package from nixpkgs
-      plugin = pkgs.vimUtils.buildVimPlugin {
-        name = "jupytext-vim";
-        pname = "jupytext-vim";
-        src = pkgs.fetchFromGitHub {
-          owner = "goerz";
-          repo = "jupytext.vim";
-          rev = "32c1e37b2edf63a7e38d0deb92cc3f1462cc4dcd";
-          sha256 = "1jmimir6d0vz5cs0hcpa8v5ay7jm5xj91qkk0y4mbgms47bd43na";
-        };
-      };
-    }
 
     #
     # visuals
@@ -323,9 +309,9 @@
         pname = "nightfly";
         src = pkgs.fetchFromGitHub {
           owner = "bluz71";
-          repo = "vim-nightfly-guicolors";
-          rev = "33d094aa4c5864796615af20026ab3d792cfd482";
-          sha256 = "0l02wgzr7nz50ns1azxpkrm2hnv2dc84vyb04r8sxyynahlh9b7b";
+          repo = "vim-nightfly-colors";
+          rev = "e306fd7d890dc628f4265f3cc825165520d4f0d3";
+          sha256 = "0vf5cn2sc5dsnykb3s939j8im0wkg903855i4lxl4z63afhj139w";
         };
         # swap colors around for more green
         preInstall = ''
@@ -413,8 +399,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "akinsho";
           repo = "git-conflict.nvim";
-          rev = "v1.0.0";
-          sha256 = "07zk1fh1ira2ynfxql1c7z3qimp0wkl7dq7libnjgzca6a7qc4ml";
+          rev = "v1.1.2";
+          sha256 = "0axijf03qq48lgx6gfya92d5izr6bj4vhz2f41z767i3c8vcqimm";
         };
       };
       config = ''
@@ -480,8 +466,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "LeonHeidelbach";
           repo = "trailblazer.nvim";
-          rev = "65f073be8faf6189add5090d73e42830ed11447c";
-          sha256 = "1bd3b8qkcwrm9255j86cabdjqah3kwwss062v1qjblkyhyx7zs4q";
+          rev = "674bb6254a376a234d0d243366224122fc064eab";
+          sha256 = "1lh29saxl3dmpjq0lnrrhgqs052wpgjcq7qfxydv5686nnch5bzn";
         };
       };
       config = ''
@@ -560,16 +546,7 @@
     vim-smoothie # smooth scroll
     {
       # sessions fully automatically
-      plugin = pkgs.vimUtils.buildVimPlugin {
-        name = "auto-session";
-        pname = "auto-session";
-        src = pkgs.fetchFromGitHub {
-          owner = "rmagatti";
-          repo = "auto-session";
-          rev = "9c302e01ebb474f9b19998488060d9f110ef75c5";
-          sha256 = "0m9jjbrqvlhgzp8gcif678f6315jy1qrs86sc712q3ban9zs2ykw";
-        };
-      };
+      plugin = auto-session;
       config = ''
         lua require("auto-session").setup()
       '';
