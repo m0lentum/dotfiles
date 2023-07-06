@@ -77,8 +77,16 @@
   # don't suspend on lid close so we can use ssh or second monitor while closed
   services.logind.lidSwitch = "lock";
 
-  virtualisation.docker.enable = true;
-  virtualisation.libvirtd.enable = true;
+  virtualisation = {
+    docker.enable = true;
+    podman = {
+      enable = true;
+      defaultNetwork.settings = {
+        dns_enabled = true;
+      };
+    };
+    libvirtd.enable = true;
+  };
   # needed for mounting node_modules
   programs.fuse.userAllowOther = true;
 
