@@ -90,6 +90,7 @@ theme.widget_net = theme.dir .. "/icons/net.png"
 theme.widget_hdd = theme.dir .. "/icons/hdd.png"
 theme.widget_music = theme.dir .. "/icons/note.png"
 theme.widget_music_on = theme.dir .. "/icons/note_on.png"
+theme.widget_music_play = theme.dir .. "/icons/play.png"
 theme.widget_music_pause = theme.dir .. "/icons/pause.png"
 theme.widget_music_stop = theme.dir .. "/icons/stop.png"
 theme.widget_vol = theme.dir .. "/icons/vol.png"
@@ -226,6 +227,34 @@ local net =
         end
     }
 )
+
+-- Wallpaper
+-- shows a tooltip of the current wallpaper when hovered;
+-- depends on rc.lua defining screen.wallpaper_name
+-- and creating wallpaper_timer
+local wp_widget = wibox.widget.imagebox(theme.widget_music_play)
+local wp_tooltip = awful.tooltip {
+    objects = { wp_widget },
+    timeout = 0.5,
+    timer_function = function()
+        local screen = awful.screen.focused()
+        return "wallpaper" ..
+            (wallpaper_timer.started and "" or " (paused)") ..
+            ":\n" ..
+            (screen.wallpaper_name or "")
+    end,
+    bg = theme.bg_normal,
+    fg = theme.fg_normal,
+    margin_leftright = dpi(15),
+    margin_topbottom = dpi(13),
+}
+wallpaper_timer:connect_signal('start', function ()
+    wp_widget:set_image(theme.widget_music_play)
+end)
+wallpaper_timer:connect_signal('stop', function ()
+    wp_widget:set_image(theme.widget_music_pause)
+end)
+wp_widget:connect_signal('button::press', toggle_slideshow)
 
 -- Separators
 local arrow = separators.arrow_left
@@ -453,6 +482,10 @@ function theme.at_screen_connect(s)
                 widget_colors.systray
             ),
             arrow(widget_colors.systray, widget_colors.filler),
+            wibox.container.background(
+                wibox.widget {nil, wp_widget, layout = wibox.layout.align.horizontal},
+                widget_colors.filler
+            ),
             arrow(widget_colors.filler, "alpha"),
             s.mylayoutbox
         }

@@ -184,8 +184,6 @@ lain.layout.cascade.tile.extra_padding = dpi(5)
 lain.layout.cascade.tile.nmaster = 5
 lain.layout.cascade.tile.ncol = 2
 
-beautiful.init(string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HOME")))
-
 -- }}}
 
 -- {{{ Random wallpaper
@@ -194,20 +192,14 @@ local random_wallpaper = require("random-wallpaper")
 function wallpaper(screen)
     local wp = random_wallpaper(screen)
     local msg = wp == nil and "No wallpaper found" or string.match(wp, "[^/]+$")
-    naughty.notify(
-        {
-            title = "Wallpaper",
-            text = msg,
-            screen = screen,
-            position = "bottom_right",
-            timeout = 5
-        }
-    )
+    -- store wallpaper name for the widget defined in theme.lua
+    screen.wallpaper_name = msg
     return wp
 end
 
 -- swap wallpapers on a timer
-local wp_timer = gears.timer {
+-- global for access in a widget in theme.lua
+wallpaper_timer = gears.timer {
     timeout = 5 * 60,
     call_now = true,
     autostart = true,
@@ -222,34 +214,30 @@ local wp_timer = gears.timer {
 }
 
 function toggle_slideshow(screen)
-    if wp_timer.started then
-        wp_timer:stop()
-        naughty.notify(
-            {
-                text = "Stopped wallpaper slideshow",
-                screen = screen,
-                position = "bottom_right",
-                timeout = 1
-            }
-        )
+    if wallpaper_timer.started then
+        wallpaper_timer:stop()
     else
         -- immediately change the wallpaper
-        wp_timer:emit_signal("timeout")
-        wp_timer:start()
+        wallpaper_timer:emit_signal("timeout")
+        wallpaper_timer:start()
     end
 end
 
 -- constant wallpaper to avoid copyright issues and awkward moments
 -- while streaming or screensharing
 function const_wallpaper()
-    if wp_timer.started then
-        wp_timer:stop()
+    if wallpaper_timer.started then
+        wallpaper_timer:stop()
     end
     for s in screen do
         local path = os.getenv("HOME") .. "/.wallpaper-const"
         gears.wallpaper.maximized(path, s)
     end
 end
+
+-- Initialize theme.
+-- Make sure this comes after everything global you want to use in theme.lua
+beautiful.init(string.format("%s/.config/awesome/theme/theme.lua", os.getenv("HOME")))
 
 -- }}}
 
