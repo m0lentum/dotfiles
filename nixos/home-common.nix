@@ -31,6 +31,22 @@ in
     tmux = import ./home-modules/tmux.nix { };
     nnn = import ./home-modules/nnn.nix { inherit pkgs; };
     neovim = import ./home-modules/neovim.nix { inherit pkgs listIgnores; };
+    helix = {
+      enable = true;
+      settings = {
+        editor = {
+          scrolloff = 15;
+          line-number = "relative";
+          bufferline = "always";
+          cursor-shape = {
+            normal = "block";
+            insert = "bar";
+            select = "underline";
+          };
+          indent-guides.render = true;
+        };
+      };
+    };
     firefox = {
       enable = true;
       package = (pkgs.firefox.override { extraNativeMessagingHosts = [ pkgs.passff-host ]; });
