@@ -302,8 +302,8 @@
         src = pkgs.fetchFromGitHub {
           owner = "bluz71";
           repo = "vim-nightfly-colors";
-          rev = "e306fd7d890dc628f4265f3cc825165520d4f0d3";
-          sha256 = "0vf5cn2sc5dsnykb3s939j8im0wkg903855i4lxl4z63afhj139w";
+          rev = "547a94326e7fca9288b323edfa0599407b516e55";
+          hash = "sha256-DKfrkggXURC/5RObBR9Ps3QsFpG0yimBAkJYW8CrdPU=";
         };
         # swap colors around for more green
         preInstall = ''
@@ -402,7 +402,6 @@
 
     # tree-sitter based highlighting
 
-    nvim-ts-rainbow
     {
       plugin = nvim-treesitter.withPlugins (p: [
         p.tree-sitter-nix
@@ -437,14 +436,17 @@
             enable = true,
             additional_vim_regex_highlighting = false,
           },
-          rainbow = {
-            enable = true,
-            extended_mode = true,
-            max_file_lines = nil,
-          },
         }
         EOF
       '';
+    }
+    {
+      plugin = pkgs.fetchFromGitLab {
+        owner = "HiPhish";
+        repo = "rainbow-delimiters.nvim";
+        rev = "862e0f5e867e1a4c93e3efe73d4c71b7b6d3fec8";
+        hash = "sha256-5N/Lhuje8Eob3of+XVPSZxXRdQbCW/IVa2xvZh+Cq+g=";
+      };
     }
 
     #
