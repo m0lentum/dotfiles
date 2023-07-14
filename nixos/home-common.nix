@@ -19,16 +19,6 @@ let
   ];
 
   shells = import ./home-modules/shells.nix { inherit pkgs pkgsUnstable listIgnores; };
-
-  # helper script because I always forget the exact way to nix-prefetch-url from github
-  prefetchGithub = pkgs.writeScriptBin "nix-prefetch-github" ''
-    #! /usr/bin/env bash
-    if [ "$#" -ne 3 ]; then
-      echo "usage: nix-prefetch-github <owner> <repo> <rev>"
-      exit 1
-    fi
-    nix-prefetch-url --unpack "https://github.com/$1/$2/archive/$3.tar.gz"
-  '';
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -98,7 +88,7 @@ in
     jq
     zip
     unzip
-    prefetchGithub
+    nurl
     # general helpful stuff
     et
     pass
