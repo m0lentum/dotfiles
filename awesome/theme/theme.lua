@@ -232,7 +232,7 @@ local net =
 -- shows a tooltip of the current wallpaper when hovered;
 -- depends on rc.lua defining screen.wallpaper_name
 -- and creating wallpaper_timer
-local wp_widget = wibox.widget.imagebox(theme.widget_music_play)
+local wp_widget = wibox.widget.imagebox(theme.widget_music_pause)
 local wp_tooltip = awful.tooltip {
     objects = { wp_widget },
     timeout = 0.5,
@@ -249,10 +249,10 @@ local wp_tooltip = awful.tooltip {
     margin_topbottom = dpi(13),
 }
 wallpaper_timer:connect_signal('start', function ()
-    wp_widget:set_image(theme.widget_music_play)
+    wp_widget:set_image(theme.widget_music_pause)
 end)
 wallpaper_timer:connect_signal('stop', function ()
-    wp_widget:set_image(theme.widget_music_pause)
+    wp_widget:set_image(theme.widget_music_play)
 end)
 wp_widget:connect_signal('button::press', toggle_slideshow)
 
