@@ -1,6 +1,10 @@
 { pkgs, pkgsUnstable }:
 {
   enable = true;
+  # current nushell version doesn't match zoxide and starship,
+  # use manual configuration for them (defined in shells.nix).
+  # TODO: remove this and the custom config once versions match
+  enableNushellIntegration = false;
   # get from unstable to ensure compatibility with nushell from unstable
   package = pkgsUnstable.starship;
   settings = {

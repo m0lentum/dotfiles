@@ -76,7 +76,7 @@ let
     package = pkgsUnstable.nushell;
     configFile.text =
       ''
-        let-env config = {
+        $env.config = {
           show_banner: false
           edit_mode: vi
           cursor_shape: {
@@ -130,10 +130,10 @@ let
 
         # direnv
         # taken from home-manager git master; TODO: remove once it lands on stable
-        let-env config = ($env | default {} config).config
-        let-env config = ($env.config | default {} hooks)
-        let-env config = ($env.config | update hooks ($env.config.hooks | default [] pre_prompt))
-        let-env config = ($env.config | update hooks.pre_prompt ($env.config.hooks.pre_prompt | append {
+        $env.config = ($env | default {} config).config
+        $env.config = ($env.config | default {} hooks)
+        $env.config = ($env.config | update hooks ($env.config.hooks | default [] pre_prompt))
+        $env.config = ($env.config | update hooks.pre_prompt ($env.config.hooks.pre_prompt | append {
           code: "
             let direnv = (${pkgs.direnv}/bin/direnv export json | from json)
             let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
@@ -144,18 +144,18 @@ let
         # zoxide (generated with `zoxide init nushell`
         # since home-manager doesn't currently have automation for this)
 
-        let-env config = ($env | default {} config).config
-        let-env config = ($env.config | default {} hooks)
-        let-env config = ($env.config | update hooks ($env.config.hooks | default {} env_change))
-        let-env config = ($env.config | update hooks.env_change ($env.config.hooks.env_change | default [] PWD))
-        let-env config = ($env.config | update hooks.env_change.PWD ($env.config.hooks.env_change.PWD | append {|_, dir|
+        $env.config = ($env | default {} config).config
+        $env.config = ($env.config | default {} hooks)
+        $env.config = ($env.config | update hooks ($env.config.hooks | default {} env_change))
+        $env.config = ($env.config | update hooks.env_change ($env.config.hooks.env_change | default [] PWD))
+        $env.config = ($env.config | update hooks.env_change.PWD ($env.config.hooks.env_change.PWD | append {|_, dir|
           zoxide add -- $dir
         }))
 
         # Jump to a directory using only keywords.
         def-env __zoxide_z [...rest:string] {
           let arg0 = ($rest | append '~').0
-          let path = if (($rest | length) <= 1) and ($arg0 == '-' or ($arg0 | path expand | path type) == dir) {
+          let path = if (($rest | str join | str length) <= 1) and ($arg0 == '-' or ($arg0 | path expand | path type) == dir) {
             $arg0
           } else {
             (zoxide query --exclude $env.PWD -- $rest | str trim -r -c "\n")
@@ -174,19 +174,19 @@ let
     envFile.text = ''
       # starship
 
-      let-env STARSHIP_SHELL = "nu"
+      $env.STARSHIP_SHELL = "nu"
 
       def create_left_prompt [] {
           starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)'
       }
 
-      let-env PROMPT_COMMAND = { create_left_prompt }
-      let-env PROMPT_COMMAND_RIGHT = ""
+      $env.PROMPT_COMMAND = { create_left_prompt }
+      $env.PROMPT_COMMAND_RIGHT = ""
 
       # starship brings its own indicator char
-      let-env PROMPT_INDICATOR_VI_INSERT = ""
-      let-env PROMPT_INDICATOR_VI_NORMAL = ""
-      let-env PROMPT_MULTILINE_INDICATOR = "| "
+      $env.PROMPT_INDICATOR_VI_INSERT = ""
+      $env.PROMPT_INDICATOR_VI_NORMAL = ""
+      $env.PROMPT_MULTILINE_INDICATOR = "| "
     '';
   };
 in

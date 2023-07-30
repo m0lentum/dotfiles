@@ -61,6 +61,10 @@ in
     };
     zathura.enable = true;
     zoxide.enable = true;
+    # current nushell version doesn't match zoxide and starship,
+    # use manual configuration for them (defined in shells.nix).
+    # TODO: remove this and the custom config once versions match
+    zoxide.enableNushellIntegration = false;
     lsd.enable = true;
     feh.enable = true;
     direnv.enable = true;
