@@ -1,4 +1,4 @@
-{ pkgs, pkgsUnstable, listIgnores }:
+{ pkgs, listIgnores }:
 let
   # aliases for multiple shells in one place,
   # separated into abbrs and aliases for fish
@@ -71,9 +71,6 @@ let
     # instead, fish is login shell, set up to automatically start tmux,
     # and the tmux default command is set to "exec nu"
     enable = true;
-    # changes come frequently enough and make big enough changes to online docs
-    # to warrant getting the version on unstable
-    package = pkgsUnstable.nushell;
     configFile.text =
       ''
         $env.config = {
@@ -108,9 +105,7 @@ let
               event: {
                 send: executehostcommand
                 # big messy command to wrap the result in ticks only if it has spaces or quotes
-                # `commandline --insert` inserts at the start on 0.79,
-                # temporary workaround using --append instead
-                cmd: `commandline --append (fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
+                cmd: `commandline --insert (fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
               }
             },
             {
@@ -120,70 +115,16 @@ let
               mode: [emacs, vi_insert, vi_normal]
               event: {
                 send: executehostcommand
-                cmd: `commandline --append (fd --type d | fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
+                cmd: `commandline --insert (fd --type d | fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
               }
             },
           ]
         }
 
         ${nuAliasesStr}
-
-        # direnv
-        # taken from home-manager git master; TODO: remove once it lands on stable
-        $env.config = ($env | default {} config).config
-        $env.config = ($env.config | default {} hooks)
-        $env.config = ($env.config | update hooks ($env.config.hooks | default [] pre_prompt))
-        $env.config = ($env.config | update hooks.pre_prompt ($env.config.hooks.pre_prompt | append {
-          code: "
-            let direnv = (${pkgs.direnv}/bin/direnv export json | from json)
-            let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
-            $direnv | load-env
-            "
-        }))
-
-        # zoxide (generated with `zoxide init nushell`
-        # since home-manager doesn't currently have automation for this)
-
-        $env.config = ($env | default {} config).config
-        $env.config = ($env.config | default {} hooks)
-        $env.config = ($env.config | update hooks ($env.config.hooks | default {} env_change))
-        $env.config = ($env.config | update hooks.env_change ($env.config.hooks.env_change | default [] PWD))
-        $env.config = ($env.config | update hooks.env_change.PWD ($env.config.hooks.env_change.PWD | append {|_, dir|
-          zoxide add -- $dir
-        }))
-
-        # Jump to a directory using only keywords.
-        def-env __zoxide_z [...rest:string] {
-          let arg0 = ($rest | append '~').0
-          let path = if (($rest | str join | str length) <= 1) and ($arg0 == '-' or ($arg0 | path expand | path type) == dir) {
-            $arg0
-          } else {
-            (zoxide query --exclude $env.PWD -- $rest | str trim -r -c "\n")
-          }
-          cd $path
-        }
-
-        # Jump to a directory using interactive search.
-        def-env __zoxide_zi  [...rest:string] {
-          cd $'(zoxide query -i -- $rest | str trim -r -c "\n")'
-        }
-
-        alias z = __zoxide_z
-        alias zi = __zoxide_zi
       '';
     envFile.text = ''
-      # starship
-
-      $env.STARSHIP_SHELL = "nu"
-
-      def create_left_prompt [] {
-          starship prompt --cmd-duration $env.CMD_DURATION_MS $'--status=($env.LAST_EXIT_CODE)'
-      }
-
-      $env.PROMPT_COMMAND = { create_left_prompt }
-      $env.PROMPT_COMMAND_RIGHT = ""
-
-      # starship brings its own indicator char
+      # remove indicator chars besides the one provided by starship
       $env.PROMPT_INDICATOR_VI_INSERT = ""
       $env.PROMPT_INDICATOR_VI_NORMAL = ""
       $env.PROMPT_MULTILINE_INDICATOR = "| "

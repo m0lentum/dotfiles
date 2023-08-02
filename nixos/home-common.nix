@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  # generally avoiding unstable but using it to keep up with some
-  # particularly fast-moving programs like nushell
-  pkgsUnstable = import <nixos-unstable> { };
-
   # directories to ignore in tree and fzf listings because they're
   # never what I'm looking for and make lists too big to navigate
   listIgnores = [
@@ -18,7 +14,7 @@ let
     ".mypy_cache"
   ];
 
-  shells = import ./home-modules/shells.nix { inherit pkgs pkgsUnstable listIgnores; };
+  shells = import ./home-modules/shells.nix { inherit pkgs listIgnores; };
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -26,7 +22,7 @@ in
     git = import ./home-modules/git.nix { inherit pkgs; };
     fish = shells.fish;
     nushell = shells.nushell;
-    starship = import ./home-modules/starship.nix { inherit pkgs pkgsUnstable; };
+    starship = import ./home-modules/starship.nix { inherit pkgs; };
     kitty = import ./home-modules/kitty.nix { inherit pkgs; };
     tmux = import ./home-modules/tmux.nix { };
     nnn = import ./home-modules/nnn.nix { inherit pkgs; };
@@ -61,10 +57,6 @@ in
     };
     zathura.enable = true;
     zoxide.enable = true;
-    # current nushell version doesn't match zoxide and starship,
-    # use manual configuration for them (defined in shells.nix).
-    # TODO: remove this and the custom config once versions match
-    zoxide.enableNushellIntegration = false;
     lsd.enable = true;
     feh.enable = true;
     direnv.enable = true;
@@ -114,8 +106,7 @@ in
     pass
     safeeyes
     networkmanagerapplet
-    # this is not on stable yet and the old yubioath-desktop doesn't work anymore
-    pkgsUnstable.yubioath-flutter
+    yubioath-flutter
     obsidian
     zotero
     # multimedia
