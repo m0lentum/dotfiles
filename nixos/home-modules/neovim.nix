@@ -75,6 +75,7 @@
           vim.keymap.set('n', '<leader>h', vim.lsp.buf.hover, bufopts)
           vim.keymap.set('n', '<F2>', vim.lsp.buf.rename, bufopts)
           vim.keymap.set('n', '<leader>,', vim.lsp.buf.code_action, bufopts)
+          vim.keymap.set('v', ',', vim.lsp.buf.code_action, bufopts)
           vim.keymap.set('n', 'gq', vim.lsp.buf.range_formatting, bufopts)
 
           -- override tsserver formatting with prettier from null-ls
