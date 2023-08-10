@@ -455,48 +455,6 @@
     #
 
     {
-      plugin = pkgs.vimUtils.buildVimPlugin {
-        name = "trailblazer";
-        pname = "trailblazer";
-        src = pkgs.fetchFromGitHub {
-          owner = "LeonHeidelbach";
-          repo = "trailblazer.nvim";
-          rev = "674bb6254a376a234d0d243366224122fc064eab";
-          sha256 = "1lh29saxl3dmpjq0lnrrhgqs052wpgjcq7qfxydv5686nnch5bzn";
-        };
-      };
-      config = ''
-        lua << EOF
-        require("trailblazer").setup({
-          trail_options = {
-            available_trail_mark_modes = {
-              "global_chron",
-              "buffer_local_line_sorted",
-            },
-            trail_mark_symbol_line_indicators_enabled = true,
-          },
-          mappings = {
-            nv = {
-              motions = {
-                new_trail_mark = '<A-l>',
-                track_back = '<A-L>',
-                peek_move_next_down = '<A-n>',
-                peek_move_previous_up = '<A-N>',
-                toggle_trail_mark_list = '<A-m>',
-              },
-              actions = {
-                delete_all_trail_marks = '<A-d>',
-                paste_at_last_trail_mark = '<A-p>',
-                paste_at_all_trail_marks = '<A-P>',
-                set_trail_mark_select_mode = '<A-t>',
-              },
-            },
-          },
-        })
-        EOF
-      '';
-    }
-    {
       plugin = ultisnips;
       config = ''
         let g:UltiSnipsSnippetDirectories = [$HOME . '/.config/nvim/ultisnips']
