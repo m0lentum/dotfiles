@@ -3,7 +3,7 @@
 let
   cam = pkgs.writeScriptBin "cam" ''
     #! /usr/bin/env nix-shell
-    #! nix-shell -p ffmpeg -i bash
+    #! nix-shell -p ffmpeg_6-full -i bash
     if [[ -z $1 ]]; then
       echo "Usage: cam [IPCamera address]"
       false
