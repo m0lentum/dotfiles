@@ -429,6 +429,7 @@
         p.tree-sitter-yaml
         p.tree-sitter-json
         p.tree-sitter-dockerfile
+        p.tree-sitter-hcl
       ]);
       config = ''
         lua << EOF
