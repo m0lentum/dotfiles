@@ -13,3 +13,26 @@ endsnippet
 snippet inl "#[inline]" b
 #[inline]$0
 endsnippet
+
+snippet att "general attribute" b
+#[$1]$0
+endsnippet
+
+snippet tests "tests module" b
+#[cfg(test)]
+mod tests {
+    use super::*;
+    $0
+}
+endsnippet
+
+snippet test "test function" b
+#[test]
+fn $1() {
+    $0
+}
+endsnippet
+
+snippet nofmt "#[rustfmt::skip]" b
+#[rustfmt::skip]$0
+endsnippet
