@@ -96,6 +96,13 @@ let
               }
             }
           }
+          hooks: {
+            # auto-expand tables. This is default in nu 0.84,
+            # but I want it now and don't want to use nixpkgs unstable
+            display_output: {
+              if (term size).columns >= 100 { table -e } else { table }
+            }
+          }
           keybindings: [
             {
               name: fzf_file
