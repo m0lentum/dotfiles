@@ -26,6 +26,8 @@
     mergetool.nvim.cmd = ''nvim "$MERGED"'';
     mergetool.prompt = false;
     mergetool.keepBackup = false;
+    rebase.autosquash = true;
+    rebase.autostash = true;
   };
   aliases = {
     fixup = pkgs.lib.concatStrings [
