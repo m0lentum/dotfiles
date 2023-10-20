@@ -79,16 +79,6 @@
 
   programs.fuse.userAllowOther = true;
 
-  # block Valve Index to prevent it from eating up usb power
-  # and causing problems with other usb devices
-  services.usbguard = {
-    enable = true;
-    implictPolicyTarget = "allow";
-    rules = ''
-      block name "Valve Index HMD"
-    '';
-  };
-
   # shenanigans for agent forwarding to work computer
   programs.ssh.extraConfig = ''
     Host work
