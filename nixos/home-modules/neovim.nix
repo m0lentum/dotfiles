@@ -482,6 +482,7 @@
         local opts = { noremap=true, silent=true }
         vim.keymap.set("", 'm', hop.hint_char1, opts)
         vim.keymap.set("", 'L', hop.hint_lines, opts)
+        vim.keymap.set("", 'M', hop.hint_words, opts)
         EOF
       '';
     }
