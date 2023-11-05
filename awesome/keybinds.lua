@@ -19,14 +19,25 @@ end
 
 local globalkeys =
     my_table.join(
-    awful.key({modkey}, "s", hotkeys_popup.show_help, {description = "show help", group = "awesome"}),
+    awful.key(
+        {modkey}, "s",
+        hotkeys_popup.show_help,
+        {description = "show help", group = "awesome"}
+    ),
     -- custom wallpaper slideshow thing, functions defined in rc.lua
-    awful.key({modkey}, "w", toggle_slideshow, {description = "toggle wallpaper slideshow", group = "screen"}),
-    awful.key({modkey, "Shift"}, "w", const_wallpaper, {description = "set constant wallpaper", group = "screen"}),
+    awful.key(
+        {modkey}, "w",
+        toggle_slideshow,
+        {description = "toggle wallpaper slideshow", group = "screen"}
+    ),
+    awful.key(
+        {modkey, "Shift"}, "w",
+        const_wallpaper,
+        {description = "set constant wallpaper", group = "screen"}
+    ),
     -- Spotify
     awful.key(
-        {},
-        "XF86AudioPlay",
+        {}, "XF86AudioPlay",
         function()
             awful.spawn(
                 "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.PlayPause"
@@ -34,8 +45,7 @@ local globalkeys =
         end
     ),
     awful.key(
-        {},
-        "XF86AudioNext",
+        {}, "XF86AudioNext",
         function()
             awful.spawn(
                 "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Next"
@@ -43,8 +53,7 @@ local globalkeys =
         end
     ),
     awful.key(
-        {},
-        "XF86AudioPrev",
+        {}, "XF86AudioPrev",
         function()
             awful.spawn(
                 "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.Previous"
@@ -55,74 +64,56 @@ local globalkeys =
     -- Screenshots w/ maim
     --
     awful.key(
-        {},
-        "Print",
-        function()
-            awful.spawn(screenshot_normal("--select --hidecursor"))
-        end,
+        {}, "Print",
+        function() awful.spawn(screenshot_normal("--select --hidecursor")) end,
         {description = "custom area", group = "screenshots"}
     ),
     awful.key(
-        {altkey},
-        "Print",
-        function()
-            awful.spawn(screenshot_nocompton("--select --hidecursor"))
-        end,
+        {altkey}, "Print",
+        function() awful.spawn(screenshot_nocompton("--select --hidecursor")) end,
         {description = "custom area, no transparency", group = "screenshots"}
     ),
     awful.key(
-        {"Shift"},
-        "Print",
-        function()
-            awful.spawn(screenshot_normal("-i $(xdotool getactivewindow) -B"))
-        end,
+        {"Shift"}, "Print",
+        function() awful.spawn(screenshot_normal("-i $(xdotool getactivewindow) -B")) end,
         {description = "active window", group = "screenshots"}
     ),
     awful.key(
-        {altkey, "Shift"},
-        "Print",
-        function()
-            awful.spawn(screenshot_normal("-i $(xdotool getactivewindow)"))
-        end,
+        {altkey, "Shift"}, "Print",
+        function() awful.spawn(screenshot_normal("-i $(xdotool getactivewindow)")) end,
         {description = "active window, no transparency", group = "screenshots"}
     ),
     --
     -- Screen blank
     --
     awful.key(
-      {modkey},
-      "z",
-      function()
-          awful.spawn("xset dpms force off")
-      end,
-      {description = "Blank the screen", group = "screen"}
+        {modkey}, "z",
+        function() awful.spawn("xset dpms force off") end,
+        {description = "Blank the screen", group = "screen"}
     ),
     --
     --
     -- Navigation
     --
     --
-    awful.key({modkey}, "p", awful.tag.history.restore, {description = "go back", group = "tag"}),
     awful.key(
-        {modkey},
-        "j",
-        function()
-            awful.client.focus.byidx(1)
-        end,
+        {modkey}, "p",
+        awful.tag.history.restore,
+        {description = "go back", group = "tag"}
+    ),
+    awful.key(
+        {modkey}, "j",
+        function() awful.client.focus.byidx(1) end,
         {description = "focus next by index", group = "client"}
     ),
     awful.key(
-        {modkey},
-        "k",
-        function()
-            awful.client.focus.byidx(-1)
-        end,
+        {modkey}, "k",
+        function() awful.client.focus.byidx(-1) end,
         {description = "focus previous by index", group = "client"}
     ),
     -- By direction client focus
     awful.key(
-        {modkey},
-        "Down",
+        {modkey}, "Down",
         function()
             awful.client.focus.global_bydirection("down")
             if client.focus then
@@ -132,8 +123,7 @@ local globalkeys =
         {description = "focus down", group = "client"}
     ),
     awful.key(
-        {modkey},
-        "Up",
+        {modkey}, "Up",
         function()
             awful.client.focus.global_bydirection("up")
             if client.focus then
@@ -143,8 +133,7 @@ local globalkeys =
         {description = "focus up", group = "client"}
     ),
     awful.key(
-        {modkey},
-        "Left",
+        {modkey}, "Left",
         function()
             awful.client.focus.global_bydirection("left")
             if client.focus then
@@ -154,8 +143,7 @@ local globalkeys =
         {description = "focus left", group = "client"}
     ),
     awful.key(
-        {modkey},
-        "Right",
+        {modkey}, "Right",
         function()
             awful.client.focus.global_bydirection("right")
             if client.focus then
@@ -165,62 +153,42 @@ local globalkeys =
         {description = "focus right", group = "client"}
     ),
     awful.key(
-        {modkey},
-        "End",
-        function()
-            awful.screen.focus_bydirection("right")
-        end,
+        {modkey}, "End",
+        function() awful.screen.focus_bydirection("right") end,
         {description = "focus the screen on the right", group = "screen"}
     ),
     awful.key(
-        {modkey},
-        "Home",
-        function()
-            awful.screen.focus_bydirection("left")
-        end,
+        {modkey}, "Home",
+        function() awful.screen.focus_bydirection("left") end,
         {description = "focus the screen on the left", group = "screen"}
     ),
-    awful.key({modkey}, "u", awful.client.urgent.jumpto, {description = "jump to urgent client", group = "client"}),
     --
     --
     -- Layout
     --
     --
     awful.key(
-        {modkey, "Shift"},
-        "Left",
-        function()
-            awful.client.swap.bydirection("left")
-        end,
+        {modkey, "Shift"}, "Left",
+        function() awful.client.swap.bydirection("left") end,
         {description = "swap with client on the left", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"},
-        "Right",
-        function()
-            awful.client.swap.bydirection("right")
-        end,
+        {modkey, "Shift"}, "Right",
+        function() awful.client.swap.bydirection("right") end,
         {description = "swap with client on the right", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"},
-        "Up",
-        function()
-            awful.client.swap.bydirection("up")
-        end,
+        {modkey, "Shift"}, "Up",
+        function() awful.client.swap.bydirection("up") end,
         {description = "swap with client above", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"},
-        "Down",
-        function()
-            awful.client.swap.bydirection("down")
-        end,
+        {modkey, "Shift"}, "Down",
+        function() awful.client.swap.bydirection("down") end,
         {description = "swap with client below", group = "client"}
     ),
     awful.key(
-        {modkey},
-        "b",
+        {modkey}, "b",
         function()
             for s in screen do
                 s.mywibox.visible = not s.mywibox.visible
@@ -232,87 +200,48 @@ local globalkeys =
         {description = "toggle wibox", group = "awesome"}
     ),
     awful.key(
-        {modkey},
-        "Prior",
-        function()
-            awful.tag.incmwfact(0.025)
-        end,
+        {modkey}, "Prior",
+        function() awful.tag.incmwfact(0.025) end,
         {description = "increase master width factor", group = "layout"}
     ),
     awful.key(
-        {modkey},
-        "Next",
-        function()
-            awful.tag.incmwfact(-0.025)
-        end,
+        {modkey}, "Next",
+        function() awful.tag.incmwfact(-0.025) end,
         {description = "decrease master width factor", group = "layout"}
     ),
     awful.key(
-        {modkey, "Shift"},
-        "Prior",
-        function()
-            awful.tag.incnmaster(1, nil, true)
-        end,
+        {modkey, "Shift"}, "Prior",
+        function() awful.tag.incnmaster(1, nil, true) end,
         {description = "increase the number of master clients", group = "layout"}
     ),
     awful.key(
-        {modkey, "Shift"},
-        "Next",
-        function()
-            awful.tag.incnmaster(-1, nil, true)
-        end,
+        {modkey, "Shift"}, "Next",
+        function() awful.tag.incnmaster(-1, nil, true) end,
         {description = "decrease the number of master clients", group = "layout"}
     ),
     awful.key(
-        {modkey, "Control"},
-        "Prior",
-        function()
-            awful.tag.incncol(1, nil, true)
-        end,
+        {modkey, "Control"}, "Prior",
+        function() awful.tag.incncol(1, nil, true) end,
         {description = "increase the number of columns", group = "layout"}
     ),
     awful.key(
-        {modkey, "Control"},
-        "Next",
-        function()
-            awful.tag.incncol(-1, nil, true)
-        end,
+        {modkey, "Control"}, "Next",
+        function() awful.tag.incncol(-1, nil, true) end,
         {description = "decrease the number of columns", group = "layout"}
     ),
     awful.key(
-      {modkey, altkey}, "Prior",
-      function()
-          -- defined in rc.lua
-          increment_padding(-40)
-      end,
-      {description = "decrease screen padding", group = "layout"}
+        {modkey, altkey}, "Prior",
+        -- increment_padding defined in rc.lua
+        function() increment_padding(-40) end,
+        {description = "decrease screen padding", group = "layout"}
     ),
     awful.key(
-      {modkey, altkey}, "Next",
-      function()
-          increment_padding(40)
-      end,
-      {description = "increase screen padding", group = "layout"}
+        {modkey, altkey}, "Next",
+        function() increment_padding(40) end,
+        {description = "increase screen padding", group = "layout"}
     ),
     awful.key(
-        {modkey},
-        "space",
-        function()
-            awful.layout.inc(1)
-        end,
-        {description = "select next layout", group = "layout"}
-    ),
-    awful.key(
-        {modkey, "Shift"},
-        "space",
-        function()
-            awful.layout.inc(-1)
-        end,
-        {description = "select previous layout", group = "layout"}
-    ),
-    awful.key(
-        {modkey, "Control"},
-        "n",
+        {modkey, "Control"}, "n",
         function()
             local c = awful.client.restore()
             -- Focus restored client
@@ -329,70 +258,52 @@ local globalkeys =
     --
     --
     awful.key(
-        {modkey},
-        "Return",
-        function()
-            awful.spawn(terminal)
-        end,
+        {modkey}, "Return",
+        function() awful.spawn(terminal) end,
         {description = "open a terminal", group = "launcher"}
     ),
-    awful.key({modkey, "Control"}, "r", awesome.restart, {description = "reload awesome", group = "awesome"}),
-    awful.key({modkey, "Control", "Shift"}, "q", awesome.quit, {description = "quit awesome", group = "awesome"}),
+    awful.key(
+        {modkey, "Control"}, "r",
+        awesome.restart,
+        {description = "reload awesome", group = "awesome"}
+    ),
+    awful.key(
+        {modkey, "Control", "Shift"}, "q", 
+        awesome.quit, 
+        {description = "quit awesome", group = "awesome"}
+    ),
     -- User programs
     awful.key(
-        {modkey},
-        "q",
-        function()
-            awful.spawn(browser)
-        end,
+        {modkey}, "q",
+        function() awful.spawn(browser) end,
         {description = "run browser", group = "launcher"}
     ),
     awful.key(
-        {modkey},
-        "r",
-        function()
-            awful.screen.focused().mypromptbox:run()
-        end,
+        {modkey}, "r",
+        function() awful.screen.focused().mypromptbox:run() end,
         {description = "run prompt", group = "launcher"}
     ),
     awful.key(
-        {modkey},
-        "a",
-        function()
-            awful.spawn("obsidian")
-        end,
+        {modkey}, "a",
+        function() awful.spawn("obsidian") end,
         {description = "run obsidian", group = "launcher"}
     )
 )
 
 local clientkeys =
     my_table.join(
-    awful.key({modkey}, "m", lain.util.magnify_client, {description = "magnify client", group = "client"}),
     awful.key(
-        {modkey, "Shift"},
-        "q",
-        function(c)
-            c:kill()
-        end,
+        {modkey}, "m", 
+        lain.util.magnify_client, 
+        {description = "magnify client", group = "client"}
+    ),
+    awful.key(
+        {modkey, "Shift"}, "q",
+        function(c) c:kill() end,
         {description = "close", group = "client"}
     ),
     awful.key(
-        {modkey, "Control"},
-        "space",
-        awful.client.floating.toggle,
-        {description = "toggle floating", group = "client"}
-    ),
-    awful.key(
-        {modkey, "Control"},
-        "Return",
-        function(c)
-            c:swap(awful.client.getmaster())
-        end,
-        {description = "move to master", group = "client"}
-    ),
-    awful.key(
-        {modkey, "Shift"},
-        "Home",
+        {modkey, "Shift"}, "Home",
         function(c)
             local target = c.screen:get_next_in_direction("left")
             if target then
@@ -402,8 +313,7 @@ local clientkeys =
         {description = "move to screen on the left", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"},
-        "End",
+        {modkey, "Shift"}, "End",
         function(c)
             local target = c.screen:get_next_in_direction("right")
             if target then
@@ -413,8 +323,7 @@ local clientkeys =
         {description = "move to screen on the right", group = "client"}
     ),
     awful.key(
-        {modkey},
-        "n",
+        {modkey}, "n",
         function(c)
             -- The client currently has the input focus, so it cannot be
             -- minimized, since minimized clients can't have the focus.
@@ -423,17 +332,7 @@ local clientkeys =
         {description = "minimize", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"},
-        "m",
-        function(c)
-            c.maximized = not c.maximized
-            c:raise()
-        end,
-        {description = "maximize", group = "client"}
-    ),
-    awful.key(
-        {modkey},
-        "f",
+        {modkey}, "f",
         function(c)
             c.fullscreen = not c.fullscreen
             c:raise()
