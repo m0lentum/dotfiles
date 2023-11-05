@@ -187,36 +187,12 @@ local globalkeys =
     --
     --
     awful.key(
-        {modkey, "Control"},
+        {modkey, "Shift"},
         "Left",
         function()
             awful.client.swap.bydirection("left")
         end,
         {description = "swap with client on the left", group = "client"}
-    ),
-    awful.key(
-        {modkey, "Control"},
-        "Right",
-        function()
-            awful.client.swap.bydirection("right")
-        end,
-        {description = "swap with client on the right", group = "client"}
-    ),
-    awful.key(
-        {modkey, "Control"},
-        "Up",
-        function()
-            awful.client.swap.bydirection("up")
-        end,
-        {description = "swap with client above", group = "client"}
-    ),
-    awful.key(
-        {modkey, "Control"},
-        "Down",
-        function()
-            awful.client.swap.bydirection("down")
-        end,
-        {description = "swap with client below", group = "client"}
     ),
     awful.key(
         {modkey, "Shift"},
@@ -225,6 +201,22 @@ local globalkeys =
             awful.client.swap.bydirection("right")
         end,
         {description = "swap with client on the right", group = "client"}
+    ),
+    awful.key(
+        {modkey, "Shift"},
+        "Up",
+        function()
+            awful.client.swap.bydirection("up")
+        end,
+        {description = "swap with client above", group = "client"}
+    ),
+    awful.key(
+        {modkey, "Shift"},
+        "Down",
+        function()
+            awful.client.swap.bydirection("down")
+        end,
+        {description = "swap with client below", group = "client"}
     ),
     awful.key(
         {modkey},
@@ -399,7 +391,7 @@ local clientkeys =
         {description = "move to master", group = "client"}
     ),
     awful.key(
-        {modkey, "Control"},
+        {modkey, "Shift"},
         "Home",
         function(c)
             local target = c.screen:get_next_in_direction("left")
@@ -410,7 +402,7 @@ local clientkeys =
         {description = "move to screen on the left", group = "client"}
     ),
     awful.key(
-        {modkey, "Control"},
+        {modkey, "Shift"},
         "End",
         function(c)
             local target = c.screen:get_next_in_direction("right")
