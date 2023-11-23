@@ -117,7 +117,7 @@ let
     fi
 
     dims="''${target_w}x''${target_h}"
-    convert "$src" -resize "$dims" -background white -gravity center -extent "$dims" "$dest"
+    convert "$src" -resize "$dims" -background white -gravity northwest -extent "$dims" "$dest"
   '';
 in
 {
