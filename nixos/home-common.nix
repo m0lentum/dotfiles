@@ -97,6 +97,7 @@ in
     xclip
     entr
     file
+    exiftool
     jq
     zip
     unzip
