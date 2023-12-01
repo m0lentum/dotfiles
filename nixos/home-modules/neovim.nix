@@ -129,6 +129,9 @@
         enable('pyright', {
           cmd = { "${pkgs.pyright}/bin/pyright-langserver", "--stdio" },
         })
+        enable('taplo', {
+          cmd = { "${pkgs.taplo}/bin/taplo", "lsp", "stdio" },
+        })
 
         -- nicer diagnostic icons
 
