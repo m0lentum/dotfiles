@@ -144,6 +144,7 @@ in
     spotify
 
     krita
+    pureref
     inkscape
     blender
 
