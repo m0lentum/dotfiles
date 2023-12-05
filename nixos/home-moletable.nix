@@ -44,6 +44,7 @@ let
         /data/steam-windows/steamapps/common/Beat\ Saber/Beat\ Saber_Data/CustomLevels \
         /home/mole/stuff                \
         /home/mole/.config/krita*       \
+        /home/mole/.config/Allusion/backups \
 
     backup_exit=$?
 
