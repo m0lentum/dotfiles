@@ -352,8 +352,12 @@ awful.rules.rules = {
         rule = { floating = true },
         properties = { titlebars_enabled = true },
     },
+    -- floating by default
     {
-        rule_any = { class = { "pinentry", "Matplotlib" } },
+        rule_any = {
+            class = { "pinentry", "Matplotlib", "sandbox", "flamegrower" },
+            name = { "dexterior" },
+        },
         properties = { floating = true },
     }
 }
