@@ -343,10 +343,20 @@
     {
       plugin = indent-blankline-nvim;
       config = ''
-        let g:indent_blankline_char_highlight_list = [
-          \'NightflySlateBlue',
-          \'NightflyRegalBlue',
-        \]
+        lua << EOF
+        require("ibl").setup {
+          indent = {
+            highlight = {
+              "NightflySlateBlue",
+              "NightflyRegalBlue",
+            }
+          },
+          scope = {
+            highlight = { "NightflyMalibu" },
+            show_start = false,
+          },
+        }
+        EOF
       '';
     }
     {
