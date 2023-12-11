@@ -138,7 +138,6 @@ in
     a4pad
   ] ++ (with pkgs; [
     (discord.override { nss = pkgs.nss_latest; })
-    teams
     zoom-us
     zulip
 
