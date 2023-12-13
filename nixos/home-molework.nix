@@ -54,7 +54,6 @@ in
     picom.backend = pkgs.lib.mkForce "glx";
   };
   home.packages = with pkgs; [
-    teams
     zulip
     spotify
     virt-manager
