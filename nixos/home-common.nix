@@ -119,7 +119,7 @@ in
     sxiv
     vlc
     mpv
-    pcmanfm
+    gnome.nautilus
     notify-desktop
     # script/WM dependencies
     maim
