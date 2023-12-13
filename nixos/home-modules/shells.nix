@@ -71,6 +71,7 @@ let
     # instead, fish is login shell, set up to automatically start tmux,
     # and the tmux default command is set to "exec nu"
     enable = true;
+    package = pkgs.nushellFull;
     configFile.text =
       ''
         $env.config = {
