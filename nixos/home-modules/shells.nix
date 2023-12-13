@@ -86,21 +86,20 @@ let
               max_results: 100
               completer: {|spans|
                 # workaround for a bug with custom completers and aliases in nu v0.77+,
-                # see https://github.com/nushell/nushell/issues/8483
-                let has_alias = ($nu.scope.aliases | where name == $spans.0)
-                let spans = (if not ($has_alias | is-empty) {
-                  # put the first word of the expanded alias first in the span
-                  $spans | skip 1 | prepend ($has_alias | get expansion | split words | get 0)
+                # see https://www.nushell.sh/cookbook/external_completers.html#alias-completions
+
+                # if the current command is an alias, get it's expansion
+                let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
+                # overwrite
+                let spans = (if $expanded_alias != null  {
+                    # put the first word of the expanded alias first in the span
+                    $spans | skip 1 | prepend ($expanded_alias | split row " ")
                 } else { $spans })
-                carapace $spans.0 nushell $spans | from json
+
+                carapace $spans.0 nushell $spans
+                  | from json
+                  | if ($in | default [] | where value == $"($spans | last)ERR" | is-empty) { $in } else { null }
               }
-            }
-          }
-          hooks: {
-            # auto-expand tables. This is default in nu 0.84,
-            # but I want it now and don't want to use nixpkgs unstable
-            display_output: {
-              if (term size).columns >= 100 { table -e } else { table }
             }
           }
           keybindings: [
