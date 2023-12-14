@@ -354,6 +354,7 @@
           scope = {
             highlight = { "NightflyMalibu" },
             show_start = false,
+            show_end = false,
           },
         }
         EOF
