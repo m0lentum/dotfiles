@@ -450,6 +450,16 @@
             enable = true,
             additional_vim_regex_highlighting = false,
           },
+          incremental_selection = {
+            enable = true,
+            keymaps = {
+              init_selection = "<leader>v",
+              -- I don't tend to use search while selecting so this seems convenient
+              node_incremental = "n",
+              scope_incremental = "<leader>n",
+              node_decremental = "N",
+            },
+          },
         }
         EOF
       '';
