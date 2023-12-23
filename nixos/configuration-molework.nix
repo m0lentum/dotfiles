@@ -24,13 +24,8 @@
   networking.interfaces.enp0s31f6.useDHCP = true;
 
   services.xserver = {
-    # videoDrivers = ["intel"];
-    extraLayouts.fi-molemak = {
-      description = "Finnish colemak with some modifier customization";
-      languages = [ "fi" ];
-      symbolsFile = ../molemak.xkb;
-    };
-    # fi by default because I'll be using an ergodox with this one most of the time
+    # fi instead of fi-molemak by default
+    # because I'll be using an ergodox with this one most of the time
     layout = "fi";
     # Enable touchpad support.
     libinput.enable = true;

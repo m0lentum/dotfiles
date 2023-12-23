@@ -51,6 +51,13 @@
       Option "SuspendTime" "0"
       Option "OffTime" "0"
     '';
+    # software layout for colemak on qwerty keyboards
+    # (laptops, mainly - I use programmable keyboards with desktops)
+    extraLayouts.fi-molemak = {
+      description = "Finnish colemak with some modifier customization";
+      languages = [ "fi" ];
+      symbolsFile = ../molemak.xkb;
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.

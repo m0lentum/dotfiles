@@ -36,11 +36,6 @@
 
   services.xserver = {
     videoDrivers = [ "intel" ];
-    extraLayouts.fi-molemak = {
-      description = "Finnish colemak with some modifier customization";
-      languages = [ "fi" ];
-      symbolsFile = ../molemak.xkb;
-    };
     layout = "fi-molemak";
     # Enable touchpad support.
     libinput.enable = true;
