@@ -168,22 +168,22 @@ local globalkeys =
     --
     --
     awful.key(
-        {modkey, "Shift"}, "Left",
+        {modkey, altkey}, "Left",
         function() awful.client.swap.bydirection("left") end,
         {description = "swap with client on the left", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"}, "Right",
+        {modkey, altkey}, "Right",
         function() awful.client.swap.bydirection("right") end,
         {description = "swap with client on the right", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"}, "Up",
+        {modkey, altkey}, "Up",
         function() awful.client.swap.bydirection("up") end,
         {description = "swap with client above", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"}, "Down",
+        {modkey, altkey}, "Down",
         function() awful.client.swap.bydirection("down") end,
         {description = "swap with client below", group = "client"}
     ),
@@ -303,7 +303,7 @@ local clientkeys =
         {description = "close", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"}, "Home",
+        {modkey, altkey}, "Home",
         function(c)
             local target = c.screen:get_next_in_direction("left")
             if target then
@@ -313,7 +313,7 @@ local clientkeys =
         {description = "move to screen on the left", group = "client"}
     ),
     awful.key(
-        {modkey, "Shift"}, "End",
+        {modkey, altkey}, "End",
         function(c)
             local target = c.screen:get_next_in_direction("right")
             if target then
@@ -384,7 +384,7 @@ for i = 1, 9 do
         ),
         -- Move client to tag.
         awful.key(
-            {modkey, "Shift"},
+            {modkey, altkey},
             "#" .. i + 9,
             function()
                 if client.focus then
