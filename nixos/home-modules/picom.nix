@@ -23,6 +23,7 @@
     "100:class_g = 'zoom'"
     "100:class_g = 'krita'"
     "100:class_g = 'PureRef'"
+    "100:class_g = 'Allusion'"
     "100:class_g = 'tabbed'"
     "100:class_g = 'game'"
     # Slightly transparent even when focused
