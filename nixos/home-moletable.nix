@@ -150,6 +150,7 @@ in
     (discord.override { nss = pkgs.nss_latest; })
     zoom-us
     zulip
+    teams-for-linux
 
     spotify
 
