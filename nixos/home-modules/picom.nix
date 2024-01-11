@@ -19,7 +19,7 @@
     "100:class_g = 'mpv'"
     "100:class_g = 'obs'"
     "100:class_g = 'Wine'"
-    "100:class_g = 'Microsoft Teams - Preview'"
+    "100:class_g = 'teams-for-linux'"
     "100:class_g = 'zoom'"
     "100:class_g = 'krita'"
     "100:class_g = 'PureRef'"
