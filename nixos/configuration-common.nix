@@ -28,7 +28,7 @@
   programs.vim.defaultEditor = true;
   programs.fish.enable = true;
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     noto-fonts
     liberation_ttf
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
