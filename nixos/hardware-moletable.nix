@@ -32,7 +32,6 @@
       fsType = "vfat";
     };
 
-
   fileSystems."/data" =
     {
       device = "/dev/disk/by-uuid/7365130763304B2D";
@@ -42,9 +41,9 @@
 
   fileSystems."/backup" =
     {
-      device = "/dev/disk/by-uuid/100C-2B5D";
-      fsType = "vfat";
-      options = [ "rw" "uid=1000" "gid=100" "dmask=007" "fmask=117" ];
+      device = "/dev/disk/by-uuid/3CF0-87B0";
+      fsType = "exfat";
+      options = [ "rw" "uid=1000" "gid=100" ];
     };
 
   swapDevices = [ ];
