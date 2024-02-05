@@ -8,6 +8,11 @@
 
   programs.steam.enable = true;
   programs.gamemode.enable = true;
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [ xdg-desktop-portal-gtk ];
+    config.common.default = [ "gtk" ];
+  };
 
   # run JACK on the external soundcard so it doesn't need to worry about pulseaudio
   services.jack = {
