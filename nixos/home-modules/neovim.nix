@@ -535,19 +535,6 @@
         lua require("nvim-surround").setup()
       '';
     }
-    {
-      plugin = autoclose-nvim;
-      config = ''
-        lua << EOF
-        require("autoclose").setup({
-          keys = {
-            -- disable for apostrophe because it's used so often in english text
-            ["'"] = { close = false }
-          }
-        })
-        EOF
-      '';
-    }
     vim-sleuth # autodetect tab settings
 
     {
