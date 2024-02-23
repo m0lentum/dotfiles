@@ -63,6 +63,7 @@ in
     pyright
     fuse
     bindfs
+    camunda-modeler
   ];
   # vscode with robocorp extensions
   programs.vscode = {
