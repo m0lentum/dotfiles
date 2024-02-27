@@ -355,7 +355,7 @@ awful.rules.rules = {
     -- floating by default
     {
         rule_any = {
-            class = { "pinentry", "Matplotlib", "sandbox", "flamegrower" },
+            class = { "pinentry", "Matplotlib", "sandbox", "flamegrower", "demodemons" },
             name = { "dexterior" },
         },
         properties = { floating = true },
