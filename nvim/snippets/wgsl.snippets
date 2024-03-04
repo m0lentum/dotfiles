@@ -1,0 +1,37 @@
+snippet bind "binding resource"
+@group($1) @binding($2)$0
+endsnippet
+
+snippet v2 "vec2"
+vec2<f32>
+endsnippet
+
+snippet v3 "vec3"
+vec3<f32>
+endsnippet
+
+snippet v4 "vec4"
+vec4<f32>
+endsnippet
+
+snippet template "quick template for a generic shader" b
+struct VertexOutput {
+    @builtin(position) clip_position: vec4<f32>,
+}
+
+@vertex
+fn vs_main(
+    @location(0) position: vec3<f32>,
+) -> VertexOutput {
+    var out: VertexOutput;
+
+    return out;
+}
+
+@fragment
+fn fs_main(
+    in: VertexOutput
+) -> @location(0) vec4<f32> {
+    return vec4<f32>(0., 0., 0., 0.);
+}
+endsnippet

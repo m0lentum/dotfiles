@@ -106,6 +106,11 @@
             }
           },
         })
+        enable('wgsl_analyzer', {
+          -- wgsl_analyzer is not currently on nixpkgs,
+          -- so I install it in projects via nix flake
+          cmd = { "wgsl_analyzer" },
+        })
         enable('clangd', {
           cmd = { "${pkgs.clang-tools}/bin/clangd" },
         })
@@ -448,7 +453,9 @@
         require'nvim-treesitter.configs'.setup {
           highlight = {
             enable = true,
-            additional_vim_regex_highlighting = false,
+            -- wgsl tree-sitter module is outdated, use highlight from wgsl-vim instead
+            disable = { "wgsl" },
+            additional_vim_regex_highlighting = { "wgsl" },
           },
           incremental_selection = {
             enable = true,
@@ -464,6 +471,7 @@
         EOF
       '';
     }
+    wgsl-vim
     {
       plugin = pkgs.fetchFromGitLab {
         owner = "HiPhish";
