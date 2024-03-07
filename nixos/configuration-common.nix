@@ -78,6 +78,11 @@
     ];
   };
 
+  # enable ssh command line for interactive port forwarding
+  programs.ssh.extraConfig = ''
+    EnableEscapeCommandline=yes
+  '';
+
   # yubikey setup
   # also requires ~/.gnupg/gpg.conf from https://github.com/drduh/config/blob/master/gpg.conf
   # and ~/.gnupg/scdaemon.conf with the line `disable-ccid`
