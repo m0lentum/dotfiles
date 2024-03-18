@@ -28,6 +28,10 @@
     au FocusGained,BufEnter * :checktime
     nnoremap <Home> ^
 
+    " paste from the non-volatile yank buffer
+    noremap <leader>p "0p
+    noremap <leader>P "0P
+
     set nobackup
     set nowritebackup
 
