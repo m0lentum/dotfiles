@@ -60,6 +60,7 @@ in
     virt-manager
     vagrant
     docker-compose
+    podman-compose
     pyright
     fuse
     bindfs

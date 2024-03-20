@@ -7,6 +7,7 @@ let
     ltd = "lt --depth";
     nnn = "nnn -adHe -P p";
     docc = "docker-compose";
+    podc = "podman-compose";
     clip = "xclip -sel clip";
     today = "date +%F";
     datetime = "date +%FT%T%z";

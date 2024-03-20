@@ -73,9 +73,10 @@
   services.logind.lidSwitch = "lock";
 
   virtualisation = {
+    docker.enable = true;
     podman = {
       enable = true;
-      dockerCompat = true;
+      # dockerCompat = true;
       defaultNetwork.settings = {
         dns_enabled = true;
       };
