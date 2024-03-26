@@ -50,6 +50,11 @@ let
 in
 {
   imports = [ ./home-common.nix ];
+  programs = {
+    # sign commits at work with work email
+    git.userEmail = pkgs.lib.mkForce "mikael.b.myyra@jyu.fi";
+    jujutsu.settings.user.email = pkgs.lib.mkForce "mikael.b.myyra@jyu.fi";
+  };
   services = {
     picom.backend = pkgs.lib.mkForce "glx";
   };
