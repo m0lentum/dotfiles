@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 let
+  pkgsUnstable = import <nixos-unstable> { };
+
   # directories to ignore in tree and fzf listings because they're
   # never what I'm looking for and make lists too big to navigate
   listIgnores = [
@@ -20,6 +22,16 @@ in
   nixpkgs.config.allowUnfree = true;
   programs = {
     git = import ./home-modules/git.nix { inherit pkgs; };
+    jujutsu = {
+      enable = true;
+      package = pkgsUnstable.jujutsu;
+      settings = {
+        user.name = "Mikael Myyrä";
+        user.email = "mikael.myyrae@gmail.com";
+        ui.default-command = "status";
+        ui.paginate = "never";
+      };
+    };
     fish = shells.fish;
     nushell = shells.nushell;
     starship = import ./home-modules/starship.nix { inherit pkgs; };
