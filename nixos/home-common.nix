@@ -17,22 +17,13 @@ let
   ];
 
   shells = import ./home-modules/shells.nix { inherit pkgs listIgnores; };
+  vcs = import ./home-modules/vcs.nix { inherit pkgs pkgsUnstable; };
 in
 {
   nixpkgs.config.allowUnfree = true;
   programs = {
-    git = import ./home-modules/git.nix { inherit pkgs; };
-    jujutsu = {
-      enable = true;
-      package = pkgsUnstable.jujutsu;
-      settings = {
-        user.name = "Mikael Myyrä";
-        user.email = "mikael.myyrae@gmail.com";
-        ui.default-command = "log";
-        # make sure the pager only pages overflowing messages
-        ui.pager = [ "less" "-FRX" ];
-      };
-    };
+    git = vcs.git;
+    jujutsu = vcs.jujutsu;
     fish = shells.fish;
     nushell = shells.nushell;
     starship = import ./home-modules/starship.nix { inherit pkgs; };
