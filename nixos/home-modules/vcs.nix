@@ -58,6 +58,15 @@ let
       ui.default-command = "log";
       # make sure the pager only pages overflowing messages
       ui.pager = [ "less" "-FRX" ];
+      colors = {
+        description = "green";
+      };
+      aliases = {
+        bup = [ "branch" "set" "-r" "@-" ];
+        la = [ "log" "-r" ".." ];
+        ld = [ "log" "--template" "builtin_log_detailed" ];
+        lad = [ "log" "-r" ".." "--template" "builtin_log_detailed" ];
+      };
     };
   };
 
