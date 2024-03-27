@@ -28,8 +28,9 @@ in
       settings = {
         user.name = "Mikael Myyrä";
         user.email = "mikael.myyrae@gmail.com";
-        ui.default-command = "status";
-        ui.paginate = "never";
+        ui.default-command = "log";
+        # make sure the pager only pages overflowing messages
+        ui.pager = [ "less" "-FRX" ];
       };
     };
     fish = shells.fish;
