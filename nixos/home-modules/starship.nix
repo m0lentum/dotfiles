@@ -9,6 +9,7 @@
       "$git_branch"
       "$git_state"
       "$git_status"
+      "$custom"
       "$rust"
       "$cmd_duration"
       "$line_break"
@@ -31,5 +32,10 @@
       pure_msg = "λλ";
     };
     package.disabled = true;
+    custom.jj = {
+      when = "jj root";
+      format = "[jj]($style) ";
+      style = "bold purple";
+    };
   };
 }
