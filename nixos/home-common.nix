@@ -7,6 +7,7 @@ let
   # never what I'm looking for and make lists too big to navigate
   listIgnores = [
     ".git"
+    ".jj"
     "node_modules"
     "build"
     "target"
