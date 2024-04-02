@@ -64,8 +64,9 @@ let
       aliases = {
         bup = [ "branch" "set" "-r" "@-" ];
         la = [ "log" "-r" ".." ];
-        ld = [ "log" "--template" "builtin_log_detailed" ];
-        lad = [ "log" "-r" ".." "--template" "builtin_log_detailed" ];
+        ld = [ "log" "--template" "builtin_log_detailed" "--stat" ];
+        lad = [ "log" "-r" ".." "--template" "builtin_log_detailed" "--stat" ];
+        gf = [ "git" "fetch" ];
       };
     };
   };
