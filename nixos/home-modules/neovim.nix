@@ -139,6 +139,8 @@
         enable('taplo', {
           cmd = { "${pkgs.taplo}/bin/taplo", "lsp", "stdio" },
         })
+        -- dart installed per-project because I almost never use it, no cmd override
+        enable('dartls', {})
 
         -- nicer diagnostic icons
 
@@ -451,6 +453,7 @@
         p.tree-sitter-json
         p.tree-sitter-dockerfile
         p.tree-sitter-hcl
+        p.tree-sitter-dart
       ]);
       config = ''
         lua << EOF
