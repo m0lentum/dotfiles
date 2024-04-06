@@ -68,6 +68,7 @@ let
         lad = [ "log" "-r" ".." "--template" "builtin_log_detailed" "--stat" ];
         gf = [ "git" "fetch" ];
       };
+      snapshot.max-new-file-size = "10M";
     };
   };
 
