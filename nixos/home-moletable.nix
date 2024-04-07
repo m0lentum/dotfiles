@@ -155,7 +155,6 @@ in
     spotify
 
     krita
-    pureref
     allusion
     inkscape
     blender
