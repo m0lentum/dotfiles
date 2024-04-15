@@ -1,16 +1,6 @@
 { config, pkgs, ... }:
 
 let
-  # maybe put this on nixpkgs at some point
-  allusion = pkgs.appimageTools.wrapType2 rec {
-    name = "allusion";
-    version = "1.0.0-rc.10";
-    src = builtins.fetchurl {
-      url = "https://github.com/allusion-app/Allusion/releases/download/v${version}/Allusion-${version}.AppImage";
-      sha256 = "1yc7jkwxyj092k86ij8yrw2x21jmj9iziyssngzcvgpn6s751c75";
-    };
-  };
-
   cam = pkgs.writeScriptBin "cam" ''
     #! /usr/bin/env nix-shell
     #! nix-shell -p ffmpeg_6-full -i bash
@@ -155,7 +145,6 @@ in
     spotify
 
     krita
-    allusion
     inkscape
     blender
 
