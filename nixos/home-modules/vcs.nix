@@ -68,6 +68,10 @@ let
         lad = [ "log" "-r" ".." "--template" "builtin_log_detailed" "--stat" ];
         gf = [ "git" "fetch" ];
       };
+      revsets = {
+        # compared to default, show fewer branches and always a few ancestors even if editing trunk
+        log = "ancestors(@, 5) | immutable_heads()-..@";
+      };
       snapshot.max-new-file-size = "10M";
     };
   };
