@@ -69,10 +69,11 @@ let
         gf = [ "git" "fetch" ];
       };
       revsets = {
-        # compared to default, show fewer branches and always a few ancestors even if editing trunk
-        log = "ancestors(@, 5) | immutable_heads()-..@";
+        # compared to default, show fewer branches (local only)
+        # and always a few ancestors even if editing trunk
+        log = "ancestors(@, 5) | immutable_heads()-..@ | ancestors(branches(), 2)";
       };
-      snapshot.max-new-file-size = "10M";
+      snapshot.max-new-file-size = "15M";
     };
   };
 
