@@ -60,6 +60,7 @@ let
       ui.pager = [ "less" "-FRX" ];
       colors = {
         description = "green";
+        working_copy = { underline = true; };
       };
       aliases = {
         bup = [ "branch" "set" "-r" "@-" ];
