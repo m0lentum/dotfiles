@@ -11,5 +11,11 @@ for DEV in 'Kensington Slimblade Trackball' 'Kensington Kensington Slimblade Tra
   fi
 done
 
-# wacom to monitor 1
-xsetwacom --set "Wacom Intuos S Pen stylus" MapToOutput HEAD-0
+# tablets to monitor 1
+for DEV in 'Wacom Intuos S Pen stylus' \
+  'Wacom Intuos Pro M Pen stylus' \
+  'Wacom Intuos Pro M Pen eraser'; do
+  if xsetwacom --list devices | grep -q "$DEV"; then
+    xsetwacom --set "$DEV" MapToOutput HEAD-0
+  fi
+done
