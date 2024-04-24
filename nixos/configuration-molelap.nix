@@ -36,7 +36,7 @@
 
   services.xserver = {
     videoDrivers = [ "intel" ];
-    layout = "fi-molemak";
+    xkb.layout = "fi-molemak";
     # Enable touchpad support.
     libinput.enable = true;
   };

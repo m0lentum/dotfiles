@@ -42,7 +42,6 @@
   services.xserver = {
     enable = true;
     windowManager.awesome.enable = true;
-    displayManager.defaultSession = "none+awesome";
     desktopManager.xterm.enable = false;
     # disable automatic screen blanking and stuff, we'll do it manually instead
     serverFlagsSection = ''
@@ -53,12 +52,13 @@
     '';
     # software layout for colemak on qwerty keyboards
     # (laptops, mainly - I use programmable keyboards with desktops)
-    extraLayouts.fi-molemak = {
+    xkb.extraLayouts.fi-molemak = {
       description = "Finnish colemak with some modifier customization";
       languages = [ "fi" ];
       symbolsFile = ../molemak.xkb;
     };
   };
+  services.displayManager.defaultSession = "none+awesome";
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.mole = {
@@ -93,8 +93,8 @@
   services.pcscd.enable = true;
 
   programs.gnupg.agent = {
-    pinentryFlavor = "qt";
     enableSSHSupport = true;
+    pinentryPackage = pkgs.pinentry-qt;
   };
 
   security.pam.yubico = {

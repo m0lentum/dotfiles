@@ -26,7 +26,7 @@
   services.xserver = {
     # fi instead of fi-molemak by default
     # because I'll be using an ergodox with this one most of the time
-    layout = "fi";
+    xkb.layout = "fi";
     # Enable touchpad support.
     libinput.enable = true;
     xrandrHeads = [

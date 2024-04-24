@@ -130,9 +130,6 @@
             "--stdio",
           },
         })
-        enable('rnix', {
-          cmd = { "${pkgs.rnix-lsp}/bin/rnix-lsp" },
-        })
         enable('pyright', {
           cmd = { "${pkgs.pyright}/bin/pyright-langserver", "--stdio" },
         })

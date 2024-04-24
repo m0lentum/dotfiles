@@ -56,28 +56,30 @@
   # common development server ports
   networking.firewall.allowedTCPPorts = [ 8080 8000 9000 ];
 
-  services.xserver.layout = "fi";
-  services.xserver.videoDrivers = [ "nvidia" ];
-  services.xserver.wacom.enable = true;
+  services.xserver = {
+    xkb.layout = "fi";
+    videoDrivers = [ "nvidia" ];
+    wacom.enable = true;
+
+    xrandrHeads = [
+      { output = "DP-0"; primary = true; }
+      "DP-2"
+      "DVI-D-0"
+    ];
+    # enable vsync and position screens
+    screenSection = pkgs.lib.strings.concatStrings [
+      "Option \"metamodes\" "
+      "\"DP-0: nvidia-auto-select +1080+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, "
+      "DP-2: nvidia-auto-select +3640+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, "
+      "HDMI-0: nvidia-auto-select +0+0 {Rotation=left, ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}\""
+      "Option \"DPI\" \"96 x 96\""
+    ];
+  };
 
   services.printing = {
     enable = true;
     drivers = [ pkgs.epson-escpr2 ];
   };
-
-  services.xserver.xrandrHeads = [
-    { output = "DP-0"; primary = true; }
-    "DP-2"
-    "DVI-D-0"
-  ];
-  # enable vsync and position screens
-  services.xserver.screenSection = pkgs.lib.strings.concatStrings [
-    "Option \"metamodes\" "
-    "\"DP-0: nvidia-auto-select +1080+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, "
-    "DP-2: nvidia-auto-select +3640+0 {ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}, "
-    "HDMI-0: nvidia-auto-select +0+0 {Rotation=left, ForceCompositionPipeline=On, ForceFullCompositionPipeline=On}\""
-    "Option \"DPI\" \"96 x 96\""
-  ];
 
   # systemd-udev-settle hangs the system for 2 minutes on startup and apparently isn't needed
   systemd.services.systemd-udev-settle.enable = false;
