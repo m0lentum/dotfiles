@@ -70,9 +70,16 @@ let
         gf = [ "git" "fetch" ];
       };
       revsets = {
-        # compared to default, show fewer branches (local only)
-        # and always a few ancestors even if editing trunk
-        log = "ancestors(@, 5) | immutable_heads()-..@ | ancestors(branches(), 2)";
+        log = pkgs.lib.strings.concatStringsSep " | " [
+          # show a bit of extra context even if editing trunk
+          "ancestors(@, 5)"
+          # show the entire distance from trunk to current even if it's longer than 5
+          "immutable_heads()-..@"
+          # show all of my own digressions even if I never made them into a branch
+          "ancestors(visible_heads() & mine(), 2)"
+          # show a bit of all local branches
+          "ancestors(branches(), 2)"
+        ];
       };
       snapshot.max-new-file-size = "15M";
     };
