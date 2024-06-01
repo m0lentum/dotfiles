@@ -113,7 +113,7 @@ let
               event: {
                 send: executehostcommand
                 # big messy command to wrap the result in ticks only if it has spaces or quotes
-                cmd: `commandline --insert (fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
+                cmd: `commandline edit --insert (fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
               }
             },
             {
@@ -123,7 +123,7 @@ let
               mode: [emacs, vi_insert, vi_normal]
               event: {
                 send: executehostcommand
-                cmd: `commandline --insert (fd --type d | fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
+                cmd: `commandline edit --insert (fd --type d | fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
               }
             },
           ]
