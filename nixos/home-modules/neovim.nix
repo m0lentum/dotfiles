@@ -548,25 +548,5 @@
       '';
     }
     vim-sleuth # autodetect tab settings
-
-    {
-      # discord rich presence, but opt-in with an environment variable
-      plugin = presence-nvim;
-      config = ''
-        lua << EOF
-        if vim.env.VIM_DISCORD_PRESENCE ~= nil then
-          require("presence"):setup({
-            neovim_image_text = "The text editor whomst is good",
-            log_level = "error",
-          })
-        else
-          -- setup with everything blacklisted, otherwise presence will setup itself
-          require("presence"):setup({
-            blacklist = {".*"}
-          })
-        end
-        EOF
-      '';
-    }
   ];
 }
