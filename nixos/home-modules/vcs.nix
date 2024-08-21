@@ -15,6 +15,7 @@ let
       "Session.vim"
       "compile_commands.json"
       ".cache"
+      ".nlsp-settings"
     ];
     lfs.enable = true;
     delta.enable = true;
