@@ -1,85 +1,5 @@
 #
-# text shorthands
-#
-
-snippet sec* "section*" bA
-\section*{$1}$0
-endsnippet
-
-snippet sec- "section" bA
-\section{$1}$0
-endsnippet
-
-snippet sub* "subsection*" bA
-\subsection*{$1}$0
-endsnippet
-
-snippet sub- "subsection" bA
-\subsection{$1}$0
-endsnippet
-
-snippet bf "textbf{}"
-\textbf{${1:${VISUAL}}}$0
-endsnippet
-
-snippet it "textit{}"
-\textit{${1:${VISUAL}}}$0
-endsnippet
-
-snippet ci "textcite"
-\textcite{$1}$0
-endsnippet
-
-snippet pci "parencite"
-\parencite{$1}$0
-endsnippet
-
-snippet pci* "parencite*"
-\parencite*{$1}$0
-endsnippet
-
-snippet lab "label"
-\label{$1}$0
-endsnippet
-
-#
-# symbol shorthands
-#
-
-snippet -> "right arrow"
-\rightarrow
-endsnippet
-
-snippet <- "left arrow"
-\leftarrow
-endsnippet
-
-snippet par "partial derivative" i
-\partial
-endsnippet
-
-snippet "([a-zA-Z])bb" "postfix mathbb" ri
-\mathbb{`!p snip.rv=match.group(1)`}
-endsnippet
-
-snippet "([a-zA-Z])bf" "postfix mathbf" ri
-\mathbf{`!p snip.rv=match.group(1)`}
-endsnippet
-
-snippet "([a-zA-Z])cal" "postfix mathcal" ri
-\mathcal{`!p snip.rv=match.group(1)`}
-endsnippet
-
-snippet "([a-zA-Z])bar" "postfix overline" ri
-\overline{`!p snip.rv=match.group(1)`}
-endsnippet
-
-snippet "([a-zA-Z])hat" "postfix hat" ri
-\hat{`!p snip.rv=match.group(1)`}
-endsnippet
-
-#
-# math blocks and environments
+# blocks and environments
 #
 
 snippet beg "begin{} / end{}"
@@ -139,18 +59,102 @@ snippet pp "partial derivative" i
 endsnippet
 
 #
-# miscellaneous expressions
+# text shorthands
 #
 
-snippet // "fraction" iA
+snippet sec* "section*" bA
+\section*{$1}$0
+endsnippet
+
+snippet sec- "section" bA
+\section{$1}$0
+endsnippet
+
+snippet sub* "subsection*" bA
+\subsection*{$1}$0
+endsnippet
+
+snippet sub- "subsection" bA
+\subsection{$1}$0
+endsnippet
+
+snippet bf "textbf{}"
+\textbf{${1:${VISUAL}}}$0
+endsnippet
+
+snippet it "textit{}"
+\textit{${1:${VISUAL}}}$0
+endsnippet
+
+snippet ci "textcite"
+\textcite{$1}$0
+endsnippet
+
+snippet pci "parencite"
+\parencite{$1}$0
+endsnippet
+
+snippet pci* "parencite*"
+\parencite*{$1}$0
+endsnippet
+
+snippet lab "label"
+\label{$1}$0
+endsnippet
+
+#
+# symbol and expression shorthands
+#
+
+snippet -> "right arrow"
+\rightarrow
+endsnippet
+
+snippet <- "left arrow"
+\leftarrow
+endsnippet
+
+snippet par "partial derivative" i
+\partial
+endsnippet
+
+snippet "([a-zA-Z])bb" "postfix mathbb" ri
+\mathbb{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet "([a-zA-Z])bf" "postfix mathbf" ri
+\mathbf{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet "([a-zA-Z])cal" "postfix mathcal" ri
+\mathcal{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet "([a-zA-Z])bar" "postfix overline" ri
+\overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet "([a-zA-Z])hat" "postfix hat" ri
+\hat{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet div "divergence" i
+\nabla \cdot
+endsnippet
+
+snippet curl "curl" i
+\nabla \times
+endsnippet
+
+snippet // "fraction" i
 \frac{$1}{$2}$0
 endsnippet
 
-snippet sum "sum"
+snippet sum "sum" i
 \sum_{$1}^{$2}$0
 endsnippet
 
-snippet int "integral"
+snippet int "integral" i
 \int_{$1}^{$2}$0
 endsnippet
 
