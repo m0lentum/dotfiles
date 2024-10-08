@@ -118,6 +118,14 @@ snippet par "partial derivative" i
 \partial
 endsnippet
 
+snippet eps "epsilon" i
+\varepsilon
+endsnippet
+
+snippet inf "infinity" i
+\infty
+endsnippet
+
 snippet "([a-zA-Z])bb" "postfix mathbb" ri
 \mathbb{`!p snip.rv=match.group(1)`}
 endsnippet
@@ -138,6 +146,14 @@ snippet "([a-zA-Z])hat" "postfix hat" ri
 \hat{`!p snip.rv=match.group(1)`}
 endsnippet
 
+snippet "([a-zA-Z])til" "postfix tilde" ri
+\tilde{`!p snip.rv=match.group(1)`}
+endsnippet
+
+snippet over "overset" i
+\overset{$1}{${2:${VISUAL}}}$0
+endsnippet
+
 snippet div "divergence" i
 \nabla \cdot
 endsnippet
@@ -146,7 +162,7 @@ snippet curl "curl" i
 \nabla \times
 endsnippet
 
-snippet // "fraction" i
+snippet fr "fraction" i
 \frac{$1}{$2}$0
 endsnippet
 
