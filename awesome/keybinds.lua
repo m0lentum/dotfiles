@@ -74,12 +74,12 @@ local globalkeys =
         {description = "custom area, no transparency", group = "screenshots"}
     ),
     awful.key(
-        {"Shift"}, "Print",
+        {"Control"}, "Print",
         function() awful.spawn(screenshot_normal("-i $(xdotool getactivewindow) -B")) end,
         {description = "active window", group = "screenshots"}
     ),
     awful.key(
-        {altkey, "Shift"}, "Print",
+        {altkey, "Control"}, "Print",
         function() awful.spawn(screenshot_normal("-i $(xdotool getactivewindow)")) end,
         {description = "active window, no transparency", group = "screenshots"}
     ),
