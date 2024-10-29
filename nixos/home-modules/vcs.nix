@@ -64,7 +64,7 @@ let
         working_copy = { underline = true; };
       };
       aliases = {
-        bup = [ "branch" "set" "-r" "@-" ];
+        bup = [ "bookmark" "set" "-r" "@-" ];
         la = [ "log" "-r" ".." ];
         ld = [ "log" "--template" "builtin_log_detailed" "--stat" ];
         lad = [ "log" "-r" ".." "--template" "builtin_log_detailed" "--stat" ];
@@ -79,7 +79,7 @@ let
           # show all of my own digressions even if I never made them into a branch
           "ancestors(visible_heads() & mine(), 2)"
           # show a bit of all local branches
-          "ancestors(branches(), 2)"
+          "ancestors(bookmarks(), 2)"
         ];
       };
       snapshot.max-new-file-size = "15M";
