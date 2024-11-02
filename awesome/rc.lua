@@ -358,7 +358,7 @@ awful.rules.rules = {
             class = { "pinentry", "Matplotlib", "Octave",
                 -- personal game/graphics projects
                 -- TODO: figure out a better way to do this than individual rules here
-                "sandbox", "flamegrower", "demodemons", "moonstaff" },
+                "sandbox", "flamegrower", "demodemons", "moonstaff", "heather", "velgi" },
             name = { "dexterior" },
         },
         properties = { floating = true },
