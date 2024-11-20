@@ -90,7 +90,7 @@
   programs.ssh.extraConfig = ''
     Host work
       User mole
-      HostName 192.168.0.172
+      HostName 192.168.0.170
       ForwardX11 yes
       ForwardX11Trusted yes
       StreamLocalBindUnlink yes
