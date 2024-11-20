@@ -1,3 +1,8 @@
+global !p
+def snake_case(s):
+  return s.lower().replace(' ', '_')
+endglobal
+
 #
 # blocks and environments
 #
@@ -62,20 +67,16 @@ endsnippet
 # text shorthands
 #
 
-snippet sec* "section*" bA
-\section*{$1}$0
+snippet cha "chapter" b
+\chapter{$1}\label{ch:`!p snip.rv = snake_case(t[1])`}$0
 endsnippet
 
-snippet sec- "section" bA
-\section{$1}$0
+snippet sec* "unnumbered section" bA
+\\$1section*{$2}$0
 endsnippet
 
-snippet sub* "subsection*" bA
-\subsection*{$1}$0
-endsnippet
-
-snippet sub- "subsection" bA
-\subsection{$1}$0
+snippet sec "section" b
+\\$1section{$2}\label{sec:`!p snip.rv = snake_case(t[2])`}$0
 endsnippet
 
 snippet bf "textbf{}"
@@ -108,6 +109,10 @@ endsnippet
 
 snippet -> "right arrow"
 \rightarrow
+endsnippet
+
+snippet --> "long right arrow"
+\longrightarrow
 endsnippet
 
 snippet <- "left arrow"
