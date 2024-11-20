@@ -12,6 +12,7 @@
   };
   home.packages = with pkgs; [
     teams-for-linux
+    zoom-us
     zulip
     spotify
     virt-manager
