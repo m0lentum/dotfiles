@@ -9,7 +9,7 @@ local my_table = awful.util.table or gears.table -- 4.{0,1} compatibility
 -- screenshot commands require maim, ifne and sed to be installed.
 -- transparency removal assumes transparency is created by picom.
 local screenshot_pipe =
-    " | ifne tee ~/Pictures/Screenshots/$(date +%y-%m-%d_%T)_$(xdotool getwindowname $(xdotool getactivewindow) | sed 's/ /_/g').png | xclip -sel clip -t image/png"
+    " | ifne tee ~/Pictures/Screenshots/$(date +%y-%m-%d_%T)_$(xdotool getwindowname $(xdotool getactivewindow) | sed 's/[ /]/_/g').png | xclip -sel clip -t image/png"
 local screenshot_normal = function(maim_opts)
     return 'bash -c "maim -o ' .. maim_opts .. screenshot_pipe .. '"'
 end
