@@ -25,6 +25,7 @@
     git
     firefox
   ];
+  programs.vim.enable = true;
   programs.vim.defaultEditor = true;
   programs.fish.enable = true;
 
@@ -34,9 +35,7 @@
     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
   ];
 
-  # Enable sound.
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
+  hardware.nvidia.open = true;
 
   # Enable the X11 windowing system.
   services.xserver = {

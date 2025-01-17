@@ -124,7 +124,7 @@ in
     sxiv
     vlc
     mpv
-    gnome.nautilus
+    nautilus
     notify-desktop
     # script/WM dependencies
     maim

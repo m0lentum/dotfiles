@@ -133,7 +133,7 @@
         enable('clangd', {
           cmd = { "${pkgs.clang-tools}/bin/clangd" },
         })
-        enable('tsserver', {
+        enable('ts_ls', {
           cmd = {
             "${pkgs.nodePackages.typescript-language-server}/bin/typescript-language-server",
             "--stdio",
