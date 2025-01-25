@@ -82,6 +82,14 @@ in
       latitude = "62.24";
       longitude = "25.70";
     };
+    safeeyes.enable = true;
+    # see https://github.com/slgobinath/SafeEyes/wiki/How-to-install-backend-for-Safe-Eyes-tray-icon
+    snixembed = {
+      enable = true;
+      beforeUnits = [
+        "safeeyes.service"
+      ];
+    };
   };
 
   # extra stuff not in programs and/or config files managed manually
@@ -110,7 +118,6 @@ in
     # general helpful stuff
     et
     pass
-    safeeyes
     networkmanagerapplet
     yubioath-flutter
     obsidian
