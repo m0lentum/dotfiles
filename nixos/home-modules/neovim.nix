@@ -407,6 +407,7 @@
         require("bufferline").setup {
           options = {
             show_buffer_close_icons = false,
+            diagnostics = "nvim_lsp",
             separator_style = "slant",
             right_mouse_command = nil,
             middle_mouse_command = "bdelete %d",
