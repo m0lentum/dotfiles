@@ -547,7 +547,12 @@
         vmap <C-Right> <Plug>MoveBlockRight
       '';
     }
-    vim-smoothie # smooth scroll
+    {
+      plugin = mini-animate;
+      config = ''
+        lua require("mini.animate").setup()
+      '';
+    }
     {
       # sessions fully automatically
       plugin = auto-session;
