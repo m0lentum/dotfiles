@@ -125,12 +125,7 @@ in
   imports = [ ./home-common.nix ];
   nixpkgs.config.allowUnfree = true;
   programs = {
-    obs-studio = {
-      enable = true;
-      # obs-linuxbrowser isn't in nixpkgs on 21.05.
-      # I don't need it atm since I stream from windows, so leaving it off
-      # plugins = [ pkgs.obs-linuxbrowser ];
-    };
+    obs-studio.enable = true;
   };
   home.packages = [
     cam
@@ -141,6 +136,8 @@ in
     zoom-us
     zulip
     teams-for-linux
+
+    peek
 
     spotify
 

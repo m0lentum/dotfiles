@@ -25,9 +25,12 @@
     git
     firefox
   ];
-  programs.vim.enable = true;
-  programs.vim.defaultEditor = true;
-  programs.fish.enable = true;
+  programs = {
+    vim.enable = true;
+    vim.defaultEditor = true;
+    fish.enable = true;
+    dconf.enable = true;
+  };
 
   fonts.packages = with pkgs; [
     noto-fonts
