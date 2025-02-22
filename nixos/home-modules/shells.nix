@@ -42,6 +42,8 @@ let
   };
   shellAliases = fishAbbrs // fishAliases;
   nuAliases = shellAliases // {
+    l = "ls -a";
+    ll = "ls -al";
     # TODO: these don't work with nu 0.79, figure out why
     # today = "(date now | date format \"%F\")";
     # datetime = "(date now | date format \"%FT%T%z\")";
