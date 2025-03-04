@@ -68,6 +68,8 @@ let
     shellAliases = fishAliases;
   };
 
+  nuScripts = builtins.readFile ../../scripts/mkslides.nu;
+
   nushell = {
     # nushell is not set as login shell because it doesn't have the right
     # environment variable setup and making it by hand is cumbersome.
@@ -131,6 +133,8 @@ let
         }
 
         ${nuAliasesStr}
+
+        ${nuScripts}
       '';
     envFile.text = ''
       # remove indicator chars besides the one provided by starship
