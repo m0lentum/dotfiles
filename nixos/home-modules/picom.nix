@@ -42,8 +42,11 @@
     blur-background-exclude = [
       "name *= 'rect-overlay'" # teams screenshare overlay
       "name *= 'Peek'"
+      # override-redirect windows usually appear on top of other windows
+      # and look weird with a blur (and also flicker with xrender backend)
+      "override_redirect = true"
     ];
   };
-  # fixes flickering problems with glx backend
+  # fixes flicker and stutter problems with glx backend
   backend = "xrender";
 }
