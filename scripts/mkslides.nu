@@ -1,14 +1,23 @@
-# creates a slideshow with a fade effect
+# Creates a slideshow with a fade effect using ffmpeg
 # as described here: https://www.bannerbear.com/blog/how-to-create-a-slideshow-from-images-with-ffmpeg/
+#
+# Note: this can eat up a lot of memory with large images.
+# Downscaling the images manually beforehand
+# (instead of using the --downscale option) may be a good idea.
+# Also, all images should be the same resolution;
+# this does not scale them individually.
 def mkslides [
-  files: list,
-  --frametime: duration = 2sec,
-  --lastframetime: duration = 4sec,
-  --fadetime: duration = 0.5sec,
-  --downscale: int = 1,
-  --odd-downscale,
-  --out-file: string = "out.mp4",
-] {
+  files: list, # List of file paths to include in the slideshow.
+  --frametime (-t): duration = 2sec, # Time to display a frame.
+  --lastframetime (-l): duration = 5sec, # Time to display the final frame.
+  --fadetime (-d): duration = 0.5sec, # Time taken by the fade effect between frames.
+  --downscale (-s): int = 1, # Scale the final video down by an integer factor, e.g. 2 will half the resolution.
+  --odd-downscale, # The command may fail if your image resolution isn't divisible by the given downscale factor.
+    # This fixes it for cases where it's off by one by subtracting one pixel.
+    # Other cases can only appear with downscale factors greater than 2
+    # and are currently not supported.
+  --out-file (-o): string = "out.mp4", # Set the file name for the output.
+]: list<string> -> nothing {
   let frame_time_str = ($frametime | format duration sec | str substring 0..-5)
   let last_frame_time_str = ($lastframetime | format duration sec | str substring 0..-5)
   let fade_time_str = ($fadetime | format duration sec | str substring 0..-5)
