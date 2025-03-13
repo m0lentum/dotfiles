@@ -9,6 +9,7 @@
   };
   services = {
     picom.backend = pkgs.lib.mkForce "glx";
+    safeeyes.enable = pkgs.lib.mkForce false;
   };
   home.packages = with pkgs; [
     teams-for-linux
