@@ -150,6 +150,7 @@
         enable('taplo', {
           cmd = { "${pkgs.taplo}/bin/taplo", "lsp", "stdio" },
         })
+        enable('nushell', {})
         -- dart installed per-project because I almost never use it, no cmd override
         enable('dartls', {})
 
@@ -466,6 +467,7 @@
         p.tree-sitter-dockerfile
         p.tree-sitter-hcl
         p.tree-sitter-dart
+        p.tree-sitter-nu
       ]);
       config = ''
         lua << EOF
