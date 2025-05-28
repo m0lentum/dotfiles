@@ -78,6 +78,16 @@ let
     enable = true;
     configFile.text =
       ''
+        # wrap a string in ticks if it has spaces. used in fzf keybindings
+        def tick-wrap []: string -> string {
+          let s = $in
+          if (["'", '"', " "] | any { $in in $s }) {
+            $'`($s)`'
+          } else {
+            $s
+          }
+        }
+
         $env.config = {
           show_banner: false
           edit_mode: vi
@@ -93,7 +103,7 @@ let
                 # workaround for a bug with custom completers and aliases in nu v0.77+,
                 # see https://www.nushell.sh/cookbook/external_completers.html#alias-completions
 
-                # if the current command is an alias, get it's expansion
+                # if the current command is an alias, get its expansion
                 let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
                 # overwrite
                 let spans = (if $expanded_alias != null  {
@@ -115,8 +125,7 @@ let
               mode: [emacs, vi_insert, vi_normal]
               event: {
                 send: executehostcommand
-                # big messy command to wrap the result in ticks only if it has spaces or quotes
-                cmd: `commandline edit --insert (fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
+                cmd: `commandline edit --insert (fzf --tmux | str trim | tick-wrap)`
               }
             },
             {
@@ -126,7 +135,7 @@ let
               mode: [emacs, vi_insert, vi_normal]
               event: {
                 send: executehostcommand
-                cmd: `commandline edit --insert (fd --type d | fzf --height=50% | str trim | do { let res = $in; if (["'", '"', " "] | any { $in in $res }) { $'`($res)`' } else { $res }})`
+                cmd: `commandline edit --insert (fd --type d | fzf --tmux | str trim | tick-wrap)`
               }
             },
           ]
