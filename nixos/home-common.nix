@@ -119,6 +119,7 @@ in
     et
     pass
     networkmanagerapplet
+    openconnect
     yubioath-flutter
     obsidian
     zotero
