@@ -35,7 +35,7 @@
   fonts.packages = with pkgs; [
     noto-fonts
     liberation_ttf
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    nerd-fonts.jetbrains-mono
   ];
 
   hardware.nvidia.open = true;

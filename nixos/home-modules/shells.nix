@@ -65,7 +65,11 @@ let
       end
     '';
     shellAbbrs = fishAbbrs;
-    shellAliases = fishAliases;
+    # the following gets a weird conflict on nixpkgs 25.05,
+    # I think the `lsd` package defines some fish aliases by default
+    # which include `lt`.
+    # can't be bothered to fix because I don't use fish anymore
+    # shellAliases = fishAliases;
   };
 
   nuScripts = builtins.readFile ../../scripts/mkslides.nu;

@@ -396,12 +396,6 @@
       '';
     }
     {
-      plugin = feline-nvim;
-      config = ''
-        lua require("feline").setup()
-      '';
-    }
-    {
       plugin = bufferline-nvim;
       config = ''
         lua << EOF
