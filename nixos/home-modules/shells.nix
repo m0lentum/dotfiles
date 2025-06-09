@@ -104,20 +104,7 @@ let
               enable: true
               max_results: 100
               completer: {|spans|
-                # workaround for a bug with custom completers and aliases in nu v0.77+,
-                # see https://www.nushell.sh/cookbook/external_completers.html#alias-completions
-
-                # if the current command is an alias, get its expansion
-                let expanded_alias = (scope aliases | where name == $spans.0 | get -i 0 | get -i expansion)
-                # overwrite
-                let spans = (if $expanded_alias != null  {
-                    # put the first word of the expanded alias first in the span
-                    $spans | skip 1 | prepend ($expanded_alias | split row " ")
-                } else { $spans })
-
-                carapace $spans.0 nushell $spans
-                  | from json
-                  | if ($in | default [] | where value == $"($spans | last)ERR" | is-empty) { $in } else { null }
+                carapace $spans.0 nushell ...$spans | from json
               }
             }
           }
