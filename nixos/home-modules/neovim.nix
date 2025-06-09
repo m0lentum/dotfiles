@@ -120,7 +120,8 @@
           cmd = { "${pkgs.rust-analyzer}/bin/rust-analyzer" },
           settings = {
             ["rust-analyzer"] = {
-              checkOnSave = { command = "clippy" },
+              checkOnSave = true,
+              check = { command = "clippy" },
             }
           },
         })
