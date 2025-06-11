@@ -179,22 +179,23 @@
       '';
     }
     # null-ls for formatters that don't come with lspconfig
-    {
-      plugin = null-ls-nvim;
-      config = ''
-        lua << EOF
-        local null_ls = require('null-ls')
-        null_ls.setup {
-          debug = true,
-          sources = {
-            null_ls.builtins.formatting.isort,
-            null_ls.builtins.formatting.black,
-            null_ls.builtins.formatting.prettier,
-          },
-        }
-        EOF
-      '';
-    }
+    # (disabled for now due to version mismatch and not having need for it)
+    # {
+    #   plugin = null-ls-nvim;
+    #   config = ''
+    #     lua << EOF
+    #     local null_ls = require('null-ls')
+    #     null_ls.setup {
+    #       debug = true,
+    #       sources = {
+    #         null_ls.builtins.formatting.isort,
+    #         null_ls.builtins.formatting.black,
+    #         null_ls.builtins.formatting.prettier,
+    #       },
+    #     }
+    #     EOF
+    #   '';
+    # }
     {
       # bindings for telescope defined in the LSP section above
       plugin = telescope-nvim;
@@ -414,6 +415,12 @@
         nnoremap <silent><C-PageUp> :BufferLineCyclePrev<CR>
         nnoremap <silent><leader><C-PageDown> :BufferLineMoveNext<CR>
         nnoremap <silent><leader><C-PageUp> :BufferLineMovePrev<CR>
+      '';
+    }
+    {
+      plugin = lualine-nvim;
+      config = ''
+        lua require("lualine").setup()
       '';
     }
     {
