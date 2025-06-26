@@ -32,6 +32,7 @@ in
     krita
     inkscape
     blender
+    shotcut
 
     ardour
     guitarix
