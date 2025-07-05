@@ -3,7 +3,7 @@ let
   git = {
     enable = true;
     userName = "Mikael Myyrä";
-    userEmail = "mikael.myyrae@gmail.com";
+    userEmail = "mikael@molentum.me";
     signing.signByDefault = true;
     signing.key = "EBDEF166B95A3FB8";
     ignores = [
@@ -55,7 +55,7 @@ let
     package = pkgsUnstable.jujutsu;
     settings = {
       user.name = "Mikael Myyrä";
-      user.email = "mikael.myyrae@gmail.com";
+      user.email = "mikael@molentum.me";
       ui.default-command = "log";
       # make sure the pager only pages overflowing messages
       ui.pager = [ "less" "-FRX" ];
